@@ -284,11 +284,7 @@ class MedicalPatient(models.Model):
     registration_inv_id = fields.Many2one('account.invoice', 'Registration Invoice')
     treatment_ids = fields.One2many("treatment.invoice", 'patient_id', "Treatment History", readonly=True
                                     , track_visibility='onchange')
-    # patient_type = fields.Selection([('qatari', 'Qatari'), ('resident', 'Resident'), ('visit', 'Visit')],
-    #                                 string='Patient Type',required='True',default='qatari')
-    # patient_type = fields.Selection([('qat', 'Qatari'), ('reside', 'Resident'), ('vist', 'Visit')], 'Patient Type',
-    #                                  required=True, default='qat', readonly=True,
-    #                                  track_visibility='onchange')
+   
 
     def _default_company(self):
         return self.env['res.company']._company_default_get('res.partner')
