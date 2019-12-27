@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+	<record model="ir.ui.view" id="view_account_invoice_report_search_inherit">
+			<field name="name">account.invoice.report.search.inherit</field>
+			<field name="model">account.invoice.report</field>
+			<field name="inherit_id" ref="account.view_account_invoice_report_search" />
+			<field name="arch" type="xml">
+			 <xpath expr="//field[@name = 'partner_id']" position="after">
+				 	<filter string="Insurance Company" name='insurance_company' context="{'group_by':'insurance_company'}"/>
+                </xpath>
+		</field>
+	</record>
+</data>
+</odoo>

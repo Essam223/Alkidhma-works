@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_consent_derma" model="ir.ui.view">
+            <field name="name">consent.derma.form</field>
+            <field name="model">consent.derma</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="CONSENT FORM : Derma Fillers">
+                    <div  attrs="{'invisible': [('language', '=', 'arabic')]}">
+                        <div class="oe_title">
+                            <h1>
+                                 CONSENT FORM : Derma Fillers
+                            </h1>
+                        </div>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:15%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:5%;"></th>
+                                <th style="width:20%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td><label for="language" string="Language/ لغة"/></td>
+                                <td ><field name="language"/></td>
+                                <td/>
+                                <td ><label for="register_date"/></td>
+                                <td><field name="register_date" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="patient_id"/></td>
+                                <td ><field name="patient_id" style="width:100%"/></td>
+                                <td/>
+                                <td ><label for="doctor_id"/></td>
+                                <td ><field name="doctor_id" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="age"/></td>
+                                <td ><field name="age" style="width:100%"/></td>
+                                <td/>
+                                <td ><label for="pregnant"/></td>
+                                <td ><field name="pregnant" style="width:100%"/></td>
+                            </tr>
+                        </table>
+                        <p class="text-right;font-size:18px;">
+                            I state that I have been informed about (name of filler) <field name="treatment" style="width:30%;border-bottom-style: dotted;border-color: black;border-left-style: none;border-right-style: none;border-top-style: none;"/>
+                            <br/>
+                            For (indication) <field style="width:30%;border-bottom-style: dotted;border-color: black;border-left-style: none;border-right-style: none;border-top-style: none;" name="indication" />
+                        </p>
+                        <div style="width:800px; margin:0 auto;">
+                            <br/>
+                            <img src="/sama_consent_management/static/src/img/consent_derma.png" class="img img-responsive"
+                               style="max-height: 1500px;"/>
+                        </div>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:70%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Patient_or_Guardian_signature"/>
+                                </td>
+                                <td><field name="Patient_or_Guardian_signature" widget="signature" nolabel="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Treating_Dentist_signature"/>
+                                </td>
+                                <td><field name="Treating_Dentist_signature" widget="signature" nolabel="1"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div  attrs="{'invisible': [('language', '=', 'english')]}">
+                        <div class="oe_title">
+                            <h1>
+                                 نموذج الموافقة على عمل حشوات تجميلية
+                            </h1>
+                        </div>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:15%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:5%;"></th>
+                                <th style="width:20%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td><label for="language" string="Language/ لغة"/></td>
+                                <td ><field name="language"/></td>
+                                <td/>
+                                <td ><label for="register_date"/></td>
+                                <td><field name="register_date" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="patient_id"/></td>
+                                <td ><field name="patient_id" style="width:100%"/></td>
+                                <td/>
+                                <td ><label for="doctor_id"/></td>
+                                <td ><field name="doctor_id" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="age"/></td>
+                                <td ><field name="age" style="width:100%"/></td>
+                                <td/>
+                                <td ><label for="pregnant"/></td>
+                                <td ><field name="pregnant" style="width:100%"/></td>
+                            </tr>
+                        </table>
+                        <p>
+  <field style="border-bottom-style: dotted;" name="indication"/>  لغرض<field style="border-bottom-style: dotted;" name="indication" />أقر أنني قد بلغت بشأن (نوع العلاج)
+                        </p>
+                        <div style="width:800px; margin:0 auto;">
+                            <br/>
+                            <img src="/sama_consent_management/static/src/img/consent_derma_ar.png" class="img img-responsive"
+                               style="max-height: 1500px;"/>
+                        </div>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:70%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Patient_or_Guardian_signature2"/>
+                                </td>
+                                <td><field name="Patient_or_Guardian_signature2" widget="signature" nolabel="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Treating_Dentist_signature2"/>
+                                </td>
+                                <td><field name="Treating_Dentist_signature2" widget="signature" nolabel="1"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <footer>
+                        <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                        <button string="Cancel / إلغاء " class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+</odoo>

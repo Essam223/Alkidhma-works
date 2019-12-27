@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="report_income_by_nurse">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<div class="page">
+							<div class="row">
+								<div style="color:#009688;" class="text-center">
+                                     <h2><b>Income By Nurse</b></h2>
+                                 </div>
+								<center>
+								 <table name="master" width="100%">
+									<colgroup>
+										<col width='25%' />
+										<col width='25%' />
+										<col width='25%' />
+										<col width='25%' />
+									</colgroup>
+									<thead>
+										<tr>
+											<th/>
+											<th/>
+											<th/>
+											<th/>
+										</tr>
+									</thead>
+									<tbody class="patient_invoice_tbody">
+										<tr>
+											<td style="color:#009688;"><strong>Period From</strong></td>
+											<td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+											<td style="color:#009688;"><strong>Report Date</strong></td>
+											<td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+										</tr>
+										<tr>
+											<td style="color:#009688;"><strong>Period To</strong></td>
+											<td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+											<td/>
+											<td/>
+										</tr>
+									</tbody>
+								</table>
+							 </center>
+							<br/>
+							</div>
+							<table class="table table-bordered table-striped">
+								<thead>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Nurse</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">No. of Patients</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total Amount</th>
+								</thead>
+								<tbody>
+									<tr t-foreach="get_income_by_nurse_info" t-as="line">
+										<t t-if="line">
+											<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+												<t t-esc="line['nurse_name']" />
+											</td>
+											<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+												<t t-esc="line['customer_count']" />
+											</td>
+											<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" align="center">
+												<t t-esc="line['total_amount']" />
+											</td>
+										</t>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+
+		<report
+			id="action_report_income_by_nurse"
+			string="Income By Nurse"
+			model="income.by.nurse"
+			report_type="qweb-pdf"
+			file="medical.report_income_by_nurse"
+			name="medical.report_income_by_nurse"
+		/>
+	</data>
+</odoo>

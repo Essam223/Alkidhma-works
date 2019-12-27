@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+     <!--  Cheque Return Reason Form View -->
+        <record model="ir.ui.view" id="reason_form">
+            <field name="name">return.reason.form</field>
+            <field name="model">return.reason</field>
+            <field name="arch" type="xml">
+                <form string="Cheque Return Reason">
+                    <sheet>
+                         <group>
+                             <group>
+                                <field name="name"/>
+                                <field name="comment_required"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Cheque Return Reason Tree View -->
+        <record model="ir.ui.view" id="reason_tree">
+            <field name="name">return.reason.tree</field>
+            <field name="model">return.reason</field>
+            <field name="arch" type="xml">
+                <tree string="Cheque Return Reasons">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Cheque Return Reason Search View -->
+        <record model="ir.ui.view" id="reason_search">
+            <field name="name">return.reason.search</field>
+            <field name="model">return.reason</field>
+            <field name="arch" type="xml">
+                <search string="Cheque Return Reasons">
+                    <field name="name"/>
+
+                </search>
+            </field>
+        </record>
+
+
+         <record model="ir.actions.act_window" id="action_reason">
+            <field name="name">Cheque Return Reasons</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">return.reason</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Cheque Return Reasons" id="menu_reasons" parent="cheque_management.menu_settings" sequence="1"
+                  action="action_reason"/>
+    </data>
+</odoo>

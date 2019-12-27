@@ -1,0 +1,43 @@
+<odoo>
+<data>
+	<record model="ir.ui.view" id="diagnosis_form_view">
+	<field name="name">Diagnosis</field>
+	<field name="model">diagnosis</field>
+	<field name="type">form</field>
+	<field name="arch" type="xml">
+		<form>
+			<sheet>
+				<group>
+					<field name="code"/>
+					<field name="description"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+		<!-- statusbar_colors='{"confirmed":"green","cancel":"red","draft":"blue","checkin":"blue","ready":"orange","done":"black","missed":"pink"}' -->
+		<record model="ir.ui.view" id="diagnosis_tree">
+			<field name="name">Diagnosis</field>
+			<field name="model">diagnosis</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="code"/>
+					<field name="description" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_diagnosis">
+			<field name="name">Diagnosis</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">diagnosis</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem action="action_diagnosis" id="Diagnosis"
+			parent="medical_conf_procedure" sequence="2" />
+			
+</data>			
+</odoo>

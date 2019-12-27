@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="external_layout_standard">
+            <div class="article o_report_layout_standard">
+                <t t-raw="0" />
+            </div>
+        </template>
+
+
+        <template id="external_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+            <t t-call="pharmacy_management.external_layout_standard">
+                <t t-raw="0"/>
+            </t>
+        </template>
+
+        <template id="report_pharmacy_invoice">
+            <t t-call="web.html_container">
+                <t t-call="pharmacy_management.external_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page" style="text-align: left;
+                                width: 300px;
+                                font-size: 14px;
+                                display: inline-block;
+                                font-family: 'Inconsolata';
+                                overflow: hidden;">
+                            <div>
+                                <div style="text-align: center;float: center;">
+                                    <t t-if="o.company_id.name" >
+                                        <div style="font-size: 17;text-transform: uppercase;">
+                                            <strong><t t-esc="o.company_id.name"/></strong>
+                                        </div>
+                                        <t t-if="o.company_id.street">
+                                            <t t-esc="o.company_id.street"/><br/>
+                                        </t>
+                                        <t t-if="o.company_id.street2 and not o.company_id.city">
+                                            <t t-esc="o.company_id.street2"/><br/>
+                                        </t>
+                                        <t t-if="not o.company_id.street2 and o.company_id.city">
+                                            <t t-esc="o.company_id.city"/><br/>
+                                        </t>
+                                        <t t-if="o.company_id.street2 and o.company_id.city">
+                                            <t t-esc="o.company_id.street2"/>, <t t-esc="o.company_id.city"/><br/>
+                                        </t>
+                                    </t>
+                                    <t t-if="o.company_id.phone">
+                                        Phone: <t t-esc="o.company_id.phone"/><br />
+                                    </t>
+                                    Inv #:<t t-esc="o.number"/><br/>
+                                    <t t-if="o.date_invoice">
+                                        Inv Date: <t t-esc="o.date_invoice" t-options='{"widget": "date"}'/><br />
+                                    </t>
+                                    <t t-if="o.partner_id">
+                                    Patient: <t t-esc="o.partner_id.name"/><br />
+                                    </t>
+                                </div>
+                            </div>
+                            <br />
+                            <table class='receipt-orderlines' style="width: 100%">
+                                <colgroup>
+                                    <col width='60%' />
+                                    <col width='10%' />
+                                    <col width='15%' />
+                                    <col width='15%' />
+                                </colgroup>
+                                <thead style="border-top: 1px solid black;border-bottom: 1px solid black;">
+                                    <tr>
+                                        <th style='text-align:center'>
+                                            <strong>Item Name</strong>
+                                        </th>
+                                        <th style='text-align:center'>
+                                            <strong>Qty</strong>
+                                        </th>
+                                        <th style='text-align:center'>
+                                            <strong>S.Price</strong>
+                                        </th>
+                                        <th style='text-align:center'>
+                                            <strong>Total</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tr t-foreach="o.invoice_line_ids" t-as="orderline" style="border-top: 1px solid grey;border-bottom:1px solid grey;">
+                                    <td>
+                                        <t t-esc="orderline.product_id.name"/>
+                                    </td>
+                                    <td style='text-align:center'>
+                                        <t t-esc="orderline.quantity"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="'%.2f'%(orderline.price_unit)"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="'%.2f'%(orderline.price_subtotal)"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <table class='receipt-total' style="width: 100%">
+                                <tr>
+                                    <td><b>Subtotal:</b></td>
+                                    <td class="text-right">
+                                        <b><span t-field="o.amount_untaxed" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></b>
+                                    </td>
+                                </tr>
+                                <tr class="emph">
+                                    <td><b>Total:</b></td>
+                                    <td class="text-right">
+                                        <b><span t-field="o.amount_total"  t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></b>
+                                    </td>
+                                </tr>
+                                <tr class="emph">
+                                    <td><b>Amt in words:</b></td>
+                                    <td class="text-right">
+                                        <span t-field="o.amt_in_words"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                            <table class='receipt-orderlines' style="width: 100%" t-if="payments_vals!=[]">
+                                <colgroup>
+                                    <col width='33%' />
+                                    <col width='34%' />
+                                    <col width='33%' />
+                                </colgroup>
+                                <thead style="border-top: 1px solid black;border-bottom: 1px solid black;">
+                                    <tr>
+                                        <th style='text-align:center'>
+                                            <strong>Date</strong>
+                                        </th>
+                                        <th style='text-align:center'>
+                                            <strong>P.Mode</strong>
+                                        </th>
+                                        <th style='text-align:right'>
+                                            <strong>Amount</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tr t-foreach="payments_vals" t-as="payment_vals" style="border-top: 1px solid grey;border-bottom:1px solid grey;">
+                                    <td style='text-align:center'>
+                                        <t t-esc="payment_vals['date_new']" t-options='{"widget": "date"}'/>
+                                    </td>
+                                    <td style='text-align:center'>
+                                        <t t-esc="payment_vals['journal_name']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="'%.2f'%(payment_vals['amount'])"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <br/>
+                            <t t-if="o.user_id">
+                                Pharmacist : <t t-esc="o.user_id.name"/><br />
+                            </t>
+                            Printed on : <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y %H:%M:%S')"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

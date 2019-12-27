@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_stock_consumption">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div style="color:#009688;">
+                                     <h2><b>STOCK REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period From</strong></td>
+                                                <td >
+                                                    :<span t-esc="period_start" t-options='{"widget": "datetime"}'/>
+                                                </td>
+                                                <td style="color:#009688;"><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y %H:%M')"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period To</strong></td>
+                                                <td>
+                                                    :<span t-esc="period_stop" t-options='{"widget": "datetime"}'/>
+                                                </td>
+                                                <td style="color:#009688;"><strong>Type</strong></td>
+                                                <td>
+                                                    <t t-if="type_in_out=='In'">
+                                                       : In
+                                                    </t>
+                                                    <t t-if="type_in_out=='Out'">
+                                                       : Out
+                                                    </t>
+                                                    <t t-if="type_in_out=='In_and_Out'">
+                                                       : In and Out
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Locations</strong></td>
+                                                <td>
+                                                    <t t-if="location_names">
+                                                       : <span t-esc="location_names"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                       : All
+                                                    </t>
+                                                </td>
+                                                <td style="color:#009688;"><strong>Products</strong></td>
+                                                <td>
+                                                    <t t-if="product_names">
+                                                       : <span t-esc="product_names"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                       : All
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-striped" name="invoices">
+                                        <colgroup>
+                                            <col width='4%'/>
+                                            <col width='14%'/>
+                                            <col width='19%'/>
+                                            <col width='26%'/>
+                                            <col width='26%'/>
+                                            <col width='8%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Date</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Reference</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Product</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Location</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appointment_tbody" >
+                                            <tr t-foreach="locations" t-as="loc">
+                                                    <td colspan="5" style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="loc.display_name"/></b></td>
+                                                    <td t-if="type_in_out=='In'" style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="get_qty_done_in_total(stock_m_line_in[loc]['IN'])"/></b></td>
+                                                    <td t-if="type_in_out=='Out'" style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="get_qty_done_out_total(stock_m_line_in[loc]['OUT'])"/></b></td>
+                                                    <td t-if="type_in_out=='In_and_Out'" style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="get_qty_done_in_total(stock_m_line_in[loc]['IN'])-get_qty_done_out_total(stock_m_line_in[loc]['OUT'])"/></b></td>
+                                                    <tr t-if="type_in_out!='Out'" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td colspan="5" style="color:black;background-color: #c7e8e5;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b>IN</b></td>
+                                                        <td style="color:black;background-color: c7e8e5;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="get_qty_done_in_total(stock_m_line_in[loc]['IN'])"/></b></td>
+                                                    </tr>
+                                                    <t t-set="i_in" t-value="1" />
+                                                    <t t-if="type_in_out!='Out'" t-foreach="stock_m_line_in[loc]['IN']" t-as="m_line_in">
+                                                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i_in"/><t t-set="i_in" t-value="i_in+1"/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-field="m_line_in.date" t-options='{"widget": "datetime"}'/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="m_line_in.reference"/><br/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="m_line_in.product_id.name"/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="m_line_in.location_id.display_name"/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="m_line_in.qty_done"/></td>
+                                                        </tr>
+                                                    </t>
+                                                    <tr t-if="type_in_out!='In'" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td colspan="5" style="color:black;background-color: #c7e8e5;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b>OUT</b></td>
+                                                        <td style="color:black;background-color: c7e8e5;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="get_qty_done_out_total(stock_m_line_in[loc]['OUT'])"/></b></td>
+                                                    </tr>
+                                                    <t t-set="i_out" t-value="1" />
+                                                    <t t-if="type_in_out!='In'" t-foreach="stock_m_line_in[loc]['OUT']" t-as="m_line_out" >
+                                                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i_out"/><t t-set="i_out" t-value="i_out+1"/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-field="m_line_out.date" t-options='{"widget": "datetime"}'/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="m_line_out.reference"/><br/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="m_line_out.product_id.name"/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="m_line_out.location_id.display_name"/></td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="m_line_out.qty_done"/></td>
+                                                        </tr>
+                                                    </t>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>
+

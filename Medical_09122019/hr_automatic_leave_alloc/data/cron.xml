@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="AutomaticLeaveAllocation">
+            <field name="name">Automatic Leave Allocation</field>
+            <field name="model_id" ref="model_hr_holidays"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="code">model.run_monthly_scheduler()</field>
+            <field name="args" eval="'()'" />
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 10:00:00')" />
+        </record>
+
+    </data>
+</odoo>

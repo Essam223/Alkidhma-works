@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<report
+		id="report_doctor_daily_appointment_pdf"
+		string="Daiy Appointment Book Report"
+		model="medical.appointment"
+		report_type="qweb-pdf"
+		menu="False"
+		file="daily_appointment_report.report_doctor_daily_appointment"
+		name="daily_appointment_report.report_doctor_daily_appointment"
+		/>
+
+	</data>
+</odoo>

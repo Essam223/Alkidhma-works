@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_doctor_daily_appointment">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div style="color:#009688;">
+                                     <h2><b>DAILY APPOINTMENT REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period From</strong></td>
+                                                <td >: <span t-esc="date_appt" t-options='{"widget": "date"}'/></td>
+                                                <td style="color:#009688;"><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y %H:%M')"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Doctor</strong></td>
+                                                <td>:
+                                                    <t t-if="doctor">
+                                                        <span t-esc="doctor[1]"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                                <td groups="base.group_multi_company" style="color:#009688;"><strong>Company</strong></td>
+                                                <td groups="base.group_multi_company">:
+                                                    <t t-if="company_id">
+                                                        <span t-esc="company_id[1]"/>
+                                                    </t>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-striped" name="appointments">
+                                        <colgroup>
+                                            <col width='13%'/>
+                                            <col width='13%'/>
+                                            <col width='30%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                            <col width='22%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Time</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Start Time</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Patient</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">File No</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Mobile</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appointment_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                            <tr t-foreach="doctors" t-as="l">
+                                                <td colspan="6" style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="l.name.name"/></b></td>
+                                                <t t-foreach="dr_appts[l]" t-as="am_pm_key">
+                                                    <t t-set="len_appts" t-value="len(dr_appts[l][am_pm_key])"/>
+                                                        <t t-set="list_index" t-value="1"/>
+                                                        <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                            <td rowspan="len_appts+1" style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <span t-esc="am_pm_key"/>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <t t-if="not dr_appts[l][am_pm_key] == []"><span t-field="dr_appts[l][am_pm_key][0].appointment_sdate" t-field-options="{'format': 'hh:mm'}"/></t>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <t t-if="not dr_appts[l][am_pm_key] == []"><span t-esc="dr_appts[l][am_pm_key][0].patient_name"/></t>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <t t-if="not dr_appts[l][am_pm_key] == []"><span t-esc="dr_appts[l][am_pm_key][0].patient_file_no"/></t>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <t t-if="not dr_appts[l][am_pm_key] == []"><span t-esc="dr_appts[l][am_pm_key][0].patient_phone"/></t>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <t t-if="not dr_appts[l][am_pm_key] == []">
+                                                                    <t t-if="dr_appts[l][am_pm_key][0].state == 'draft'">
+                                                                        Booked
+                                                                    </t>
+                                                                    <t t-if="dr_appts[l][am_pm_key][0].state == 'confirmed'">
+                                                                        Confirmed
+                                                                    </t>
+                                                                    <t t-if="dr_appts[l][am_pm_key][0].state == 'missed'">
+                                                                        Missed
+                                                                    </t>
+                                                                    <t t-if="dr_appts[l][am_pm_key][0].state == 'checkin'">
+                                                                        Checked In
+                                                                    </t>
+                                                                    <t t-if="dr_appts[l][am_pm_key][0].state == 'ready'">
+                                                                        In Chair
+                                                                    </t>
+                                                                    <t t-if="dr_appts[l][am_pm_key][0].state == 'done'">
+                                                                        Completed
+                                                                    </t>
+                                                                    <t t-if="dr_appts[l][am_pm_key][0].state == 'visit_closed'">
+                                                                        Visit closed
+                                                                    </t>
+                                                                    <t t-if="dr_appts[l][am_pm_key][0].state == 'cancel'">
+                                                                        Cancelled
+                                                                    </t>
+                                                                </t>
+                                                            </td>
+                                                        </tr>
+                                                        <tr t-foreach="len_appts-1" t-as="ami" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;"/>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                    <span t-field="dr_appts[l][am_pm_key][list_index].appointment_sdate" t-field-options="{'format': 'hh:mm'}"/>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <span t-esc="dr_appts[l][am_pm_key][list_index].patient_name"/>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <span t-esc="dr_appts[l][am_pm_key][list_index].patient_file_no"/>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <span t-esc="dr_appts[l][am_pm_key][list_index].patient_phone"/>
+                                                            </td>
+                                                            <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                                <t t-if="dr_appts[l][am_pm_key][list_index].state == 'draft'">
+                                                                    Booked
+                                                                </t>
+                                                                <t t-if="dr_appts[l][am_pm_key][list_index].state == 'confirmed'">
+                                                                    Confirmed
+                                                                </t>
+                                                                <t t-if="dr_appts[l][am_pm_key][list_index].state == 'missed'">
+                                                                    Missed
+                                                                </t>
+                                                                <t t-if="dr_appts[l][am_pm_key][list_index].state == 'checkin'">
+                                                                    Checked In
+                                                                </t>
+                                                                <t t-if="dr_appts[l][am_pm_key][list_index].state == 'ready'">
+                                                                    In Chair
+                                                                </t>
+                                                                <t t-if="dr_appts[l][am_pm_key][list_index].state == 'done'">
+                                                                    Completed
+                                                                </t>
+                                                                <t t-if="dr_appts[l][am_pm_key][list_index].state == 'visit_closed'">
+                                                                    Visit closed
+                                                                </t>
+                                                                <t t-if="dr_appts[l][am_pm_key][list_index].state == 'cancel'">
+                                                                    Cancelled
+                                                                </t>
+                                                            </td>
+                                                            <t t-set="list_index" t-value="list_index+1"/>
+                                                        </tr>
+                                                </t>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                 </center>
+                                 <br/>
+                                 <div class="pull-right">
+                                    <strong>Signature  </strong>
+                                </div>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record model="ir.ui.view" id="claim_wizard_form_view">
+			<field name="name">Claim Wizard</field>
+			<field name="model">dental.claim.wizard</field>
+			<!-- <field name="type">form</field> -->
+			<field name="arch" type="xml">
+				<form string="Claim Wizard">
+					<group colspan="2" col="2">
+						<field name="company_id" groups="base.group_multi_company" attrs="{'invisible':[('state','=','get')]}"/>
+						<field name="company" widget="selection" attrs="{'invisible':[('state','=','get')]}"/>
+						<field name="from_date" required="1" attrs="{'invisible':[('state','=','get')]}"/>
+						<field name="to_date" required="1" attrs="{'invisible':[('state','=','get')]}"/>
+						<field name="data" readonly="1" filename="name" attrs="{'invisible':[('state','=','choose')]}"/>
+						<field name="name" invisible="1"/>
+						<field name="state" invisible="1"/>
+					</group>
+					<footer>
+						<!--<button string="Generate PDF" type="object" name="print_report" class="btn-primary"/>-->
+						<button string="Generate XLS" type="object" name="generate_backlog_excel_report"
+								class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="claim_mgmt_wizard_view">
+			<field name="name">Claim Wizard</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">dental.claim.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem name="Insurance Claim Report" action="claim_mgmt_wizard_view"
+			id="claim_wizard_mgmt" parent="pragtech_dental_management.dental_report_menu"
+				  sequence="40" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>
+
+    </data>
+</odoo>

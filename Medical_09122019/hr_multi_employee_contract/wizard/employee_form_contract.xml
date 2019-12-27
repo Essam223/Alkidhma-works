@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--  Contract Confirmation Wizard -->
+        <record id="employee_form_contract_view_wiz" model="ir.ui.view">
+            <field name="name">employee.form.contract.wiz.form.view</field>
+            <field name="model">employee.form.contract</field>
+            <field name="arch" type="xml">
+                <form string="Confirm">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="wage"/>
+                        </group>
+                        <group>
+                            <field name="struct_id"/>
+                            <field name="working_hours"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <h3>Click confirm to create  contract to employee.</h3>
+                    <footer>
+                        <button name="create_employee_contract" string="Confirm" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Assign  Contract -->
+        <record id="employee_form_contract_act" model="ir.actions.act_window">
+            <field name="name">Create Contract</field>
+            <field name="res_model">employee.form.contract</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="employee_form_contract_view_wiz"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

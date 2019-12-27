@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="medical_patient_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+			<field name="model">medical.patient</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_patient_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='create_registration_fee_invoice']" position="before">
+                    <button name="print_patient_file" string="Print Patient File" type="object" />
+                </xpath>
+                <xpath expr="//page[7]" position="replace">
+                    <page string="Appointments">
+			        	<group colspan="4"  >
+				        	<field name="apt_id" nolabel="1">
+								<tree>
+                                    <field name="name" string="ID"/>
+                                    <field name="patient_name" string="Name"/>
+                                    <field name="patient" />
+                                    <field name="urgency" />
+                                    <button name="appt_open_chart" string="Chart" type="object"
+                                            groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+                                            attrs="{'invisible': ['|', ('state', 'not in', ['checkin', 'ready']),('patient', '=', False)]}"/>
+                                    <button name="action_view_invoice"
+                                            string="Invoice"
+                                            groups="pragtech_dental_management.group_dental_user_menu"
+                                            type="object"
+                                            class="oe_stat_button"
+                                            attrs="{'invisible': ['|', ('patient', '=', False), ('invoice_count', '=', 0)]}">
+                                        <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                                    </button>
+                                    <field name="appointment_sdate" />
+                                    <field name="doctor" />
+                                    <field name="room_id" invisible="1"/>
+                                    <field name="patient_state" />
+                                    <field name="state" />
+                                    <button string="Clinical Assessment" name="show_wiz_clinic_Assessment" type="object" />
+                                </tree>
+							</field>
+				        </group>
+			        </page>
+
+                </xpath>
+
+            </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,79 @@
+<odoo>
+    <template id="report_botox">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="text-center" t-if="language=='english'">
+                            <h3>CONSENT FORM - BOTOX</h3>
+                            <table width="100%">
+                                <colgroup>
+                                    <col width='20%' />
+                                    <col width='35%' />
+                                    <col width='15%' />
+                                    <col width='30%' />
+                                </colgroup>
+                                <tbody >
+                                    <tr>
+                                        <td style="text-align: left;"><strong>Patient Name</strong></td>
+                                        <td style="text-align: left;">
+                                            : <span t-field="o.patient_name"/>
+                                        </td>
+                                        <td style="text-align: left;"><strong>Date</strong></td>
+                                        <td style="text-align: left;">
+                                            : <span t-esc="register_date"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;"><strong>Age</strong></td>
+                                        <td style="text-align: left;">
+                                            : <span t-esc="age"/>
+                                        </td>
+                                        <td t-if="doctor_id" style="text-align: left;"><strong>Doctor</strong></td>
+                                        <td t-if="doctor_id" style="text-align: left;">
+                                            : <span t-esc="doctor_id[1]"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;"><strong>Pregnant or Lactating – If Applicable</strong></td>
+                                        <td style="text-align: left;">
+                                            : <span t-esc="pregnant"/>
+                                        </td>
+                                        <td/>
+                                        <td/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <div style="width:800px; margin:0 auto;">
+                                <img src="/sama_consent_management/static/src/img/consent_botox.png" class="img img-responsive"
+                                    attrs="{'invisible': [('language', '=', 'arabic')]}" style="max-height: 1500px;"/>
+                            </div>
+                            <br/>
+                            <table style="width:100%;">
+                                <tr>
+                                    <th style="width:15%;"></th>
+                                    <th style="width:30%;"></th>
+                                    <th style="width:5%;"></th>
+                                    <th style="width:15%;"></th>
+                                    <th style="width:30%;"></th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Patient/Guardian Signature</strong></td>
+                                    <td style="text-align: right;">
+                                        <img t-if="Patient_or_Guardian_signature" t-att-src="'data:image/png;base64,%s' % to_text(Patient_or_Guardian_signature)" class="pull-right" height="60"/>
+                                    </td>
+                                    <td/>
+                                    <td><strong>Doctor Signature</strong></td>
+                                    <td style="text-align: right;">
+                                        <img t-if="Treating_Dentist_signature" t-att-src="'data:image/png;base64,%s' % to_text(Treating_Dentist_signature)" class="pull-right" height="60"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

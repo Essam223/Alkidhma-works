@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_user_creation" model="ir.ui.view">
+            <field name="name">user.creation.form</field>
+            <field name="model">user.creation</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <separator string="Login Details"/>
+                            <field name="user_name"/>
+                            <field name="password"/>
+                        </group>
+                        <group></group>
+                    </group>
+                    <group name="access_rights" string="Access Rights">
+                        <group>
+                            <field name="admin"/>
+                            <field name="doctor"/>
+                            <field name="accountant"/>
+                            <field name="room_ids" widget="many2many_tags"
+                                   attrs="{'invisible':['|', ('admin','=',True), ('reception','=',True)]}"/>
+                        </group>
+                        <group>
+                            <field name="reception"/>
+                            <field name="inventory"/>
+                            <field name="physician_ids" widget="many2many_tags"
+                                   attrs="{'invisible':['|', ('admin','=',True), ('reception','=',True)]}"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_user_creation">
+		<field name="name">User Creation</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">user.creation</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+        <field name="context"></field>
+	</record>
+
+    <menuitem name="Users" id="users_root_menu" sequence="500"
+              groups="pragtech_dental_management.group_dental_mng_menu"/>
+    <menuitem name="New Users" id="new_users_menu" parent="users_root_menu" sequence="10"/>
+    <menuitem name="Create User" id="user_creation_menu" action="action_user_creation" parent="new_users_menu" sequence="5"/>
+</odoo>

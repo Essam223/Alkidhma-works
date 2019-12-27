@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="appointment_cancel_report_wizard" model="ir.ui.view">
+            <field name="name">appointment.cancel.report</field>
+            <field name="model">appointment.cancel.report</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Appointment Cancellation Report">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="is_only_doctor" invisible="1"/>
+                            <field name="doctor" attrs="{'required':[('is_only_doctor', '=', True)]}"/>
+                            <field name="patient"/>
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="responsible_person"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="appointment_cancel_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_appointment_Cancellation" model="ir.actions.act_window">
+                <field name="name">Cancellation Report</field>
+                <field name="res_model">appointment.cancel.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="appointment_cancel_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_cancellation_appointment_report" name="Cancellation Report" action="action_appointment_Cancellation"
+                  groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+                  parent="pragtech_dental_management.dental_report_menu" sequence="5"/>
+
+    </data>
+</odoo>

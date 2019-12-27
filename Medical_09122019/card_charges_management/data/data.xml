@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="card_reconcile_journal" model="account.journal">
+            <field name="name">Card Reconciliation</field>
+            <field name="type">bank</field>
+            <field name="code">CR</field>
+            <field name="show_on_dashboard">True</field>
+        </record>
+        <record id="card_charges_journal" model="account.journal">
+            <field name="name">Card Charges</field>
+            <field name="type">bank</field>
+            <field name="code">CC</field>
+            <field name="show_on_dashboard">True</field>
+        </record>
+    </data>
+</odoo>

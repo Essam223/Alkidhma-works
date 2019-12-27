@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <template id="report_journal_entry">
+          <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                 <div class="page">
+                     <div class="row">
+                         <h2><center>Journal Voucher</center></h2>
+                         <div class="text-center" style="font-size:17px;">
+                            <div class="text-right">
+                                <b>Date: </b>&#160;
+                                <span t-esc="o.date" t-options='{"widget": "datetime"}'/>
+                            </div>
+                            <br/>
+                        </div>
+
+                     </div>
+                    <!--<div class="oe_structure"/>-->
+
+                    <div class="row mt32 mb32" id="informations">
+                         <div class="col-xs-3">
+                            <strong>Number:</strong>
+                            <p t-field="o.name"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>Reference:</strong>
+                            <p t-field="o.ref"/>
+                        </div>
+                        <div  class="col-xs-3">
+                            <strong>Journal:</strong>
+                            <p t-field="o.journal_id.name"/>
+                        </div>
+                    </div>
+                     <h4>Journal Items</h4>
+                     <!--<table class="table table-striped" style="width:100%;border:1px solid black;">-->
+                     <table class="table table-bordered table-striped" >
+                        <tr >
+                            <th>Account</th>
+                            <th>Partner</th>
+                            <!--<th>Due Date</th>-->
+                            <th>Description</th>
+                            <th class="text-right">Debit</th>
+                            <th class="text-right">Credit</th>
+                        </tr>
+                        <t t-set="sum_debit" t-value="0" />
+                        <t t-set="sum_credit" t-value="0" />
+                        <t t-foreach="o.line_ids" t-as="line">
+                            <t t-set="sum_debit" t-value="sum_debit+line.debit" />
+                            <t t-set="sum_credit" t-value="sum_credit+line.credit" />
+                            <tr >
+                                <td><span t-field="line.account_id.name"/></td>
+                                <td><span t-field="line.partner_id.name"/></td>
+                                <!--<td><span t-field="line.date_maturity"/></td>-->
+                                <td><span t-field="line.name"/></td>
+                                <td class="text-right"><span t-field="line.debit" /></td>
+                                <td class="text-right"><span t-field="line.credit" /></td>
+                            </tr>
+                        </t>
+                         <tr >
+                                <td colspan="3"><strong>Total:</strong></td>
+                                <td class="text-right"><strong><span t-esc="sum_debit" /></strong></td>
+                                <td class="text-right"><strong><span t-esc="sum_credit" /></strong></td>
+                            </tr>
+                     </table>
+                     <br/>
+                     <br/>
+
+                     <table style="width:100%;">
+						<tr>
+							<th style="width:60%;">&#160;</th>
+							<th style="width:40%;">&#160;</th>
+						</tr>
+                        <tr>
+							<td class="text-left"/>
+							<td class="text-center">Authorised Signatory</td>
+						</tr>
+					</table>
+
+                     <br/>
+
+                     <table style="width:100%;">
+						<tr>
+							<th style="width:60%;">&#160;</th>
+							<th style="width:40%;">&#160;</th>
+						</tr>
+						<tr>
+							<td class="text-left"><span>Checked By :</span></td>
+							<td class="text-center">Verified By :</td>
+						</tr>
+					</table>
+             </div>
+              </t>
+           </t>
+        </template>
+        
+    </data>
+</openerp>

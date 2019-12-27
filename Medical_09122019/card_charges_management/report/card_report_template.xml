@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="card_report_pdf">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <h2>CARD RECONCILIATION REPORT</h2>
+                                 <center>
+                                     <table name="master" width="90%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <tbody class="master_tbody">
+                                            <tr>
+                                                <td><strong>Period From</strong></td>
+                                                <td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+                                                <td><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Period To</strong></td>
+                                                <td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+                                                <td groups="base.group_multi_company"><strong>Company</strong></td>
+                                                <td groups="base.group_multi_company">:
+                                                    <t t-if="company_id">
+                                                        <span t-esc="company_id[1]"/>
+                                                    </t>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-striped" name="account_payments">
+                                        <colgroup>
+                                            <col width='5%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='17%'/>
+                                            <col width='16%'/>
+                                            <col width='14%'/>
+                                            <col width='14%'/>
+                                            <col width='14%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Ref No</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Date</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Bank</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Card Journal</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Card Amount</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Commission</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Amount Transferring to Bank</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="orders_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                            <t t-set="card_sum" t-value="0" />
+                                            <t t-set="service_sum" t-value="0" />
+                                            <t t-set="bank_sum" t-value="0" />
+                                            <tr t-foreach="orders" t-as="l" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l.name"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l.payment_date" t-options='{"widget": "date"}'/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><t t-if="l.bank_id"><span t-esc="l.bank_id.name"/></t></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><t t-if="l.card_id"><span t-esc="l.card_id.name"/></t></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l.card_amount"/><t t-set="card_sum" t-value="card_sum+l.card_amount"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l.service_charge"/><t t-set="service_sum" t-value="service_sum+l.service_charge"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l.transfer_amount"/><t t-set="bank_sum" t-value="bank_sum+l.transfer_amount"/></td>
+                                            </tr>
+                                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td colspan="4" style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                <td style="border-right: 1px solid black;border-top: 1px solid black;"><strong>Total  : </strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="card_sum"/></strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="service_sum"/></strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="bank_sum"/></strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>

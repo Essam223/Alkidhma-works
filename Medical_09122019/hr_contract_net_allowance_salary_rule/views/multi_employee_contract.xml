@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="multi_employee_contract_view_wiz" model="ir.ui.view">
+        <field name="name">multi.contract.inherit.form1</field>
+        <field name="model">multi.contract</field>
+        <field name="inherit_id" ref="hr_multi_employee_contract.multi_employee_contract_view_wiz"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_ids']" position="after">
+                <br/>
+                <h3>Below allowances are applicable to all of the above contracts.</h3>
+                <field name="allowance_multi_wiz_contract_ids">
+                    <tree>
+                        <field name="allowance_id"/>
+                        <field name="allowance_amount"/>
+                    </tree>
+                    <form>
+                        <group>
+                            <group>
+                                <field name="allowance_id"/>
+                            </group>
+                            <group>
+                                <field name="allowance_amount"/>
+                            </group>
+                        </group>
+                    </form>
+                </field>
+            </xpath>
+            <xpath expr="//field[@name='wage']" position="after">
+                 <field name="journal_id"/>
+                <field name="date_start"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

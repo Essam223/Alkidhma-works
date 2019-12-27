@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="treatment_invoice_view" model="ir.ui.view">
+        <field name="name">Treatment Line</field>
+        <field name="model">treatment.invoice</field>
+            <field name="inherit_id" ref="pragtech_dental_management.treatment_invoice_view"/>
+            <field name="arch" type="xml">
+                <field name="actual_amount" position="replace">
+                    <field name="able_to_modify_actual_amount" invisible="1"/>
+                    <field name="actual_amount" attrs="{'readonly': [('able_to_modify_actual_amount', '=', False)]}"/>
+                </field>
+            </field>
+    </record>
+
+    <record id="treatment_invoice_tree" model="ir.ui.view">
+        <field name="name">Treatment Line</field>
+        <field name="model">treatment.invoice</field>
+            <field name="inherit_id" ref="pragtech_dental_management.treatment_invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="actual_amount" position="replace">
+                    <field name="able_to_modify_actual_amount" invisible="1"/>
+                    <field name="actual_amount" attrs="{'readonly': [('able_to_modify_actual_amount', '=', False)]}"/>
+                </field>
+            </field>
+    </record>
+
+</odoo>

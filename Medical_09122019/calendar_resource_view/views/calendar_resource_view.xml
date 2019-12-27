@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!--Calendar action-->
+        <record id="action_todays_appointments" model="ir.actions.server">
+            <field name="name">Appointment Scheduler</field>
+            <field name="model_id" ref="calendar_resource_view.model_appointments_calendar"/>
+            <field name="state">code</field>
+            <field name="code">action = model.action_your_appointments()</field>
+        </record>
+
+        <!--Calendar menu-->
+        <menuitem name="Appointment Scheduler"
+                  id="todays_appointments"
+                  action="action_todays_appointments"
+        />
+        <!--<menuitem name="Doctorwise Appointment Scheduler"-->
+                  <!--id="doctorwise_appointments"-->
+                  <!--action="action_todays_appointments"-->
+                  <!--parent="pragtech_dental_management.medical_appointment_menu" sequence="2"-->
+        <!--/>-->
+        <!--calendar configuration form-->
+        <record id="calendar_config_form" model="ir.ui.view">
+            <field name="name">Calendar Config Form</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="1"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <script>
+                        $(document).ready(function(){
+                            $.ajax({url: "/current_schedule", success: function(result){
+                                var times = result.split(",");
+                                $('.timepicker1').wickedpicker({
+                                     twentyFour: true,
+                                     title: 'Timepicker',
+                                     now: times[0]
+                                });
+                                $('.timepicker2').wickedpicker({
+                                     twentyFour: true,
+                                     title: 'Timepicker',
+                                     now: times[1]
+                                });
+                           }});
+                        });
+                    </script>
+                    <div class="app_settings_block" data-string="Calendar-Configuration"
+                         string="Calendar Configuration"
+                         data-key="calendar_resource_view">
+                        <h2>Time Duration</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    From:<br />
+                                    <field name="calendar_start" class="timepicker timepicker1" /><br />
+                                    To:<br />
+                                    <field name="calendar_end" class="timepicker timepicker2" /> <br />
+                                </div>
+                                <!--Time schedule-->
+                                <!--<div class="o_setting_right_pane">-->
+                                    <!--<field name="timing" style="font-weight:bold !important;"/>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+-->
+
+       <record id="action_appointments_config" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_id" ref="calendar_config_form"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'calendar_resource_view'}</field>
+        </record>
+
+        <menuitem name="Calendar configuration"
+                  id="appointments_config_menu"
+                  action="action_appointments_config"
+                  parent="pragtech_dental_management.medical_conf_menu"
+                  sequence="10"
+        />
+-->
+        <record id="appointments_config_tree" model="ir.ui.view">
+            <field name="name">appointments_config_tree</field>
+            <field name="model">appointment.state.color</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="appointments_config_form" model="ir.ui.view">
+            <field name="name">appointments_config_form</field>
+            <field name="model">appointment.state.color</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="state" />
+                            </group>
+                            <group>
+                                <field name="color" widget="colorpicker" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_appointments_color_config" model="ir.actions.act_window">
+            <field name="name">Appointments Configuration</field>
+            <field name="res_model">appointment.state.color</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('appointments_config_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('appointments_config_form')})
+                          ]"
+            />
+        </record>
+        <menuitem name="Appointments configuration"
+                  id="appointments_color_config_menu"
+                  action="action_appointments_color_config"
+                  parent="pragtech_dental_management.medical_conf_menu"
+                  sequence="11"
+        />
+
+
+    </data>
+</odoo>

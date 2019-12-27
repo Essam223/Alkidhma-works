@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="report_lab_order_document">
+			<t t-call="web.external_layout">
+				<t t-set="doc" t-value="doc.with_context({'lang':doc.doctor_id.name.lang})" />
+					<div class="page">
+						<div class="text-center"/>
+							<center>
+								<div style="color:#009688;">
+                                     <h2><b>Lab Order</b></h2>
+                                 </div>
+							</center>
+							<table width="100%">
+								<colgroup>
+									  <col width='15%' />
+									  <col width='35%' />
+									  <col width='15%' />
+									  <col width='35%' />
+								</colgroup>
+							<tbody class="sale_tbody">
+								<tr>
+									  <td t-if="doc.patient_id" style="text-align: left;color:#009688;">
+										  <strong>Patient</strong>
+									  </td>
+									  <td t-if="doc.patient_id" style="text-align: left;">
+										 : <span t-field="doc.patient_id.name.name"/>
+									  </td>
+									  <td style="text-align: left;color:#009688;">
+										  <t t-if="doc.lab_date">
+											  <strong>Date</strong>
+										  </t>
+									  </td>
+									  <td t-if="doc.lab_date" style="text-align: left;">
+										   : <span t-field="doc.lab_date"/>
+									  </td>
+								</tr>
+								<tr>
+									  <td style="text-align: left;color:#009688;">
+										  <t t-if="doc.doctor_id">
+											  <strong>Doctor</strong>
+										  </t>
+									  </td>
+									  <td t-if="doc.doctor_id" style="text-align: left;">
+										  : <span t-field="doc.doctor_id.name.name"/><br/>
+										  <t t-if="doc.doctor_id.speciality"> <span t-field="doc.doctor_id.speciality.name"/><br/> </t>
+										  <t t-if="doc.doctor_id.license_code"> Licence No. <span t-if="doc.doctor_id.license_code" t-field="doc.doctor_id.license_code"/></t>
+
+									  </td>
+									<td t-if="doc.user_id" style="text-align: left;color:#009688;">
+										<strong>Lab User</strong>
+									</td>
+									<td t-if="doc.user_id" style="text-align: left;">
+										: <span t-field="doc.user_id.name"/>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+							<br/>
+							<br/>
+						<table style="width:100%;" class="table table-condensed table-bordered">
+							<thead>
+								<tr>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:50%;" class="text-left">Test</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:50%;" class="text-left">Special Instructions</th>
+								</tr>
+							</thead>
+							<tbody >
+								<tr t-foreach="doc.lab_request_line_ids" t-as="l">
+									<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="l.test_id.name"/></td>
+									<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="l.Special_Instructions"/></td>
+								</tr>
+							</tbody>
+                        </table>
+						<br/>
+						<div class="pull-right">
+							<strong>Doctor Seal and Sign</strong>
+							<br/>
+						</div>
+					</div>
+			</t>
+			<!-- </t> -->
+		</template>
+		<template id="report_lab_order">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<t t-call="laboratory.report_lab_order_document" t-lang="doc.doctor_id.name.lang"/>
+				</t>
+			</t>
+		</template>
+
+	</data>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="session_done_wizard" model="ir.ui.view">
+        <field name="name">session.date</field>
+        <field name="model">session.date</field>
+        <field name="arch" type="xml">
+            <form string="Mark session as Done">
+                <group>
+                    <group>
+                        <field name="date"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+                <footer>
+                    <button name="confirm" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

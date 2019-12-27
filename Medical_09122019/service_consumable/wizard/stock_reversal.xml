@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_stock_reversal_wizard2" model="ir.ui.view">
+            <field name="name">stock.reversal.form</field>
+            <field name="model">stock.reversal</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Stock Reversal Reason ">
+                    <group>
+                        <field name="reason_stock_reversal" />
+                        <field name="appt_id"  invisible="1"/>
+                    </group>
+                    <field name="warning_msg" readonly="1" attrs="{'invisible': [('warning_msg', '=', False)]}"
+                               style="color:Red;" />
+
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+
+</odoo>

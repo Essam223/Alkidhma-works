@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_doctor_appointment">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div style="color:#009688;">
+                                     <h2><b>APPOINTMENT REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period From</strong></td>
+                                                <td >: <span t-esc="period_start" t-options='{"widget": "datetime"}'/></td>
+                                                <td style="color:#009688;"><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y %H:%M')"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period To</strong></td>
+                                                <td>: <span t-esc="period_stop" t-options='{"widget": "datetime"}'/></td>
+                                                <td style="color:#009688;"><strong>Doctor</strong></td>
+                                                <td>:
+                                                    <t t-if="doctor">
+                                                        <span t-esc="doctor[1]"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr groups="base.group_multi_company">
+                                                <td style="color:#009688;"><strong>Company</strong></td>
+                                                <td>:
+                                                    <t t-if="company_id">
+                                                        <span t-esc="company_id[1]"/>
+                                                    </t>
+                                                </td>
+                                                <td style="color:#009688;"/>
+                                                <td/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-striped" name="appointments">
+                                        <colgroup>
+                                            <col width='6%'/>
+                                            <col width='10%'/>
+                                            <col width='13%'/>
+                                            <col width='25%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                            <col width='22%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Date</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Time</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Patient</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Phone</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Status</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Remarks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appointment_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                            <tr t-foreach="doctors" t-as="l">
+                                                <t t-if="not appointments[l] == []">
+                                                <td colspan="7" style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="l.name.name"/></b></td>
+                                                </t>
+                                                <tr t-foreach="appointments[l]" t-as="appt" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="appt.appointment_sdate" t-options='{"widget": "date"}'/>
+                                                        <br/>
+                                                        </td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-field="appt.appointment_sdate" t-field-options="{'format': 'hh:mm'}"/> - <span t-field="appt.appointment_edate" t-field-options="{'format': 'hh:mm'}"/></td>
+                                                    <!--<td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="appt.patient.patient_name"/></td>-->
+                                                    <!--<td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="appt.patient.mobile"/></td>-->
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="appt.patient_name"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="appt.patient_phone"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                        <t t-if="appt.state == 'draft'">
+                                                            Booked
+                                                        </t>
+                                                        <t t-if="appt.state == 'confirmed'">
+                                                            Confirmed
+                                                        </t>
+                                                        <t t-if="appt.state == 'missed'">
+                                                            Missed
+                                                        </t>
+                                                        <t t-if="appt.state == 'checkin'">
+                                                            Checked In
+                                                        </t>
+                                                        <t t-if="appt.state == 'ready'">
+                                                            In Chair
+                                                        </t>
+                                                        <t t-if="appt.state == 'done'">
+                                                            Completed
+                                                        </t>
+                                                        <t t-if="appt.state == 'visit_closed'">
+                                                            Visit closed
+                                                        </t>
+                                                        <t t-if="appt.state == 'cancel'">
+                                                            Cancelled
+                                                        </t>
+                                                    </td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                                                </tr>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                 </center>
+                                 <br/>
+                                 <div class="pull-right">
+                                    <strong>Signature  </strong>
+                                </div>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>
+

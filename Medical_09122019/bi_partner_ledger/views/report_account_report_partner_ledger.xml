@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+         <record id="action_account_partner_ledger" model="ir.actions.act_window">
+            <field name="name">Partner Ledger</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.report.partner.ledger</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account.account_report_partner_ledger_view"/>
+            <field name="context">{'default_partner_ids':active_ids}</field>
+            <field name="target">new</field>
+        </record>
+
+        <act_window id="acti"
+            context="{'default_partner_ids':active_ids}"
+            name="Partner Ledger"
+            src_model="res.partner"
+            view_id = "account.account_report_partner_ledger_view"
+            res_model="account.report.partner.ledger"
+            view_type="form" view_mode="form"
+            key2="client_action_multi" target="new"
+            />
+
+
+
+    </data>
+</odoo>

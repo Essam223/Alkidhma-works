@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="assets1" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href='/calendar_resource_view/static/wickedpicker/dist/wickedpicker.min.css' rel='stylesheet' />
+            <link href='/calendar_resource_view/static/wickedpicker/stylesheets/wickedpicker.css' rel='stylesheet' />
+            <script type="text/javascript" src='/calendar_resource_view/static/wickedpicker/dist/wickedpicker.min.js' />
+            <script type="text/javascript" src='/calendar_resource_view/static/wickedpicker/src/wickedpicker.js' />
+
+            <script type="text/javascript" src='/calendar_resource_view/static/fullcalendar/moment.min.js'></script>
+            <link href='/calendar_resource_view/static/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
+            <link href='/calendar_resource_view/static/fullcalendar/fullcalendar.css' rel='stylesheet' />
+
+            <script type="text/javascript" src='/calendar_resource_view/static/fullcalendar/fullcalendar.js'></script>
+            <script type="text/javascript" src='/calendar_resource_view/static/fullcalendar/fullcalendar.min.js'></script>
+            <script type="text/javascript" src='/calendar_resource_view/static/fullcalendar/fullcalendar-resource.js'></script>
+
+            <link href='/calendar_resource_view/static/src/css/calendar.css' rel='stylesheet' />
+            <link href='/calendar_resource_view/static/src/css/modal_styles.css' rel='stylesheet' />
+            <script type="text/javascript"
+                    src="/calendar_resource_view/static/src/js/calendar_resource.js" />
+
+            <link rel="stylesheet"
+                  href="/calendar_resource_view/static/src/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.css"/>
+
+            <script type="text/javascript" src="/calendar_resource_view/static/src/js/color_widget.js"></script>
+            <script type="text/javascript"
+                    src="/calendar_resource_view/static/src/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.js">
+            </script>
+
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_library_reminder" model="ir.cron">
+            <field name="name">Check Pending Outbound Cheques</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall">2015-12-31 17:00:30</field>
+            <field eval="False" name="doall" />
+            <field name="model_id" ref='model_cheque_master'/>
+            <field name="function">_check_pending</field>
+            <field name="args">()</field>
+      </record>
+
+
+     <!--  Cheque Master Book Kanban View -->
+        <record model="ir.ui.view" id="resource_kanban_view">
+            <field name="name">cheque.master.kanban</field>
+            <field name="model">cheque.master</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" create="false">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="cheque_date"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <strong><span><t t-esc="record.name.value"/></span></strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <strong><span class="pull-right text-right">
+                                            <field name="state" widget="kanban_label_selection" options="{'classes': {'new': 'default',
+                                            'used': 'default',
+                                            'printed': 'default',
+                                            'issued': 'default',
+                                            'pending': 'warning',
+                                            'cleared': 'success',
+                                            'returned': 'danger',
+                                            'cancelled': 'default',
+                                            'lost': 'danger'}}"/>                                   </span></strong>
+                                    </div>
+                                </div>
+                                <div class="row text-muted">
+                                    <div class="col-xs-6">
+                                        <span><t t-esc="record.partner_id.value"/></span>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span class="pull-right text-right"><t t-esc="record.cheque_date.value and record.cheque_date.value.split(' ')[0] or False"/></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                    </div>
+                                    <div class="col-xs-6 pull-right text-right">
+                                        <strong><field name="amount"/></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_cheque_master_calendar" model="ir.ui.view">
+            <field name="name">cheque.master.calendar</field>
+            <field name="model">cheque.master</field>
+            <field name="arch" type="xml">
+                <calendar string="Cheques" color="state" date_start="cheque_date">
+                    <field name="partner_id"/>
+                    <field name="amount"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_cheque_master_graph">
+            <field name="name">cheque.master.graph</field>
+            <field name="model">cheque.master</field>
+            <field name="arch" type="xml">
+                <graph string="Cheque Analysis">
+                    <field name="partner_id"/>
+                    <field name="amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_cheque_master_pivot">
+            <field name="name">cheque.master.pivot</field>
+            <field name="model">cheque.master</field>
+            <field name="arch" type="xml">
+                <pivot string="Cheques">
+                    <field name="name" type="row"/>
+                    <field name="amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+
+     <!--  Cheque Master Book Form View -->
+        <record model="ir.ui.view" id="cheque_form">
+            <field name="name">cheque.master.form</field>
+            <field name="model">cheque.master</field>
+            <field name="arch" type="xml">
+                <form string="Cheque" create="false" delete='false' edit='false'>
+                    <header>
+                        <button name="print_cheque" states="used,printed,issued,hold,pending,cleared,returned,cancelled,reuse" string="Print" type="object"/>
+                        <button name="issue_cheque" states="printed" string="Issue" type="object"/>
+                        <button name="hold_cheque" states="issued,hold,pending" string="Hold" type="object"/>
+                        <button name="clear_cheque" states="issued,hold,pending" string="Cheque Clearance" type="object"/>
+                        <button name="lost_cheque" states="used,printed,issued,hold,pending" string="Lost" type="object"/>
+                        <button name="return_cheque" states="issued,hold,pending" string="Cheque Return" type="object"/>
+                        <button name="cancel_cheque" string="Cancel" attrs="{'invisible':[('state','in',('cancelled'))]}" type="object"/>
+                        <button name="reuse_cheque" states="cancelled" string="Re-use" type="object"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="new,used,printed,issued,hold,pending,cleared,returned,cancelled,reuse,lost"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+
+                     <group>
+                         <group>
+                            <field name="cheque_no"/>
+                            <field name="bank_name"/>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                            <field name="partner_account_id" attrs="{'invisible':[('state','in',('new'))]}" options="{'no_create': True}"/>
+                            <field name="amount" attrs="{'invisible':[('state','in',('new', 'used'))]}"/>
+                            <field name="receiver_name" attrs="{'invisible':[('receiver_name','=',False)]}"/>
+                            <field name="designation" attrs="{'invisible':[('designation','=',False)]}"/>
+                            <field name="phone" attrs="{'invisible':[('phone','=',False)]}"/>
+                         </group>
+                         <group>
+                            <field name="cheque_date_issue" attrs="{'invisible':[('cheque_date_issue','=',False)]}"/>
+                            <field name="hold_date" attrs="{'invisible':[('hold_date','=',False)]}"/>
+                            <field name="clear_date" attrs="{'invisible':[('clear_date','=',False)]}"/>
+                            <field name="cancel_date" attrs="{'invisible':[('cancel_date','=',False)]}"/>
+                            <field name="return_date" attrs="{'invisible':[('return_date','=',False)]}"/>
+                            <field name="lost_date" attrs="{'invisible':[('lost_date','=',False)]}"/>
+                            <field name="date_issue"/>
+                            <field name="cheque_date"/>
+                            <field name="account_move_ids" widget="many2many_tags" attrs="{'invisible':[('state','in',('new', 'used'))]}"/>
+                        </group>
+                    </group>
+                        <notebook>
+							<page string="Payments" name="payments">
+                                <field name="payment_ids">
+                                <tree decoration-info="state == 'draft'" decoration-muted="state in ['reconciled', 'cancelled']" edit="false">
+                                    <field name="payment_date"/>
+                                    <field name="name"/>
+                                    <field name="journal_id"/>
+                                    <field name="payment_method_id"/>
+                                    <field name="partner_id" string="Customer"/>
+                                    <field name="amount"/>
+                                    <field name="state"/>
+                                    <field name="company_id" groups="base.group_multi_company"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="partner_type" invisible="1"/>
+                                </tree>
+                                <!-- <xpath expr="//field[@name='payment_ids']tree/field[@name='amount']" position="replace">
+
+                                    <field name="amount" />
+
+                                </xpath> -->
+                            </field>
+                            </page>
+							<page string="Comments" name="comments">
+                                <field name="comment"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Cheque Master Book Tree View -->
+        <record model="ir.ui.view" id="cheque_tree">
+            <field name="name">cheque.master.tree</field>
+            <field name="model">cheque.master</field>
+            <field name="arch" type="xml">
+                <tree string="Cheques"  create="false" delete='false'>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="date_issue"/>
+                    <field name="cheque_date"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Cheque Master Book Search View -->
+        <record model="ir.ui.view" id="cheque_search">
+            <field name="name">cheque.master.search</field>
+            <field name="model">cheque.master</field>
+            <field name="arch" type="xml">
+                <search string="Cheques">
+                    <field name="name"/>
+                    <field name="cheque_no"/>
+                    <field name="bank_name"/>
+                    <field name="partner_id"/>
+                    <field name="date_issue" string="Printed Before" filter_domain="[('date_issue','&lt;=',self)]"/>
+                    <field name="date_issue" string="Printed After" filter_domain="[('date_issue','&gt;=',self)]"/>
+                    <field name="cheque_date" string="Cheque Date Before" filter_domain="[('cheque_date','&lt;=',self)]"/>
+                    <field name="cheque_date" string="Cheque Date After" filter_domain="[('cheque_date','&gt;=',self)]"/>
+                </search>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_cheque_master">
+            <field name="name">Cheque Master Book</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cheque.master</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,pivot,calendar,graph</field>
+        </record>
+
+        <record id="action_server_module_immediate_pending" model="ir.actions.server">
+            <field name="name">Check Pending</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_cheque_master" />
+            <field name="state">code</field>
+            <field name="code">records.immediate_make_pending()</field>
+        </record>
+
+        <record id="action_module_immediate_pending" model="ir.actions.server">
+            <field name="name">immediate pending</field>
+            <field name="model_id" ref="cheque_management.model_cheque_master"/>
+            <field name="state">code</field>
+            <field name="code">action = model.action_server_module_immediate_pending()</field>
+        </record>
+
+        <!--<record model="ir.values" id="action_module_immediate_pending">-->
+            <!--<field name="name">action_module_immediate_pending</field>-->
+            <!--<field name="action_id" ref="action_server_module_immediate_pending" />-->
+            <!--<field name="value" eval="'ir.actions.server,' + str(ref('action_server_module_immediate_pending'))" />-->
+            <!--<field name="key">action</field>-->
+            <!--<field name="model_id" ref="model_cheque_master" />-->
+            <!--<field name="model">cheque.master</field>-->
+            <!--<field name="key2">client_action_multi</field>-->
+        <!--</record>-->
+
+        <record id="action_immediate_clear3" model="ir.actions.act_window">
+            <field name="name">Check Clearance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">clear.cheque</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_clear_cheque2"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_module_immediate_clear" model="ir.actions.server">
+            <field name="name">immediate clear</field>
+            <field name="model_id" ref="cheque_management.model_cheque_master"/>
+            <field name="state">code</field>
+            <field name="code">action = model.action_immediate_clear3()</field>
+        </record>
+
+        <!--<record model="ir.values" id="action_module_immediate_clear">-->
+            <!--<field name="name">action_module_immediate_clear</field>-->
+            <!--<field name="action_id" ref="action_immediate_clear3" />-->
+            <!--<field name="value" eval="'ir.actions.act_window,' + str(ref('action_immediate_clear3'))" />-->
+            <!--<field name="key">action</field>-->
+            <!--<field name="model_id" ref="model_cheque_master" />-->
+            <!--<field name="model">cheque.master</field>-->
+            <!--<field name="key2">client_action_multi</field>-->
+        <!--</record>-->
+
+        <menuitem name="Cheque Management" id="menu_cheque_management" sequence="41"/>
+        <menuitem name="Outbound Cheques" id="menu_cheque" sequence="1"  parent="menu_cheque_management"
+            groups="cheque_management.group_cheque_admin,cheque_management.group_outbound"/>
+        <menuitem name="Cheque Master Book" id="menu_master" parent="menu_cheque" sequence="2" action="action_cheque_master"/>
+        <menuitem name="Configuration" parent="menu_cheque_management" id="menu_configuration" sequence="10"/>
+        <menuitem name="Settings" id="menu_settings" parent="menu_configuration" sequence="1"
+            groups="cheque_management.group_cheque_admin"/>
+    </data>
+</odoo>

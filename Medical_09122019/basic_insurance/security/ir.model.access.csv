@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_model_account_move_line_insurance,account move line insurance,account.model_account_move_line,basic_insurance.group_insurance_mgmnt_manager_menu,1,1,1,1
+access_model_account_move_insurance,account move insurance,account.model_account_move,basic_insurance.group_insurance_mgmnt_manager_menu,1,1,1,1
+access_model_account_invoice_tax_insurance,account invoice tax insurance,account.model_account_invoice_tax,basic_insurance.group_insurance_mgmnt_manager_menu,1,1,1,1
+access_model_account_payment_insurance,account payment insurance,account.model_account_payment,basic_insurance.group_insurance_mgmnt_manager_menu,1,1,1,1
+

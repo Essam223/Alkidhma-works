@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="card_report_wizard" model="ir.ui.view">
+            <field name="name">card.report</field>
+            <field name="model">card.report</field>
+            <field name="arch" type="xml">
+                <form string="Card Report Wizard">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="card_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_card_report" model="ir.actions.act_window">
+                <field name="name">Card Report</field>
+                <field name="res_model">card.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="card_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_card_report" name="Card Reconciliation" action="action_card_report"
+                  parent="account.menu_finance_legal_statement" sequence="1"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,687 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
+
+
+/*.MyTable table {
+ width: 100%;
+ display:block;
+ }
+ .MyTable thead {
+ display: inline-block;
+ width: 100%;
+ height: 20px;
+ }
+ .MyTable tbody {
+ height: 200px;
+ display: inline-block;
+ width: 100%;
+ overflow: auto;
+ }*/
+
+.mouth_selection {
+	position: absolute;
+	top: 10px;
+	left: 20%;
+}
+
+/*styles for the open-chart*/
+#teethchart_adult {
+    width: 700px !important;
+    margin-left: 25%;
+    margin-top: -483px;
+    position: relative;
+}
+/*.mapster_el, .teethchartadult {
+    width: 700px !important;
+}*/
+.numbering, .numbering_below {
+    width: 738px !important;
+    margin-left: 5%;
+}
+.mouth_selection div {
+    float: left !important;
+    padding-left: 20px;
+}
+
+.mouth_selection div:first-child{
+	padding-left: 0px;
+}
+
+body {
+	margin: 0;
+	background-color: rgba(255,255,255,1);
+}
+.page {
+	position: relative;
+	top: 45px;
+	float: left;
+	height: 100px;
+	width: 100px;
+}
+.selected {
+	background-color: #4169E1;
+}
+.selected_tooth {
+	/*background-color:#4169E1;*/
+}
+.selected_operation {
+	background-color: #D8E8EA;
+}
+
+/*Button Classes*/
+.myButton {
+/*	-moz-box-shadow: 7px 9px 21px -4px #276873;
+	-webkit-box-shadow: 7px 9px 21px -4px #276873;
+	box-shadow: 7px 9px 21px -4px #276873;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #408c99));
+	background: -moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
+	background: -webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
+	background: -o-linear-gradient(top, #599bb3 5%, #408c99 100%);
+	background: -ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
+	background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+	display: inline-block;
+	text-decoration: none;*/
+	padding: 10px 20px;
+	background-color: #408c99;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border:0px;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 17px;
+}
+.scrollit {
+	overflow: scroll;
+	height: 50px;
+}
+.myButton:hover {
+/*	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
+	background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+	background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+	background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+	background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+	background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);*/
+	background-color: #2c7885;
+}
+.myButton:active {
+	position: relative;
+	top: 1px;
+}
+
+
+
+/*Table Classes*/
+.CSSTableGenerator {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	box-shadow: 10px 10px 5px #888888;
+	border: 1px solid #000000;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+}
+.CSSTableGenerator table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+.CSSTableGenerator tr:last-child td:last-child {
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+}
+.CSSTableGenerator tr:last-child td:first-child {
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+/*.CSSTableGenerator tr:hover td {
+ background-color:#ffaaaa;
+ }*/
+.CSSTableGenerator td {
+	vertical-align: middle;
+	/*background-color:#ffffff;*/
+	border: 1px solid #000000;
+	border-width: 0px 1px 1px 0px;
+	text-align: left;
+	padding: 7px;
+	font-size: 12px;
+	font-family:'Roboto', sans-serif;
+	font-weight: bold;
+	color: #141111;
+}
+.CSSTableGenerator tr:last-child td {
+	border-width: 0px 1px 0px 0px;
+}
+.CSSTableGenerator tr td:last-child {
+	border-width: 0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:last-child td:last-child {
+	border-width: 0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td {
+	background: -o-linear-gradient(bottom, #408c99 5%, #408c99 100%);
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #408c99) );
+	background: -moz-linear-gradient( center top, #408c99 5%, #408c99 100% );
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#408c99", endColorstr="#408c99");
+	background: -o-linear-gradient(top,#408c99,408c99);
+	background-color: #408c99;
+	border: 0px solid #000000;
+	text-align: center;
+	border-width: 0px 0px 1px 1px;
+	font-size: 15px;
+	font-family:'Roboto', sans-serif;
+	font-weight: bold;
+	color: #ffffff;
+}
+.CSSTableGenerator tr:first-child:hover td {
+	background: -o-linear-gradient(bottom, #408c99 5%, #408c99 100%);
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #408c99) );
+	background: -moz-linear-gradient( center top, #408c99 5%, #408c99 100% );
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#408c99", endColorstr="#408c99");
+	background: -o-linear-gradient(top,#408c99,408c99);
+	background-color: #408c99;
+}
+.CSSTableGenerator tr:first-child td:first-child {
+	border-width: 0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child {
+	border-width: 0px 0px 1px 1px;
+}
+.delete_td {
+	background-color: #FFFFFF !important;
+	text-align: center !important;
+	border: #FFFFFF !important;
+}
+/*.legend_class{
+ position:absolute;
+ top:50px;
+ left:10px;
+ }*/
+fieldset {
+	font-family: sans-serif;
+	border: 5px solid #408c99;
+	background: #D8E8EA;
+	border-radius: 5px;
+	padding: 15px;
+}
+fieldset legend {
+	background: #408c99;
+	color: #fff;
+	padding: 5px 10px;
+	font-size: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 0 5px #ddd;
+}
+
+.result_class {
+	background-color: #4169E1;
+}
+/*.surface2{
+ position:absolute;
+ top:100000;
+ left:0;
+ }*/
+.teeth_chart {
+	position: absolute;
+	top: 30px;
+}
+.procedure_label{
+	font-size:larger;
+	font-weight:900;
+}
+.label{
+	font-family: sans-serif;
+	font-size: medium;
+}
+/*.close {
+    display:flex;
+    align-content: flex-end;
+	float: right;
+	font-size: 35px;
+	font-weight: 900;
+	line-height: 1;
+	color: rgb(20, 44, 51);
+	text-shadow: 0 3px 0 rgba(30, 18, 84, 0.2);;
+	filter: alpha(opacity=20);
+	opacity: .6;
+	position: absolute;
+	 top: 0;
+	 right: 25px;
+}*/
+.close {
+/*    display:flex;
+    align-content: flex-end;
+	float: right;*/
+	line-height: normal;
+	position: absolute;
+	 top: 10px;
+	 right: 10px;
+	padding: 10px !important;
+	background-color: #408c99 !important;
+	-moz-border-radius: 3px !important;
+	-webkit-border-radius: 3px !important;
+	border-radius: 3px !important;
+	border:0px !important;
+	cursor: pointer !important;
+	color: #ffffff !important;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	opacity: 1;
+	text-shadow: none;
+	font-weight: 500;
+	width: 100px;
+	
+}
+
+.close:hover{
+	background-color: #2c7885 !important;
+	opacity: 1;
+}
+
+
+.save {
+/*	float: right;*/
+	line-height: normal;
+	position: absolute;
+	top: 60px;
+	right: 10px;
+	padding: 10px !important;
+	background-color: #408c99 !important;
+	-moz-border-radius: 3px !important;
+	-webkit-border-radius: 3px !important;
+	border-radius: 3px !important;
+	border:0px !important;
+	cursor: pointer !important;
+	color: #ffffff !important;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	width: 100px;
+	
+}
+
+.save:hover{
+	background-color: #2c7885 !important;
+}
+
+
+.back {
+/*	float: right;*/
+	line-height: normal;
+	position: absolute;
+	top: 60px;
+	left: 260px;
+	padding: 10px !important;
+	background-color: #408c99 !important;
+	-moz-border-radius: 3px !important;
+	-webkit-border-radius: 3px !important;
+	border-radius: 3px !important;
+	border:0px !important;
+	cursor: pointer !important;
+	color: #ffffff !important;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	width: 100px;
+	
+}
+
+.back:hover{
+	background-color: #2c7885 !important;
+}
+
+
+
+.close_button {
+	height: 25px;
+	width: 60px;
+	position: absolute;
+	/*text-align: center;*/
+	background-color: #DDD;
+	 font-size: 12px;
+	 line-height: 40px;
+	 -webkit-border-radius: 5px;
+
+	 top: 0;
+	 right: 75px;
+	 cursor: pointer;
+}
+
+#teeth-surface-1 {
+	margin-left: 20px;
+	position: absolute;
+	top: 50px
+}
+#teeth-surface-2 {
+	margin-left: 20px;
+	position: absolute;
+	top: 55%;
+}
+
+.header_lbl {
+	font-family: sans-serif;
+	font-size: 20pt;
+	text-shadow: 1px 1px 1px #FFFFFF;;
+	color: black;
+	text-align: center;
+	position: relative;
+}
+.legend_class {
+	width: 100%
+}
+.progress_report {
+	width: 70%;
+	position: absolute;
+	top: 380px;
+}
+/*.teeth_chart{
+ position: absolute;
+ top:0;
+ right:100;
+ }*/
+.header {
+	width: 100%;
+	height: 35px;
+	padding-top: 10px;
+	text-align: center;
+	color: red;
+}
+/*.close_button {
+ height: 100%;
+ float: right;
+ }*/
+/*.close_button {
+ height: 40px;
+ width: 60px;
+ text-align: center;
+ background-color: #DDD;
+ font-size: 12px;
+ line-height: 40px;
+ -webkit-border-radius: 5px;
+ position: absolute;
+ top: 0;
+ right: 15px;
+ cursor: pointer;
+ }*/
+.define_img {
+	width: 60px;
+	height: 60px
+}
+
+.selected_treatment {
+	color: #FF0000 !important;
+}
+
+.selected_category {
+	font-weight: bold;
+}
+
+.perio_chart_view_dashboard {
+	text-align: center;
+	height: 100% width :100%
+}
+.chart_view_dashboard {
+	/*background-image: url("/pragtech_dental_management/static/src/img/dentist_background.gif");*/
+	background-color:white;
+	text-align: center;
+}
+.categs {
+	text-align: left;
+}
+
+.set_together {
+	margin: 0px;
+	width: 20%;
+	float: left;
+	padding: 25px;
+}
+
+.right_col {
+	width: 75%;
+	float: left;
+	margin: 0px;
+	padding: 25px;
+}
+
+/* medical alert */
+.medical_alert_class > a {
+	color: #FF0000 !important;
+}
+
+.carousel-inner {
+	left: 150px !important;
+}
+
+.carousel-control {
+	background-color: white;
+}
+
+.shift_left {
+	position: absolute;
+	top: 0px;
+}
+.shift_right {
+	position: absolute;
+	top: 0px;
+	left: 930px;
+}
+.multi-item-carousel {.carousel-inner{
+	.item{
+	transition: 500ms ease-in-out left;
+}
+.active {&.left{
+	left: -33%;
+}
+&
+.right {
+	left: 33%;
+}
+}
+.next {
+	left: 33%;
+}
+.prev {
+	left: -33%;
+}
+@media all and (transform-3d) , (-webkit-transform-3d) {
+	.item {// use your favourite prefixer here
+		transition: 500ms ease-in-out all;
+		backface-visibility: visible;
+		transform: none !important;
+	}
+}
+}
+.carouse-control{
+&.left, &
+.right {
+	background-image: none;
+}
+}
+}
+
+//
+non-related styling:
+body {
+	background: #333;
+	color: #ddd;
+}
+h1 {
+	font-size: 2.25em;
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 2em;
+}
+
+/*ul.smart_autocomplete_container {
+	margin: 15px 0;
+    position: absolute !important;
+    top: 175.067px !important;
+    width: 246.933px !important;
+    z-index: 1000 !important;
+    display: block !important;
+    left: 639.567px !important;
+
+}*/
+
+ul.smart_autocomplete_container li {
+	list-style: none;
+    cursor: pointer;
+    margin-left: -38px;
+    padding: 5px;
+    background-color: #c8db67;
+    width: inherit;
+}
+li.smart_autocomplete_highlight {
+	background-color: #d8e8ea !important;
+}
+
+.childnumberingupper {
+    width: 0px !important;
+    margin-left: 0% !important;
+}
+
+.childnumberinglower {
+    width: 0px !important;
+    margin-left: 0% !important;	
+}
+
+.patient_details {
+font-weight: 600;
+border: none;
+width: auto;
+height: auto;
+background: gainsboro;
+margin-bottom: 18px;
+font-size: 16px;
+border-radius: 3px;
+}
+.patient_details span {
+margin: 10px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(1){
+	position: relative;
+	left: 40px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(2){
+	position: relative;
+	left: 75px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(3){
+	position: relative;
+	left: 112px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(4){
+	position: relative;
+	left: 150px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(5){
+	position: relative;
+	left: 186px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(6){
+	position: relative;
+	left: 225px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(7){
+	position: relative;
+	left: 260px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(8){
+	position: relative;
+	left: 298px;
+}
+.childnumberingupper #child_upper_teeths td:nth-child(9){
+	position: relative;
+	left: 336px;
+}
+
+.childnumberingupper #child_upper_teeths td:nth-child(10){
+	position: relative;
+	left: 375px;
+}
+
+/*<-----------Lower Text--------------->*/
+
+.childnumberinglower #child_lower_teeths td:nth-child(1){
+	position: relative;
+	left: 40px;
+}
+
+.childnumberinglower #child_lower_teeths td:nth-child(2){
+	position: relative;
+	left: 75px;
+}
+
+.childnumberinglower #child_lower_teeths td:nth-child(3){
+	position: relative;
+	left: 112px;
+}
+
+.childnumberinglower #child_lower_teeths td:nth-child(4){
+	position: relative;
+	left: 150px;
+}
+
+.childnumberinglower #child_lower_teeths td:nth-child(5){
+	position: relative;
+	left: 186px;
+}
+
+.childnumberinglower #child_lower_teeths td:nth-child(6){
+	position: relative;
+	left: 225px;
+}
+
+.childnumberinglower #child_lower_teeths td:nth-child(7){
+	position: relative;
+	left: 260px;
+}
+
+.childnumberinglower #child_lower_teeths td:nth-child(8){
+	position: relative;
+	left: 298px;
+}
+.childnumberinglower #child_lower_teeths td:nth-child(9){
+	position: relative;
+	left: 336px;
+}
+
+.childnumberinglower #child_lower_teeths td:nth-child(10){
+	position: relative;
+	left: 372px;
+}

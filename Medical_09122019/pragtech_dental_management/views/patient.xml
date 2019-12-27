@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.ui.view" id="operation_summary_tree">
+			<field name="name">operation.summary</field>
+			<field name="model">operation.summary</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Operation Summary'>
+					<field name="appt_id" />
+					<field name="create_date" />
+					<field name="description" />
+					<field name="diagnosis_id" readonly="0"/>
+					<field name="diagnosis_description" readonly="0" />
+
+					<field name="teeth_id" />
+					<!-- <field name="tooth_function_field"/> -->
+					<field name="state" />
+					<field name="dentist" />
+					<field name="detail_description" />
+					<field name="amount" />
+				</tree>
+			</field>
+		</record>
+
+    <record model="ir.ui.view" id="medical_patient_view_2">
+			<field name="name">Patient</field>
+			<field name="model">medical.patient</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+			<form string="Patient">
+				<group col="6" colspan="6">
+				<group col="4" colspan="4" string="Main Info">
+					<field name="name"
+						context="{'default_is_patient': 1, 'search_default_is_patient': 1}"/>
+					<field name="patient_id"/>
+					<field name="dob" />
+					<field name="report_date" invisible="1"/>
+					<field name="sex" required="1"/>
+					<field  name="age"/>
+					<field  name="arebic"/>
+					<field name="id" invisible="1"/>
+
+				</group>
+				<group col="2" colspan="2" string="Picture" rowspan="1">
+					<field name="photo"  nolabel="1" img_width="120" img_height="120" width="120" height="120" widget="image"/>
+				</group>
+				</group>
+				<notebook>
+			        <page string="General Information">
+						<group colspan="4" col="4" string="Patient General Information">
+							<field name="blood_type"/>
+							<field name="rh"/>
+							<field name="marital_status"/>
+							<field name="occupation_id"/>
+							<field name="primary_doctor_id"/>
+							<field name="referring_doctor_id"/>
+							<field name="mobile"/>
+							<field name="nationality_id"/>
+							<field name="other_mobile"/>
+						</group>
+						<separator colspan="4" string="Patient Extra Information" />
+						<newline/>
+						<field colspan="4" name="general_info" nolabel="1"/>
+						<newline/>
+						<field colspan="4" name="note" nolabel="1" placeholder="Notes...."/>
+						<newline/>
+						<group colspan="4" col="4">
+							<field name="deceased"/>
+							<field name="dod" attrs="{'invisible':[('deceased','=',False)],'required':[('deceased','=',True)]}"/>
+						</group>
+					</page>
+					<page string="Medical Questionnaire">
+						<div >
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q1" />
+                                </td>
+                                <td><field name="q1"/></td>
+                            </tr>
+
+                        </table>
+                        <p><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q2"/>
+                                </td>
+                                <td><field name="q2"/></td>
+
+                                <td>
+                                    <label for="q3" />
+                                </td>
+                                <td><field name="q3"/></td>
+
+                                <td>
+                                    <label for="q4" />
+                                </td>
+                                <td><field name="q4"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q5" />
+                                </td>
+                                <td><field name="q5"/></td>
+
+                                <td>
+                                    <label for="q6"/>
+                                </td>
+                                <td><field name="q6"/></td>
+
+                                <td>
+                                    <label for="q7" />
+                                </td>
+                                <td><field name="q7"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q8"/>
+                                </td>
+                                <td><field name="q8"/></td>
+
+                                <td>
+                                    <label for="q9"/>
+                                </td>
+                                <td><field name="q9"/></td>
+
+                                <td>
+                                    <label for="q10"/>
+                                </td>
+                                <td><field name="q10"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q11"/>
+                                </td>
+                                <td><field name="q11"/></td>
+
+                                <td>
+                                    <label for="q12"/>
+                                </td>
+                                <td><field name="q12"/></td>
+
+                                <td>
+                                    <label for="q13"/>
+                                </td>
+                                <td><field name="q13"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q14"/>
+                                </td>
+                                <td><field name="q14"/></td>
+
+                                <td>
+                                    <label for="q15"/>
+                                </td>
+                                <td><field name="q15"/></td>
+
+                                <td>
+                                    <label for="q16"/>
+                                </td>
+                                <td><field name="q16"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q17"/>
+                                </td>
+                                <td><field name="q17"/></td>
+
+                                <td>
+                                    <label for="q18"/>
+                                </td>
+                                <td><field name="q18"/></td>
+
+                                <td>
+                                    <label for="q19"/>
+                                </td>
+                                <td><field name="q19"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q20"/>
+                                </td>
+                                <td><field name="q20"/></td>
+
+                                <td>
+                                    <label for="q21"/>
+                                </td>
+                                <td><field name="q21"/></td>
+
+                                <td>
+                                    <label for="q22"/>
+                                </td>
+                                <td><field name="q22"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q23"/>
+                                </td>
+                                <td><field name="q23"/></td>
+
+                                <td>
+                                    <label for="q24"/>
+                                </td>
+                                <td><field name="q24"/></td>
+
+                                <td>
+                                    <label for="q25"/>
+                                </td>
+                                <td><field name="q25"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q26"/>
+                                </td>
+                                <td><field name="q26"/></td>
+
+                                <td>
+                                    <label for="q27"/>
+                                </td>
+                                <td><field name="q27"/></td>
+
+                                <td>
+                                    <label for="q28"/>
+                                </td>
+                                <td><field name="q28"/></td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q29"/>
+
+                                    </td>
+                                <td><field name="q29"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q29', '!=', 'YES')]}">
+                                <td><field name="q30"  placeholder="When...."/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q31"/>
+
+                                    </td>
+                                <td><field name="q31"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q31', '!=', 'YES')]}">
+                                <td><field name="q32"  placeholder="Please specify...."/></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p><strong>Do you have allergies to?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q33"/>
+                                </td>
+                                <td><field name="q33"/></td>
+
+                                <td>
+                                    <label for="q34"/>
+                                </td>
+                                <td><field name="q34"/></td>
+
+                                <td>
+                                    <label for="q35"/>
+                                </td>
+                                <td><field name="q35"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q36"/>
+                                </td>
+                                <td><field name="q36"/></td>
+
+                                <td>
+                                    <label for="q37"/>
+                                </td>
+                                <td><field name="q37"/></td>
+
+                                <td>
+                                    <label for="q38"/>
+                                </td>
+                                <td><field name="q38"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q39"/>
+                                </td>
+                                <td><field name="q39"/></td>
+
+                                <td>
+                                    <label for="q40"/>
+                                </td>
+                                <td><field name="q40"/></td>
+
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q41"/>
+                                </td>
+                                <td><field name="q41"/></td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q42"/>
+                                </td>
+                                <td><field name="q42"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q42', '!=', 'YES')]}">
+                                <td><field name="q43"  placeholder="# of cigarette/day...."/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q44"/>
+                                </td>
+                                <td><field name="q44"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q44', '!=', 'YES')]}">
+                                <td><field name="q45"  placeholder="Month...."/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q46"/>
+                                </td>
+                                <td><field name="q46"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q47"/>
+                                </td>
+                                <td><field name="q47"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q48"/>
+                                </td>
+                                <td><field name="q48"/></td>
+                            </tr>
+                        </table>
+                        <p><strong>Associated with dentistry?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q49"/>
+                                </td>
+                                <td><field name="q49"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q50" string="How often do you brush/floss?"/>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label for="q50"/>
+                                </td>
+                                <td>
+                                    <field name="q50"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label for="q51"/>
+                                </td>
+                                <td>
+                                    <field name="q51"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label for="q52"/>
+                                </td>
+                                <td>
+                                    <field name="q52"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q53"/>
+                                </td>
+                                <td><field name="q53"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q54"/>
+                                </td>
+                                <td><field name="q54"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q54', '!=', 'YES')]}">
+                                <td><field name="q55"  placeholder="When and where...."/></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q56"/>
+                                </td>
+                                <td><field name="q56"/></td>
+                            </tr>
+                        </table>
+
+                        <p><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:40%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:40%;"></th>
+                                <th style="width:15%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q57"/>
+                                </td>
+                                <td><field name="q57"/></td>
+
+                                <td>
+                                    <label for="q58"/>
+                                </td>
+                                <td><field name="q58"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q59"/>
+                                </td>
+                                <td><field name="q59"/></td>
+
+                                <td>
+                                    <label for="q60"/>
+                                </td>
+                                <td><field name="q60"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q61"/>
+                                </td>
+                                <td><field name="q61"/></td>
+
+                                <td>
+                                    <label for="q62"/>
+                                </td>
+                                <td><field name="q62"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q63"/>
+                                </td>
+                                <td><field name="q63"/></td>
+
+                                <td>
+                                    <label for="q64"/>
+                                </td>
+                                <td><field name="q64"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q65"/>
+                                </td>
+                                <td><field name="q65"/></td>
+
+                                <td>
+                                    <label for="q66"/>
+                                </td>
+                                <td><field name="q66"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q67"/>
+                                </td>
+                                <td><field name="q67"/></td>
+
+                                <td>
+                                    <label for="q68"/>
+                                </td>
+                                <td><field name="q68"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q69"/>
+                                </td>
+                                <td><field name="q69"/></td>
+
+                                <td>
+                                    <label for="q70"/>
+                                </td>
+                                <td><field name="q70"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q71"/>
+                                </td>
+                                <td><field name="q71"/></td>
+
+                                <td>
+                                    <label for="q72"/>
+                                </td>
+                                <td><field name="q72"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q73"/>
+                                </td>
+                                <td><field name="q73"/></td>
+
+                                <td>
+                                    <label for="q74"/>
+                                </td>
+                                <td><field name="q74"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q75"/>
+                                </td>
+                                <td><field name="q75"/></td>
+
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p><strong>Smile Assessment</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q76"/>
+                                </td>
+                                <td><field name="q76"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q76', '!=', 'NO')]}">
+                                <td><field name="q77"  placeholder="If no, Please explain...."/></td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+                    </div>
+			        </page>
+					<page string="Medical Alert" attrs = "{'invisible':['|',('critical_info', '!=', False),('medical_history','!=',False)]}">
+						<group colspan="4" >
+							<field name="critical_info_fun"/>
+							<field name="medical_history_fun"/>
+						</group>
+			        </page>
+			        <page string="Medical  Alert" class = "medical_alert_class" attrs = "{'invisible':[('critical_info', '=', False),('medical_history','=',False)]}">
+						<group colspan="4" >
+							<field name="critical_info" />
+							<field name="medical_history" />
+						</group>
+			        </page>
+			        <page string="Prescriptions">
+						<field name="prescriptions"
+									   context="{'default_patient_id':id}" nolabel="1">
+							<tree editable="bottom">
+								<field name="appt_id"/>
+								<field name="patient_id" invisible="1" />
+								<field name="prescription_date"/>
+								<field name="doctor"/>
+								<field name="medicine_id" />
+								<field name="dose" />
+								<field name="dose_unit" />
+								<field name="form" />
+								<field name="common_dosage" />
+								<field name="duration" />
+								<field name="duration_period" />
+								<field name="note" />
+							</tree>
+						</field>
+			        </page>
+			        <page string="Appointments">
+			        	<group colspan="4"  >
+				        <field name="apt_id" nolabel="1"/>
+				        </group>
+			        </page>
+			        <page string="Chart" autofocus="autofocus">
+			        	<button name="open_chart" groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu" default_focus="1" type="object" string="Open Chart"></button>
+			        </page>
+			        <page string="Operations">
+                            <field name="teeth_treatment_ids" string="Operations" nolabel="1">
+                                <tree  editable="bottom" create="0" delete="0">
+									<field name="appt_id"/>
+									<field name="create_date"/>
+									<field name="description" readonly="1"/>
+									<field name="diagnosis_id" readonly="0"/>
+									<field name="diagnosis_description" readonly="0" />
+									<field name="teeth_id" readonly="1"/>
+									<!-- <field name="tooth_function_field"/> -->
+									<field name="state" readonly="1"/>
+									<field name="signature" widget="image" width="80" height="60" readonly="1"/>
+									<field name="dentist"/>
+									<field name="detail_description" readonly="1"/>
+									<field name="actual_amount" />
+									<field name="amount" />
+									<field name="amt_paid_by_patient" readonly="1"/>
+									<field name="amt_to_be_patient" readonly="1"/>
+								</tree>
+                            </field>
+                    </page>
+                    <page string="Images">
+                    	<button name="get_img" type="object" string="View Images"></button>
+                    	<field name = "attachment_ids"  context="{'default_res_model': 'medical.patient','default_res_id': id}">
+                               <field name = "datas"/>
+                        </field>
+
+                        	<!-- <field name = "datas"/> -->
+                    </page>
+                    <page string="Patient Complaints">
+                        <group colspan="4" col="8" >
+                            <field name="patient_complaint_ids" context="{'search_default_patient_id': id,'default_patient_id': id}" string="Complaints" nolabel="1">
+                            	<tree string="records">
+                            	<field name="complaint_subject"/>
+                    			<field name="complaint_date"/>
+                    			<field name="complaint"/>
+								<field name="action_ta"/>
+								<field name="patient_id" invisible="1"/>
+                            	</tree>
+                            	<form string="Records">
+									<group >
+										<field name="complaint_subject"/>
+                    					<field name="complaint_date"/>
+                    					<field name="complaint"/>
+										<field name="action_ta"/>
+										<field name="patient_id" invisible="1"/>
+									</group>
+								</form>
+                          	</field>
+                        </group>
+                    </page>
+		        </notebook>
+			</form>
+		</field>
+	</record>
+
+
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="invoice_tree" model="ir.ui.view">
+            <field name="name">account.invoice.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="credit_amt"/>
+                    <field name="cash_amt"/>
+                </field>
+            </field>
+    </record>
+
+    <record id="invoice_supplier_tree" model="ir.ui.view">
+            <field name="name">account.invoice.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="credit_amt"/>
+                    <field name="cash_amt"/>
+                </field>
+            </field>
+    </record>
+
+    <record id="view_account_invoice_form" model="ir.ui.view">
+            <field name="name">account.invoice.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_invoice_open']" position="after">
+                    <button name="modify_invoice" string="Modify Invoice" type="object" attrs="{'invisible': [('state', 'not in', ['open'])]}"/>
+                    <button name="modify_invoice" string="Modify Invoice" type="object"
+                            attrs="{'invisible': ['|',('state', 'not in', ['paid']),('amount_total', '&gt;', 0)]}"/>
+                    <button name="add_discount" string="Add Discount" type="object" attrs="{'invisible': [('state', 'not in', ['open'])]}"/>
+                </xpath>
+                <field name="partner_id" position="after">
+                    <field name="adv_amount" invisible="1"/>
+                </field>
+                <xpath expr="//page[@name='other_info']" position="after">
+                   <page name="Payments" string="Payments">
+                        <field name="payment_ids" readonly="1">
+                            <tree>
+                                <field name="payment_date"/>
+                                <field name="name"/>
+                                <field name="journal_id"/>
+                                <field name="payment_method_id"/>
+                                <field name="partner_id" string="Customer"/>
+                                <field name="amount" sum="Amount"/>
+                                <field name="adv_pay_amount" />
+                                <field name="state"/>
+                                <field name="advance" invisible="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <button name="update_payment" string="Update" type="object"
+                                        attrs="{'invisible': ['|',('state', 'not in', ['posted']),('advance', '=', True)]}"/>
+                                <button name="delete_payment" string="Delete" type="object" attrs="{'invisible': [('advance', '=', True)]}"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="invoice_supplier_form" model="ir.ui.view">
+            <field name="name">account.invoice.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_invoice_open']" position="after">
+                      <button name="modify_invoice" string="Modify Invoice" type="object"
+                              attrs="{'invisible': [('state', 'not in', ['open'])]}"/>
+                      <button name="modify_invoice" string="Modify Invoice" type="object"
+                              attrs="{'invisible': ['|',('state', 'not in', ['paid']),('amount_total', '&gt;', 0)]}"/>
+                </xpath>
+                <field name="partner_id" position="after">
+                    <field name="adv_amount" invisible="1"/>
+                </field>
+                <xpath expr="//page[@name='other_info']" position="after">
+                   <page name="Payments" string="Payments">
+                        <field name="payment_ids" readonly="1">
+                            <tree>
+                                <field name="payment_date"/>
+                                <field name="name"/>
+                                <field name="journal_id"/>
+                                <field name="payment_method_id"/>
+                                <field name="partner_id" string="Customer"/>
+                                <field name="amount" sum="Amount"/>
+                                <field name="adv_pay_amount" />
+                                <field name="state"/>
+                                <field name="advance" invisible="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <button name="update_payment" string="Update" type="object"
+                                        attrs="{'invisible': ['|',('state', 'not in', ['posted']),('advance', '=', True)]}"/>
+                                <button name="delete_payment" string="Delete" type="object" attrs="{'invisible': [('advance', '=', True)]}"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+    </record>
+
+</odoo>

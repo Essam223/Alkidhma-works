@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+        id="report_surgical_consent_consent"
+        string="Surgical Consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="phi_surgical_consent.report_surgical_consent_pdf"
+        name="phi_surgical_consent.report_surgical_consent_pdf"
+		menu="False"
+    />
+</odoo>

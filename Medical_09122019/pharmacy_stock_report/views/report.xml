@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="pharmacy_stock_inout_report"
+                string="Pharmacy Stock IN-OUT Report"
+                model="pharmacy.stock_inout.report"
+                report_type="qweb-pdf"
+                file="pharmacy_stock_report.pharmacy_stock_inout_report_pdf"
+                name="pharmacy_stock_report.pharmacy_stock_inout_report_pdf"
+
+        />
+        <report
+                id="pharmacy_stock_report"
+                string="Pharmacy Stock Report"
+                model="pharmacy.stock.report"
+                report_type="qweb-pdf"
+                file="pharmacy_stock_report.pharmacy_stock_report_pdf"
+                name="pharmacy_stock_report.pharmacy_stock_report_pdf"
+        />
+    </data>
+</odoo>

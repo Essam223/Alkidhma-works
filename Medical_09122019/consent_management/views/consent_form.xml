@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_consent_form_wizard2" model="ir.ui.view">
+            <field name="name">consent.form.form</field>
+            <field name="model">consent.form</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Consent Form">
+                    <div >
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:33%;"></th>
+                                <th style="width:33%;"></th>
+                                <th style="width:34%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_Consent_for_Final_Cementation" type="object">Consent for Final Cementation</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_Cosmetic_treatment_consent" type="object">Cosmetic treatment Consent</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_general_Consent" type="object">General Consent</button>
+                                </td>
+                                <!-- <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_xray_consent" type="object">X-ray Consent</button>
+                                </td> -->
+                            </tr>
+                            <tr>
+                                <td><br/></td>
+                                <td/>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <!-- <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_ATTENDANCE" type="object">Attendance</button>
+                                </td> -->
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_Orthodontic_informed_Consent" type="object">Ortho-Informed-Consent</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_Endodontic_treatment_Consent" type="object">Endodontic treatment Consent</button>
+                                </td>
+                                <!-- <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_refusal_of_xray" type="object">Refusal of X-ray</button>
+                                </td> -->
+                            </tr>
+                            <tr>
+                                <td><br/></td>
+                                <td/>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_general_dentistry_consent" type="object">General Dentistry Consent</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_Oral_Surgery_Consent" type="object"> Oral Surgery Consent</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_Refusal_of_Recommended_Treatment" type="object"> Refusal of Recommended Treatment</button>
+                                </td>
+                               <!--  <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_photo_release" type="object">Photo and Video Release Form</button>
+                                </td> -->
+                            </tr>
+                            <tr>
+                                <td><br/></td>
+                                <td/>
+                                <td/>
+                            </tr>
+                        </table>
+                    </div>
+                    <footer>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_consent_wizard">
+		<field name="name">Consent Form</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">consent.form</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

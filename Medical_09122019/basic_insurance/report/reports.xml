@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <report   
+            id="income_by_insurance_company_qweb" 
+            string="Income By Insurance Company"
+            model="income.by.insurance.company.wizard"
+            report_type="qweb-pdf"
+            file="basic_insurance.income_by_insurance"
+            name="basic_insurance.income_by_insurance"/>
+
+        <report
+            id="claim_report_qweb"
+            string="Claim Report"
+            model="dental.claim.wizard"
+            report_type="qweb-pdf"
+            file="basic_insurance.claim_report"
+            name="basic_insurance.claim_report"/>
+
+    </data>
+</odoo>

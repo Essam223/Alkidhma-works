@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="cheque_receipt_report">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page" style="padding-top: 10px;">
+                            <center><i><h2>CHEQUE RECEIPT VOUCHER</h2></i></center>
+
+                            <div class="row mt32 mb32" style="padding-top: 5px;" id="informations" >
+                                <div class="col-xs-8">
+                                      <strong>RECEIVED FROM : </strong>
+                                      <span t-field="o.partner_id.name" ></span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <strong>DATE : </strong>
+                                    <span t-esc="time.strftime('%d-%m-%Y')"/>
+                                </div>
+                            </div>
+                            <div class="row mt32 mb32" id="informations2" >
+                                <div class="col-xs-8">
+                                </div>
+                                <div class="col-xs-4">
+                                    <strong>Voucher No : </strong>
+                                      <span t-field="o.name" ></span>
+                                </div>
+                            </div>
+
+                            <table width="95%" class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" width="25%">Cheque Date</th>
+                                        <th class="text-center" width="25%">Bank</th>
+                                        <th class="text-center" width="25%">Cheque No.</th>
+                                        <th class="text-center" width="25%">Payment Amount</th>
+
+                                    </tr>
+                                </thead >
+                                <tbody class="cheque_tbody">
+                                    <tr>
+                                        <td class="text-center"><span t-field="o.cheque_date"/></td>
+                                        <td class="text-center"><span t-field="o.bank_name"/></td>
+                                        <td class="text-center"><span t-field="o.name"/></td>
+                                        <td class="text-center"><span t-field="o.amount"/></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div >
+                                <strong>THE SUM OF :</strong><span t-esc="o.amount_to_text(o.amount)"/>
+                            </div>
+                            <div class="row mt32 mb32" id="informations2" style="padding-top: 10px;" >
+                                <div class="col-xs-8">
+                                      <strong>Description : </strong>
+                                        <br/>
+                                      <span t-field="o.comment" ></span>
+                                </div>
+                            </div>
+                            <div class="row zero_min_height" style="padding-bottom: 25px;">
+                                <div class="col-xs-12">
+                                    <div style="border-bottom: 2px dotted black;"></div>
+                                </div>
+                            </div>
+
+                            <div class="row mt32 mb32" style="border-top: 1px solid black;border-bottom:4px double black;padding-top: 25px;padding-bottom: 25px;" id="informations4" >
+                                <div class="col-xs-4">
+                                      <span>Prepared By : </span>
+                                </div>
+                                <div class="col-xs-4">
+                                      <span>Checked By : </span>
+                                </div>
+                                <div class="col-xs-4">
+                                      <span>Received By : </span>
+                                </div>
+
+                            </div>
+                            <div class="row mt32 mb32" style="padding-top: 25px;" id="informations4" >
+                                <div class="col-xs-6">
+                                      <h4><strong>Printed By : <span t-esc="user.name"/></strong></h4>
+                                </div>
+                                <div class="col-xs-6">
+                                      <h4><strong>Time : <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"/></strong></h4>
+                                </div>
+                            </div>
+
+                            </div>
+                        </t>
+                    </t>
+            </template>
+    </data>
+</odoo>

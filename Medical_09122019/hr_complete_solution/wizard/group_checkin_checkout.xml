@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Checkin/ Checkout  -->
+        <record id="checkin_checkout_form" model="ir.ui.view">
+            <field name="name">checkin.checkout.form</field>
+            <field name="model">checkin.checkout</field>
+            <field name="arch" type="xml">
+                <form string="Checkin / Checkout">
+                    <group >
+                        <group>
+                            <field name="check_in_time"/>
+                        </group>
+                        <group>
+                            <field name="check_out_time"/>
+                        </group>
+                    </group>
+                    <group string="Employees">
+                        <field name="employee_ids" nolabel="1">
+                            <tree>
+                                <field name="name" />
+                                <field name="department_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="action_checkin_checkout" type="object" string="Proceed" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--  Checkin/Checkout action -->
+        <record id="checkin_checkout_act" model="ir.actions.act_window">
+            <field name="name">Checkin/Checkout</field>
+            <field name="res_model">checkin.checkout</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="checkin_checkout_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <act_window
+            id="action_checkin_checkout"
+            multi="True"
+            key2="client_action_multi" name="Checkin/Checkout"
+            res_model="checkin.checkout"
+            src_model="hr.employee"
+            view_mode="form" target="new" view_type="form"
+            view_id="checkin_checkout_form"
+            groups="hr_attendance.group_hr_attendance_user,hr_attendance.group_hr_attendance_manager"
+        />
+</odoo>

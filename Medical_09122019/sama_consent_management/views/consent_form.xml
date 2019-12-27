@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_sama_consent_form_wizard" model="ir.ui.view">
+            <field name="name">consent.form.form</field>
+            <field name="model">consent.form</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Consent Form">
+                    <div >
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:33%;"></th>
+                                <th style="width:33%;"></th>
+                                <th style="width:34%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_botox" type="object"> Botox</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_derma_fillers" type="object"> Derma Fillers</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_chemical_peeling" type="object"> Chemical peeling/ Mesotherapy</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><br/></td>
+                                <td/>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_prp" type="object"> PRP</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary fa fa-navicon" name="get_lhr" type="object"> LHR</button>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><br/></td>
+                                <td/>
+                                <td/>
+                            </tr>
+                        </table>
+                    </div>
+                    <footer>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_consent_wizard">
+		<field name="name">Consent Form</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">consent.form</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

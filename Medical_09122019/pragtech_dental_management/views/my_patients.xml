@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="action_doctor_my_patients" model="ir.actions.server">
+            <field name="name">My Patients</field>
+            <field name="model_id" ref="pragtech_dental_management.model_medical_physician"/>
+            <field name="state">code</field>
+            <field name="code">action = model.action_my_patients()</field>
+        </record>
+
+        <menuitem name="My Patients" id="menu_my_patients" action="action_doctor_my_patients"
+                  sequence="1" parent="pragtech_dental_management.medical_patients_menu"
+                  groups="pragtech_dental_management.group_dental_doc_menu"/>
+    </data>
+</odoo>

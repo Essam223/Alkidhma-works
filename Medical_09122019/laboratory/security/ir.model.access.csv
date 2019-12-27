@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lab_request,lab_request,model_lab_request,,1,1,1,1
+access_lab_request_lines,lab_request_lines,model_lab_request_lines,,1,1,1,1

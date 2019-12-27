@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_offer_letter">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                        <h4><center><b>Employment Offer Letter</b></center></h4>
+                    <p>
+                       Dear <span t-field="o.employee_id"/>, <br/><br/>
+                         &#160;&#160;&#160;&#160;&#160;&#160; &#160;&#160;&#160;We are pleased to offer you the position of <b><span t-field="o.job_id.name"/></b> under
+                        <b><span t-field="o.department_id.name"/></b> department at
+                        <b><span t-field="o.company_id.name"/></b> with a start date of <b><span t-field="o.date_start"/>. </b>
+                        We believe your skills and experience are an excellent match for our company.
+                        The annual starting salary for this position is
+                        <b><span t-field="o.wage" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></b>
+                        to be paid on a
+                       <t t-if="not o.schedule_pay">Monthly</t>
+                       <t t-if="o.schedule_pay=='monthly'">Monthly</t>
+                       <t t-if="o.schedule_pay=='quarterly'">Quarterly</t>
+                       <t t-if="o.schedule_pay=='semi-annually'">Semi-annually</t>
+                       <t t-if="o.schedule_pay=='annually'">Annually</t>
+                       <t t-if="o.schedule_pay=='weekly'">Weekly</t>
+                       <t t-if="o.schedule_pay=='bi-weekly'">Bi-weekly</t>
+                       <t t-if="o.schedule_pay=='bi-monthly'">Bi-monthly</t>
+                        basis.
+                        <br/>
+                         &#160;&#160;&#160;&#160;&#160;&#160;
+
+                        </p>
+
+                        <!--As an employee of-->
+                        <!--<b><span t-field="o.company_id.name"/></b>,-->
+                        <!--you are also eligible for our benefits program which-->
+                        <!--which includes medical insurance, vacation leave, etc., and other benefits which-->
+                        <!--will be described below.-->
+
+                        <div class="col-xs-12">
+                            <table width="50%" class="table table-condensed" >
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" width="25%">Sr.No.</th>
+                                        <th width="25%">Allowances</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="i" t-value="0"/>
+                                    <t t-foreach="o.struct_id.rule_ids" t-as="rules">
+                                        <tr t-if="rules.include_in_offer_letter">
+                                            <td class="text-center"><t t-esc ="i+1"/>.</td>
+                                            <td><span t-field="rules.name"/></td>
+                                            <t t-set="i" t-value="i+1"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <p>
+                            Please confirm your acceptance of this offer by signing and returning this letter ASAP.
+                            <!--Please confirm your acceptance of this offer by signing and returning this letter within 3 days.-->
+                            <br/>
+                            We are excited to have you join our team! If you have any questions, please feel free to reach out at any time.
+
+                            Sincerely,
+                            <br/>
+                            Signature: ______________________________
+                            <br/>
+                            Name: _________________________________
+                            <br/>
+                            Date: __________________________________
+                            <br/>
+                        </p>
+
+
+
+
+<!--Your employment with [company name] will be on an at-will basis, which means you and the company are free to terminate the employment relationship at any time for any reason. This letter is not a contract or guarantee of employment for a definite amount of time.-->
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

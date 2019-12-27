@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="medical_patient_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+			<field name="model">medical.patient</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_patient_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[2]" position="replace">
+                    <page string="Medical Questionnaire">
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p1" />
+                                </td>
+                                <td><field name="p1"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('p1', '!=', 'YES')]}">
+                                <td>
+                                    <label for="p2" />
+                                </td>
+                                <td><field name="p2"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p3" />
+                                </td>
+                                <td><field name="p3"/></td>
+                            </tr>
+                        </table>
+                        <p><strong>Circle any illness you have ever had.</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:3%;"></th>
+                                <th style="width:13%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:13%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:13%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:13%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:13%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:13%;"></th>
+
+                            </tr>
+                            <tr>
+                                <td><field name="p4"/></td>
+                                <td><label for="p4"/></td>
+                                <td><field name="p5"/></td>
+                                <td><label for="p5"/></td>
+                                <td><field name="p6"/></td>
+                                <td><label for="p6"/></td>
+                                <td><field name="p7"/></td>
+                                <td><label for="p7"/></td>
+                                <td><field name="p8"/></td>
+                                <td><label for="p8"/></td>
+                                <td><field name="p9"/></td>
+                                <td><label for="p9"/></td>
+                            </tr>
+                            <tr>
+                                <td><field name="p10"/></td>
+                                <td><label for="p10"/></td>
+                                <td><field name="p11"/></td>
+                                <td><label for="p11"/></td>
+                                <td><field name="p12"/></td>
+                                <td><label for="p12"/></td>
+                                <td><field name="p13"/></td>
+                                <td><label for="p13"/></td>
+                                <td><field name="p14"/></td>
+                                <td><label for="p14"/></td>
+                                <td><field name="p15"/></td>
+                                <td><label for="p15"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6"><label for="p16"/></td>
+                                <td colspan="6"><field name="p16"/></td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:60%;"></th>
+                                <th style="width:40%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p17"/>
+                                </td>
+                                <td>
+                                    <field name="p17"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p18"/>
+                                </td>
+                                <td>
+                                    <field name="p18"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p19"/>
+                                </td>
+                                <td>
+                                    <field name="p19"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p20"/>
+                                </td>
+                                <td>
+                                    <field name="p20"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p21"/>
+                                </td>
+                                <td>
+                                    <field name="p21"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p22"/>
+                                </td>
+                                <td>
+                                    <field name="p22"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p23"/>
+                                </td>
+                                <td>
+                                    <field name="p23"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p24"/>
+                                </td>
+                                <td>
+                                    <field name="p24"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </page>
+                </xpath>
+            </field>
+    </record>
+
+</odoo>

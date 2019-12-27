@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.rule" id="lab_request_mc_rule">
+            <field name="name">lab.request multi-company</field>
+            <field name="model_id" ref="laboratory.model_lab_request"/>
+            <field name="domain_force">[('company_id','child_of',[user.company_id.id])]</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

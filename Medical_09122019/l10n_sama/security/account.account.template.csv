@@ -1,0 +1,139 @@
+code,name,id,user_type_id:id,reconcile,chart_template_id:id
+100000,CASH_&_BANKS,CASH & BANKS,account.data_account_type_liquidity,0,configurable_chart_template
+110000,Cash,Cash,account.data_account_type_liquidity,0,configurable_chart_template
+111000,Treasury,Treasury,account.data_account_type_liquidity,0,configurable_chart_template
+112000,Cash Custody,Cash Custody,account.data_account_type_liquidity,0,configurable_chart_template
+120000,Banks,Banks,account.data_account_type_liquidity,0,configurable_chart_template
+121100,MAR Current Account,MAR Current Account,account.data_account_type_liquidity,0,configurable_chart_template
+122100,DOH Current Account,DOH Current Account,account.data_account_type_liquidity,0,configurable_chart_template
+200000,ACCOUNTS RECEIVABLE & DEBIT BALANCES,ACCOUNTS RECEIVABLE & DEBIT BALANCES,account.data_account_type_receivable,1,configurable_chart_template
+210000,Refundable Deposits,Refundable Deposits,account.data_account_type_receivable,1,configurable_chart_template
+220000,Due From Employees,Due From Employees,account.data_account_type_receivable,1,configurable_chart_template
+230000,Due From Clients,Due From Clients,account.data_account_type_receivable,1,configurable_chart_template
+240000,Other Recevables,Other Recevables,account.data_account_type_receivable,1,configurable_chart_template
+250000,Prepaid Expense,Prepaid Expense,account.data_account_type_receivable,1,configurable_chart_template
+260000,Due From Related Parties,Due From Related Parties,account.data_account_type_receivable,1,configurable_chart_template
+261000,Due From QLM,Due From QLM,account.data_account_type_receivable,1,configurable_chart_template
+262000,Due From Related Party 2,Due From Related Party 2,account.data_account_type_receivable,1,configurable_chart_template
+300000,TANGIBLE ASSETS,TANGIBLE ASSETS,account.data_account_type_fixed_assets,0,configurable_chart_template
+310000,Fixed Assets,Fixed Assets,account.data_account_type_fixed_assets,0,configurable_chart_template
+311000,Vehicles,Vehicle,account.data_account_type_fixed_assets,0,configurable_chart_template
+312000,Furniture & Fixtures,Furniture & Fixture,account.data_account_type_fixed_assets,0,configurable_chart_template
+313000,IT & Computers,IT & Computer,account.data_account_type_fixed_assets,0,configurable_chart_template
+314000,Electricals,Electrical,account.data_account_type_fixed_assets,0,configurable_chart_template
+315000,Offices Fit-Out,Offices Fit-Ou,account.data_account_type_fixed_assets,0,configurable_chart_template
+320000,Accumulated Depreciation,Accumulated Depreciation,account.data_account_type_fixed_assets,0,configurable_chart_template
+321000,AD - Vehicles,AD - Vehicle,account.data_account_type_fixed_assets,0,configurable_chart_template
+322000,AD - Furniture & Fixtures,AD - Furniture & Fixture,account.data_account_type_fixed_assets,0,configurable_chart_template
+323000,AD - IT & Computers,AD - IT & Computer,account.data_account_type_fixed_assets,0,configurable_chart_template
+324000,AD - Electricals,AD - Electrical,account.data_account_type_fixed_assets,0,configurable_chart_template
+325000,AD - Offices Fit-Out,AD - Offices Fit-Ou,account.data_account_type_fixed_assets,0,configurable_chart_template
+330000,Inventory,Inventor,account.data_account_type_fixed_assets,0,configurable_chart_template
+500000,CLINICS & PHARMACY COST,CLINICS & PHARMACY COST,account.data_account_type_revenue,0,configurable_chart_template
+510000,Dental Clinic,Dental Clinic,account.data_account_type_revenue,0,configurable_chart_template
+520000,Orthodontics Clinic,Orthodontics Clinic,account.data_account_type_revenue,0,configurable_chart_template
+530000,Plastic & Cosmetic Surgery Clinic,Plastic & Cosmetic Surgery Clinic,account.data_account_type_revenue,0,configurable_chart_template
+540000,Dermatology Clinic,Dermatology Clinic,account.data_account_type_revenue,0,configurable_chart_template
+550000,OB-GYN Clinic,OB-GYN Clinic,account.data_account_type_revenue,0,configurable_chart_template
+560000,Laser Treatment Clinic,Laser Treatment Clinic,account.data_account_type_revenue,0,configurable_chart_template
+570000, Pharmacy, Pharmacy,account.data_account_type_revenue,0,configurable_chart_template
+600000,ACCOUNTS PAYABLE & OTHER CREDIT BALANCES,ACCOUNTS PAYABLE & OTHER CREDIT BALANCES,account.data_account_type_payable,1,configurable_chart_template
+610000,Vendors & Service Providers,Vendors & Service Provider,account.data_account_type_payable,1,configurable_chart_template
+611000,V&SP - G&A,V&SP - G&,account.data_account_type_payable,1,configurable_chart_template
+612000,V&SP - Dental Clinic,V&SP - Dental Clini,account.data_account_type_payable,1,configurable_chart_template
+613000,V&SP - Orthodontics Clinic,V&SP - Orthodontics Clini,account.data_account_type_payable,1,configurable_chart_template
+614000,V&SP - Plastic & Cosmetic Surgery Clinic,V&SP - Plastic & Cosmetic Surgery Clini,account.data_account_type_payable,1,configurable_chart_template
+615000,V&SP - Dermatology Clinic,V&SP - Dermatology Clini,account.data_account_type_payable,1,configurable_chart_template
+616000,V&SP - OB-GYN Clinic,V&SP - OB-GYN Clini,account.data_account_type_payable,1,configurable_chart_template
+617000,V&SP - Laser Treatment Clinic,V&SP - Laser Treatment Clini,account.data_account_type_payable,1,configurable_chart_template
+618000,V&SP - Pharmacy,V&SP - Pharmac,account.data_account_type_payable,1,configurable_chart_template
+620000,Notes Payables,Notes Payables,account.data_account_type_payable,1,configurable_chart_template
+630000,Accruals - Accrued Salaries,Accruals - Accrued Salarie,account.data_account_type_payable,1,configurable_chart_template
+640000,PDC,PD,account.data_account_type_payable,1,configurable_chart_template
+650000,Due To Related Parties,Due To Related Partie,account.data_account_type_payable,1,configurable_chart_template
+651000,Due To Related Party 1,Due To Related Party,account.data_account_type_payable,1,configurable_chart_template
+652000,Due To Related Party 2,Due To Related Party,account.data_account_type_payable,1,configurable_chart_template
+660000,Security / Warranty Cheque,Security / Warranty Cheque,account.data_account_type_payable,1,configurable_chart_template
+700000,GENERAL & ADMINISTRATIVE EXPENSES,GENERAL & ADMINISTRATIVE EXPENSES,account.data_account_type_expenses,0,configurable_chart_template
+710000,Employee Salaries Wages & Other Benfits,Employee Salaries Wages & Other Benfits,account.data_account_type_expenses,0,configurable_chart_template
+720000,Licensing & Legal Cost,Licensing & Legal Cost,account.data_account_type_expenses,0,configurable_chart_template
+730000,Printing Stationery & Hospitality,Printing Stationery & Hospitality,account.data_account_type_expenses,0,configurable_chart_template
+740000,Marketing & Business Developments,Marketing & Business Developments,account.data_account_type_expenses,0,configurable_chart_template
+750000,Office Stors & Accommodation Renting Cost & Utilities,Office Stors & Accommodation Renting Cost & Utilities,account.data_account_type_expenses,0,configurable_chart_template
+760000,Depreciation & Amortization,Depreciation & Amortization,account.data_account_type_expenses,0,configurable_chart_template
+770000,Bank Charges,Bank Charges,account.data_account_type_expenses,0,configurable_chart_template
+780000,Transportation Cost,Transportation Cost,account.data_account_type_expenses,0,configurable_chart_template
+790000,Others,Others,account.data_account_type_expenses,0,configurable_chart_template
+800000,REVENUES,REVENUES,account.data_account_type_direct_costs,0,configurable_chart_template
+811000,Dental Clinic,Dental Clinic,account.data_account_type_direct_costs,0,configurable_chart_template
+812000,Orthodontics Clinic,Orthodontics Clinic,account.data_account_type_direct_costs,0,configurable_chart_template
+813000,Plastic & Cosmetic Surgery Clinic,Plastic & Cosmetic Surgery Clinic,account.data_account_type_direct_costs,0,configurable_chart_template
+814000,Dermatology Clinic,Dermatology Clinic,account.data_account_type_direct_costs,0,configurable_chart_template
+815000,OB-GYN Clinic,OB-GYN Clinic,account.data_account_type_direct_costs,0,configurable_chart_template
+816000,Laser Treatment Clinic,Laser Treatment Clinic,account.data_account_type_direct_costs,0,configurable_chart_template
+817000,Pharmacy,Pharmacy,account.data_account_type_direct_costs,0,configurable_chart_template
+900000,EQUITY,EQUITY,account.data_account_type_equity,0,configurable_chart_template
+910000,Capital,Capital,account.data_account_type_equity,0,configurable_chart_template
+920000,Owner Current Account,Owner Current Account,account.data_account_type_equity,0,configurable_chart_template
+921000,Mr. Imad Nached,Mr. Imad Nache,account.data_account_type_equity,0,configurable_chart_template
+922000,Owner Current Account 2,Owner Current Account,account.data_account_type_equity,0,configurable_chart_template
+930000,Retained Earning,Retained Earning,account.data_account_type_equity,0,configurable_chart_template
+940000,Legal Reserve,Legal Reserve,account.data_account_type_equity,0,configurable_chart_template
+710100,Recruiting Advertisement,Recruiting Advertisement,account.data_account_type_expenses,0,configurable_chart_template
+710200,Health Card,Health Card,account.data_account_type_expenses,0,configurable_chart_template
+710300,Staff Training,Staff Training,account.data_account_type_expenses,0,configurable_chart_template
+710400,Salaries & Wages,Salaries & Wages,account.data_account_type_expenses,0,configurable_chart_template
+710500,Tickets,Tickets,account.data_account_type_expenses,0,configurable_chart_template
+710600,Visa,Visa,account.data_account_type_expenses,0,configurable_chart_template
+710700,Leave Allowance,Leave Allowance,account.data_account_type_expenses,0,configurable_chart_template
+710800,Ticket Allowance,Ticket Allowance,account.data_account_type_expenses,0,configurable_chart_template
+710900,Laborers Gifts,Laborers Gifts,account.data_account_type_expenses,0,configurable_chart_template
+711000,Employing Consultants,Employing Consultants,account.data_account_type_expenses,0,configurable_chart_template
+711100,Health Care (Insurance),Health Care (Insurance),account.data_account_type_expenses,0,configurable_chart_template
+711200,Education Allowance,Education Allowance,account.data_account_type_expenses,0,configurable_chart_template
+711300,SPA Membership,SPA Membership,account.data_account_type_expenses,0,configurable_chart_template
+711400,Entertainments,Entertainments,account.data_account_type_expenses,0,configurable_chart_template
+711500,Laborer needs,Laborer needs,account.data_account_type_expenses,0,configurable_chart_template
+711600,Residencies,Residencies,account.data_account_type_expenses,0,configurable_chart_template
+711700,Employee Vehicles Insurance,Employee Vehicles Insurance,account.data_account_type_expenses,0,configurable_chart_template
+711800,Tools,Tools,account.data_account_type_expenses,0,configurable_chart_template
+720100,Computer Card & C.L,Computer Card & C.L,account.data_account_type_expenses,0,configurable_chart_template
+720200,C.R Fees,C.R Fees,account.data_account_type_expenses,0,configurable_chart_template
+720300,Establishment Expenses,Establishment Expenses,account.data_account_type_expenses,0,configurable_chart_template
+720400,Tender Expenses,Tender Expenses,account.data_account_type_expenses,0,configurable_chart_template
+720500,Consultation Works (Finance),Consultation Works (Finance),account.data_account_type_expenses,0,configurable_chart_template
+720600,Administration Fees to ASC,Administration Fees to ASC,account.data_account_type_expenses,0,configurable_chart_template
+720700,Auditing,Auditing,account.data_account_type_expenses,0,configurable_chart_template
+720800,Consulting Works (IT),Consulting Works (IT),account.data_account_type_expenses,0,configurable_chart_template
+730100,Computer Needs,Computer Needs,account.data_account_type_expenses,0,configurable_chart_template
+730200,Prints,Prints,account.data_account_type_expenses,0,configurable_chart_template
+730300,Cleaning Services,Cleaning Services,account.data_account_type_expenses,0,configurable_chart_template
+730400,Toner,Toner,account.data_account_type_expenses,0,configurable_chart_template
+730500,Electricity Needs,Electricity Needs,account.data_account_type_expenses,0,configurable_chart_template
+730600,Newspaper Subscription,Newspaper Subscription,account.data_account_type_expenses,0,configurable_chart_template
+730700,Fire Alarm,Fire Alarm,account.data_account_type_expenses,0,configurable_chart_template
+730800,Mail & phone,Mail & phone,account.data_account_type_expenses,0,configurable_chart_template
+730900,Hospitality,Hospitality,account.data_account_type_expenses,0,configurable_chart_template
+731000,Office Preparations,Office Preparations,account.data_account_type_expenses,0,configurable_chart_template
+731100,Ratifications & Attestations,Ratifications & Attestations,account.data_account_type_expenses,0,configurable_chart_template
+731200,Stationeries,Stationeries,account.data_account_type_expenses,0,configurable_chart_template
+740100,Sterilization,Sterilization,account.data_account_type_expenses,0,configurable_chart_template
+740200,Marketing & Advertising,Marketing & Advertising,account.data_account_type_expenses,0,configurable_chart_template
+740300,Business Trips,Business Trips,account.data_account_type_expenses,0,configurable_chart_template
+740400,Celebrations,Celebrations,account.data_account_type_expenses,0,configurable_chart_template
+740500,Gifts,Gifts,account.data_account_type_expenses,0,configurable_chart_template
+750100,Electricity & Water,Electricity & Water,account.data_account_type_expenses,0,configurable_chart_template
+750200,Offices Rent,Offices Rent,account.data_account_type_expenses,0,configurable_chart_template
+750300,Stors & Accommodation Works,Stors & Accommodation Works,account.data_account_type_expenses,0,configurable_chart_template
+750400,Al Salam Tower Offices,Al Salam Tower Offices,account.data_account_type_expenses,0,configurable_chart_template
+750500,Stors & Accommodation Rent,Stors & Accommodation Rent,account.data_account_type_expenses,0,configurable_chart_template
+760100,Depreciation & Amortization,Depreciation & Amortization,account.data_account_type_expenses,0,configurable_chart_template
+770100,Bank Fees,Bank Fees,account.data_account_type_expenses,0,configurable_chart_template
+780100,Fuels,Fuels,account.data_account_type_expenses,0,configurable_chart_template
+780200,Traffic Violations,Traffic Violations,account.data_account_type_expenses,0,configurable_chart_template
+780300,Vehicle Maintenance,Vehicle Maintenance,account.data_account_type_expenses,0,configurable_chart_template
+790100,Charity,Charity,account.data_account_type_expenses,0,configurable_chart_template
+790200,Miscellaneous,Miscellaneous,account.data_account_type_expenses,0,configurable_chart_template
+790300,Cost of Services For Subsidiaries,Cost of Services For Subsidiaries,account.data_account_type_expenses,0,configurable_chart_template
+
+

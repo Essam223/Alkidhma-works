@@ -1,0 +1,28 @@
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="medical_physician_view">
+			<field name="name">Physician</field>
+			<field name="model">medical.physician</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_physician_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//page[1]" position="after">
+					<page name="commission" string="Commission">
+						<field name="commission_ids">
+							<tree editable="bottom">
+								<field name="doctor_id" invisible="1"/>
+								<field name="from_amt"/>
+								<field name="to_amt"/>
+								<field name="commission"/>
+							</tree>
+						</field>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>
+
+
+	

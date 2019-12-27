@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="treatment_invoice_tree" model="ir.ui.view">
+            <field name="name">Patient</field>
+			<field name="model">treatment.invoice</field>
+            <field name="inherit_id" ref="pragtech_dental_management.treatment_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='actual_amount']" position="before">
+                    <field name="qty"/>
+                </xpath>
+
+            </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,414 @@
+<odoo>
+    <template id="pragtech_dental_management.report_registration_pdf">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="text-center">
+                        <div>
+                        <h2>Patient Registration</h2>
+                        <br/>
+                        <table class="table table-bordered table-striped" style="width:100%;border-spacing: 0px;">
+							<tr>
+                                <td colspan="2" style="background-color: #bca147;color: #ffffff; font-size: 15px;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <center><strong><span>BASIC INFORMATION</span></strong></center>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Name</span></strong>
+                                </td>
+                                <td style="width:70%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.patient_name"/></td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>File No.</span></strong>
+                                </td>
+                                <td style="width:70%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.patient_id"/></td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>QID</span></strong>
+                                </td>
+                                <td style="width:70%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.qid"/></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Gender</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.sex" widget="radio"/></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Mobile</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <t t-esc="o.mobile"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Nationality</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <t t-if="o.nationality_id" t-esc="o.nationality_id.name"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                            <table class="table table-bordered table-striped" style="width:100%;border-spacing: 0px;">
+
+                            <tr>
+                                <td colspan="3" style="background-color: #bca147;color: #ffffff; font-size: 15px;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <center><strong><span>REGISTRATION / وثيقة تسجيل</span></strong></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Registration Date</span></strong>
+                                </td>
+                                <td style="width:40%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.register_date" t-options='{"widget": "date"}'/></td>
+                                <td style="text-align: right;width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>تاريخ التسجيل</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Date of Birth</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.dob" t-options='{"widget": "date"}'/></td>
+                                <td style="text-align: right;width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>تاريخ الولادة</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Marital Status</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.marital_status"/></td>
+                                <td style="text-align: right;width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>الحالة الاجتماعية</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Address</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.address"/></td>
+                                <td style="text-align: right;width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>العنوان</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Occupation</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.occupation_id.name"/></td>
+                                <td style="text-align: right;width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>الوظيفة</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Person to contact in case of emergency</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.emergency_name"/></td>
+                                <td style="text-align: right;width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>شخص يمكن الاتصال به في حالة الطوارئ</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>Mob</span></strong>
+                                </td>
+                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;"><t t-esc="o.emergency_phone"/></td>
+                                <td style="text-align: right;width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>الجوال</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="background-color: #bca147;color: #ffffff; font-size: 15px;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #bca147;">
+                                    <strong><span>MEDICAL HISTORY / الحالة الصحية</span></strong>
+                                </td>
+                            </tr>
+					</table>
+                        <table class="table table-bordered table-striped" style="width:100%;border-spacing: 0px;">
+                            <colgroup>
+                                <col width='30%' />
+                                <col width='40%' />
+                                <col width='30%' />
+                            </colgroup>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you under a physician's care now?</span></strong>
+                                </td>
+                                <td><t t-esc="o.p1"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل انت تحت عناية طبيب الآن؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr t-if="o.p1 == 'YES'">
+                                <td>
+                                    <strong><span>Give a reason for treatment</span></strong>
+                                </td>
+                                <td><t t-esc="o.p2"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>إذا كان نعم فلماذا؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you taking any kind of medication?</span></strong>
+                                </td>
+                                <td><t t-esc="o.p3"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل تستعمل دواء في الوقت الحاضر</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Circle any illness you have ever had.</strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;border-spacing: 0px;">
+                            <colgroup>
+                                <th style="width:11%;"></th>
+                                <th style="width:2%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:11%;"></th>
+                                <th style="width:2%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:11%;"></th>
+                                <th style="width:2%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:11%;"></th>
+                                <th style="width:2%;"></th>
+                                <th style="width:12%;"></th>
+                            </colgroup>
+                            <tr>
+                                <td style="text-align: right;"><strong><span>Asthma</span></strong></td>
+                                <td>
+                                    <t t-if="o.p4">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>ربو</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Anemia</span></strong></td>
+                                <td>
+                                    <t t-if="o.p5">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>فقر دم</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Hypertension</span></strong></td>
+                                <td>
+                                    <t t-if="o.p6">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>ارتفاع ضغط الدم</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Diabetes</span></strong></td>
+                                <td>
+                                    <t t-if="o.p7">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>مرض السكري</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><strong><span>Infectious Dis.</span></strong></td>
+                                <td>
+                                    <t t-if="o.p8">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>امراض معدية</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Allergy</span></strong></td>
+                                <td>
+                                    <t t-if="o.p9">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>حساسية</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Epilepsy</span></strong></td>
+                                <td>
+                                    <t t-if="o.p10">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>صرع</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Eye Dis.</span></strong></td>
+                                <td>
+                                    <t t-if="o.p11">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>مرض في العين</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><strong><span>Tuberculosis</span></strong></td>
+                                <td>
+                                    <t t-if="o.p12">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>مرض السل</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Kidney Dis.</span></strong></td>
+                                <td>
+                                    <t t-if="o.p13">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>مرض في الكلى</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Heart Dis.</span></strong></td>
+                                <td>
+                                    <t t-if="o.p14">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>مرض في القلب</span></strong></td>
+                                <td style="text-align: right;"><strong><span>Liver Dis.</span></strong></td>
+                                <td>
+                                    <t t-if="o.p15">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td><strong><span>مرض في الكبد</span></strong></td>
+                            </tr>
+                            <tr/>
+
+                        </table>
+                        <table class="table table-bordered table-striped" style="width:100%;border-spacing: 0px;">
+                            <colgroup>
+                                <col width='30%'/>
+                                <col width='40%'/>
+                                <col width='30%'/>
+                            </colgroup>
+                            <tr>
+                                <td><strong><span>Other diseases you would like to mention</span></strong></td>
+                                <td><t t-esc="o.p16"/></td>
+                                <td style="text-align: right;"><strong><span>أمراض أخرى تود ذكرها</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you pregnant?</span></strong>
+                                </td>
+                                <td><t t-esc="o.p17"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل أنتِ حامل؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you ever had surgery before?</span></strong>
+                                </td>
+                                <td><t t-esc="o.p18"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل سبق و أن اجريت لك عملية جراحية؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you ever had blood transfusion?</span></strong>
+                                </td>
+                                <td><t t-esc="o.p19"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل سبق و أن احتجت لنقل الدم؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you ever had trouble with prolonged bleeding?</span></strong>
+                                </td>
+                                <td><t t-esc="o.p20"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل حدث ان نزفت دما لمدة طويلة؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you ever had fainting during surgical procedure?</span></strong>
+                                </td>
+                                <td><t t-esc="o.p21"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل أصبت بحالة إغماء أثناء إعطاؤك حقنة</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Local anesthesia or injection?</span></strong>
+                                </td>
+                                <td><t t-esc="o.p22"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>أو مخدر موضعي</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you ever had any unusual reaction to anesthetic or drug (like penisilin)</span></strong>
+                                </td>
+                                <td><t t-esc="o.p23"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل أنت حساس للمخدر أو أي دواء آخر مثل البنسلين</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">
+                                    <strong><span>Is there any other information you wish to add?</span></strong>
+                                </td>
+                                <td rowspan="2"><t t-esc="o.p24"/></td>
+                                <td rowspan="2" style="text-align: right;">
+                                    <strong><span>أيوجد أي معلومة تود إضافتها</span></strong>
+                                </td>
+                            </tr>
+                        </table>
+
+                        </div>
+                        <center>
+                        <h4>Endorse and sign on the health of the above information / أصادق و أوقع على صحة المعلومات أعلاه</h4>
+                        </center>
+                        <div class="pull-right">
+                                <strong>Patient Signature / توقيع المريض</strong>
+                                <br/>
+                                <img t-if="o.register_signature" t-att-src="'data:image/png;base64,%s' % to_text(o.register_signature)" class="pull-right" height="60"/>
+                        </div>
+
+                    </div>
+                </div>
+        </t>
+        </t>
+        </t>
+    </template>
+
+</odoo>

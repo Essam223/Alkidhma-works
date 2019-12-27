@@ -1,0 +1,1055 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_quest_format">
+    <t t-call="web.html_container">
+    <t t-call="web.external_layout">
+		<t t-foreach="docs" t-as="o">
+		<div class="page" style="font-size:28px;">
+			<div class="text-center" >
+
+                <div  t-if="o.language == 'english'">
+                        <div style="color:#009688;">
+                             <h2><b>Medical Questionnaire</b></h2>
+                         </div>
+                        <br/>
+                        <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Language/لغة</strong></td>
+                                                <td>: <span t-field="o.language"/></td>
+                                                <td style="color:#009688;"><strong>Updated Date</strong></td>
+                                                <td>: <span t-esc="time.strftime('%d/%m/%Y')"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Patient Id</strong></td>
+                                                <td>: <span t-field="o.patient_id"/></td>
+                                                <td style="color:#009688;"><strong>Patient Name</strong></td>
+                                                <td>: <span t-field="o.patient_name"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                        <br/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:40%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Is your health good?</span></strong>
+                                </td>
+                                <td style="vertical-align:middle;"><input type="checkbox"/> Yes </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/> No</td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <p style="text-align: left;"><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;"></th>
+                            </tr>
+                            <tr>
+                                <td  style="vertical-align:middle">
+                                    <input type="checkbox"/>
+                                </td>
+                                <td>
+                                    <span>Anemia</span>
+                                </td>
+                                <td style="vertical-align:middle">
+                                    <input type="checkbox"/>
+                                </td>
+                                <td>
+                                    <span>Arthritis, Rheumatism</span>
+                                </td>
+                                <td style="vertical-align:middle">
+                                   <input type="checkbox"/>
+                                </td>
+
+                                <td>
+                                   <span>Artificial Joints, Pins</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Asthma</span>
+                                </td>
+                                <td style="vertical-align:middle">
+                                    <input type="checkbox"/>
+                                </td>
+
+                                <td>
+                                    <span>Back pain</span>
+                                </td>
+                                <td style="vertical-align:middle">
+                                    <input type="checkbox"/>
+                                </td>
+
+                                <td>
+                                    <span>Cortisone Treatment</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Cough, Persistent</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Diabetes</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Epilepsy</span>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Fainting</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Glaucoma</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Headaches or Migraine</span>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Hemophilia</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Heart Disease</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Heart Valve problems</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Heart Surgery</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Hepatitis</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>High Blood Pressure</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>HIV</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Jaw Pain</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Kidney Disease</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Pacemaker</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Prolonged bleeding</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Respiratory Disease</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Kidney Problem</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Liver Problem</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Thyroid Problem</span>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:4%;"></th>
+                                <th style="width:96%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Serious illness or operations? If Yes, When ................................</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Other Medical Problems? If Yes, Please specify..............................</span>
+                                </td>
+                            </tr>
+                        </table>
+                    <br/>
+                        <p style="text-align: left;"><strong>Do you have allergies to?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Latex</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Local Anesthetic</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Penicillin</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Sulfa</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Aspirin</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Brufen</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Iodine</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>NONE</span>
+                                </td>
+                                <td colspan="2">Any other allergies? ....................</td>
+                            </tr>
+                        </table>
+                    <br/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:40%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:26%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:26%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Do you smoke?</span></strong>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:middle">Yes, # of cigarette/day .....</td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:middle">No</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you pregnant?</span></strong>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:middle">Yes, Month .....</td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:middle">No</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you having discomfort at this time?</span></strong>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:middle">Yes</td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:middle">No</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you ever had any serious trouble?</span></strong>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:middle">Yes</td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:middle">No</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you taking any anticoagulants (blood thinner) ?</span></strong>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:bottom">Yes</td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="vertical-align:bottom">No</td>
+                            </tr>
+                        </table>
+                    <br/>
+                        <p style="text-align: left;"><strong>Associated with dentistry?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Date and year of Last Medical Visit? .....................</span>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>How often do you brush/floss?</span>
+                                </td>
+                                <td>
+                                    <span>Brushing ...........Flossing ...........Mouthwash..........</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Have you been treated for gum disease?</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/> Yes   <input type="checkbox"/> No</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Have you had any Medical radiographs?</span>
+                                </td>
+                                <td>When ............... Where ........................</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>What is the main reason for seeking Medical care?</span>
+                                </td>
+                                <td>....................................</td>
+                            </tr>
+                        </table>
+                    <br/>
+
+                        <p style="text-align: left;"><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:4%;"></th>
+                                <th style="width:46%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:46%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Bleeding or sore gums</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+
+                                <td>
+                                    <span>Biting Cheeks/lips</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Broken filling</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Clenching/grinding</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Clicking/Locked Jaw</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Difficult to open/close</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Frequent blisters (lips/mouth)</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Food impaction</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Food collection in between teeth</span>
+                                </td>
+                               <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Root Canal Treatment</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Loose teeth</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Swelling or Lumps in mouth</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Ortho Treatment (braces)</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Sensitive to hot</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Sensitive to cold</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Sensitive to sweet</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Sensitive to bite</span>
+                                </td>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Shifting in bite</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle"><input type="checkbox"/></td>
+                                <td>
+                                    <span>Unpleasant taste/bad breath</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    <br/>
+                    <p style="text-align: left;"><strong>Smile Assessment</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:20%;"></th>
+                                <th style="width:50%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Are you pleased with the general appearance of your teeth and smile?</span></td>
+                                <td colspan="2" style="vertical-align:middle"><input type="checkbox"/> Yes <input type="checkbox"/> No</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>If no, Please explain</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>..........................................................................................................................................................</td>
+                                <td>.................................................................................................................................................................................</td>
+                                <td>.................................................................................................................................................................................</td>
+                            </tr>
+                        </table>
+                    <br/>
+                    <br/>
+                    <div class="pull-right">
+						<strong>Patient Signature</strong>
+						<br/>
+					</div>
+                    </div>
+                <div  t-if="o.language == 'arabic'">
+                            <div style="color:#009688;text-align:center;">
+                                 <h2><b>استبيان طبي</b></h2>
+                             </div>
+                            <br/>
+                            <table name="master" width="100%">
+                                            <colgroup>
+                                                <col width='25%' />
+                                                <col width='25%' />
+                                                <col width='25%' />
+                                                <col width='25%' />
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="patient_invoice_tbody">
+                                                <tr>
+                                                    <td style="text-align: right;"><span t-esc="time.strftime('%d/%m/%Y')"/> :</td>
+                                                    <td style="text-align: right;color:#009688;"><strong>تاريخ التحديث</strong></td>
+                                                    <td style="text-align: right;"><span t-field="o.language"/>: </td>
+                                                    <td style="text-align: right;color:#009688;"><strong>لغة</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right;"><span t-field="o.patient_name"/>: </td>
+                                                    <td style="text-align: right;color:#009688;"><strong>اسم المريض</strong></td>
+                                                    <td style="text-align: right;"><span t-field="o.patient_id"/>: </td>
+                                                    <td style="text-align: right;color:#009688;"><strong>رقم المريض</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                            <br/>
+
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:40%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align:middle"> لا <input type="checkbox"/></td>
+                                <td style="text-align: right;vertical-align:middle">  نعم <input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل صحتك جيدة؟</span></strong>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <p style="text-align: right;"><strong>هل كان لديك أي من التالي؟(يرجى تحديد المربع)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:29%;text-align: right;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;text-align: right;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;text-align: right;"></th>
+                                <th style="width:4%;"></th>
+
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>فقر دم</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>التهاب المفاصل والروماتيزم</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>المفاصل الصناعية ودبابيس</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>الربو</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>ألم في الظهر</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>علاج الكورتيزون</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>السعال ، المستمر</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>داء السكري</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>صرع</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>إغماء</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>الزرق</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>الصداع أو الصداع النصفي</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>الهموفيليا مرض بالدم</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>مرض القلب</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>مشاكل صمام القلب</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;" >
+                                    <span>عملية قلب</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>التهاب الكبد</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>ضغط دم مرتفع</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>فيروس نقص المناعة البشرية</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>ألم الفك</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>مرض الكلية</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>جهاز تنظيم ضربات القلب</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>نزيف استمر لفترة طويلة</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>أمراض الجهاز التنفسي</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>مشكلة في الكلى"/></span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>مشكلة الكبد</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>مشكلة الغدة الدرقية</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+
+                        </table>
+                        <br/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:96%;text-align: right;"></th>
+                                <th style="width:4%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <strong><span>مرض خطير أو عمليات؟ إذا نعم متى ...................................</span></strong>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <strong><span> مشاكل طبية أخرى؟ إذا كان الجواب بالنفي ، فيرجى تحديد </span></strong>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    <br/>
+                        <p style="text-align: right;"><strong>هل لديك حساسيه؟</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:29%;text-align: right;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;text-align: right;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:29%;text-align: right;"></th>
+                                <th style="width:4%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>اللاتكس</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>مخدر موضعي</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>بنسلين</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>السلفا</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>الأسبرين</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>البروفين</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td> أي حساسية أخرى؟ ...............</td>
+                                <td></td>
+                                <td style="text-align: right;">
+                                    <span>اليود</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>لا شيء</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    <br/>
+                    <table style="width:100%;">
+                            <tr>
+                                <th style="width:26%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:26%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:40%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align:middle"> لا </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;vertical-align:middle">نعم # السيجارة/اليوم .......</td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل تدخن؟	</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align:middle"> لا </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;vertical-align:middle">نعم الشهر ............</td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل انت حامل؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align:middle"> لا </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;vertical-align:middle">  نعم </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل تشعر بالانزعاج في هذا الوقت؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align:middle"> لا </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;vertical-align:middle">  نعم </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل سبق لك أن واجهت أي مشكلة خطيرة؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align:middle"> لا </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;vertical-align:middle">  نعم </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل تأخذ أي مضادات تخثر الدم</span></strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <p style="text-align: right;"><strong>يرتبط مع طب الأسنان؟</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="text-align: right;">
+                                    <strong><span>تاريخ آخر زيارة لطب الأسنان؟ ..............</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>تنظيف .....	 الخيط .... 	غسول الفم ......</td>
+                                <td style="text-align: right;">
+                                    <strong><span>كم مرة تقوم بالفرشاة / الخيط؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align:middle">لا<input type="checkbox"/>نعم<input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل عولجت لمرض اللثة</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">متى و أين ......................</td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل كان لديك أي صور الأشعة السنية؟ </span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">.....................................................</td>
+                                <td style="text-align: right;">
+                                    <strong><span>مما هو السبب الرئيسي للحصول على رعاية الأسنان؟</span></strong>
+                                </td>
+                            </tr>
+                        </table>
+                    <br/>
+                        <p style="text-align: right;"><strong>هل لديك مشكلة في:</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:46%;"></th>
+                                <th style="width:4%;"></th>
+                                <th style="width:46%;"></th>
+                                <th style="width:4%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>نزيف أو التهاب اللثة</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>الخفق العض / الشفتين</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>ملء المكسور</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>انقباض / طحن</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>النقر / قفل الفك</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>من الصعب فتح / إغلاق</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>بثور متكررة (الشفتين / الفم)</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>تأثير الغذاء</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>جمع الطعام بين الأسنان</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>معالجة قناة الجذر</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>الأسنان فضفاضة</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>تورم أو كتل في الفم</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>علاج أورثو (تقويم الأسنان)</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>حساسة للحرارة</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>حساسة للبرد</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>حساسة للحلو</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <span>حساسة لدغة</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>التحول في لدغة</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;">
+                                    <span>طعم غير سار / رائحة كريهة</span>
+                                </td>
+                                <td style="text-align: right;vertical-align:middle"><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                    <br/>
+                        <p style="text-align: right;"><strong>تقييم الابتسامة</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:40%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;vertical-align:middle"> لا <input type="checkbox"/></td>
+                                <td style="text-align: right;vertical-align:middle">  نعم <input type="checkbox"/></td>
+                                <td style="text-align: right;">
+                                    <span>هل أنت راض عن المظهر العام لأسنانك وابتسامتك؟</span>
+                                </td>
+                            </tr>
+                            <tr  >
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;"><span>إذا كان الجواب لا ، فيرجى التوضيح</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">..........................................................................................................................................</td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                    <div class="pull-left">
+						<strong>توقيع المريض</strong>
+						<br/>
+					</div>
+                    </div>
+			</div>
+		</div>
+    </t>
+    </t>
+    </t>
+</template>
+
+
+    <report
+        id="quest_format"
+        string="Approval Report"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="pragtech_dental_management.report_quest_format"
+        name="pragtech_dental_management.report_quest_format"
+		menu="False"
+    />
+
+</odoo>

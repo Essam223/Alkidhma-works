@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="sales_report_detailed"
+            string="Detailed Sales Report"
+            model="detailed.cash.card.wizard"
+            report_type="qweb-pdf"
+            file="detailed_sales_report.detailed_sales_report_pdf"
+            name="detailed_sales_report.detailed_sales_report_pdf"
+        />
+    </data>
+</odoo>

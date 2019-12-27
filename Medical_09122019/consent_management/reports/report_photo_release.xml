@@ -1,0 +1,154 @@
+<odoo>
+    <template id="report_photo_release_pdf">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="text-center" t-if="language=='english'">
+                                <h3>Photo and Video Release Form</h3>
+                            <table width="100%">
+                                <colgroup>
+                                    <col width='15%' />
+                                    <col width='45%' />
+                                    <col width='15%' />
+                                    <col width='25%' />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <td style="text-align: left;"><strong>Patient Name</strong></td>
+                                        <td style="text-align: left;">
+                                            <span t-field="o.patient_name"/>
+                                        </td>
+                                        <td style="text-align: left;"><strong>Date</strong></td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="register_date"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="Treatment or Tooth_number">
+                                        <td t-if="Treatment" style="text-align: left;"><strong>Treatment</strong></td>
+                                        <td t-if="Treatment" style="text-align: left;"><span t-esc="Treatment"/></td>
+                                        <td t-if="Tooth_number" style="text-align: left;"><strong>Tooth number</strong></td>
+                                        <td t-if="Tooth_number" style="text-align: left;"><span t-esc="Tooth_number"/></td>
+                                    </tr>
+                                    <tr >
+                                        <td t-if="doctor_id" style="text-align: left;"><strong>Doctor</strong></td>
+                                        <td t-if="doctor_id" style="text-align: left;"><span t-esc="doctor_id[1]"/></td>
+                                        <td t-if="Parent_Guardian" style="text-align: left;"><strong>Parent / Guardian</strong></td>
+                                        <td t-if="Parent_Guardian" style="text-align: left;"><span t-esc="Parent_Guardian"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                        <div style="width:800px; margin:0 auto;">
+                            <img src="/consent_management/static/src/img/photo_video_en.png" class="img img-responsive"
+                                attrs="{'invisible': [('language', '=', 'arabic')]}" style="max-height: 1500px;"/>
+                        </div>
+                            <table style="width:100%;">
+                                <tr>
+                                    <th style="width:16%;"></th>
+                                    <th style="width:18%;"></th>
+                                    <th style="width:16%;"></th>
+                                    <th style="width:17%;"></th>
+                                    <th style="width:16%;"></th>
+                                    <th style="width:17%;"></th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Patient or Guardian</strong></td>
+                                    <td style="text-align: right;">
+                                        <img t-if="Patient_or_Guardian_signature" t-att-src="'data:image/png;base64,%s' % to_text(Patient_or_Guardian_signature)" class="pull-right" height="60"/>
+                                    </td>
+                                    <td><strong>Treating Dentist</strong></td>
+                                    <td style="text-align: right;">
+                                        <img t-if="Treating_Dentist_signature" t-att-src="'data:image/png;base64,%s' % to_text(Treating_Dentist_signature)" class="pull-right" height="60"/>
+                                    </td>
+
+                                    <td><strong>Witness</strong></td>
+                                    <td style="text-align: right;">
+                                        <img t-if="Witness_signature" t-att-src="'data:image/png;base64,%s' % to_text(Witness_signature)" class="pull-right" height="60"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="text-center" t-if="language=='arabic'">
+                            <h3> تصريح استخدام الصور الفوتوغرافية والفيديو</h3>
+                            <table width="100%">
+                                <colgroup>
+                                    <col width='45%' />
+                                    <col width='15%' />
+                                    <col width='25%' />
+                                    <col width='15%' />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <td style="text-align: right;"><span t-field="o.patient_name"/></td>
+                                        <td style="text-align: right;"><strong>اسم المريض</strong></td>
+                                        <td style="text-align: right;"><span t-esc="register_date"/></td>
+                                        <td style="text-align: right;"><strong>التاريخ</strong></td>
+                                    </tr>
+                                    <tr t-if="Treatment or Tooth_number">
+                                        <td t-if="Treatment" style="text-align: right;"><span t-esc="Treatment"/></td>
+                                        <td t-if="Treatment" style="text-align: right;"><strong>العلاج</strong></td>
+                                        <td t-if="Tooth_number" style="text-align: right;"><span t-esc="Tooth_number"/></td>
+                                        <td t-if="Tooth_number" style="text-align: right;"><strong>رقم السن</strong></td>
+                                    </tr>
+                                    <tr >
+                                        <td t-if="Parent_Guardian" style="text-align: right;"><span t-esc="Parent_Guardian"/></td>
+                                        <td t-if="Parent_Guardian" style="text-align: right;"><strong>الوالد / الوصي</strong></td>
+                                        <td t-if="doctor_id" style="text-align: right;"><span t-esc="doctor_id[1]"/></td>
+                                        <td t-if="doctor_id" style="text-align: right;"><strong>الطبيب </strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <div style="width:800px; margin:0 auto;">
+                                <img src="/consent_management/static/src/img/photo_video_ar.png" class="img img-responsive"
+                                     attrs="{'invisible': [('language', '=', 'english')]}" style="max-height: 1500px;"/>
+                            </div>
+                            <table style="width:100%;">
+                                <tr>
+                                    <th style="width:16%;"></th>
+                                    <th style="width:18%;"></th>
+                                    <th style="width:16%;"></th>
+                                    <th style="width:17%;"></th>
+                                    <th style="width:16%;"></th>
+                                    <th style="width:17%;"></th>
+                                </tr>
+                                <tr>
+                                    <td><strong> المريض أو الوصي</strong></td>
+                                    <td style="text-align: right;">
+                                        <img t-if="Patient_or_Guardian_signature" t-att-src="'data:image/png;base64,%s' % to_text(Patient_or_Guardian_signature)" class="pull-right" height="60"/>
+                                    </td>
+                                    <td><strong>العلاج  الطبيب الأسنان</strong></td>
+                                    <td style="text-align: right;">
+                                        <img t-if="Treating_Dentist_signature" t-att-src="'data:image/png;base64,%s' % to_text(Treating_Dentist_signature)" class="pull-right" height="60"/>
+                                    </td>
+
+                                    <td><strong>الشاهد</strong></td>
+                                    <td style="text-align: right;">
+                                        <img t-if="Witness_signature" t-att-src="'data:image/png;base64,%s' % to_text(Witness_signature)" class="pull-right" height="60"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                </div>
+        </t>
+        </t>
+        </t>
+    </template>
+</odoo>

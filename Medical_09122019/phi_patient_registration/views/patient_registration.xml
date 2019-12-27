@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="pragtech_dental_management.view_registration_wizard2" model="ir.ui.view">
+            <field name="name">patient.registration.form</field>
+            <field name="model">patient.registration</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Patient Details">
+                    <div>
+
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td >
+                                    <label for="patient_id"/>
+                                </td>
+                                <td >
+                                    <field name="patient_id"/>
+                                </td>
+                                <td >
+                                    <label for="register_date"/>
+                                </td>
+                                <td >
+                                    <field name="register_date"/></td>
+                            </tr>
+                        </table>
+
+                        <separator string="BASIC INFO"/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:70%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="patient_name"/>
+                                </td>
+                                <td>
+                                    <field name="patient_name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="qid"/>
+                                </td>
+                                <td><field name="qid"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="sex"/>
+                                </td>
+                                <td><field name="sex" widget="radio"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="mobile"/>
+                                </td>
+                                <td>
+                                    <field name="mobile"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="nationality_id"/>
+                                </td>
+                                <td><field name="nationality_id"/></td>
+                            </tr>
+                        </table>
+                        <separator string="REGISTRATION / وثيقة تسجيل"/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:40%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="dob"/>
+                                </td>
+                                <td><group><field name="dob" nolabel="1"/></group></td>
+                                <td style="text-align: right;">
+                                    <label for="dob" string="تاريخ الولادة"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="marital_status"/>
+                                </td>
+                                <td><field name="marital_status"/></td>
+                                <td style="text-align: right;">
+                                    <label for="marital_status" string="الحالة الاجتماعية"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top;">
+                                    <label for="address"/>
+                                </td>
+                                <td><field name="address"/></td>
+                                <td style="vertical-align: top;text-align: right;"><label for="address" string="العنوان"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="occupation_id"/>
+                                </td>
+                                <td><group><field name="occupation_id" nolabel="1"/></group></td>
+                                <td style="text-align: right;"><label for="occupation_id" string="الوظيفة"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="emergency_name"/>
+                                </td>
+                                <td><field name="emergency_name"/></td>
+                                <td style="text-align: right;">
+                                    <label for="emergency_name" string="شخص يمكن الاتصال به في حالة الطوارئ"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="emergency_phone"/>
+                                </td>
+                                <td><field name="emergency_phone"/></td>
+                                <td style="text-align: right;">
+                                    <label for="emergency_phone" string="الجوال"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <separator string="MEDICAL HISTORY / الحالة الصحية"/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:40%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p1" />
+                                </td>
+                                <td><field name="p1"/></td>
+                                <td style="text-align: right;">
+                                    <label for="p1" string="هل انت تحت عناية طبيب الآن؟"/>
+                                </td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('p1', '!=', 'YES')]}">
+                                <td>
+                                    <label for="p2" />
+                                </td>
+                                <td><field name="p2"/></td>
+                                <td style="text-align: right;">
+                                    <label for="p2" string="إذا كان نعم فلماذا؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p3" />
+                                </td>
+                                <td><field name="p3"/></td>
+                                <td style="text-align: right;"><label for="p3" string="هل تستعمل دواء في الوقت الحاضر"/></td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <p><strong>Circle any illness you have ever had.</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:12%;"></th>
+                                <th style="width:1%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:1%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:1%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:12%;"></th>
+                                <th style="width:1%;"></th>
+                                <th style="width:12%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;height: 50px;"><label for="p4"/></td>
+                                <td><field name="p4"/></td>
+                                <td><label for="p4" string="ربو"/></td>
+                                <td style="text-align: right;"><label for="p5"/></td>
+                                <td><field name="p5"/></td>
+                                <td><label for="p5" string="فقر دم"/></td>
+                                <td style="text-align: right;"><label for="p6"/></td>
+                                <td><field name="p6"/></td>
+                                <td><label for="p6" string="ارتفاع ضغط الدم"/></td>
+                                <td style="text-align: right;"><label for="p7"/></td>
+                                <td><field name="p7"/></td>
+                                <td><label for="p7" string="مرض السكري"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;height: 50px;"><label for="p8"/></td>
+                                <td><field name="p8"/></td>
+                                <td><label for="p8" string="امراض معدية"/></td>
+                                <td style="text-align: right;"><label for="p9"/></td>
+                                <td><field name="p9"/></td>
+                                <td><label for="p9" string="حساسية"/></td>
+                                <td style="text-align: right;"><label for="p10"/></td>
+                                <td><field name="p10"/></td>
+                                <td><label for="p10" string="صرع"/></td>
+                                <td style="text-align: right;"><label for="p11"/></td>
+                                <td><field name="p11"/></td>
+                                <td><label for="p11" string="مرض في العين"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;height: 50px;"><label for="p12"/></td>
+                                <td><field name="p12"/></td>
+                                <td><label for="p12" string="مرض السل"/></td>
+                                <td style="text-align: right;"><label for="p13"/></td>
+                                <td><field name="p13"/></td>
+                                <td><label for="p13" string="مرض في الكلى"/></td>
+                                <td style="text-align: right;"><label for="p14"/></td>
+                                <td><field name="p14"/></td>
+                                <td><label for="p14" string="مرض في القلب"/></td>
+                                <td style="text-align: right;"><label for="p15"/></td>
+                                <td><field name="p15"/></td>
+                                <td><label for="p15" string="مرض في الكبد"/></td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:40%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td><label for="p16"/></td>
+                                <td><field name="p16"/></td>
+                                <td style="text-align: right;"><label for="p16" string="أمراض أخرى تود ذكرها"/></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label for="p17"/>
+                                </td>
+                                <td>
+                                    <field name="p17"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="p17" string="هل أنتِ حامل؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p18"/>
+                                </td>
+                                <td>
+                                    <field name="p18"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="p18" string="هل سبق و أن اجريت لك عملية جراحية؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p19"/>
+                                </td>
+                                <td>
+                                    <field name="p19"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="p19" string="هل سبق و أن احتجت لنقل الدم؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p20"/>
+                                </td>
+                                <td>
+                                    <field name="p20"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="p20" string="هل حدث ان نزفت دما لمدة طويلة؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p21"/>
+                                </td>
+                                <td>
+                                    <field name="p21"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="p21" string="هل أصبت بحالة إغماء أثناء إعطاؤك حقنة"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p22"/>
+                                </td>
+                                <td>
+                                    <field name="p22"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="p22" string="أو مخدر موضعي"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p23"/>
+                                </td>
+                                <td>
+                                    <field name="p23"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="p23" string="هل أنت حساس للمخدر أو أي دواء آخر
+مثل البنسلين
+"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="p24"/>
+                                </td>
+                                <td>
+                                    <field name="p24"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="p24" string="أيوجد أي معلومة تود إضافتها"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <center>
+                        <h4>Endorse and sign on the health of the above information / أصادق و أوقع على صحة المعلومات أعلاه</h4>
+                        </center>
+                    </div>
+                    <group>
+                        <field name="register_signature" widget="signature" nolabel="1" />
+                    </group>
+                    <footer>
+                            <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                            <button string="Cancel / إلغاء " class="btn-default" special="cancel" />
+                        </footer>
+
+                </form>
+            </field>
+    </record>
+
+</odoo>

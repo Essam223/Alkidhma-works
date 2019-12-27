@@ -1,0 +1,147 @@
+<odoo>
+	<data>
+
+		<template id="web.external_layout">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"/>
+        </t>
+
+
+        <div class="header">
+            <div class="row" t-if="company.header_image">
+                <div style="width:100%;">
+                    <center>
+                        <img t-if="company.header_image" t-att-src="'data:image/png;base64,%s' % to_text(company.header_image)" style="max-height: 150px;"/>
+                    </center>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+            <div class="row" t-if="not company.header_image">
+                <div class="col-xs-3 mb4">
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 45px;"/>
+                </div>
+                <div class="col-xs-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+                <div class="col-xs-6" name="company_address">
+                    <span t-field="company.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                        style="display:inline-block;"/>
+                </div>
+            </div>
+
+            <div t-if="not company.header_image" class="row zero_min_height">
+                <div class="col-xs-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="article o_report_layout_standard">
+            <t t-raw="0" />
+        </div>
+
+        <div class="footer">
+            <div class="text-center" style="padding-bottom: 5px;border-top: 3px;" t-if="company.footer_image">
+                <div class="row">
+                    <div style="width:100%;">
+                        <center>
+                            <img t-if="company.footer_image" t-att-src="'data:image/png;base64,%s' % to_text(company.footer_image)" style="max-height: 150px;"/>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="padding-bottom: 5px;border-top: 3px;" t-if="not company.footer_image">
+                <div class="row">
+                    <div name="financial_infos" style="border-top: 1px solid black;">
+                        <strong><span t-field="company.report_footer"/></strong>
+                    </div>
+                </div>
+            </div>
+                <!--<div class="text-muted text-center">-->
+                    <!--Page: <span class="page"/> / <span class="topage"/>-->
+                <!--</div>-->
+        </div>
+    </template>
+
+		<template id="web.internal_layout">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"/>
+        </t>
+
+        <div class="header">
+            <div class="row" t-if="company.header_image">
+                <div style="width:100%;">
+                    <img t-att-src="'data:image/png;base64,%s' % to_text(company.header_image)" style="max-height: 150px;"/>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+            <div class="row" t-if="not company.header_image">
+                <div class="col-xs-3 mb4">
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 45px;"/>
+                </div>
+                <div class="col-xs-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+                <div class="col-xs-6" name="company_address">
+                    <span t-field="company.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                        style="display:inline-block;"/>
+                </div>
+            </div>
+
+            <div t-if="not company.header_image" class="row zero_min_height">
+                <div class="col-xs-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard">
+            <t t-raw="0" />
+        </div>
+
+        <div class="footer">
+            <div class="text-center" style="padding-bottom: 5px;border-top: 3px;" t-if="company.footer_image">
+                    <div class="row" style="width:100%;">
+                        <center>
+                            <img t-if="company.footer_image" t-att-src="'data:image/png;base64,%s' % to_text(company.footer_image)" style="max-height: 150px;"/>
+                        </center>
+                    </div>
+            </div>
+            <div class="text-center" style="padding-bottom: 5px;border-top: 3px;" t-if="not company.footer_image">
+                <div class="row">
+                    <div name="financial_infos" style="border-top: 1px solid black;">
+                        <strong><span t-field="company.report_footer"/></strong>
+                    </div>
+                </div>
+            </div>
+                <div class="text-muted text-center">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+        </div>
+    </template>
+
+
+	</data>
+</odoo>
+
+
+	

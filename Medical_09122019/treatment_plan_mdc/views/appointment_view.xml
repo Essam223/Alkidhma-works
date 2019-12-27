@@ -1,0 +1,76 @@
+<odoo>
+	<data>
+
+        <record id="appointment_form_view_inherited" model="ir.ui.view">
+            <field name="name">medical.appointment.form</field>
+            <field name="model">medical.appointment</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_appointment_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='operations']" position="replace">
+                    <separator string="Pending Treatments" colspan="4" />
+                    <field name="operation_ids">
+                        <tree string='Planned Operations'>
+                            <field name="tree_control" invisible="1"/>
+                            <field name="appt_id" invisible="1"/>
+                            <field name="patient_id" invisible="1"/>
+                            <field name="create_date" invisible="1"/>
+                            <field name="initial" invisible="1"/>
+                            <field name="description" attrs="{'readonly': [('state', 'in', ('condition','in_progress','invoiced','completed'))]}"/>
+                            <field name="teeth_code_rel" widget="many2many_tags" string="Teeth" attrs="{'required': [('tree_control', '=', 1)]}"/>
+                            <field name="teeth_id" invisible="1"/>
+                            <field name="diagnosis_id" />
+                            <field name="diagnosis_description" />
+                            <!-- <field name="tooth_function_field"/> -->
+                            <field name="dentist" invisible="1"/>
+                            <field name="detail_description" invisible="1"/>
+                            <field name="actual_amount" readonly="1"/>
+                            <field name="amount" attrs="{'readonly': [('state', 'in', ('condition','in_progress','invoiced','completed'))]}"/>
+                            <field name="state"/>
+                            <field name="amt_paid_by_patient" readonly="1" invisible="1"/>
+                            <field name="amt_to_be_patient" readonly="1" invisible="1"/>
+                            <button name="action_go_back" icon="fa fa-arrow-left"
+                                    groups="pragtech_dental_management.group_dental_mng_menu"
+                                    string="Go Back" type="object"
+                                    states="in_progress,completed"/>
+                            <button name="action_proceed" icon="fa fa-arrow-right"
+                                    string="Proceed" type="object" states="planned,in_progress"/>
+                        </tree>
+                    </field>
+                    <separator string="Treatments added on this visit" colspan="4" />
+                    <field name="operations" context="{'default_appt_id':id, 'default_tree_control':1, 'default_patient_id':patient}">
+                        <tree string='Operations' editable="bottom"
+                              decoration-info="(state == 'planned')"
+                              decoration-success="(state == 'completed')"
+                              decoration-warning="(state == 'in_progress')" >
+                            <field name="tree_control" invisible="1"/>
+                            <field name="appt_id" invisible="1"/>
+                            <field name="patient_id" invisible="1"/>
+                            <field name="create_date" invisible="1"/>
+                            <field name="initial" invisible="1"/>
+                            <field name="description" attrs="{'readonly': [('state', 'in', ('condition','in_progress','invoiced','completed'))]}"/>
+                            <field name="teeth_code_rel" widget="many2many_tags" string="Teeth" attrs="{'required': [('tree_control', '=', 1)]}"/>
+                            <field name="teeth_id" invisible="1"/>
+                            <field name="diagnosis_id" />
+                            <field name="diagnosis_description" />
+                            <!-- <field name="tooth_function_field"/> -->
+                            <field name="dentist" invisible="1"/>
+                            <field name="detail_description" invisible="1"/>
+                            <field name="actual_amount" readonly="1"/>
+                            <field name="amount" attrs="{'readonly': [('state', 'in', ('condition','in_progress','invoiced','completed'))]}"/>
+                            <field name="state"/>
+                            <field name="amt_paid_by_patient" readonly="1" invisible="1"/>
+                            <field name="amt_to_be_patient" readonly="1" invisible="1"/>
+                            <button name="action_go_back" icon="fa fa-arrow-left"
+                                    groups="pragtech_dental_management.group_dental_mng_menu"
+                                    string="Go Back" type="object"
+                                    states="in_progress,completed"/>
+                            <button name="action_proceed" icon="fa fa-arrow-right"
+                                    string="Proceed" type="object" states="planned,in_progress"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

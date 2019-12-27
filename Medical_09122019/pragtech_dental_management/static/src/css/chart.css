@@ -1,0 +1,151 @@
+.flex-container {
+  display: flex;
+
+
+
+}
+.col-1 {
+         /*flex: 0 1 50%;*/
+          display: flex;
+           height: 100%;
+          align-items: center;
+           flex-direction: column;
+           flex-wrap: wrap;
+           grid-template-rows: auto;
+           width : auto;
+           position: relative;
+
+}
+.col-2 {
+    /*flex: 0 1 50%;*/
+    display: flex;
+    min-height: 100%;
+    max-width: 25%;
+
+
+}
+.col-3{
+display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+
+
+
+.tabarea{
+display: flex;
+flex-direction: row;
+display: grid;
+grid-auto-columns: auto;
+/*align-content: stretch;*/
+justify-content: space-between;
+height: 85px;
+width: 960px;
+
+}
+
+.charttype{
+flex-grow: 1;
+display:flex;
+
+border: 1px solid #4CAF50;
+position: relative;
+right: 75px;
+}
+
+.mouth_selection{
+display:flex;
+
+
+flex-grow: 1
+}
+
+.closearea{
+display:flex;
+flex-grow:1;
+align-content: flex-end;
+
+}
+
+#selections{
+display:none;
+}
+
+#showkey{
+display:none;
+}
+}
+
+.mouth_selection{
+display:flex
+}
+
+.teethchart {
+    display: flex;
+    flex-direction: column;
+    flex-grow:1
+    justify-content: center;
+    position: relative;
+}
+
+.upperteeth{
+
+ display: flex;
+ order : 1;
+ max-width: 50%;
+ height: auto;
+ /*justify-content: flex-end;*/
+ position: absolute;
+  top: 0;
+  right: 20px;
+}
+.svg-layer{
+display:flex;
+order:2;
+/*justify-content: flex-end;*/
+position: absolute;
+top: 0;
+right: 20px;
+}
+.lowerteeth{
+display: flex;
+order:3;
+max-width: 50%;
+height: auto;
+/*justify-content: flex-end;*/
+position: absolute;
+    top: 0;
+  right: 20px;
+}
+
+
+.states{
+display:flex;
+flex-direction: row;
+max-width: 100%;
+/* margin-left: 100px */
+}
+
+.procedure_selected{
+display:flex;
+
+}
+.hidden{
+display: none;
+}
+
+/*Numbering table*/
+.numbering {
+	display:flex;
+	font-weight: 600;
+	order:1;
+
+}
+
+.numbering_below {
+	display:flex;
+	font-weight: 600;
+	order:3;
+
+}

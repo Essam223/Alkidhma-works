@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="DentalFormView">
+		<div class="perio_chart_view_dashboard">
+			<center>
+				<div class="header">
+					<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+					<meta name="description" content=""/>
+					<!--<script src="https://code.jquery.com/jquery-1.10.2.js">-->
+					<!--</script>-->
+					<fieldset>
+						<legend>
+							Perio Exams:
+						</legend>
+						Date
+						<input id = "current_date" type = "text">
+						</input>
+						<br/>
+						<br/>
+						<button string = "Delete" id = "delete_click">
+							Delete
+						</button>
+						<button string = "Delete">
+							New
+						</button>
+						<button string = "Delete">
+							New from Current
+						</button>
+						<br/>
+						<br/>
+						Selected Tooth:
+						<textarea id = "selected_tooth">
+						</textarea>
+					</fieldset>
+					<br/>
+					<div>
+						<img src = "/pragtech_dental_management/static/src/img/blank.jpg" id = "blank_img" style="display:none;">
+						</img>
+						Bleeding
+						<div>
+							<input type = "checkbox" id = "bleeding_1" name = "chk">
+							</input>
+							<input type = "checkbox" id = "bleeding_2" name = "chk">
+							</input>
+							<input type = "checkbox" id = "bleeding_3" name = "chk">
+							</input>
+							<br/>
+							<input type = "checkbox" id = "bleeding_4" name = "chk">
+							</input>
+							<input type = "checkbox" id = "bleeding_5" name = "chk">
+							</input>
+							<input type = "checkbox" id = "bleeding_6" name = "chk">
+							</input>
+						</div>
+					</div>
+					<br/>
+					<div id = "tooth_page">
+						<table id="tooth_table" class = "table_class" border="1" width="100%">
+						</table>
+					</div>
+					<script>
+					</script>
+				</div>
+				<br />
+				<br />
+			</center>
+		</div>
+	</t>
+	<t t-name="DentalChartView">
+
+
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<script type="text/javascript" src="/pragtech_dental_management/static/src/js/childchart_action.js"></script>
+        <script type="text/javascript" src="/pragtech_dental_management/static/src/js/jquery.imagemapster.js"></script>
+		<script type="text/javascript" src="/pragtech_dental_management/static/src/js/teeth_selection.js"></script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+
+	<div  class="flex-container">
+
+     	<div class = "col-2">
+			<div style="border:1px; width:250px;height:540px;overflow:scroll;">
+				<script>
+					$(document).ready(function() {
+						$('.deleteicon').click(function() {
+							$(this).prev('input').val('').trigger('change').focus();
+						});
+					});
+				</script>
+				<style>
+					span.deleteicon {
+						position: relative;
+						top: -17px;
+    					left: 93%;
+						cursor: pointer;
+					}
+					
+				</style>
+
+				<input type="text" style="margin-top:5px;"
+					   id="treatment_search"
+					   placeholder="Search treatment"
+				/>
+				<span class="deleteicon glyphicon glyphicon-remove" />
+
+				<h2>Procedures</h2>
+				<div id = "categ_list" class = "categs">
+					<div id = "total_list_div" class="panel panel-default">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-1 ">
+			<div class="tabarea">
+				<div class = "mouth_selection">
+					<!--patient details-->
+					<div class="patient_details"></div>
+
+						<div class="charttype">
+							<input type="radio" id="adult" class="chartselect" value="adult" name="chartoption" checked="checked"/>
+							<label for="adult">Adult</label>
+
+							<input type="radio" id="child" class="chartselect" value="child" name="chartoption"/>
+							<label for="child">Child</label>
+						</div>
+
+						<div>
+							<input type="checkbox" value="None" id="select_full_mouth_child" name="check" class="hidden"/>
+							<input type="checkbox" value="None" id="select_full_mouth" name="check" class=""/>
+							<label for="select_full_mouth">Full Mouth</label>
+						</div>
+						<div>
+							<input type="checkbox" id="select_upper_mouth_child" class="jaw hidden" name="mouthselection" value="uppermouth_child"/>
+							<input type="checkbox" id="select_upper_mouth" class="jaw" name="mouthselection" value="uppermouth"/>
+							<label for="select_upper_mouth">Upper Jaw</label>
+						</div>
+
+						<div>
+							<input type="checkbox" id="select_lower_mouth_child" class="jaw hidden" name="mouthselection" value="lowermouth_child"/>
+							<input type="checkbox" id="select_lower_mouth" class="jaw" name="mouthselection" value="lowermouth"/>
+							<label for="select_lower_mouth">Lower Jaw</label>
+						</div>
+					<!--<div><input type="checkbox" name="checkfield" id="mapchk"  onchange="doalert(this)"></input> checker</div>-->
+
+					 <!--<div id ="mapdetails" class ="mapdetails" >-->
+						 <!--<span class="mapper"></span>-->
+						 <!--<input type="text" id="mapKey" name="mapKeyId" value="test"/>-->
+					 <!--</div>-->
+
+				</div>
+
+
+           </div>
+
+           	<div class="initial-examination">
+           		<button id="init_examination" class="initial_examination" name="Initial Examination">Initial Examination</button>
+           	</div>
+           	<div id="screen_shorts" class="screenshorts hidden" style="margin-right: 100px">
+	           	<button id="take_screenshot" class="screenshot" name="Initial Examination">Take screenshot</button>
+	           	<a id="img_adult_tooth" download='Adult Tooth Chart.jpeg' href="" class="fa fa-download img_tooth_screen hidden">   Adult Tooths</a>
+	           	<a id="img_child_tooth" download='Child Tooth Chart.jpeg' href="" class="fa fa-download img_tooth_screen hidden">   Child Tooths</a>
+	           	<a id="img_tooth_line" download='Treatments.jpeg' href="" class="fa fa-download img_tooth_lines_screen hidden">   Treatments</a>
+	           	<canvas width="500" height="500" style="display: none;"></canvas>
+	        </div>
+           	<div class="closearea">
+           		<button id="save_screen" class="save" name="Save">Save</button>
+           		<button id="close_screen" class="close" name="Close">Close</button>
+           		<!-- <button id="back_screen" class="back" name="back">Back</button> -->
+           	</div>
+
+
+          <div id="teethchart_adult" class="teethchartadult">
+			<div id="uppermoutharea" class="teethchartadult" style="margin-left:10px">
+				<img id="UT" src="/pragtech_dental_management/static/src/img/upperteeth.png" usemap="#upperteethmap" style="height:190px"/>	
+		   		<map id="toothmapupper" name="upperteethmap" class="teethmap">
+					<area shape="poly" coords="31,57,25,55,23,64,21,76,20,83,20,93,25,95,33,95,46,95,49,93,49,85,51,77,49,69,45,61,41,55,37,55,34,57" data-key="root_1" id="root_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="78,54,76,49,76,47,72,48,68,53,68,62,69,70,69,75,70,79,68,85,67,89,73,85,77,84,84,85,91,88,95,87,96,75,95,66,96,59,94,52,91,46,88,45,87,51,82,44,79,46,79,54" data-key="root_2" id="root_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="121,53,120,49,117,46,116,55,116,61,117,69,119,76,119,81,116,87,119,88,127,88,132,88,138,90,143,90,143,79,145,73,145,63,141,56,138,50,135,45,133,46,132,51,128,46,124,47" data-key="root_3" id="root_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="166,30,168,38,169,51,167,61,167,69,167,79,172,79,178,78,183,80,184,68,181,54,179,43,174,35,172,30" data-key="root_4" id="root_4" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="214,22,211,29,210,47,210,63,209,75,210,81,229,79,226,65,225,50,221,36,218,27" data-key="root_5" id="root_5" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="260,18,260,30,258,46,256,56,255,70,262,69,275,73,274,63,273,49,272,39,269,29,266,23" data-key="root_6" id="root_6" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="306,27,307,41,307,53,306,66,305,78,313,76,322,77,320,68,320,58,318,49,317,39,315,31,312,27" data-key="root_7" id="root_7" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="357,32,354,45,353,60,350,68,347,79,356,75,363,76,370,79,368,69,367,60,366,50,363,42" data-key="root_8" id="root_8" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="402,33,397,46,394,56,392,68,390,81,399,77,407,76,413,79,411,68,408,56,407,46,404,36" data-key="root_9" id="root_9" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="454,28,448,27,443,36,441,47,439,58,438,70,437,81,445,77,455,79,453,70,452,62,452,53,453,44,453,34" data-key="root_10" id="root_10" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="498,18,491,23,486,33,484,47,482,62,481,76,487,70,495,68,503,74,501,61,501,51,499,42,499,36,497,31" data-key="root_11" id="root_11" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="544,20,538,29,533,41,532,57,530,69,529,80,539,79,547,82,547,72,547,61,546,45,546,37,545,30" data-key="root_12" id="root_12" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="587,30,579,36,575,47,572,55,570,70,570,81,578,80,589,83,588,72,586,61,586,50,585,45,588,38" data-key="root_13" id="root_13" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="616,48,609,59,605,67,606,78,608,86,607,93,616,92,625,90,634,90,633,82,633,73,635,64,635,56,634,50,632,48,629,54,628,51,625,49,620,48,619,56" data-key="root_14" id="root_14" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="660,44,655,53,654,61,654,68,656,76,655,83,656,88,665,86,670,83,679,85,683,86,682,75,682,67,681,57,680,51,676,44,673,51,670,49,669,44,663,49" data-key="root_15" id="root_15" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="709,54,703,66,699,78,701,87,700,94,707,94,719,95,729,93,732,92,730,83,729,75,728,65,727,58,725,54,721,54,718,57" data-key="root_16" id="root_16" href="#" data-toggle="tooltip" />
+			   		<area shape="poly" coords="17,93,15,102,16,111,21,114,28,116,31,113,37,115,42,118,49,112,51,106,51,99,49,96" data-key="crown_1" id="crown_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="68,87,64,94,64,105,71,109,77,106,82,109,91,112,95,108,98,104,99,96,97,92,95,89,87,86,78,83" data-key="crown_2" id="crown_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="117,88,113,97,111,102,114,110,119,114,127,111,130,111,135,114,139,116,145,112,147,106,146,98,144,94,142,91" data-key="crown_3" id="crown_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="168,82,164,92,161,100,161,107,170,114,176,115,185,112,190,107,191,100,188,94,186,88,185,84,184,81,175,79" data-key="crown_4" id="crown_4" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="211,82,207,90,205,99,205,106,213,111,223,114,230,108,236,105,237,95,233,91,230,84,229,80,216,79" data-key="crown_5" id="crown_5" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="256,73,253,86,251,96,256,104,264,110,275,106,279,99,282,94,282,87,279,82,276,77,275,74,269,70,261,68" data-key="crown_6" id="crown_6" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="306,80,301,88,298,97,300,105,305,112,315,113,328,112,327,106,328,99,327,92,325,86,323,82,322,79,318,77,309,76" data-key="crown_7" id="crown_7" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="348,79,343,91,342,101,342,109,352,111,362,112,369,111,373,108,373,95,372,90,372,85,371,81,365,76,357,74" data-key="crown_8" id="crown_8" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="391,79,388,90,387,100,388,108,396,111,406,111,414,111,420,105,419,98,418,93,416,88,413,79,406,76,399,74" data-key="crown_9" id="crown_9" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="437,79,434,90,432,96,432,108,433,111,439,113,453,113,457,110,463,103,460,93,458,85,456,81,451,77,444,76" data-key="crown_10" id="crown_10" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="482,75,477,85,476,94,479,103,485,107,492,109,501,106,506,99,506,90,503,82,503,77,502,73,496,70,488,70" data-key="crown_11" id="crown_11" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="528,81,524,92,520,98,520,103,526,108,535,113,544,111,551,105,553,100,552,93,548,88,548,83,545,80,536,79" data-key="crown_12" id="crown_12" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="571,82,568,93,564,99,563,105,568,111,575,115,580,117,585,114,593,110,594,100,593,93,589,88,589,84,584,80,575,80" data-key="crown_13" id="crown_13" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="608,93,605,101,604,109,606,114,610,116,615,116,619,114,623,113,630,114,634,114,639,111,640,106,640,100,637,95,634,91,621,90" data-key="crown_14" id="crown_14" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="655,87,650,98,652,107,660,109,667,109,672,106,680,107,687,102,687,95,686,89,681,86,675,84,666,83" data-key="crown_15" id="crown_15" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="700,94,698,102,700,110,705,115,713,114,719,111,724,113,730,113,733,109,735,104,735,100,733,96,733,93,715,93" data-key="crown_16" id="crown_16" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="29,124,20,128,16,136,17,145,20,154,25,161,36,161,44,157,48,148,52,139,51,132,49,127,45,125" data-key="toothcap_1" id="toothcap_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="75,122,66,128,64,137,65,149,66,155,72,161,82,160,88,160,92,157,95,149,96,141,99,131,96,124,90,120" data-key="toothcap_2" id="toothcap_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="132,123,116,128,112,137,112,146,114,155,126,159,138,157,147,152,146,142,146,134,144,126" data-key="toothcap_3" id="toothcap_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="171,125,161,133,159,143,164,154,169,158,179,160,191,152,191,143,191,135,188,129,178,125" data-key="toothcap_4" id="toothcap_4" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="219,120,208,126,204,135,205,146,211,154,217,159,230,158,236,148,236,139,236,131,232,126" data-key="toothcap_5" id="toothcap_5" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="265,122,255,127,250,134,250,143,253,149,257,156,262,159,268,159,275,154,281,146,283,139,283,133,280,127,271,123" data-key="toothcap_6" id="toothcap_6" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="314,124,304,130,298,138,296,147,303,151,308,156,312,158,317,157,325,154,328,148,330,143,329,134,322,128" data-key="toothcap_7" id="toothcap_7" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="359,130,348,131,344,139,341,144,340,148,348,151,352,154,355,157,359,158,367,156,372,149,375,145,374,140,373,136,371,133,367,130" data-key="toothcap_8" id="toothcap_8" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="396,130,388,136,387,144,390,152,395,155,398,159,404,158,412,153,420,147,419,140,415,136,412,131,404,129" data-key="toothcap_9" id="toothcap_9" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="442,125,433,133,430,141,429,148,435,153,441,158,446,158,452,158,456,154,462,146,462,138,456,131,450,127" data-key="toothcap_10" id="toothcap_10" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="490,122,479,126,473,134,474,144,480,153,488,158,497,158,503,151,507,145,507,139,508,134,505,130,501,126,500,125,496,122" data-key="toothcap_11" id="toothcap_11" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="537,119,528,123,522,128,520,139,521,149,525,155,535,159,542,157,551,147,553,139,552,131,547,125" data-key="toothcap_12" id="toothcap_12" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="580,125,573,125,569,131,565,135,563,144,564,150,568,155,574,159,581,158,588,157,593,151,595,141,595,137,591,132,585,125" data-key="toothcap_13" id="toothcap_13" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="618,125,609,125,605,132,604,141,605,153,611,159,623,160,632,160,637,157,640,148,638,142,638,134,632,131,625,126" data-key="toothcap_14" id="toothcap_14" href="#" />
+					<area shape="poly" coords="665,120,659,119,653,126,651,131,652,137,654,143,654,151,659,158,668,160,679,159,684,155,685,148,686,139,684,133,684,125,678,122,668,120" data-key="toothcap_15" id="toothcap_15" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="716,124,705,123,698,127,699,137,701,143,703,150,708,157,718,159,725,157,731,155,733,150,733,141,733,138,733,132,726,124" data-key="toothcap_16" id="toothcap_16" href="#" data-toggle="tooltip" />
+				    <!--<area shape="poly" coords="25,55,23,68,21,77,19,84,19,93,29,94,31,91,31,86,31,77,31,69,31,62,29,57,28,56" data-key="root_1_1" id="root_1_1" href="#" />-->
+					<area shape="poly" coords="30,59,34,56,35,56,38,61,41,69,42,75,40,80,40,84,38,91,37,94,32,92,31,87,31,80,32,74,31,68,31,64" data-key="root_1_2" id="root_1_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="36,56,40,56,43,60,47,68,49,75,49,83,49,90,48,94,43,96,40,96,38,95,40,86,41,78,43,75,40,67" data-key="root_1_3" id="root_1_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="73,47,68,55,68,66,70,78,68,82,69,89,73,85,78,83,80,84,77,76,78,68,77,60,76,51,76,47" data-key="root_2_1" id="root_2_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="81,44,78,53,79,59,80,66,79,74,79,81,82,83,85,77,87,69,85,59,85,53,85,46" data-key="root_2_2" id="root_2_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="87,45,87,53,85,57,87,66,86,74,83,84,89,87,93,88,96,85,96,77,96,67,96,59,95,53,93,48" data-key="root_2_3" id="root_2_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="117,46,114,56,116,65,119,74,118,80,117,86,121,89,126,88,130,86,132,81,131,74,126,67,123,63,122,56,120,50" data-key="root_3_1" id="root_3_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="124,61,122,54,124,49,126,46,130,47,132,52,132,60,134,69,131,75" data-key="root_3_2" id="root_3_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="133,46,133,54,135,63,135,70,132,75,133,84,133,87,136,88,141,90,144,87,145,78,145,70,144,62,143,56" data-key="root_3_3" id="root_3_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="615,48,609,58,605,65,605,73,607,82,607,92,614,92,618,91,619,85,619,77,615,73,616,63,617,58,618,50" data-key="root_14_1" id="root_14_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="617,64,617,55,622,49,629,51,628,59,626,64,623,70,619,76,617,75" data-key="root_14_2" id="root_14_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="632,49,628,58,625,67,623,72,620,77,618,83,621,89,625,90,630,90,633,90,634,87,632,82,633,74,633,68,636,62,636,56,635,50" data-key="root_14_3" id="root_14_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="660,45,654,54,654,63,655,73,656,80,655,86,660,87,667,85,670,81,668,74,664,70,664,65,664,57,662,47" data-key="root_15_1" id="root_15_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="664,55,665,48,666,45,669,43,671,50,672,59,670,65,669,69,668,72,667,73,665,67,665,57" data-key="root_15_2" id="root_15_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="669,72,671,64,673,57,673,52,673,46,674,44,679,47,682,55,682,63,681,72,682,80,682,86,681,87,677,85,674,84,672,83,671,84" data-key="root_15_3" id="root_15_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="709,53,708,55,702,69,702,76,701,85,701,94,710,93,714,93,717,93,715,87,710,82,709,73,710,65,712,60,714,56" data-key="root_16_1" id="root_16_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="716,54,711,63,710,73,710,77,712,83,716,87,718,88,718,79,717,70,718,60,718,56" data-key="root_16_2" id="root_16_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="721,53,719,57,718,69,719,75,719,84,719,89,718,93,724,94,729,92,732,92,730,82,728,74,727,67,727,62,725,53" data-key="root_16_3" id="root_16_3" href="#" data-toggle="tooltip" />
+				</map>
+		    </div>
+
+            <div id="svg_adult" class="teethchartadult">
+            	<table class = "numbering">
+            		<tr id="upper_teeths"></tr>
+            	</table>
+            	<svg id = "svg_object" width="960" height="110"></svg>
+            	<table class = "numbering_below">
+            		<tr id="lower_teeths"></tr>
+            	</table>
+            </div>
+
+            <div id="lowermoutharea" class="teethchartadult" style="margin-left:5px">
+            	<img class="lowersection" id="LT" src = "/pragtech_dental_management/static/src/img/lowerteeth.png" usemap="#lowerteethmap" style="width:760px;"/>
+                <map id="toothmaplower" name="lowerteethmap" class="teethmap">
+					<area shape="poly" coords="30,18,21,19,15,28,13,39,17,47,20,52,28,54,42,54,49,45,50,35,49,28,44,20" data-key="toothcap_32" id="toothcap_32" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="80,17,72,17,66,20,62,25,63,35,64,42,70,48,79,49,86,49,96,46,99,40,99,30,100,25,99,21,93,18" data-key="toothcap_31" id="toothcap_31" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="129,17,119,16,114,20,112,26,112,33,113,38,120,45,127,46,138,45,143,41,145,37,146,29,146,24,141,18" data-key="toothcap_30" id="toothcap_30" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="174,16,163,20,159,27,158,37,164,44,168,51,175,53,184,45,191,39,190,31,187,23,183,17" data-key="toothcap_29" id="toothcap_29" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="221,16,210,18,204,28,204,36,205,45,211,50,216,52,222,53,229,49,235,43,239,39,237,33,236,28,234,23,230,22,228,18" data-key="toothcap_28" id="toothcap_28" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="262,16,254,21,250,27,249,37,254,46,264,51,275,44,279,39,279,32,279,27,275,23,270,20,264,18" data-key="toothcap_27" id="toothcap_27" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="308,17,303,25,297,30,300,40,303,46,310,50,315,51,322,47,326,41,328,36,329,30,325,25,321,22,316,18" data-key="toothcap_26" id="toothcap_26" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="353,16,349,22,345,25,342,27,342,34,349,42,358,46,365,41,369,36,370,31,368,25,364,26,364,21,361,17" data-key="toothcap_25" id="toothcap_25" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="401,16,395,20,390,26,387,28,387,36,394,41,399,45,405,44,413,39,415,31,415,26,408,22" data-key="toothcap_24" id="toothcap_24" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="448,15,438,21,430,26,429,34,434,43,441,49,447,50,454,46,459,40,461,33,460,26,457,23,452,18" data-key="toothcap_23" id="toothcap_23" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="490,16,478,23,474,28,473,37,478,43,484,48,490,49,496,48,501,39,504,34,503,26,497,20" data-key="toothcap_22" id="toothcap_22" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="534,15,526,19,526,23,521,24,517,33,518,42,522,47,525,49,532,53,540,54,548,46,550,38,552,32,549,25,546,19,540,18" data-key="toothcap_21" id="toothcap_21" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="576,16,567,19,561,28,562,36,568,46,575,51,581,52,587,46,593,39,594,31,593,25,590,21,586,17" data-key="toothcap_20" id="toothcap_20" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="618,16,608,18,605,27,605,35,607,43,615,48,621,48,628,46,633,44,638,37,638,32,635,25,635,19,626,15" data-key="toothcap_19" id="toothcap_19" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="668,18,656,16,650,22,649,31,649,40,654,46,664,50,673,50,681,47,685,39,687,31,687,26,684,21,679,17" data-key="toothcap_18" id="toothcap_18" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="716,16,706,16,702,24,699,31,698,39,701,47,709,51,719,51,730,49,734,41,734,32,735,26,732,21,725,17" data-key="toothcap_17" id="toothcap_17" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="31,66,24,63,20,62,15,66,14,75,16,81,19,84,34,82,47,84,50,77,50,70,48,67,45,63,41,62" data-key="crown_32" id="crown_32" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="82,65,76,63,71,63,65,65,62,71,64,78,67,84,77,85,84,87,89,84,94,84,97,79,97,75,98,69,98,66,95,63,91,62" data-key="crown_31" id="crown_31" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="128,65,126,62,121,62,114,63,110,70,113,79,117,85,125,86,135,85,141,85,144,79,145,73,146,66,143,62,136,61" data-key="crown_30" id="crown_30" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="174,63,164,68,160,75,163,82,166,88,184,90,186,80,189,74,188,69,182,65" data-key="crown_29" id="crown_29" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="221,66,214,68,206,71,205,82,208,88,211,98,220,99,231,99,233,90,237,84,237,77,235,73,233,71" data-key="crown_28" id="crown_28" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="265,62,256,65,251,72,250,81,255,91,258,97,264,97,270,94,276,92,278,83,278,77,277,70,277,67" data-key="crown_27" id="crown_27" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="315,62,307,63,300,68,300,76,302,87,305,95,307,105,313,107,322,104,324,93,326,78,328,72,328,66,325,62" data-key="crown_26" id="crown_26" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="356,60,345,60,342,66,344,77,345,91,348,96,348,101,352,107,359,105,364,101,366,92,366,83,367,74,368,68,369,64,367,61" data-key="crown_25" id="crown_25" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="400,59,391,60,388,62,390,75,391,86,393,97,395,103,403,106,409,102,411,92,412,83,414,77,415,69,414,65,413,60" data-key="crown_24" id="crown_24" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="446,61,437,61,431,65,431,74,433,83,436,94,437,103,444,105,451,103,453,99,453,92,457,81,458,75,458,69,457,63" data-key="crown_23" id="crown_23" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="487,60,477,65,474,74,475,87,478,91,486,94,495,95,499,88,501,78,502,71,496,65" data-key="crown_22" id="crown_22" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="534,65,526,69,519,73,518,86,524,93,525,99,534,100,541,99,545,97,545,91,547,86,550,80,550,72,541,67" data-key="crown_21" id="crown_21" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="577,63,566,67,562,74,565,83,569,90,587,89,586,85,591,79,592,73,588,68" data-key="crown_20" id="crown_20" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="621,65,615,61,608,61,606,68,605,73,607,79,609,85,620,86,631,86,636,81,638,73,638,68,636,62,631,62,626,62,624,62" data-key="crown_19" id="crown_19" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="667,64,660,61,654,64,651,69,652,80,654,84,662,84,670,86,677,85,681,84,683,78,687,72,685,66,681,63,673,62" data-key="crown_18" id="crown_18" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="719,65,710,63,705,63,699,68,698,76,701,83,711,83,720,83,732,85,734,76,735,71,731,65,727,63" data-key="crown_17" id="crown_17" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="17,84,22,96,22,103,23,110,21,115,22,118,27,113,29,106,32,104,30,111,27,116,26,120,30,121,36,115,42,106,46,97,46,89,48,84,43,81,27,82" data-key="root_32" id="root_32" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="68,86,68,98,68,107,65,119,66,123,71,117,75,108,79,99,80,100,79,109,77,117,75,125,79,127,86,116,92,107,94,97,95,90,96,84,87,84" data-key="root_31" id="root_31" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="117,86,116,100,113,111,110,122,109,131,112,132,117,123,120,111,123,103,129,94,132,106,131,117,130,127,130,133,133,134,138,126,140,115,141,104,140,95,141,90,140,86" data-key="root_30" id="root_30" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="167,90,169,113,172,133,173,146,175,149,180,135,180,121,179,109,182,99,182,90" data-key="root_29" id="root_29" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="211,99,214,120,214,136,216,151,224,137,227,122,228,110,230,101,230,98,223,100" data-key="root_28" id="root_28" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="257,95,259,112,260,128,260,140,263,157,269,151,271,137,272,122,274,110,275,103,275,92,267,96" data-key="root_27" id="root_27" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="307,104,307,125,309,145,308,158,315,153,318,143,320,132,320,123,320,116,322,104,313,106" data-key="root_26" id="root_26" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="349,105,350,122,352,136,353,152,352,159,355,159,361,148,362,134,362,124,363,111,364,106,364,102,357,105" data-key="root_25" id="root_25" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="394,101,395,120,395,138,397,151,403,159,405,152,405,140,406,125,408,117,407,110,407,103,401,106" data-key="root_24" id="root_24" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="437,104,439,119,439,134,441,147,449,157,451,155,450,144,450,131,450,120,451,111,452,103,446,106" data-key="root_23" id="root_23" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="477,91,479,109,481,120,482,139,484,146,488,158,492,146,493,133,492,123,493,110,495,104,495,95,486,96" data-key="root_22" id="root_22" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="525,99,527,115,529,128,532,138,538,151,541,138,540,125,541,113,541,105,542,98,535,101" data-key="root_21" id="root_21" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="569,90,571,104,572,118,573,135,575,149,578,148,580,138,582,126,582,114,584,105,585,96,585,89" data-key="root_20" id="root_20" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="609,85,610,100,609,112,612,126,618,136,619,123,617,112,619,101,621,95,625,101,630,113,633,124,637,133,639,132,639,120,636,110,634,102,632,96,632,86" data-key="root_19" id="root_19" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="654,84,656,103,664,116,673,127,674,121,671,109,670,100,677,111,681,123,684,123,683,113,683,101,681,94,682,86,668,87" data-key="root_18" id="root_18" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="701,85,703,99,709,109,718,121,722,119,720,113,714,105,716,104,721,109,724,116,728,117,727,112,724,103,727,94,729,89,729,84,721,81,712,82,700,82" data-key="root_17" id="root_17" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="18,84,21,93,22,100,22,106,21,110,19,116,25,116,29,108,32,102,31,94,31,83,24,83" data-key="root_32_1" id="root_32_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="33,105,35,94,32,86,32,83,39,82,47,83,47,90,44,101,39,111,34,116,28,122,27,121,25,119,29,110,34,102" data-key="root_32_2" id="root_32_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="68,85,68,99,67,109,66,117,66,125,68,123,71,115,74,107,77,101,78,95,81,94,80,87" data-key="root_31_1" id="root_31_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="83,95,84,87,87,85,92,85,96,85,94,95,93,102,91,108,88,113,84,118,80,125,77,126,76,119,79,112,81,106" data-key="root_31_2" id="root_31_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="111,130,111,116,115,104,118,96,118,86,126,84,126,85,129,86,130,90,129,96,124,100,123,107,122,112,118,120,116,125,113,129" data-key="root_30_1" id="root_30_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="130,95,130,90,130,86,137,86,141,87,141,95,140,103,140,112,139,119,138,124,135,131,133,134,130,132,132,120,133,113,131,106" data-key="root_30_2" id="root_30_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="610,85,609,102,609,115,612,125,616,135,620,131,619,120,619,108,619,100,620,96,621,87" data-key="root_19_1" id="root_19_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="621,96,621,91,622,86,629,86,633,86,632,93,634,104,637,114,639,123,639,130,638,132,633,122,631,115,627,107,626,101" data-key="root_19_2" id="root_19_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="655,85,655,95,657,104,660,111,666,120,673,127,673,120,672,112,669,106,668,99,668,92,668,86" data-key="root_18_1" id="root_18_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="670,97,669,91,671,85,680,85,683,86,682,98,682,107,684,118,685,123,682,125,677,114,675,107" data-key="root_18_2" id="root_18_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="701,85,702,94,704,102,711,112,715,118,718,122,722,117,718,111,715,103,714,93,714,88,713,84,706,83" data-key="root_17_1" id="root_17_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="714,84,722,83,729,84,728,88,728,96,725,104,727,111,729,116,724,118,722,113,719,107,718,101,715,95" data-key="root_17_2" id="root_17_2" href="#" data-toggle="tooltip" />
+				</map>
+            </div>
+        </div>
+
+		<div id="teethchart_child" class="childteethchart hidden" style="width: 700px !important; margin-left: 25%; margin-top: -473px; position: relative;">
+			<div id="child_uppermouth" class="childteethchart  childupper">
+				<img id="childUT"  src = "/pragtech_dental_management/static/src/img/upperteeth_child_new.png" usemap="#childuppermap"/>
+				<map id="childmapupper" name="childuppermap">
+					<area shape="poly" coords="167,30,168,46,168,58,168,67,167,80,170,81,177,79,182,80,185,81,183,68,182,55,178,42,176,37" data-key="chroot_1" id="chroot_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="212,20,211,37,211,52,210,68,210,82,218,80,227,81,229,75,225,58,224,46,220,30,218,24" data-key="chroot_2" id="chroot_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="259,19,261,32,258,42,256,52,255,63,255,72,259,69,262,69,267,69,275,74,275,56,271,35,270,29,268,23,265,21" data-key="chroot_3" id="chroot_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="307,26,307,42,307,54,307,69,305,79,313,77,322,77,321,68,320,58,319,47,318,37,312,28" data-key="chroot_4" id="chroot_4" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="357,32,354,48,351,63,350,71,347,80,355,77,360,76,365,78,370,82,370,71,366,56,366,50,363,42,361,35" data-key="chroot_5" id="chroot_5" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="401,33,396,45,394,55,392,66,392,74,390,84,396,76,405,76,409,77,412,79,411,70,408,61,408,54,407,44,407,40,404,33" data-key="chroot_6" id="chroot_6" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="453,26,446,30,441,40,439,54,438,64,438,74,436,80,443,76,449,77,453,80,454,79,453,69,453,61,452,52,453,44,453,37" data-key="chroot_7" id="chroot_7" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="496,18,488,26,485,39,484,53,483,63,482,72,481,79,488,71,493,68,497,70,502,72,502,62,501,50,499,40,497,31,498,22" data-key="chroot_8" id="chroot_8" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="543,20,537,32,534,47,531,62,532,70,529,78,535,79,543,80,545,80,546,67,547,54,545,40" data-key="chroot_9" id="chroot_9" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="587,29,577,40,573,51,571,66,572,75,571,82,579,79,586,81,589,82,587,70,586,60,585,50,586,42,588,40" data-key="chroot_10" id="chroot_10" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="167,81,164,91,162,97,160,105,167,111,173,116,182,115,186,110,189,104,191,99,187,93,186,89,185,81" data-key="chcrown_1" id="chcrown_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="210,82,208,88,204,94,204,105,211,111,219,114,228,112,234,105,237,99,233,92,232,86,229,81,230,81,218,80" data-key="chcrown_2" id="chcrown_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="255,72,254,84,251,92,252,101,262,108,270,109,277,103,279,99,282,98,281,89,279,81,276,76,269,70,263,70" data-key="chcrown_3" id="chcrown_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="305,79,299,91,298,104,302,110,309,112,321,113,328,111,329,102,327,93,326,86,322,77" data-key="chcrown_4" id="chcrown_4" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="348,79,344,90,341,97,341,106,344,110,354,112,362,113,370,110,371,107,372,100,372,93,371,85,371,82,360,78" data-key="chcrown_5" id="chcrown_5" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="392,82,389,88,387,99,388,107,392,110,401,113,409,112,417,111,419,101,419,94,416,87,414,83,412,80,404,75,395,77" data-key="chcrown_6" id="chcrown_6" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="446,77,440,77,437,80,435,83,433,90,431,102,433,111,438,114,446,114,455,113,461,107,462,96,459,88,456,80" data-key="chcrown_7" id="chcrown_7" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="492,70,485,74,480,79,476,87,476,96,477,101,484,106,489,109,498,108,503,102,506,98,506,88,505,80,502,73" data-key="chcrown_8" id="chcrown_8" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="537,80,530,79,525,87,523,93,521,101,523,106,532,112,537,114,543,111,551,107,554,100,552,94,549,87,547,82" data-key="chcrown_9" id="chcrown_9" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="578,80,570,83,569,91,566,98,564,104,566,108,569,112,573,115,579,117,586,112,592,108,595,103,591,96,590,89,589,83,589,82,581,80" data-key="chcrown_10" id="chcrown_10" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="174,124,163,132,158,145,162,151,169,158,178,160,189,153,191,145,191,138,186,130" data-key="chcap_1" id="chcap_1" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="219,121,208,128,203,135,208,147,211,157,221,160,230,157,235,151,236,141,236,133,233,127,227,123" data-key="chcap_2" id="chcap_2" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="266,122,256,126,249,136,250,145,253,152,258,156,268,161,278,151,284,143,282,134,280,129,277,125" data-key="chcap_3" id="chcap_3" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="314,125,303,130,297,137,297,144,303,150,309,156,314,159,325,153,330,148,329,139,327,133,321,127" data-key="chcap_4" id="chcap_4" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="359,129,349,132,343,138,341,145,343,150,351,152,354,157,358,158,364,157,370,151,374,146,374,140,369,131" data-key="chcap_5" id="chcap_5" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="400,131,391,133,386,140,387,147,394,153,398,157,406,157,410,153,417,149,419,146,418,138,411,131,404,130" data-key="chcap_6" id="chcap_6" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="443,125,432,133,429,141,431,151,440,158,449,160,458,152,464,144,461,137,456,130,450,125,450,126,447,125" data-key="chcap_7" id="chcap_7" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="491,121,480,127,473,137,478,150,484,157,493,159,501,154,506,146,508,137,506,130,499,125" data-key="chcap_8" id="chcap_8" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="536,120,521,127,519,136,521,141,520,149,528,155,536,158,546,157,550,147,553,139,553,133,547,125,541,121" data-key="chcap_9" id="chcap_9" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="580,124,569,127,564,138,564,148,569,155,577,159,587,159,593,149,593,139,592,131" data-key="chcap_10" id="chcap_10" href="#" data-toggle="tooltip" />
+				</map>
+			</div>
+			<div id="svg_child" class="childteethchart hidden childsvg" style="margin-left: 128px;">
+            	<!--<table class="childnumberingupper" style="width: 459px; margin-left: 6%;">-->
+				<table class="childnumberingupper">
+            		<tr id="child_upper_teeths"></tr>
+            	</table>
+				<svg id="svg_object_child" width="500" height="110"></svg>
+				<!--<table class="childnumberinglower" style="width: 458px; margin-left: 6%;">-->
+            	<table class="childnumberinglower">
+            		<tr id="child_lower_teeths"></tr>
+            	</table>
+            </div>
+
+			<div id="child_lowermouth" class="childteethchart childlower hidden">
+				<img id="childLT"  src = "/pragtech_dental_management/static/src/img/lowerteeth_child_new.png" usemap="#childlowermap"/>
+				<map name="childlowermap" id="childmaplower">
+					<area shape="poly" coords="173,16,163,20,159,28,159,36,163,44,166,49,173,52,184,48,189,39,191,32,187,21,183,17" data-key="chcap_20" id="chcap_20" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="218,16,206,22,204,33,203,42,210,49,218,53,229,51,235,44,238,34,236,26,230,20,226,17" data-key="chcap_19" id="chcap_19" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="261,17,253,20,250,27,250,36,254,43,260,49,267,49,273,46,279,40,279,33,279,26,272,23,270,18" data-key="chcap_18" id="chcap_18" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="308,16,304,24,298,28,299,39,303,45,311,50,320,50,325,42,329,37,330,29,325,25,322,23,317,18" data-key="chcap_17" id="chcap_17" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="355,15,349,23,341,26,342,35,348,38,352,44,358,45,364,42,368,37,369,30,369,26,368,26,364,22,359,17" data-key="chcap_16" id="chcap_16" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="399,16,393,22,392,25,387,28,388,36,393,41,395,43,402,45,409,40,414,35,416,29,412,23,408,24,406,18" data-key="chcap_15" id="chcap_15" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="447,17,439,19,431,25,430,33,433,41,438,48,446,51,452,47,459,40,460,33,459,28,455,22,450,16" data-key="chcap_14" id="chcap_14" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="491,15,480,20,473,30,473,39,477,44,486,48,495,49,501,39,504,30,502,24,498,18" data-key="chcap_13" id="chcap_13" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="525,18,525,21,521,24,516,33,520,44,527,50,534,53,544,52,551,42,552,34,548,26,546,20,540,16,534,17" data-key="chcap_12" id="chcap_12" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="577,15,566,17,563,26,560,36,567,44,573,50,582,52,590,44,594,33,593,24,586,16" data-key="chcap_11" id="chcap_11" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="176,63,164,66,159,74,163,83,167,89,182,90,187,83,188,76,188,70,183,66" data-key="chcrown_20" id="chcrown_20" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="221,65,212,68,205,73,205,83,209,91,211,98,219,100,227,100,231,97,233,92,237,83,236,75,232,69" data-key="chcrown_19" id="chcrown_19" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="265,62,254,67,249,78,252,84,255,92,257,96,267,96,276,91,278,83,279,74,277,67" data-key="chcrown_18" id="chcrown_18" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="314,63,305,62,300,68,300,79,303,92,304,100,307,105,315,106,323,104,322,91,326,84,326,77,327,69,326,64,315,62" data-key="chcrown_17" id="chcrown_17" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="342,61,344,82,347,96,349,105,355,107,363,103,365,92,367,79,369,70,368,62,359,59" data-key="chcrown_16" id="chcrown_16" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="403,59,391,60,388,62,391,77,392,89,394,99,398,105,406,105,410,97,411,87,413,76,415,68,414,60" data-key="chcrown_15" id="chcrown_15" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="447,61,435,61,431,68,432,78,435,89,437,97,439,103,446,106,451,104,455,91,457,82,459,73,458,65,452,61" data-key="chcrown_14" id="chcrown_14" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="487,60,479,64,474,74,476,84,478,93,488,93,494,95,498,90,501,82,502,75,499,65" data-key="chcrown_13" id="chcrown_13" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="533,64,520,71,518,82,522,91,524,99,534,100,544,99,545,89,549,83,551,77,549,70,544,70" data-key="chcrown_12" id="chcrown_12" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="573,63,565,68,564,77,566,83,569,89,579,90,587,89,587,81,592,76,590,70,585,66" data-key="chcrown_11" id="chcrown_11" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="167,89,167,100,168,114,170,135,174,148,180,142,180,131,181,117,180,106,180,99,182,91" data-key="chroot_20" id="chroot_20" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="211,100,214,113,213,124,214,136,214,146,217,151,223,141,224,126,228,114,229,107,229,99" data-key="chroot_19" id="chroot_19" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="258,97,260,111,261,128,262,141,264,154,265,158,269,148,272,132,273,114,273,105,274,103,275,94" data-key="chroot_18" id="chroot_18" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="306,106,307,123,308,139,308,152,308,157,313,155,319,143,321,129,320,120,321,111,321,104" data-key="chroot_17" id="chroot_17" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="350,105,352,121,351,137,352,149,353,160,359,153,361,146,362,134,362,122,363,113,364,103" data-key="chroot_16" id="chroot_16" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="393,104,395,123,396,139,398,150,405,160,406,149,406,130,408,115,404,106" data-key="chroot_15" id="chroot_15" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="438,104,438,122,440,135,442,146,448,156,451,156,451,147,450,134,453,119,451,110,452,103" data-key="chroot_14" id="chroot_14" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="479,93,479,112,482,126,482,139,486,154,490,157,493,140,494,128,494,112,495,106,495,95" data-key="chroot_13" id="chroot_13" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="525,101,528,117,531,134,533,142,538,150,540,140,540,125,541,112,542,107,543,98" data-key="chroot_12" id="chroot_12" href="#" data-toggle="tooltip" />
+					<area shape="poly" coords="570,90,572,111,572,124,573,138,575,147,578,149,582,137,583,122,584,111,585,102,585,89" data-key="chroot_11" id="chroot_11" href="#" data-toggle="tooltip" />
+				</map>
+			</div>
+		</div>
+	
+	<div class="col-3">
+			<div class = "states" width = "100%">
+							<button id = "in_progress" class = "myButton">
+								In Progress
+							</button>
+							<button id = 'completed' class = "myButton">
+								Completed
+							</button>
+							<label id = 'planned' class="hidden">
+								Planned
+							</label>
+							
+			</div>
+		    <div id="procedure_tab" class = "procedure_selected">
+					<table id = "operations" class = 'CSSTableGenerator'>
+						<thead>
+							<tr id = "heading">
+								<td>
+									Date/Time Created
+								</td>
+								<td>
+									Initial
+								</td>
+								<td>
+									Description
+								</td>
+								<td>
+									Diagnosis Code
+								</td>
+								<td>
+									Note
+								</td>
+								<td>
+									Tooth
+								</td>
+								<td>
+									Status
+								</td>
+								<td>
+									Surface
+								</td>
+								<td>
+									Dentist
+								</td>
+								<td>
+									Amount
+								</td>
+								<td style="display:none;">
+									Action
+								</td>
+								<td style = "background:white" class = "delete_td">
+								</td>
+								<td style = "background:white" class = "copy_td">
+								</td>
+								<td style = "display:none">
+									Previous Record
+								</td>
+								<td style = "display:none">
+									Invoice Status
+								</td>
+							</tr>
+						</thead>
+						<tbody id="progres_table">
+							<tr>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+
+
+
+		</div>
+	</div>
+
+
+	</div>
+	</t>
+	<t t-name="ResultImageView">
+		<div class="row">
+			<div style="height:40px;" class="col-md-4">
+			</div>
+			<div style="height:40px;" class="col-md-4">
+			</div>
+			<div style="height:40px;padding-top:3px" class="col-md-4 " align="center">
+				<button id="close_screen" class = "close_button"  name="Close">
+					Close
+				</button>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="carousel slide multi-item-carousel" id="theCarousel">
+						<div class="carousel-inner" id = "my_div">
+						</div>
+						<a class="left shift_left" style="background-color:rgb(255,255,258);" href="#theCarousel" data-slide="prev">
+							<img id="left_img"  src="/pragtech_dental_management/static/src/img/backward.png" style="height:128px;width:128px" class="img-responsive"/>
+						</a>
+						<a class="right shift_right" style="background-color:white;" href="#theCarousel" data-slide="next">
+							<img id="right_img" src="/pragtech_dental_management/static/src/img/forward.png" style="height:128px;width:135px" class="img-responsive"/>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div  style="height:20px">
+			</div>
+			<div id = "zoomed">
+				<div  style="height:30px">
+				</div>
+			</div>
+		</div>
+	</t>
+</templates>

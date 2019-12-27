@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_note_report_wizard" model="ir.ui.view">
+            <field name="name">sale.note.report.wizard</field>
+            <field name="model">sale.note.report.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Sales Report Wizard">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="period_stop"/>
+                            <field name="is_only_doctor" invisible="1"/>
+                            <field name="doctor" attrs="{'required':[('is_only_doctor', '=', True)],'readonly': [('is_only_doctor', '=', True)]}"/>
+                            <field name="patient"/>
+                        </group>
+                        <group>
+                            <field name="date_type"/>
+                            <field name="cashier" attrs="{'invisible':[('date_type', '=', 'invoice')]}"/>
+                            <field name="payment_mode" attrs="{'invisible':[('date_type', '=', 'invoice')]}"/>
+                            <field name="insurance_company"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="sale_note_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button name="send_sale_note_report" string="Email Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sale_note_report" model="ir.actions.act_window">
+                <field name="name">Sales Report Wizard</field>
+                <field name="res_model">sale.note.report.wizard</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="sale_note_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_sale_note_report" name="Sales Report" action="action_sale_note_report"
+                  parent="pragtech_dental_management.dental_report_menu" sequence="1"
+                  groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu"
+        />
+
+    </data>
+</odoo>

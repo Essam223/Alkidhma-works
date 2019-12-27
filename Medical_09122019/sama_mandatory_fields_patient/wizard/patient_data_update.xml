@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_patient_data_update2" model="ir.ui.view">
+            <field name="name">patient.data.update.form</field>
+            <field name="model">patient.data.update</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Update Patient Data">
+                    <group colspan="4" col="4">
+                            <field name="patient_name" invisible="not context.get('no_patient_name', False)" required="context.get('no_patient_name', False)"/>
+                            <field name="patient_phone" invisible="not context.get('no_patient_phone', False)" required="context.get('no_patient_phone', False)"/>
+                            <field name="qid" invisible="not context.get('no_qid', False)" required="context.get('no_qid', False)"/>
+                            <field name="sex" invisible="not context.get('no_sex', False)" required="context.get('no_sex', False)"/>
+                            <field name="dob" invisible="not context.get('no_dob', False)" required="context.get('no_dob', False)"/>
+                            <field name="nationality_id" invisible="not context.get('no_nationality_id', False)" required="context.get('no_nationality_id', False)"/>
+                        <field name="patient_type" invisible="not context.get('no_patient_type', False)" required="context.get('no_patient_type', False)"/>
+                            <field name="appt_id"  invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_Update_checkin" string="Update &amp; Checkin" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+
+</odoo>

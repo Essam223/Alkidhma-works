@@ -1,0 +1,2324 @@
+<odoo>
+	<data>
+
+		<!-- Action for image view -->
+		<record id="action_result_image_view" model="ir.actions.client">
+			<field name="name">Result Images</field>
+			<field name="tag">result_images</field>
+		</record>
+
+		<!--Dental Chart Opening Action -->
+		<record id="action_open_dental_chart" model="ir.actions.client">
+			<field name="name">Dental Chart</field>
+			<field name="tag">dental_chart</field>
+		</record>
+
+		<menuitem name="HCARE" id="medical_menu" icon="STOCK_ZOOM_IN" />
+		<menuitem name="Configuration" id="medical_conf_menu" parent="medical_menu"
+			sequence="12" groups="pragtech_dental_management.group_dental_mng_menu"/>
+		<menuitem name="Appointments" id="medical_appointment_menu"
+			parent="medical_menu" sequence="2" />
+		<menuitem name="Patients" id="medical_patients_menu" parent="medical_menu"
+			sequence="3" groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_access_patients_menu"/>
+		<menuitem name="Medical Procedures" id="medical_conf_procedure"
+			parent="medical_conf_menu" sequence="4" groups="pragtech_dental_management.group_dental_mng_menu"/>
+		<menuitem name="Operational Areas" id="medical_conf_operational_areas"
+			parent="medical_conf_menu" sequence="6" />
+		<menuitem name="Clinic Hierarchy" id="medical_conf_hospital"
+			parent="medical_conf_menu" sequence="5" groups="pragtech_dental_management.group_dental_mng_menu"/>
+		<menuitem name="Physicians" id="medical_conf_physicians"
+			parent="medical_conf_menu" sequence="7" groups="pragtech_dental_management.group_dental_mng_menu"/>
+		<menuitem name="Medicaments" id="medical_conf_medicaments"
+			parent="medical_conf_menu" sequence="8" groups="pragtech_dental_management.group_dental_mng_menu"/>
+		<menuitem name="Reporting" id="medical_reporting_menu"
+			parent="medical_menu" sequence="11" />
+		<menuitem name="Reports" id="dental_report_menu" parent="medical_menu"
+			sequence="6" />
+
+		<!-- Appointments -->
+	<record model="ir.ui.view" id="medical_appointment_view">
+			<field name="name">Appointment</field>
+			<field name="model">medical.appointment</field>
+			<field name="priority">10</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Appointment" version="7.0">
+					<header>
+					   <button name="confirm_appointment" class="btn-primary" string="Confirm" groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu" type="object" attrs="{'invisible': [ '|', '|',('id', '=', False),('patient_state', '=', 'withapt'),('state', '!=', 'draft')]}"/>
+					   <button name="confirm" class="btn-primary" string="Confirm" groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu" type="object" attrs="{'invisible': ['|',('patient_state', '=', 'walkin'),('state', 'not in', ('sms_send', 'draft'))]}"/>
+					   <button name="set_back" string="Change Status" type="object" groups="pragtech_dental_management.group_dental_user_menu" states="confirmed,missed,cancel,checkin"/>
+					   <button name="set_back" string="Change Status" type="object" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_doc_menu" states="ready"/>
+					   <button name="missed" string="Missed" type="object" states="confirmed" groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu"/>
+					   <button name="checkin" class="btn-primary" string="Checked In" type="object" states="confirmed" groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_doc_menu"/>
+					   <button name="%(action_treatment_plan_wizard)d" string="Treatment Plan Print" type="action" attrs="{'invisible': [('hav_operation', '=', False)]}" />
+					   <button name="open_quest_format" string="Print Questionnaire Format" type="object" states="checkin,ready,done,visit_closed" />
+					   <button name="print_prescription" string="Print Prescription" type="object" attrs="{'invisible': [('hav_prescription', '=', False)]}" />
+					   <button name="questionnaire_popup" string="Patient Info" type="object" states="checkin,ready" groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu"/>
+					   <button name="ready" class="btn-primary" string="In Chair" type="object" states="checkin"/>
+                       <button name="done" class="btn-primary" string="Completed" type="object" states="ready"/>
+                       <button name="action_Reverse" class="btn-primary" string="Re-open" type="object" states="done,visit_closed"/>
+                       <button name="cancel" string="Cancel" type="object" states="draft,confirmed"/>
+				       <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,checkin,ready,done,visit_closed" statusbar_colors='{"confirmed":"blue","ready":"blue","cancel":"red"}'/>
+            		 </header>
+                    <sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="toggle_active" type="object"
+									attrs="{'invisible': [('state', 'in', ('done', 'visit_closed'))]}"
+									groups="pragtech_dental_management.group_dental_user_menu"
+									class="oe_stat_button" icon="fa-archive">
+								<field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+							</button>
+							<button name="show_inv_due" type="object"
+									groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu"
+									attrs="{'invisible': ['|',('patient', '=', False),('amount_due', '=', '0.00')]}">
+								<i class="fa fa-dollar" style="font-size:25px;color:red"></i>
+								<field name="amount_due" widget="statinfo" string="Amount Due"/>
+							</button>
+							<button name="show_advance" type="object"
+									groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu"
+									attrs="{'invisible': ['|',('patient', '=', False),('amount_advance', '=', '0.00')]}">
+								<i class="fa fa-dollar" style="font-size:25px;color:#13eb4c"></i>
+								<field name="amount_advance" widget="statinfo" string="Advance Paid"/>
+							</button>
+							<button name="appt_open_chart" type="object"
+									groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+                                    string="Open Chart" icon="fa fa-tasks"
+									attrs="{'invisible': ['|', ('state', 'not in', ['checkin', 'ready']),('patient', '=', False)]}">
+							</button>
+							<button name="action_view_invoice"
+									groups="pragtech_dental_management.group_dental_user_menu"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-pencil-square-o"
+									attrs="{'invisible': ['|', ('patient', '=', False), ('invoice_count', '=', 0)]}">
+								<field name="invoice_count" widget="statinfo" string="Invoices"/>
+							</button>
+						</div>
+
+						<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1"/>
+							</h1>
+						</div>
+	                    <group colspan="4" col="4">
+                            <!--<group>-->
+                                <field name="is_registered" groups="pragtech_dental_management.group_dental_user_menu"/>
+								<field name="patient_state" groups="pragtech_dental_management.group_dental_user_menu"/>
+								<field name="patient_name" attrs="{'invisible': ['|', ('is_registered', '=', True), ('patient', '!=', False)], 'required': [('is_registered', '=', False)]}"/>
+								<field name="patient_phone" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu" attrs="{'invisible': ['|', ('is_registered', '=', True), ('patient', '!=', False)]}"/>
+								<field name="patient" attrs="{'invisible': ['&amp;', ('is_registered', '=', False), ('state', 'in', ['draft'])],'required': [('is_registered', '=', True)]}" context="{'appointment_id_new':id}"/>
+								<field name="qid" attrs="{'readonly': [('patient', '!=', False)]}" force_save="1"/>
+								<field name="sex" attrs="{'readonly': [('patient', '!=', False)]}" force_save="1" invisible="1"/>
+								<field name="dob" attrs="{'readonly': [('patient', '!=', False)]}" force_save="1" invisible="1"/>
+								<field name="nationality_id" attrs="{'readonly': [('patient', '!=', False)]}" force_save="1" invisible="1"/>
+								<field name="urgency"/>
+								<field name="doctor" required="1" options="{'no_create': True, 'no_create_edit':True}"/>
+								<field name="room_id"/>
+								<field name="appointment_sdate"/>
+								<field name="appointment_edate" />
+								<field name="waiting_time" />
+								<field name="checkin_time" />
+								<field name="ready_time" />
+								<field name="followup"/>
+								<field name="invoice_id" attrs="{'invisible': [('invoice_id', '=', False)]}"
+									   context="{'show_for_service_bill': True,'hide_for_service_bill':True}"/>
+								<field name="reason_archive" readonly="1" attrs="{'invisible': [('reason_archive', '=', False)]}"/>
+								<field name="reason_reversal" readonly="1" attrs="{'invisible': [('reason_reversal', '=', False)]}"/>
+								<field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+								<field name="state_visit_closed" invisible="1"/>
+								<field name="saleperson_id" invisible="1"/>
+                                <field name="user_id" invisible="1"/>
+								<field name="invoice_done" invisible="1"/>
+								<field name="id" invisible="1"/>
+								<field name="hav_operation" invisible="1"/>
+								<field name="hav_prescription" invisible="1"/>
+								<field name="patient_partner" invisible="1"/>
+
+                            <!--</group>-->
+						</group>
+						<notebook>
+							<page string="Complaints and Findings" name="complaints" attrs="{'invisible': [('state', 'not in', ['checkin', 'ready', 'done', 'visit_closed'])]}"
+								groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+								>
+								<group>
+									<field name="medicl_history" />
+								</group>
+								<group>
+									<group>
+										<field name="benefit_type" />
+									</group>
+									<group/>
+								</group>
+								<field name="finding_ids" context="{'default_appt_id':id,'default_patient_id':patient}">
+									<tree string="records" editable="bottom">
+										<field name="appt_id" invisible="1" />
+										<field name="date" invisible="1" />
+										<field name="patient_id" invisible="1" />
+										<field name="complaint"/>
+										<field name="finding"/>
+										<field name="diagnosis"/>
+										<field name="diagnosis_ids" widget="many2many_tags"/>
+										<field name="procedure"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Prescriptions" attrs="{'invisible': [('state', 'not in', ['checkin', 'ready', 'done', 'visit_closed'])]}"
+								groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+								>
+								<field name="prescription_ids"
+									   context="{'default_patient_id':patient,
+								 'default_doctor':doctor, 'default_appt_id':id,
+								 'default_prescription_date':appointment_sdate}">
+									<tree editable="bottom">
+										<field name="appt_id" invisible="1" />
+										<field name="patient_id" invisible="1" />
+										<field name="prescription_date" invisible="1"/>
+										<field name="doctor" invisible="1"/>
+										<field name="medicine_id" />
+										<field name="dose"  invisible="1"/>
+										<field name="dose_unit" invisible="1"/>
+										<field name="form" invisible="1"/>
+										<field name="common_dosage" />
+										<field name="duration" />
+										<field name="duration_period" />
+										<field name="note" />
+									</tree>
+								</field>
+							</page>
+							<page string="Operations" name="operations" attrs="{'invisible': [('state', 'not in', ['checkin', 'ready', 'done', 'visit_closed'])]}">
+								<field name="operations">
+									<tree string='Operations' editable="bottom" delete="0" create="0">
+											<field name="appt_id" invisible="1"/>
+											<field name="create_date" invisible="1"/>
+											<field name="initial" readonly="1"/>
+											<field name="description" readonly="1"/>
+											<field name="diagnosis_id" readonly="1"/>
+											<field name="diagnosis_description" readonly="1" />
+											<field name="teeth_id" readonly="1"/>
+											<!-- <field name="tooth_function_field"/> -->
+											<field name="state" readonly="1"/>
+											<field name="dentist"/>
+											<field name="detail_description" readonly="1"/>
+											<field name="actual_amount"  readonly="1"/>
+											<field name="amount"  readonly="1"/>
+											<field name="amt_paid_by_patient" readonly="1"/>
+											<field name="amt_to_be_patient" readonly="1"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Operations" invisible="1">
+								<field name="op_summary_ids" readonly="1">
+									<tree string='op_summary_ids'>
+											<field name="appt_id" invisible="1"/>
+											<field name="create_date" invisible="1"/>
+											<field name="description" readonly="1"/>
+											<field name="diagnosis_id" readonly="0" invisible="1"/>
+											<field name="diagnosis_description" readonly="0" invisible="1"/>
+											<field name="teeth_id" readonly="1"/>
+											<!-- <field name="tooth_function_field"/> -->
+											<field name="state" readonly="1"/>
+											<field name="dentist" invisible="1"/>
+											<field name="detail_description" readonly="1"/>
+											<field name="amount" />
+											<field name="amt_paid_by_patient" readonly="1"/>
+											<field name="amt_to_be_patient" readonly="1"/>
+									</tree>
+								</field>
+							</page>
+							<!-- changes by mubaris for diagnosis -->
+							<page string="Payment Lines" attrs="{'invisible': [('state', 'not in', ['checkin', 'ready', 'done', 'visit_closed'])]}">
+								<field name="treatment_ids" context="{'default_appointment_id':id}"/>
+							</page>
+							<page string="Attachments" attrs="{'invisible': [('state', 'not in', ['checkin', 'ready', 'done', 'visit_closed'])]}"
+								  groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+								>
+								<field name="attach_count" invisible="1"/>
+								<button name="get_img" type="object"
+										attrs="{'invisible': [('attach_count', '=', '0')]}"
+										string="View Images"
+										class="btn btn-primary fa fa-file-image">
+								</button>
+								<button name="show_attachments" type="object"
+									attrs="{'invisible': [('attach_count', '=', '0')]}"
+									string="View Non-images"
+									class="btn btn-primary fa fa-file-pdf">
+								</button>
+								<field name = "attachment_ids"
+									   context="{'default_res_model': 'medical.appointment','default_res_id': id,'default_patient_id': patient,'default_appointment_id': active_id}">
+										<tree editable="bottom">
+											<field name="name"/>
+											<field name="type" invisible="1"/>
+											<!--<field name="datas_fname" invisible="1" />-->
+											<!--<field name="datas" filename="datas_fname"/>-->
+											<field name="datas" widget="download_link" options="{'filename': 'datas_fname'}"/>
+											<!--<field name="datas" widget="binary" options="{'filename': 'datas_fname'}"/>-->
+											<field name="appointment_id" invisible="1"/>
+											<field name="patient_id" invisible="1"/>
+											<field name="create_date"/>
+										</tree>
+								</field>
+
+							</page>
+							<page string="Notes">
+								<field name="comments"/>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+		<!-- statusbar_colors='{"confirmed":"green","cancel":"red","draft":"blue","checkin":"blue","ready":"orange","done":"black","missed":"pink"}' -->
+		<record model="ir.ui.view" id="medical_appointment_tree">
+			<field name="name">Appointments</field>
+			<field name="model">medical.appointment</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Appointment Information'
+					colors="green:state=='confirmed';red:state=='cancel';black:state=='missed';blue:state=='draft';pink:state=='checkin';brown:state=='ready'">
+					<field name="state_visit_closed" invisible="1"/>
+					<field name="name" string="ID"/>
+					<field name="patient_name" string="Name"/>
+					<field name="patient" />
+					<field name="patient_phone" string="Phone" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"
+					/>
+					<button name="appt_open_chart" string="Chart" type="object"
+							groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+							attrs="{'invisible': ['|', ('state', 'not in', ['checkin', 'ready']),('patient', '=', False)]}"/>
+					<button name="action_view_invoice"
+							string="Invoice"
+							groups="pragtech_dental_management.group_dental_user_menu"
+							type="object"
+							class="oe_stat_button"
+							attrs="{'invisible': ['|', ('patient', '=', False), ('invoice_count', '=', 0)]}">
+						<field name="invoice_count" widget="statinfo" string="Invoices"/>
+					</button>
+					<field name="company_id" groups="base.group_multi_company"/>
+					<field name="appointment_sdate" />
+					<field name="doctor" />
+					<field name="room_id"/>
+					<field name="patient_state" />
+					<field name="state" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_medical_appointment_filter" model="ir.ui.view">
+			<field name="name">medical.appointment.select</field>
+			<field name="model">medical.appointment</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Appointments">
+					<filter icon="terp-personal" string="My appointments"
+						domain="[('user_id','=',uid)]" />
+					<filter icon="terp-personal" string="Confirmed Appointments"
+						domain="[('state','=','confirmed')]" />
+					<filter icon="terp-personal" string="Cancel Appointments"
+						domain="[('state','=','cancel')]" />
+					<filter icon="terp-personal" string="Walk-In"
+						domain="[('patient_state','=','walkin')]" />
+					<filter icon="terp-personal" string="Delayed" domain="[('delayed','=',True)]" />
+					<newline />
+					<separator orientation="vertical" />
+					<field name="name" string="Appt ID" />
+					<field name="patient" string="File No."/>
+					<field name="state"  string="State"/>
+					<field name="doctor" />
+					<field name="patient_name"/>
+					<field name="patient_phone"/>
+					<field name="qid"/>
+					<filter string="Today" name='today' domain="[('appointment_sdate','&gt;=',(context_today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d 21:00:01')),('appointment_sdate','&lt;=',time.strftime('%Y-%m-%d 20:59:59'))]"/>
+				 	<filter string="Patient Revisits" name='revisits' domain="[('is_registered','=',True)]"/>
+					<filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+					<field name="appointment_sdate" />
+					<newline />
+					<group expand="1" string="Group By...">
+						<filter name="group_doctor" string="Doctor" icon="terp-personal" domain="[]"
+							context="{'group_by':'doctor'}" />
+						<filter string="Room" icon="terp-personal" domain="[]"
+							context="{'group_by':'room_id'}" />
+						<filter string="Created By" icon="terp-personal" domain="[]"
+							context="{'group_by':'saleperson_id'}" />
+						<filter string="Date" icon="terp-go-month" domain="[]"
+							context="{'group_by':'appointment_sdate'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="medical_action_form_appointment">
+			<field name="name">All Appointments</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.appointment</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="context">{'apt_id':True,"search_default_today":1}</field>
+			<!--<field name="view_id" ref="medical_appointment_tree" />-->
+			<field name="search_view_id" ref="view_medical_appointment_filter" />
+			<field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('medical_appointment_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('medical_appointment_view')})]"/>
+		</record>
+
+		<record model="ir.actions.act_window" id="medical_action_form_my_appointment">
+			<field name="name">My Appointments</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.appointment</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('doctor.name.user_id', '=', uid)]</field>
+			<field name="context">{'apt_id':True,"search_default_today":1}</field>
+			<!--<field name="view_id" ref="medical_appointment_tree" />-->
+			<field name="search_view_id" ref="view_medical_appointment_filter" />
+			<field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('medical_appointment_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('medical_appointment_view')})]"/>
+
+		</record>
+
+
+		<menuitem action="medical_action_form_appointment" id="medical_conf_appointment_add"
+			parent="medical_appointment_menu" sequence="2"
+			groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu"/>
+
+		<menuitem action="medical_action_form_my_appointment" id="medical_conf_my_appointment_add"
+			parent="medical_appointment_menu" sequence="3"
+			groups="pragtech_dental_management.group_dental_doc_menu"
+		/>
+
+		<record model="ir.ui.view" id="medical_appointment_tree2">
+			<field name="name">Appointments</field>
+			<field name="model">medical.appointment</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Appointment Information' colors="green:state=='confirmed';red:state=='cancel';black:state=='missed';blue:state=='draft';pink:state=='checkin';brown:state=='ready'" >
+					<field name="name"/>
+					<field name="patient"/>
+					<field name="appointment_sdate"/>
+					<field name="doctor"/>
+					<field name="room_id"/>
+					<field name="patient_state"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="medical_physician_view">
+			<field name="name">Physician</field>
+			<field name="model">medical.physician</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Doctor">
+					<sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"  options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+						<notebook>
+							<page string="Main Info">
+								<group colspan="4" col="4">
+									<field name="name" required="1"
+										context="{'default_is_doctor': 1, 'search_default_is_doctor': 1}" />
+									<field name="speciality" />
+									<field name="license_code" />
+									<field name="code" />
+									<field name="followup_days" />
+									<field name="treatment_category" widget="many2many_tags" domain="[('treatment', '=', True)]"/>
+									<field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+									<field name="domain_partner" invisible="1"/>
+								</group>
+							</page>
+							<page string="My Patients">
+								<field name="my_patient_ids"/>
+							</page>
+							<page string="Stamp and Seal">
+								<field name="stamp" img_width="120" img_height="120" width="120" height="120" widget="image"/>
+							</page>
+							<page string="Extra Info">
+								<field name="info" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_physician_tree">
+			<field name="name">Doctor List</field>
+			<field name="model">medical.physician</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Physician Information'>
+					<field name="name" />
+					<field name="code" />
+					<field name="speciality" />
+					<field name="license_code" />
+					<field name="followup_days" />
+					<field name="company_id" groups="base.group_multi_company"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="medical_action_form_physician">
+			<field name="name">Doctor</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.physician</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="medical_physician_tree" />
+		</record>
+
+		<menuitem action="medical_action_form_physician" id="medical_conf_physician_list"
+			parent="medical_conf_physicians" sequence="1" />
+
+
+
+
+		<record id="view_medical_physician_filter" model="ir.ui.view">
+			<field name="name">medical.physician.select</field>
+			<field name="model">medical.physician</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Doctor">
+					<separator orientation="vertical"/>
+					<field name="name" />
+					<field name="code" />
+				</search>
+			</field>
+		</record>
+
+		<record id="product_treatment_actionn" model="ir.actions.act_window">
+			<field name="name">Insurance Treatment</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">product.product</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="view_type">form</field>
+			<field name="priority">16</field>
+			<field name="context">{"search_default_is_treatment":1,"default_type":"service","default_is_treatment":1}
+			</field>
+			<field name="domain">[('is_treatment', '=', 1),('is_clinic_treatment', '=', False)]</field>
+			<field name="view_id" ref="product.product_product_tree_view" />
+			<field name="search_view_id" ref="product.product_search_form_view" />
+		</record>
+
+		<!-- Medical Specialities -->
+
+		<record model="ir.ui.view" id="medical_speciality_view">
+			<field name="name">Specialties</field>
+			<field name="model">medical.speciality</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Speciality">
+					<group colspan="4" col="4">
+						<field name="name" required="1" />
+						<field name="code" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_speciality_tree">
+			<field name="name">Speciality list</field>
+			<field name="model">medical.speciality</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Speciality">
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="medical_action_speciality">
+			<field name="name">Specialties</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.speciality</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="medical_speciality_tree" />
+		</record>
+
+		<menuitem action="medical_action_speciality" id="medical_conf_speciality"
+			parent="medical_conf_physicians" />
+
+		<record id="view_medical_specialty_filter" model="ir.ui.view">
+			<field name="name">medical.speciality.select</field>
+			<field name="model">medical.speciality</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Specialties">
+					<separator orientation="vertical" />
+					<field name="name" />
+					<field name="code" />
+					<newline />
+
+				</search>
+			</field>
+		</record>
+
+		<!-- Patient -->
+
+		<record id="view_medical_patient_filter" model="ir.ui.view">
+			<field name="name">medical.patient.select</field>
+			<field name="model">medical.patient</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Patients">
+					<filter icon="terp-personal" string="My Patients" domain="[('user_id','=',uid)]" />
+					<field name="name" string="Patient name"/>
+					<field name="qid" string="QID"/>
+					<field name="mobile" string="Phone"/>
+					<field name="patient_id" string="File No." />
+					<field name="company_id" groups="base.group_multi_company"/>
+					<newline />
+					<group expand="1" string="Group By...">
+						<filter string="Gender" icon="terp-personal" domain="[]" context="{'group_by':'sex'}" />
+						<filter string="Company" name="company_id" context="{'group_by':'company_id'}"
+								groups="base.group_multi_company"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+
+    <record model="ir.ui.view" id="medical_patient_view">
+			<field name="name">Patient</field>
+			<field name="model">medical.patient</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+			<form string="Patient">
+				<header>
+					 <!--<field name="state" widget="statusbar" attrs="{'invisible':[('is_patient','=', False)]}"/> -->
+					<button name="add_prescription" class="btn-primary" string="Add Prescription" type="object"
+					groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"/>
+					<button name="create_registration_fee_invoice" class="btn-primary" string="Create Registration Fee Invoice" type="object" invisible="1"/>
+				</header>
+
+                <div class="oe_button_box" name="button_box">
+					<button name="show_inv_due" type="object"
+							attrs="{'invisible': [('amount_due', '=', '0.00')]}">
+								<i class="fa fa-dollar" style="font-size:25px;color:red"></i>
+								<field name="amount_due" widget="statinfo" string="Amount Due"/>
+							</button>
+					<button name="show_advance" type="object"
+							attrs="{'invisible': [('amount_advance', '=', '0.00')]}">
+								<i class="fa fa-dollar" style="font-size:25px;color:#13eb4c"></i>
+								<field name="amount_advance" widget="statinfo" string="Advance Paid"/>
+							</button>
+					<button name="open_chart"
+							groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+							type="object"
+							string="Open Chart"
+							icon="fa fa-tasks"
+					/>
+                    <button name="action_view_invoice"
+                            groups="pragtech_dental_management.group_dental_user_menu"
+							type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                        <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                    </button>
+				</div>
+                <div class="oe_title">
+                    <h1>
+                        <field name="patient_id" readonly="1"/>
+                    </h1>
+					<button name="edit_patient_id" type="object" string="Edit Patient ID"
+							attrs="{'invisible':[('patient_id','=',False)]}"/>
+                </div>
+				<group col="6" colspan="6" string="Main Info">
+				<group col="2" colspan="3">
+					<label for="patient_name"/>
+					<div class="address_format">
+								 <field name="name_tag" style="width: 30%" />
+								 <field name="patient_name" style="width: 70%" />
+					</div>
+                    <field name="mobile" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+                    <field name="qid"/>
+					<field name="nationality_id"/>
+					<field name="survey_id"/>
+					<field name="other_survey"/>
+                </group>
+                <group col="2" colspan="2">
+					<field name="sex" required="0" widget="radio"/>
+					<field name="register_date" />
+					<field name="dob" />
+					<field  name="age"/>
+					<field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+					<field name="id" invisible="1"/>
+					<field name="report_date" invisible="1"/>
+					<field name="state" invisible="1"/>
+				</group>
+				<group col="2" colspan="1" rowspan="1">
+					<field name="photo"  nolabel="1" img_width="120" img_height="120" width="120" height="120" widget="image"/>
+				</group>
+				</group>
+				<notebook>
+			        <page string="General Info">
+						<group colspan="4" col="4" string="Patient General Information">
+							<field name="address" />
+							<field name="blood_type"/>
+							<field name="marital_status"/>
+							<field name="rh"/>
+							<field name="occupation_id"/>
+							<field name="primary_doctor_id"/>
+							<field name="referring_doctor_id"/>
+							<field name="other_mobile" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+							<field  name="language"/>
+							<field name="name" context="{'default_is_patient': 1, 'search_default_is_patient': 1}"/>
+						</group>
+						<separator colspan="4" string="Emergency Contact Details"/>
+						<group colspan="4" col="4">
+							<field  name="emergency_name"/>
+							<field  name="emergency_phone" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+							<field  name="emergency_relation"/>
+						</group>
+						<separator colspan="4" string="Patient Extra Information" />
+						<newline/>
+						<field colspan="4" name="general_info" nolabel="1"/>
+						<newline/>
+						<field colspan="4" name="note" nolabel="1" placeholder="Notes...."/>
+						<newline/>
+						<group colspan="4" col="4">
+							<field name="deceased"/>
+							<field name="dod" attrs="{'invisible':[('deceased','=',False)],'required':[('deceased','=',True)]}"/>
+						</group>
+					</page>
+					<page string="Questionnaire">
+						<div >
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q1" />
+                                </td>
+                                <td><field name="q1"/></td>
+								<td></td>
+                            </tr>
+
+                        </table>
+                        <p><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+								<th style="width:3%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+								<td><field name="q2"/></td>
+                                <td>
+                                    <label for="q2"/>
+                                </td>
+								<td><field name="q3"/></td>
+                                <td>
+                                    <label for="q3" />
+                                </td>
+								<td><field name="q4"/></td>
+
+                                <td>
+                                    <label for="q4" />
+                                </td>
+
+                            </tr>
+                            <tr>
+								<td><field name="q5"/></td>
+                                <td>
+                                    <label for="q5" />
+                                </td>
+                                <td><field name="q6"/></td>
+
+                                <td>
+                                    <label for="q6"/>
+                                </td>
+                                <td><field name="q7"/></td>
+
+                                <td>
+                                    <label for="q7" />
+                                </td>
+
+                            </tr>
+                            <tr>
+								<td><field name="q8"/></td>
+                                <td>
+                                    <label for="q8"/>
+                                </td>
+                                <td><field name="q9"/></td>
+
+                                <td>
+                                    <label for="q9"/>
+                                </td>
+                                <td><field name="q10"/></td>
+
+                                <td>
+                                    <label for="q10"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+								<td><field name="q11"/></td>
+                                <td>
+                                    <label for="q11"/>
+                                </td>
+                                <td><field name="q12"/></td>
+
+                                <td>
+                                    <label for="q12"/>
+                                </td>
+                                <td><field name="q13"/></td>
+
+                                <td>
+                                    <label for="q13"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+								<td><field name="q14"/></td>
+                                <td>
+                                    <label for="q14"/>
+                                </td>
+                                <td><field name="q15"/></td>
+
+                                <td>
+                                    <label for="q15"/>
+                                </td>
+                                <td><field name="q16"/></td>
+
+                                <td>
+                                    <label for="q16"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q17"/></td>
+                                <td>
+                                    <label for="q17"/>
+                                </td>
+                                <td><field name="q18"/></td>
+
+                                <td>
+                                    <label for="q18"/>
+                                </td>
+                                <td><field name="q19"/></td>
+
+                                <td>
+                                    <label for="q19"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q20"/></td>
+                                <td>
+                                    <label for="q20"/>
+                                </td>
+                                <td><field name="q21"/></td>
+
+                                <td>
+                                    <label for="q21"/>
+                                </td>
+                                <td><field name="q22"/></td>
+
+                                <td>
+                                    <label for="q22"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q23"/></td>
+                                <td>
+                                    <label for="q23"/>
+                                </td>
+                                <td><field name="q24"/></td>
+
+                                <td>
+                                    <label for="q24"/>
+                                </td>
+                                <td><field name="q25"/></td>
+                                <td>
+                                    <label for="q25"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+								<td><field name="q26"/></td>
+                                <td>
+                                    <label for="q26"/>
+                                </td>
+                                <td><field name="q27"/></td>
+
+                                <td>
+                                    <label for="q27"/>
+                                </td>
+                                <td><field name="q28"/></td>
+
+                                <td>
+                                    <label for="q28"/>
+                                </td>
+
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:60%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q29"/>
+
+                                    </td>
+                                <td><field name="q29"/></td>
+								<td attrs = "{'invisible':[('q29', '!=', 'YES')]}"><field name="q30"  placeholder="When...."/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q31"/>
+
+                                    </td>
+                                <td><field name="q31"/></td>
+								<td attrs = "{'invisible':[('q31', '!=', 'YES')]}"><field name="q32"  placeholder="Please specify...."/></td>
+                            </tr>
+                        </table>
+                        <p><strong>Do you have allergies to?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+								<th style="width:3%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+								<td><field name="q33"/></td>
+                                <td>
+                                    <label for="q33"/>
+                                </td>
+                                <td><field name="q34"/></td>
+
+                                <td>
+                                    <label for="q34"/>
+                                </td>
+                                <td><field name="q35"/></td>
+
+                                <td>
+                                    <label for="q35"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+								<td><field name="q36"/></td>
+                                <td>
+                                    <label for="q36"/>
+                                </td>
+                                <td><field name="q37"/></td>
+
+                                <td>
+                                    <label for="q37"/>
+                                </td>
+                                <td><field name="q38"/></td>
+
+                                <td>
+                                    <label for="q38"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+								<td><field name="q39"/></td>
+                                <td>
+                                    <label for="q39"/>
+                                </td>
+                                <td><field name="q40"/></td>
+
+                                <td>
+                                    <label for="q40"/>
+                                </td>
+
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:75%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q41"/>
+                                </td>
+                                <td><field name="q41"/></td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:60%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q42"/>
+                                </td>
+                                <td><field name="q42"/></td>
+								<td attrs = "{'invisible':[('q42', '!=', 'YES')]}"><field name="q43"  placeholder="# of cigarette/day...."/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q44"/>
+                                </td>
+                                <td><field name="q44"/></td>
+								<td attrs = "{'invisible':[('q44', '!=', 'YES')]}"><field name="q45"  placeholder="Month...."/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q46"/>
+                                </td>
+                                <td><field name="q46"/></td>
+								<td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q47"/>
+                                </td>
+                                <td><field name="q47"/></td>
+								<td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q48"/>
+                                </td>
+                                <td><field name="q48"/></td>
+								<td/>
+                            </tr>
+                        </table>
+                        <p><strong>Associated with dentistry?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:60%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q49"/>
+                                </td>
+                                <td><field name="q49"/></td>
+								<td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q50" string="How often do you brush/floss?"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <label for="q50"/>
+                                </td>
+                                <td>
+                                    <field name="q50"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td/>
+                                <td style="text-align: center;">
+                                    <label for="q51"/>
+                                </td>
+                                <td>
+                                    <field name="q51"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td/>
+                                <td style="text-align: center;">
+                                    <label for="q52"/>
+                                </td>
+                                <td>
+                                    <field name="q52"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q53"/>
+                                </td>
+                                <td><field name="q53"/></td>
+								<td/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q54"/>
+                                </td>
+                                <td><field name="q54"/></td>
+								<td attrs = "{'invisible':[('q54', '!=', 'YES')]}"><field name="q55"  placeholder="When and where...."/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q56"/>
+                                </td>
+                                <td colspan="2"><field name="q56"/></td>
+                            </tr>
+                        </table>
+
+                        <p><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+								<th style="width:3%;"></th>
+                                <th style="width:47%;"></th>
+                                <th style="width:3%;"></th>
+                                <th style="width:47%;"></th>
+                            </tr>
+                            <tr>
+								<td><field name="q57"/></td>
+                                <td>
+                                    <label for="q57"/>
+                                </td>
+                                <td><field name="q58"/></td>
+                                <td>
+                                    <label for="q58"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q59"/></td>
+                                <td>
+                                    <label for="q59"/>
+                                </td>
+                                <td><field name="q60"/></td>
+
+                                <td>
+                                    <label for="q60"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q61"/></td>
+                                <td>
+                                    <label for="q61"/>
+                                </td>
+                                <td><field name="q62"/></td>
+                                <td>
+                                    <label for="q62"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q63"/></td>
+                                <td>
+                                    <label for="q63"/>
+                                </td>
+                                <td><field name="q64"/></td>
+                                <td>
+                                    <label for="q64"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q65"/></td>
+                                <td>
+                                    <label for="q65"/>
+                                </td>
+                                <td><field name="q66"/></td>
+                                <td>
+                                    <label for="q66"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q67"/></td>
+                                <td>
+                                    <label for="q67"/>
+                                </td>
+                                <td><field name="q68"/></td>
+                                <td>
+                                    <label for="q68"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q69"/></td>
+                                <td>
+                                    <label for="q69"/>
+                                </td>
+                                <td><field name="q70"/></td>
+                                <td>
+                                    <label for="q70"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q71"/></td>
+                                <td>
+                                    <label for="q71"/>
+                                </td>
+                                <td><field name="q72"/></td>
+                                <td>
+                                    <label for="q72"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q73"/></td>
+                                <td>
+                                    <label for="q73"/>
+                                </td>
+                                <td><field name="q74"/></td>
+
+                                <td>
+                                    <label for="q74"/>
+                                </td>
+                            </tr>
+                            <tr>
+								<td><field name="q75"/></td>
+                                <td>
+                                    <label for="q75"/>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p><strong>Smile Assessment</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:60%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q76"/>
+                                </td>
+                                <td><field name="q76"/></td>
+								<td attrs = "{'invisible':[('q76', '!=', 'NO')]}"><field name="q77"  placeholder="If no, Please explain...."/></td>
+                            </tr>
+                        </table>
+
+                    </div>
+			        </page>
+					<page string="Medical Alert" attrs = "{'invisible':['|',('critical_info', '!=', False),('medical_history','!=',False)]}">
+						<group colspan="4" >
+							<field name="critical_info_fun"/>
+							<field name="medical_history_fun"/>
+						</group>
+			        </page>
+			        <page string="Medical  Alert" class = "medical_alert_class" attrs = "{'invisible':[('critical_info', '=', False),('medical_history','=',False)]}">
+						<group colspan="4" >
+							<field name="critical_info" />
+							<field name="medical_history" />
+						</group>
+			        </page>
+					<page string="Complaints and Findings"
+						  groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu">
+						<field name="finding_ids" context="{'default_patient_id':id}">
+							<tree editable="bottom">
+								<field name="appt_id"/>
+								<field name="date"/>
+								<field name="patient_id" invisible="1" />
+								<field name="complaint"/>
+								<field name="finding"/>
+								<field name="diagnosis"/>
+								<field name="diagnosis_ids" widget="many2many_tags"/>
+								<field name="procedure"/>
+							</tree>
+							<form>
+								<group>
+									<group>
+										<field name="date"/>
+										<field name="patient_id"  />
+										<field name="complaint"/>
+									</group>
+									<group>
+										<field name="finding"/>
+										<field name="diagnosis"/>
+										<field name="diagnosis_ids" widget="many2many_tags"/>
+										<field name="procedure"/>
+										<field name="appt_id" invisible="1"/>
+									</group>
+								</group>
+							</form>
+						</field>
+					</page>
+
+			        <page string="Prescriptions"
+						  groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu">
+						<button name="show_prescriptions" class="btn-primary" string="Prescriptions w/o appointment" type="object"/>
+						<field name="prescriptions"
+									   context="{'default_patient_id':id}" nolabel="1">
+							<tree editable="bottom">
+								<field name="appt_id"/>
+								<field name="patient_id" invisible="1" />
+								<field name="prescription_date"/>
+								<field name="doctor"/>
+								<field name="medicine_id" />
+								<field name="dose" />
+								<field name="dose_unit" />
+								<field name="form" />
+								<field name="common_dosage" />
+								<field name="duration" />
+								<field name="duration_period" />
+								<field name="note" />
+							</tree>
+						</field>
+			        </page>
+			        <page string="Appointments">
+			        	<group colspan="4"  >
+				        <field name="apt_id" nolabel="1">
+							<tree string='Appointment Information'
+								colors="green:state=='confirmed';red:state=='cancel';black:state=='missed';blue:state=='draft';pink:state=='checkin';brown:state=='ready'">
+								<field name="name" string="ID"/>
+								<field name="patient_name" string="Name"/>
+								<field name="patient" />
+								<field name="urgency" />
+								<field name="appointment_sdate" />
+								<field name="doctor" />
+								<field name="room_id"/>
+								<field name="patient_state" />
+								<field name="state" />
+							</tree>
+							<form>
+								<group>
+									<group>
+										<field name="name" string="ID"/>
+										<field name="patient_name" string="Name"/>
+										<field name="patient" />
+										<field name="urgency" />
+									</group>
+									<group>
+										<field name="appointment_sdate" />
+										<field name="doctor" />
+										<field name="patient_state" />
+										<field name="state" />
+										<field name="room_id"/>
+									</group>
+								</group>
+							</form>
+
+						</field>
+				        </group>
+			        </page>
+			        <page string="Activities">
+							<field name="teeth_treatment_ids" string="Activities" nolabel="1">
+								<tree  editable="bottom" create="0" delete="0">
+									<field name="appt_id" readonly="1"/>
+									<field name="create_date" readonly="1"/>
+									<field name="description" readonly="1"/>
+									<field name="diagnosis_id" readonly="1"/>
+									<field name="diagnosis_description" readonly="1" />
+									<field name="teeth_id" readonly="1"/>
+									<!-- <field name="tooth_function_field"/> -->
+									<field name="state" readonly="1"/>
+									<field name="dentist"/>
+									<field name="detail_description" readonly="1"/>
+									<field name="actual_amount" readonly="1" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+									<field name="amount" readonly="1" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+									<field name="amt_paid_by_patient" readonly="1" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+									<field name="amt_to_be_patient" readonly="1" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+								</tree>
+							</field>
+                    </page>
+					<page string="Treatment History" readonly="1">
+                        <field name="treatment_ids">
+                            <tree>
+                                <field name="appointment_id"/>
+                                <field name="patient_id" invisible="1"/>
+                                <field name="treatment_id" invisible="1"/>
+                                <field name="date"/>
+                                <field name="description"/>
+                                <field name="note"/>
+                                <field name="actual_amount" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+                                <field name="amount" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+                            </tree>
+							<form>
+								<group>
+									<group>
+										<field name="description"/>
+										<field name="appointment_id" invisible="1"/>
+									</group>
+									<group>
+										<field name="treatment_id"/>
+										<field name="actual_amount" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+										<field name="amount" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+									</group>
+								</group>
+							</form>
+                        </field>
+
+                    </page>
+			        <!--<page string="Operations Summary">-->
+                        <!--<group colspan="4" col="8" >-->
+                            <!--<field name="operation_summary_ids" string="Operations Summary" nolabel="1" widget="one2many_list"/>-->
+                        <!--</group>-->
+                    <!--</page>-->
+                    <page string="Images">
+						<field name="attach_count" invisible="1"/>
+						<button name="get_img" type="object"
+										attrs="{'invisible': [('attach_count', '=', '0')]}"
+										string="View Images"
+										class="btn  btn-primary fa fa-file-image">
+								</button>
+								<button name="show_attachments" type="object"
+									attrs="{'invisible': [('attach_count', '=', '0')]}"
+									string="View Non-images"
+									class="btn btn-primary fa fa-file-pdf">
+								</button>
+
+                    	<field name = "attachment_ids"
+							   context="{'default_res_model': 'medical.patient','default_res_id': id,'default_patient_id': active_id}">
+                                <tree editable="bottom">
+									<field name="appointment_id"/>
+									<field name="name"/>
+									<field name="type" invisible="1"/>
+									<!--<field name="datas_fname" invisible="1" />-->
+									<!--<field name="datas" filename="datas_fname"/>-->
+									<field name="datas" widget="download_link" options="{'filename': 'datas_fname'}"/>
+									<!--<field name="datas" widget="binary" options="{'filename': 'datas_fname'}"/>-->
+									<field name="patient_id" invisible="1"/>
+									<field name="create_date"/>
+								</tree>
+                        </field>
+                    </page>
+                    <page string="Patient Complaints">
+                        <group colspan="4" col="8" >
+                            <field name="patient_complaint_ids" context="{'search_default_patient_id': id,'default_patient_id': id}" string="Complaints" nolabel="1">
+                            	<tree string="records">
+                            	<field name="complaint_subject"/>
+                    			<field name="complaint_date"/>
+                    			<field name="complaint"/>
+								<field name="action_ta"/>
+								<field name="patient_id" invisible="1"/>
+                            	</tree>
+                            	<form string="Records">
+									<group >
+										<field name="complaint_subject"/>
+                    					<field name="complaint_date"/>
+                    					<field name="complaint"/>
+										<field name="action_ta"/>
+										<field name="patient_id" invisible="1"/>
+									</group>
+								</form>
+                          	</field>
+                        </group>
+                    </page>
+					<page string="Feedbacks">
+						<field name="feedbacks"
+									   context="{'default_patient_id':id}" nolabel="1">
+							<tree editable="bottom">
+								<field name="patient_id" invisible="1" />
+								<field name="feedback_id"/>
+								<field name="name"/>
+								<field name="feedback_date"/>
+							</tree>
+						</field>
+			        </page>
+
+		        </notebook>
+			</form>
+		</field>
+	</record>
+
+
+		<record model="ir.ui.view" id="medical_patient_nationality_view">
+			<field name="name">natioanality</field>
+			<field name="model">patient.nationality</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Nationality">
+					<group colspan="4">
+						<field name="name" />
+						<field name="code" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_patient_nationality_tree">
+			<field name="name">Nationality</field>
+			<field name="model">patient.nationality</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Nationality">
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+    </record>
+
+    <record id="action_patient_nationality" model="ir.actions.act_window">
+			<field name="name">Nationality</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">patient.nationality</field>
+			<field name="view_type">form</field>
+
+		</record>
+
+		<menuitem action="action_patient_nationality" groups="pragtech_dental_management.group_dental_mng_menu"
+			id="menu_patient_nationality" parent="pragtech_dental_management.medical_conf_menu" string="Nationality"
+			sequence="0" />
+
+		<record model="ir.ui.view" id="medical_patient_tree">
+			<field name="name">Patient List</field>
+			<field name="model">medical.patient</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Patient Information'>
+					<field name="name" />
+					<!-- <field name="lastname"/> -->
+					<field name="patient_id" />
+					<field name="mobile" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+					<field name="qid"/>
+					<button name="open_chart" type="object" string="Chart" groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"></button>
+                    <button name="action_view_invoice"
+							groups="pragtech_dental_management.group_dental_user_menu"
+							string="Invoice"
+                            type="object"
+                            class="oe_stat_button"
+                            attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                        <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                    </button>
+                    <!--<button name="action_view_payment"-->
+							<!--string="Payment"-->
+                            <!--type="object"-->
+                            <!--class="oe_stat_button"-->
+                            <!--attrs="{'invisible': [('payment_count', '=', 0)]}">-->
+                        <!--<field name="payment_count" widget="statinfo" string="Payments"/>-->
+                    <!--</button>-->
+					<field name="sex" />
+					<field name="dob" />
+					<field name="nationality_id"/>
+					<field name="company_id" groups="base.group_multi_company"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="medical_patient_action_tree">
+			<field name="name">Patients</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.patient</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="medical_patient_tree" />
+		</record>
+
+		<menuitem action="medical_patient_action_tree" parent="medical_patients_menu"
+			id="medical_edit_patient" sequence="2"
+			groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_access_patients_menu"/>
+
+		<!-- Hospital Oprating Room -->
+
+
+		<record model="ir.ui.view" id="medical_hospital_oprating_room_view">
+			<field name="name">Clinic Oprating Rooms</field>
+			<field name="model">medical.hospital.oprating.room</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Clinic Operating Rooms">
+					<group colspan="4">
+						<field name="name" required="1" />
+						<field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+						<newline />
+						<field name="extra_info" colspan="4" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="medical_hospital_oprating_room_tree">
+			<field name="name">Clinic Oprating Rooms</field>
+			<field name="model">medical.hospital.oprating.room</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Clinic Center Rooms'>
+					<field name="name" />
+					<field name="company_id" groups="base.group_multi_company"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="medical_action_form_hospital_oprating_room">
+			<field name="name">Operating Rooms</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.hospital.oprating.room</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="medical_hospital_oprating_room_tree" />
+		</record>
+
+
+
+		<record id="view_medical_health_center_oprating_room_search"
+			model="ir.ui.view">
+			<field name="name">hospital.oprating.room.select</field>
+			<field name="model">medical.hospital.oprating.room</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Clinic Operating Rooms">
+					<separator orientation="vertical" />
+					<field name="name" />
+					<newline />
+				</search>
+			</field>
+		</record>
+
+		<menuitem action="medical_action_form_hospital_oprating_room"
+			id="medical_conf_hospital_oprating_room" parent="pragtech_dental_management.medical_conf_hospital"
+			sequence="50" />
+
+				<!-- IS Arabic -->
+
+		<record model="ir.ui.view" id="medical_chart_tree">
+			<field name="name">Teeth Chart Selection</field>
+			<field name="model">chart.selection</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Lab test type'>
+					<field name="type" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_chart_form">
+			<field name="name">Teeth Chart Selection</field>
+			<field name="model">chart.selection</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string='Lab test type' create='0' delete='0'>
+					<field name="type" />
+				</form>
+			</field>
+		</record>
+		<record id="teeth_chart_first_record" model="chart.selection">
+			<field name="type">universal</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="medical_action_tree_chart">
+			<field name="name">Teeth Chart Selection</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">chart.selection</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="medical_chart_form" />
+		</record>
+
+		<menuitem action="medical_action_tree_chart" id="menu_medical_action_tree_chart"
+			parent="medical_conf_procedure" />
+
+		<!-- <record model="ir.ui.view" id="teeth_chart_setting_form"> -->
+		<!-- <field name="name">chart selection</field> -->
+		<!-- <field name="model">chart.selection</field> -->
+		<!-- <field name="type">form</field> -->
+		<!-- <field name="arch" type="xml"> -->
+		<!-- <form string="Procedure"> -->
+		<!-- <group colspan="4" col="4"> -->
+		<!-- <field name="type"/> -->
+		<!-- </group> -->
+		<!-- </form> -->
+		<!-- </field> -->
+		<!-- </record> -->
+
+		<!-- <record id="teeth_chart_first_record" model="chart.selection"> -->
+		<!-- <field name="type">universal</field> -->
+		<!-- </record> -->
+
+		<!-- <record model="ir.ui.view" id="teeth_chart_setting_tree"> -->
+		<!-- <field name="name">chart selection</field> -->
+		<!-- <field name="model">chart.selection</field> -->
+		<!-- <field name="type">tree</field> -->
+		<!-- <field name="arch" type="xml"> -->
+		<!-- <tree string='Lab test type'> -->
+		<!-- <field name="type"/> -->
+		<!-- </tree> -->
+		<!-- </field> -->
+		<!-- </record> -->
+
+		<!-- <record model="ir.actions.act_window" id="action_teeth_chart_selection"> -->
+		<!-- <field name="name">Teeth Chart Selection</field> -->
+		<!-- <field name="type">ir.actions.act_window</field> -->
+		<!-- <field name="res_model">chart.selection</field> -->
+		<!-- <field name="view_type">form</field> -->
+		<!-- <field name="view_mode">tree,form</field> -->
+		<!-- <field name="view_id" ref="teeth_chart_setting_tree"/> -->
+		<!-- </record> -->
+
+		<!-- <menuitem action="action_teeth_chart_selection" id="teeth_chart_setting1"
+			parent="medical_conf_procedure"/> -->
+
+		<!-- <menuitem action="action_medical_procedure_tree" id="medical_procedure_list"
+			parent="medical_conf_procedure"/> -->
+
+
+		<record model="ir.ui.view" id="teeth_code_view">
+			<field name="name">Teeth</field>
+			<field name="model">teeth.code</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Procedure" create="0" delete="0">
+					<group colspan="4" col="4">
+						<field name="name" />
+						<field name="code" />
+						<field name="palmer_name" />
+						<field name="iso" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="teeth_code_tree">
+			<field name="name">Teeth</field>
+			<field name="model">teeth.code</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Procedure' create="0" delete="0">
+					<field name="name" />
+					<field name="code" />
+					<field name="palmer_name" />
+					<field name="iso" />
+				</tree>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="action_teeth_code_tree">
+			<field name="name">Teeth</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">teeth.code</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_type">form</field>
+		</record>
+
+		<menuitem action="action_teeth_code_tree" id="teeth_code_list"
+			parent="medical_conf_procedure" />
+
+
+		<record id="view_teeth_code_filter" model="ir.ui.view">
+			<field name="name">teeth.code.select</field>
+			<field name="model">teeth.code</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Medical Procedures">
+
+					<separator orientation="vertical" />
+					<field name="name" />
+					<field name="code" />
+
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_partner_form">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<notebook>
+					<page string="Medical">
+						<group colspan="6" col="6">
+							<field name="nationality_id" attrs="{ 'invisible':[('is_insurance_company', '=', True)]}" />
+							<field name="is_doctor" attrs="{ 'invisible':[('is_insurance_company', '=', True)]}" />
+							<field name="is_patient" attrs="{ 'invisible':[('is_insurance_company', '=', True)]}" />
+							<field name="patient_id" attrs="{ 'invisible':[('is_patient', '=', False)]}"/>
+							<field name="is_insurance_company" invisible="1"/>
+							<field name="state" invisible="1"/>
+						</group>
+						<br/>
+						<group colspan="6" col="6" attrs="{ 'invisible':[('is_insurance_company', '=', False)]}" >
+							<field name="insurance_cases" attrs="{ 'required':[('is_insurance_company', '=', True)]}"/>
+							<field name="discount_amt" domain="[('is_insurance_company','=', True)]"/>
+							<field name="insur_report_format" attrs="{ 'required':[('is_insurance_company', '=', True)]}"/>
+							<field name="is_deductible" invisible="1"/>
+							<field name="amt_paid_by_insurance" invisible="1"/>
+						</group>
+                    	<newline />
+						<field name="insurance_ids" string="Insurance" colspan="4" invisible="1">
+							<tree string='Insurance List'>
+								<field name="company_id" />
+								<field name="name" invisible="not context.get('show_for_ins_menu', False)"/>
+								<field name="number" />
+								<field name="insurance_id_no"/>
+								<field name="group_name"  />
+								<field name="member_since" />
+								<field name="member_exp" />
+							</tree>
+						</field>
+					</page>
+				</notebook>
+				<field name="user_id" position="replace">
+					<field name="user_id" string="Internal User"
+						attrs="{ 'required':[('is_doctor', '=', True)]}" />
+				</field>
+				<field name="category_id" position="after">
+				</field>
+
+				<xpath expr="/form/sheet" position="before">
+
+			</xpath>
+
+
+
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_partner_form1">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="middle_name" placeholder="Middle Name......" />
+					<field name="lastname" placeholder="Last Name......" />
+				</field>
+			</field>
+		</record>
+
+		<!-- PRODUCT -->
+
+		<record model="ir.ui.view" id="view_product_tree1">
+			<field name="name">product.normal.tree</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_product_tree_view" />
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<field name="barcode" position="after">
+					<field name="company_id"/>
+				</field>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_product_form1">
+			<field name="name">product.normal.form</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<field name="type" position="before">
+					<field name="action_perform" string="Action Perform" />
+				</field>
+				<field name="image_medium" position="replace"/>
+                <field name="type" position="replace"/>
+                <field name="default_code" position="replace"/>
+                <field name="barcode" position="replace"/>
+                <field name="lst_price" position="replace"/>
+                <label for="standard_price" position="replace"/>
+                <div name="standard_price_uom" position="replace"/>
+                 <field name="property_account_expense_id" position="replace"/>
+                <field name="property_account_income_id" position="replace"/>
+                <field name="tracking" position="replace"/>
+                <label for="name" position="replace"/>
+                <field name="name" position="replace"/>
+                <div name="options" position="attributes">
+                     <attribute name="invisible">1</attribute>
+                </div>
+				<xpath expr="//notebook" position="before">
+                    <group>
+                        <group >
+                            <field name="lst_price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="standard_price" widget='monetary' options="{'currency_field': 'currency_id'}" groups="base.group_user"/>
+                            <field name="default_code" string="Code"/>
+                            <field name="highlight_color" widget="color"/>
+							<field name="company_id"/>
+                        </group>
+                        <group >
+							<field name="categ_id"/>
+                            <field name="type" readonly="1"/>
+                            <field name="barcode" attrs="{'invisible': [('type', '=', 'service')]}"/>
+                        </group>
+                    </group>
+                </xpath>
+				<xpath expr="//notebook" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+				<xpath expr="//notebook" position="after">
+                    <notebook name="general_information">
+                        <page name="notes1" string="Notes">
+                            <field name="description_sale"/>
+                        </page>
+                        <page name="Inventory1" string="Inventory">
+                            <group>
+                                <group>
+                                    <field name="tracking" widget="radio"
+                                           attrs="{'invisible':[('type', 'in', ['service', 'digital'])]}"
+                                           groups="stock.group_production_lot"/>
+                                </group>
+                                <group>
+                                    <field name="property_account_income_id"
+                                        domain="[('internal_type','=','other'),('deprecated','=',False)]"
+                                        groups="account.group_account_user"/>
+                                    <field name="property_account_expense_id"
+                                        domain="[('internal_type','=','other'),('deprecated','=',False)]"
+                                        groups="account.group_account_user"/>
+                                </group>
+                            </group>
+                        </page>
+						<page string="Medical">
+							<group col="4">
+								<field name="is_treatment" />
+								<field name="is_clinic_treatment" />
+								<field name="discount_amt" attrs="{ 'invisible':[('is_treatment', '=', False)]}" invisible="1"/>
+								<field name="is_planned_visit" />
+								<field name="duration"
+									attrs="{'invisible':[('is_planned_visit','=',False)]}" />
+								<field name="is_medicament" invisible="1"/>
+							</group>
+						</page>
+                    </notebook>
+				</xpath>
+				<div name="button_box" position="after">
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Product Name"/>
+                        <h1><field name="name" placeholder="Product Name"/></h1>
+                    </div>
+                </div>
+                <div name="button_box" position="inside">
+                    <button type="object"
+                        name="action_view_orderpoints"
+                        attrs="{'invisible':['|',('type', '!=', 'product'),('nbr_reordering_rules', '!=', 1)]}"
+                        class="oe_stat_button" icon="fa-refresh">
+                        <div class="o_form_field o_stat_info mr4">
+                            <span class="o_stat_text">Min:</span>
+                            <span class="o_stat_text">Max:</span>
+                        </div>
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value"><field name="reordering_min_qty"/></span>
+                            <span class="o_stat_value"><field name="reordering_max_qty"/></span>
+                        </div>
+                    </button>
+                </div>
+                <!-- change attrs of fields added in view_template_property_form
+                to restrict the display for templates -->
+                <xpath expr="//label[@for='weight']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@name='weight']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}</attribute>
+                </xpath>
+                <xpath expr="//label[@for='volume']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@name='volume']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('type', 'not in', ['product', 'consu']), ('product_variant_count', '&gt;', 1)]}</attribute>
+                </xpath>
+			</field>
+		</record>
+
+	<record id="product_clinic_treatment_action" model="ir.actions.act_window">
+		<field name="name">Clinic Treatment</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_mode">kanban,tree,form</field>
+		<field name="view_type">form</field>
+		<field name="priority">16</field>
+		<field name="context">{"search_default_is_treatment":1,"search_default_is_clinic_treatment":1,
+			"default_type":"service","default_is_treatment":1,"default_is_clinic_treatment":1}
+		</field>
+		<field name="domain">[('is_treatment', '=', 1),('is_clinic_treatment', '=', 1)]</field>
+		<field name="view_id" ref="product.product_product_tree_view" />
+		<field name="search_view_id" ref="product.product_search_form_view" />
+	</record>
+
+	<menuitem id="menu_product_treatment_actionn" parent="medical_conf_procedure" name="Treatments" />
+	<menuitem id="menu_product_clinic_treatment_hcare" action="product_clinic_treatment_action"
+			  parent="menu_product_treatment_actionn" sequence="1"/>
+	<menuitem id="menu_product_insurance_treatment_hcare" action="product_treatment_actionn"
+			  parent="menu_product_treatment_actionn" sequence="2"/>
+
+		<record model="ir.actions.act_window" id="view_medicament_action">
+			<field name="name">Medicament</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">product.product</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="view_type">form</field>
+			<field name="context">{"search_default_is_medicament":1,"default_is_medicament":1}
+			</field>
+			<field name="domain">[('is_medicament', '=', 1)]</field>
+			<field name="view_id" ref="product.product_product_tree_view" />
+			<field name="search_view_id" ref="product.product_search_form_view" />
+		</record>
+
+		<menuitem action="view_medicament_action" id="menu_medicament"
+			parent="medical_conf_medicaments" sequence="1" />
+		<!-- medication common dosage -->
+
+		<record model="ir.ui.view" id="medical_medication_dosage_form">
+			<field name="name">Medication Dosage</field>
+			<field name="model">medical.medication.dosage</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Medication Dosage">
+					<group colspan="4" col="4">
+						<field name="name" />
+						<field name="code" />
+						<field name="abbreviation" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_medication_dosage_tree">
+			<field name="name">Medication Dosage</field>
+			<field name="model">medical.medication.dosage</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Medication Dosage'>
+					<field name="name" />
+					<field name="code" />
+					<field name="abbreviation" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_medical_medication_dosage_search" model="ir.ui.view">
+			<field name="name">medical.medication.dosage.select</field>
+			<field name="model">medical.medication.dosage</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Medication Common Dosages">
+
+					<separator orientation="vertical" />
+					<field name="name" select="1" />
+					<field name="code" select="1" />
+					<field name="abbreviation" select="1" />
+					<newline />
+
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="view_medical_medication_dosage_action">
+			<field name="name">Medication Dosage Frequency</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.medication.dosage</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="medical_medication_dosage_tree" />
+		</record>
+
+		<menuitem action="view_medical_medication_dosage_action" id="menu_medical_medication_dosage_action"
+			parent="medical_conf_medicaments" />
+
+		<!-- Medicament form -->
+		<record model="ir.ui.view" id="medical_drug_form">
+			<field name="name">Medicament Form</field>
+			<field name="model">medical.drug.form</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Medicament Form">
+					<sheet>
+						<group colspan="4" col="4">
+							<field name="name" />
+							<field name="code" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_drug_form_tree">
+			<field name="name">Medicament Form list</field>
+			<field name="model">medical.drug.form</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Medicament Form">
+					<field name="name" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_medical_drug_form_search" model="ir.ui.view">
+			<field name="name">medical.drug.form.select</field>
+			<field name="model">medical.drug.form</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Medicament Presentation">
+					<separator orientation="vertical" />
+					<field name="name" select="1" />
+					<field name="code" select="1" />
+					<newline />
+
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="view_medical_drug_form_action">
+			<field name="name">Medicament Form</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.drug.form</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="medical_drug_form_tree" />
+		</record>
+
+		<menuitem action="view_medical_drug_form_action" id="menu_medical_drug_form_action_id"
+			parent="medical_conf_medicaments" />
+
+		<!-- Medicament dosage units -->
+
+		<record model="ir.ui.view" id="medical_dose_view">
+			<field name="name">Medicament Units</field>
+			<field name="model">medical.dose.unit</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Medicament Units">
+					<group colspan="4" col="4">
+						<field name="name" required="1" />
+						<field name="desc" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_dose_tree">
+			<field name="name">Medicament Units list</field>
+			<field name="model">medical.dose.unit</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Medicament Units">
+					<field name="name" />
+					<field name="desc" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="medical_action_dose">
+			<field name="name">Medicament Dose Units</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.dose.unit</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="medical_dose_tree" />
+		</record>
+
+
+		<record id="view_medical_medicament_dose_units" model="ir.ui.view">
+			<field name="name">medical.dose.select</field>
+			<field name="model">medical.dose.unit</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Medicament Dose Units">
+
+					<separator orientation="vertical" />
+					<field name="name" select="1" />
+					<field name="desc" select="1" />
+					<newline />
+
+				</search>
+			</field>
+		</record>
+
+		<menuitem action="medical_action_dose" id="medical_conf_dose"
+			parent="medical_conf_medicaments" />
+
+		<!--***********Product Category Inherited******** -->
+		<record model="ir.ui.view" id="view_product_category_inherited">
+			<field name="name">product.category.from.inherit</field>
+			<field name="model">product.category</field>
+			<field name="inherit_id" ref="product.product_category_form_view" />
+			<field name="arch" type="xml">
+				 <xpath expr="//form/sheet/group[@name='first']" position="after">
+	                         <group>
+	                             <field name="treatment" string="Is Treatment Category"/>
+	                         </group>
+	             </xpath>
+			</field>
+		</record>
+		
+
+
+		<record id="product_category_action_form_treatment" model="ir.actions.act_window">
+			<field name="name">Dental Treatment Categories</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">product.category</field>
+			<field name="view_type">form</field>
+			<field name="context">{"default_treatment":1,"search_default_treatment":1}</field>
+			<field name="domain">[('treatment','=',1)]</field>
+			<field name="search_view_id" ref="product.product_category_search_view" />
+			<field name="view_id" ref="product.product_category_list_view" />
+		</record>
+
+		<menuitem action="product_category_action_form_treatment"
+			id="menu_product_category_action_form_treatment" parent="medical_conf_procedure"
+			sequence="2" />
+
+		<record id="product_category_action_form_normal" model="ir.actions.act_window">
+			<field name="name">Other Categories</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">product.category</field>
+			<field name="view_type">form</field>
+			<!--<field name="context">{"default_treatment":,"search_default_treatment":1}</field>-->
+			<field name="domain">[('treatment','=',0)]</field>
+			<field name="search_view_id" ref="product.product_category_search_view" />
+			<field name="view_id" ref="product.product_category_list_view" />
+		</record>
+
+		<menuitem action="product_category_action_form_normal"
+			id="menu_product_category_action_form_normal" parent="medical_conf_procedure"
+			sequence="3" />
+
+		<record model="ir.ui.view" id="medical_patient_medication_tree">
+			<field name="name">Teeth Treatment</field>
+			<field name="model">medical.teeth.treatment</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Operations'>
+					<field name="appt_id" />
+					<field name="create_date" />
+					<field name="description" />
+					<field name="diagnosis_id" readonly="0"/>
+					<field name="diagnosis_description" readonly="0" />
+
+					<field name="teeth_id" />
+					<!-- <field name="tooth_function_field"/> -->
+					<field name="state" />
+					<field name="signature" widget="image" width="80" height="60" readonly="1"/>
+                	<button name="action_consent_form" string="Open consent form" type="object" icon="fa-edit"/>
+					<field name="dentist" />
+					<field name="detail_description" />
+					<field name="actual_amount" />
+					<field name="amount" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="medical_patient_medication_form" model="ir.ui.view">
+			<field name="name">Teeth Treatment Form</field>
+			<field name="model">medical.teeth.treatment</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Warning" version="7.0">
+					<header>
+						<field name="state" widget="statusbar"
+							statusbar_visible="condition,planned,in_progress,completed,invoiced"
+							statusbar_colors='{"completed":"red","condition":"blue","in_progress":"blue","planned":"blue","invoiced":"blue"}' />
+					</header>
+					<sheet>
+						<group col="4">
+							<field name="create_date" />
+							<field name="description" />
+							<field name="teeth_id" />
+							<!-- <field name="tooth_function_field"/> -->
+							<field name="state" />
+							<field name="dentist" />
+							<field name="detail_description" />
+							<field name="appt_id" invisible="1"/>
+							<field name="amount" groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="patient_complaint_form_view" model="ir.ui.view">
+			<field name="name">Patient Complaint</field>
+			<field name="model">patient.complaint</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Alert" version="7.0" create="false" >
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="complaint_id"/>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="patient_id" />
+								<field name="name" />
+								<field name="complaint_subject" />
+								<field name="complaint" />
+							</group>
+							<group>
+								<field name="complaint_date" />
+								<field name="language" string="Language"/>
+								<field name="action_ta" />
+								<field name="action_by" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="patient_complaint_popup_view" model="ir.ui.view">
+			<field name="name">Complaint Form</field>
+			<field name="model">patient.complaint.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Alert" version="7.0">
+					<group>
+						<group>
+							<field name="language" string="Language/لغة"/>
+							<field name="patient_id" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+							<field name="patient_id" string="صبور"
+								   attrs="{'invisible': [('language', '=', 'english')]}"/>						</group>
+						<group>
+							<field name="complaint_date" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+							<field name="complaint_date" string="تاريخ"
+								   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							<field name="name" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+							<field name="name" string="حضر الطبيب"
+								   attrs="{'invisible': [('language', '=', 'english')]}"/>
+						</group>
+					</group>
+					<table style="width:100%;">
+					    <tr>
+						    <td style="width:25%;">
+								<label for="complaint_subject" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="complaint_subject" string="موضوع الشكوى"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td style="width:75%;"><field name="complaint_subject"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="complaint" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="complaint" string="شكوى"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="complaint"/></td>
+					    </tr>
+					</table>
+					<footer>
+                        <button name="action_confirm" string="Confirm / أكد" type="object" class="btn-primary"/>
+                        <button string="Cancel / إلغاء" class="btn-default" special="cancel" />
+                    </footer>
+				</form>
+			</field>
+		</record>
+		<record id="seq_patient_complaint_id" model="ir.sequence">
+            <field name="name">complaint</field>
+            <field name="code">patient.complaint</field>
+            <field name="prefix">COM</field>
+            <field name="padding">3</field>
+			<field name="company_id" eval="False"/>
+        </record>
+
+		<record model="ir.ui.view" id="patient_complaint_tree_view">
+			<field name="name">Patient Complaints</field>
+			<field name="model">patient.complaint</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string='Patient Complaints' create="false">
+					<field name="complaint_id"/>
+					<field name="patient_id" />
+					<field name="name"/>
+					<field name="complaint_subject" />
+					<field name="complaint_date" />
+					<field name="complaint" />
+					<field name="action_ta" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_patient_complaint">
+			<field name="name">Patient Complaint</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">patient.complaint</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="patient_complaint_tree_view" />
+		</record>
+
+		<menuitem action="action_patient_complaint" name="Complaints" id="patient_complaint_submenu"
+				  parent="medical_patients_menu" sequence="4"
+				  groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_access_patients_menu"/>
+
+	</data>
+</odoo>

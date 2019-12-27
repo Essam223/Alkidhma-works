@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_attendance.view_attendance_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.tree</field>
+        <field name="model">hr.attendance</field>
+        <!--<field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>-->
+        <field name="arch" type="xml">
+            <tree string="Employee attendances" colors="red: missed">
+                <field name="employee_id"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="missed"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="inherited_hr_attendance_form" model="ir.ui.view">
+        <field name="name">hr.attendance.form</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <field name="check_out" position="after">
+                <field name="missed"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="inherited_hr_attendance_search" model="ir.ui.view">
+        <field name="name">hr.attendance.search</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter"/>
+        <field name="arch" type="xml">
+            <filter name="today" position="attributes">
+                <attribute name="domain">['|', '&amp;',('check_in', '&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0)),('check_in', '&lt;=', datetime.datetime.now().replace(hour=23, minute=59, second=59)), '&amp;',('check_out', '&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0)),('check_out', '&lt;=', datetime.datetime.now().replace(hour=23, minute=59, second=59))]</attribute>
+            </filter>
+            <field name="department_id" position="after">
+                <field name="check_in" string="After" filter_domain="[('check_in','&gt;=',self)]"/>
+                <field name="check_out" string="Before" filter_domain="[('check_out','&lt;=',self)]"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

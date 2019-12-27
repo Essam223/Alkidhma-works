@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_deposit_cheque">
+            <field name="name">deposit.cheque.wizard</field>
+            <field name="model">deposit.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Deposit Cheque">
+                    <group>
+                        <group>
+                            <field name="deposit_date" style="width:40%%"/>
+                        </group>
+                        <group>
+                            <field name="bank_id" style="width:40%%" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="deposit_cheque" string="Deposit" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'base'), ('name', '=', 'res_partner_rule')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record model="ir.rule" id="base.res_partner_rule">
+            <field name="name">res.partner multi-company</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">['|','|',('company_id.child_ids','child_of',[user.company_id.id]),('company_id','child_of',[user.company_id.id]),('company_id','=',False)]</field>
+            <!--<field name="domain_force">[('company_id','child_of',[user.company_id.id])]</field>-->
+            <field name="active" eval="True"/>
+        </record>
+
+        <record model="ir.rule" id="medical_physician_mc_rule">
+            <field name="name">medical.physician multi-company</field>
+            <field name="model_id" ref="pragtech_dental_management.model_medical_physician"/>
+            <field name="domain_force">[('company_id','child_of',[user.company_id.id])]</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record model="ir.rule" id="medical_patient_mc_rule">
+            <field name="name">medical.patient multi-company</field>
+            <field name="model_id" ref="pragtech_dental_management.model_medical_patient"/>
+            <field name="domain_force">[('company_id','child_of',[user.company_id.id])]</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record model="ir.rule" id="medical_appointment_mc_rule">
+            <field name="name">medical.appointment multi-company</field>
+            <field name="model_id" ref="pragtech_dental_management.model_medical_appointment"/>
+            <field name="domain_force">[('company_id','child_of',[user.company_id.id])]</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record model="ir.rule" id="medical_room_mc_rule">
+            <field name="name">medical.hospital.oprating.room multi-company</field>
+            <field name="model_id" ref="pragtech_dental_management.model_medical_hospital_oprating_room"/>
+            <!--<field name="domain_force">['|',('company_id','child_of',user.company_ids.ids),('company_id','=',False)]</field>-->
+            <field name="domain_force">[('company_id','child_of',[user.company_id.id])]</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record model="ir.rule" id="medical_insurance_mc_rule">
+            <field name="name">medical.insurance multi-company</field>
+            <field name="model_id" ref="pragtech_dental_management.model_medical_insurance"/>
+            <field name="domain_force">[('res_company_id','child_of',[user.company_id.id])]</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

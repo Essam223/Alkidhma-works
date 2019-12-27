@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="treatment_invoice_view">
+        <field name="name">Treatment Line</field>
+        <field name="model">treatment.invoice</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Treatment">
+                <group>
+                    <group>
+                        <field name="appointment_id"/>
+                        <field name="description"/>
+                    </group>
+                    <group>
+                        <field name="diagnosis_id"/><!-- # changes by mubaris -->
+                        <field name="treatment_id"/>
+                        <field name="actual_amount"/>
+                        <field name="able_to_modify_after_discount" invisible="1"/>
+                        <field name="amount" attrs="{'readonly': [('able_to_modify_after_discount', '=', False)]}"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="treatment_invoice_tree">
+        <field name="name">Treatment Invoice</field>
+        <field name="model">treatment.invoice</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Treatment Lines" editable="bottom">
+                <field name="diagnosis_id"/><!-- # changes by mubaris -->
+                <field name="appointment_id" invisible="1"/>
+                <field name="treatment_id" invisible="1"/>
+                <field name="description"/>
+                <field name="note"/>
+                <field name="actual_amount"/>
+                <field name="able_to_modify_after_discount" invisible="1"/>
+                <field name="amount" attrs="{'readonly': [('able_to_modify_after_discount', '=', False)]}"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="pragtech_dental_management.report_treatment_plan_pdf">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="text-center">
+                        <div style="color:#009688;">
+                             <h2><b>Treatment Plan</b></h2>
+                         </div>
+                        <table style="width:100%;">
+                                    <tr>
+                                        <th style="width:60%;"></th>
+                                        <th style="width:40%;"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color:#009688;"><strong>Patient Name : </strong></div>
+                                            <p t-if="o.patient_name" t-field="o.patient_name"/></td>
+                                        <td>
+                                            <div style="color:#009688;"><strong>Doctor Name : </strong></div>
+                                            <p t-if="o.doctor" t-field="o.doctor"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color:#009688;"><strong>Appointment : </strong></div>
+                                            <p t-field="o.name"/></td>
+                                        <td>
+                                            <div style="color:#009688;"><strong>Date Approved : </strong></div>
+                                            <p t-if="o.treatment_plan_date" t-field="o.treatment_plan_date"/></td>
+                                    </tr>
+                        </table>
+                        <table class="table table-bordered table-striped"  style="width: 100%">
+                            <thead>
+                                <th style='color:white;background-color: #009688;text-align:center;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;' width='7%'>Sl No.</th>
+                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='20%'>Description</th>
+                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='20%'>Diagnosis</th>
+                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='8%'>Tooth</th>
+                                <!--<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='10%'>Surface</th>-->
+                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='17%'>Actual Amount</th>
+                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='17%'>After Disc.</th>
+                                <!--<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='17%'>Payment by Patient</th>-->
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="1" />
+                                <t t-set="amt_total" t-value="0" />
+                                <t t-set="disc_total" t-value="0" />
+                                <t t-set="patient_total" t-value="0" />
+                                <t t-set="i" t-value="1" />
+                                <tr t-foreach="o.operations" t-as="l">
+                                    <td style='text-align:center;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;'><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l.description" t-field="l.description"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l.diagnosis_id" t-field="l.diagnosis_id"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l.teeth_id" t-field="l.teeth_id"/></td>
+                                    <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l.detail_description" t-field="l.detail_description"/></td>-->
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l.actual_amount" t-field="l.actual_amount"/><t t-set="amt_total" t-value="l.actual_amount+amt_total"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l.amount" t-field="l.amount"/><t t-set="disc_total" t-value="l.amount+disc_total"/></td>
+                                    <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l.amt_to_be_patient" t-field="l.amt_to_be_patient"/><t t-set="patient_total" t-value="l.amt_to_be_patient+patient_total"/></td>-->
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong>Total</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="amt_total"/></strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="disc_total"/></strong></td>
+                                    <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="patient_total"/></strong></td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="text-left">
+                            <br/>
+                                <p><center><strong>I have had the above diagnosis, treatment plan and cost explained to me and hereby give consent for treatment</strong></center></p>
+                                <br/>
+                                <p> I  authorize the performance of the above detail treatment plan as approved by <span t-esc="res_company.partner_id.name"/>.</p>
+                                <br/>
+                                <br/>
+                                <p>1. Alternative treatment plans have been presented, including their benefits and risks.</p>
+                                <p>2. The risks and benefits of the accepted treatment plan have been explained, and I fully understand them.</p>
+                                <p>3. I understand that changes in the accepted treatment plan may be necessary during the course of treatment and that I will be informed of such changes.</p>
+                                <p>4. I acknowldge that I have received no guarantees or assurances about the outcome of the treatment or any of its component(s), benefits or results.</p>
+                                <p>5. I understand that if treatment modifications are required as treatment progresses, the fee(s) I am assessed may need to be modified to reflect those changes. I further understand that, whenever possible, I will be informed of those changes as the need for them becomes apparent.</p>
+                        </div>
+                        <div style="width:800px; margin:0 auto;">
+                            <img src="/pragtech_dental_management/static/src/img/treatment_plan_ar.png" class="img img-responsive"
+                                 style="max-height: 1500px;"/>
+                        </div>
+                        <div t-if="o.plan_signature" class="pull-right">
+                            <strong>Patient Signature</strong>
+                            <br/>
+                            <img t-if="o.plan_signature" t-att-src="'data:image/png;base64,%s' % to_text(o.plan_signature)" class="pull-right" height="60"/>
+                        </div>
+
+                    </div>
+                </div>
+        </t>
+        </t>
+        </t>
+</template>
+
+
+    <record id="view_treatment_plan_inherited" model="ir.ui.view">
+            <field name="name">treatment.plan.wizard.form</field>
+            <field name="model">treatment.plan.wizard</field>
+            <field name="inherit_id" ref="pragtech_dental_management.view_treatment_plan"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='operations']" position="replace">
+                    <field name="operations" readonly="1">
+                        <tree>
+                            <field name="appt_id" invisible="1"/>
+                            <field name="create_date" invisible="1"/>
+                            <field name="diagnosis_description" invisible="1"/>
+                            <field name="description" />
+                            <field name="diagnosis_id" readonly="0"/>
+                            <field name="teeth_id" />
+                            <field name="state" invisible="1"/>
+                            <field name="dentist" invisible="1"/>
+                            <field name="detail_description"  invisible="1"/>
+                            <field name="actual_amount"/>
+                            <field name="amount" sum="Total after Discount"/>
+                            <field name="amt_to_be_patient" sum="Payment by Patient" invisible="1"/>
+                        </tree>
+                    </field>
+
+                </xpath>
+            </field>
+        </record>
+</odoo>

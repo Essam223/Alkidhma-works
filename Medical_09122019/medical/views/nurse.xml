@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="medical_nurse_view">
+		<field name="name">Nurse</field>
+		<field name="model">medical.nurse</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+            <form string="Nurse">
+				<sheet>
+                    <group>
+                        <group>
+                            <field name="nurse"/>
+                        </group>
+						<group>
+							<field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+						</group>
+                    </group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="medical_nurse_tree">
+		<field name="name">Nurses</field>
+		<field name="model">medical.nurse</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string='nurse'>
+				<field name="nurse"/>
+				<field name="company_id" groups="base.group_multi_company"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="view_medical_nurse_filter" model="ir.ui.view">
+		<field name="name">Nurses</field>
+		<field name="model">medical.nurse</field>
+		<field name="type">search</field>
+		<field name="arch" type="xml">
+			<search string="Search nurse">
+				<field name="nurse" />
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="medical_action_nurses">
+		<field name="name">Nurses</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">medical.nurse</field>
+		<field name="view_type">form</field>
+		<field name="view_id" ref="medical_nurse_tree" />
+	</record>
+    <menuitem name="Nurses" id="medical_conf_nurses" action="medical_action_nurses"
+			parent="pragtech_dental_management.medical_conf_physicians" sequence="8" />
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_payslip_run_form" model="ir.ui.view">
+        <field name="name">hr.payslip.run</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <button name="close_payslip_run" position='replace'>
+                <button name="close_payslip_run" type="object" string="Process" states="draft" class="oe_highlight"/>
+                <button name="compute_excel" type="object" states="close" string="Generate WPS Claim Report" class="oe_highlight"/>
+                <!--<button string="Confirm" name="action_payslip_done_batch" type="object" states="draft" class="oe_highlight"/>-->
+                <!--<button string="Compute Sheets" name="compute_sheet_batch" type="object" states="draft" class="oe_highlight"/>-->
+                <button string="Cancel Payslip" name="action_payslip_cancel_batch" type="object" states="draft"/>
+            </button>
+            <field name="credit_note" position='after'>
+                <field name="company_bank_acc_id"/>
+                <field name="data" readonly="1" filename="name_xls" attrs="{'invisible':[('state_xls','=','choose')]}"/>
+                <field name="name_xls" invisible="1"/>
+                <field name="state_xls" invisible="1"/>
+            </field>
+            <field name="slip_ids" position='replace'>
+                <field name="slip_ids">
+                    <tree decoration-danger="contract_id==False">
+                        <field name="number"/>
+                        <field name="employee_id"/>
+                        <field name="department_id"/>
+                        <field name="contract_id"/>
+                        <field name="contract_id_status"/>
+                        <field name="net_salary"/>
+                        <field name="state"/>
+                        <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                        <field name="payslip_run_id" invisible="1"/>
+                    </tree>
+                </field>
+            </field>
+        </field>
+   </record>
+
+    <record id="view_hr_payslip_tree" model="ir.ui.view">
+        <field name="name">hr.payslip</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <field name="employee_id" position='after'>
+                <field name="department_id"/>
+            </field>
+        </field>
+   </record>
+
+    <record id="hr_payslip_form_inherit_view" model="ir.ui.view">
+        <field name="name">hr.payslip.inherit.form1</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <button name="compute_sheet" position="replace">
+                <button string="Compute Sheet" name="compute_sheet" type="object" invisible="1" class="oe_highlight"/>
+            </button>
+            <button name="action_payslip_done" position="replace">
+                <button string="Process" name="action_payslip_done" type="object" states="draft" class="oe_highlight"/>
+            </button>
+        </field>
+    </record>
+
+
+
+</odoo>

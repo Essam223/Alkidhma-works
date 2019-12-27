@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+     <!--  Bank Form View -->
+        <record model="ir.ui.view" id="bank_form">
+            <field name="name">account.bank.form</field>
+            <field name="model">account.bank</field>
+            <field name="arch" type="xml">
+                <form string="Bank">
+                    <sheet>
+                         <group>
+                             <group>
+                                <field name="name"/>
+                                <field name="account_no"/>
+                             </group>
+                             <group>
+                                <field name="account_id" options="{'no_create': True}"/>
+                                <field name="pdc_account_id" options="{'no_create': True}"/>
+                                <field name="return_account_id" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Bank Tree View -->
+        <record model="ir.ui.view" id="bank_tree">
+            <field name="name">account.bank.tree</field>
+            <field name="model">account.bank</field>
+            <field name="arch" type="xml">
+                <tree string="Banks">
+                    <field name="name"/>
+                    <field name="account_no"/>
+                    <field name="account_id"/>
+                    <field name="pdc_account_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Bank Search View -->
+        <record model="ir.ui.view" id="bank_search">
+            <field name="name">account.bank.search</field>
+            <field name="model">account.bank</field>
+            <field name="arch" type="xml">
+                <search string="Banks">
+                    <field name="name"/>
+                    <field name="account_no"/>
+                </search>
+            </field>
+        </record>
+
+
+         <record model="ir.actions.act_window" id="action_bank">
+            <field name="name">Banks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.bank</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Banks" id="menu_banks" parent="cheque_management.menu_settings" sequence="1"
+                  action="action_bank"/>
+    </data>
+</odoo>

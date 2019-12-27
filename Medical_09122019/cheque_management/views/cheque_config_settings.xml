@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="cheque_config_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.cheque</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="1"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Cheque"
+                         string="Cheque Configuration"
+                         data-key="cheque_management"
+                    >
+                        <div class="row mt16 o_settings_container">
+                                    <group string="Accounts">
+                                        <field name="email"/>
+                                        <field name="interim_account_id" />
+                                        <field name="charges_account_id"/>
+                                    </group>
+                                    <group string="Journal">
+                                        <field name="cheque_journal_p_id" options="{'no_create': True}"/>
+                                        <field name="cheque_journal_r_id" options="{'no_create': True}"/>
+                                    </group>
+                                    <separator string="Pending cheques alert"/>
+                                    <group>
+                                            <label for="alert_inbound"/>
+                                            <div><field name="alert_inbound"  style="width:20%%"/> days before</div>
+                                            <label for="alert_outbound"/>
+                                            <div><field name="alert_outbound" style="width:20%%"/> days before</div>
+                                    </group>
+                        </div>
+                    </div>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_cheque_config" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_id" ref="cheque_config_form"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'cheque_management'}</field>
+        </record>
+
+        <menuitem id="menu_cheque_config" name="Settings" parent="menu_settings"
+            sequence="8" action="action_cheque_config" groups="base.group_system"/>
+    </data>
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<report
+		id="report_appt_cancellation_pdf"
+		string="Appointment Cancellation Report"
+		model="medical.appointment"
+		report_type="qweb-pdf"
+		menu="False"
+		file="pragtech_dental_management.report_appt_cancellation"
+		name="pragtech_dental_management.report_appt_cancellation"
+		/>
+		<report
+		id="report_doctor_appointment_pdf"
+		string="Appointment Book Report"
+		model="medical.appointment"
+		report_type="qweb-pdf"
+		menu="False"
+		file="pragtech_dental_management.report_doctor_appointment"
+		name="pragtech_dental_management.report_doctor_appointment"
+		/>
+		<report
+		id="act_report_patient_overdue"
+		string="Patient Overdue"
+		model="patient.overdue.report"
+		report_type="qweb-pdf"
+		file="pragtech_dental_management.report_patient_overdue"
+		name="pragtech_dental_management.report_patient_overdue"
+		/>
+
+		<report
+		id="act_rep_patient_visit"
+		string="Patient Info"
+		model="medical.patient"
+		report_type="qweb-pdf"
+		file="pragtech_dental_management.report_patient_visit"
+		name="pragtech_dental_management.report_patient_visit"
+		/>
+
+		<report
+		id="report_dental"
+		string="Visit Details"
+		model="medical.appointment"
+		report_type="qweb-pdf"
+		file="pragtech_dental_management.report_appointment"
+		name="pragtech_dental_management.report_appointment"
+		/>
+
+
+		<report
+		id="income_byreport_report12333"
+		string="Income By Doctor"
+		model="income.by.doctor.report.wizard"
+		report_type="qweb-pdf"
+		file="pragtech_dental_management.report_income_by_doctor"
+		name="pragtech_dental_management.report_income_by_doctor"
+		/>
+		
+		
+		<report
+		id="patient_byreport_report12333"
+		string="Patient By Doctor"
+		model="patient.by.doctor.report.wizard"
+		report_type="qweb-pdf"
+		file="pragtech_dental_management.report_patient_by_doctor"
+		name="pragtech_dental_management.report_patient_by_doctor"
+		/>
+
+	</data>
+</odoo>

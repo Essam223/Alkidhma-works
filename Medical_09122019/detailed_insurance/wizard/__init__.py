@@ -1,0 +1,1 @@
+from . import update_copay_wizard

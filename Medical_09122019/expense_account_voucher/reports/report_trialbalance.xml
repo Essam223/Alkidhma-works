@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_trialbalance" inherit_id="account.report_trialbalance">
+    <xpath expr="//table[@class='table table-condensed']" position="replace">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Account</th>
+                    <th class="text-right">Debit</th>
+                    <th class="text-right">Credit</th>
+                    <th class="text-right">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="Accounts_Type" t-as="account_type_1">
+                    <t t-foreach="account_type_1" t-as="account_type">
+                        <tr >
+                            <td colspan="5">
+                                <b>
+                                    <span t-esc="account_type"/>
+                                    <!--<span t-esc="account_type"/>-->
+                                </b>
+                            </td>
+                        </tr>
+                        <t t-foreach="Accounts" t-as="account">
+                            <tr t-if="account['acc_type_name']==account_type">
+                                <td>
+                                    <span t-att-style="style" t-esc="account['code']"/>
+                                </td>
+                                <td>
+                                    <span style="color: white;" t-esc="'..'"/>
+                                    <span t-att-style="style" t-esc="account['name']"/>
+                                </td>
+                                <td class="text-right">
+                                     <span t-att-style="style" t-esc="account['debit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-att-style="style" t-esc="account['credit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-att-style="style" t-esc="account['balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </t>
+            </tbody>
+        </table>
+    </xpath>
+</template>
+</odoo>

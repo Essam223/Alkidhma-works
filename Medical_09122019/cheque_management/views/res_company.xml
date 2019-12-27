@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="cheque_details" string="Cheque details">
+                    <group>
+                        <group string="Accounts">
+                            <field name="email"/>
+                            <field name="interim_account_id" />
+                            <field name="charges_account_id"/>
+                        </group>
+                        <group string="Journal">
+                            <field name="cheque_journal_p_id" options="{'no_create': True}"/>
+                            <field name="cheque_journal_r_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <div>
+                        <separator string="Pending cheques alert"/>
+                        <group>
+                                <label for="alert_inbound"/>
+                                <div><field name="alert_inbound"  style="width:20%%"/> days before</div>
+                                <label for="alert_outbound"/>
+                                <div><field name="alert_outbound" style="width:20%%"/> days before</div>
+                        </group>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="project.shutdown" id="shutdown_date_1">
+            <field name="shutdown_date" eval="(DateTime.now() + timedelta(days=365)).strftime('%Y-%m-%d')"/>
+        </record>
+    </data>
+</odoo>

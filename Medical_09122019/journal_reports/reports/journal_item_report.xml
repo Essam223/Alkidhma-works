@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+   <template id="report_journal_item_pdf">
+       <t t-call="web.html_container">
+           <t t-call="web.external_layout">
+               <div class="page">
+                  <center><h3>Journal Items Report</h3></center>
+                  <table width="90%">
+                      <colgroup>
+                          <col width='15%' />
+                          <col width='45%' />
+                          <col width='15%' />
+                          <col width='35%' />
+                      </colgroup>
+                      <tbody >
+                          <tr>
+                              <td t-if="start_date" style="text-align: left;">
+                                  <strong>Start Date</strong>
+                              </td>
+                              <td t-if="start_date" style="text-align: left;">
+                                 : <span t-esc="start_date" t-options='{"widget": "date"}'/>
+                              </td>
+                              <td style="text-align: left;">
+                                  <t t-if="account_id">
+                                      <strong>Account</strong>
+                                  </t>
+                              </td>
+                              <td t-if="account_id" style="text-align: left;">
+                                   : <span t-esc="account_id"/>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td t-if="end_date" style="text-align: left;">
+                                  <strong>End Date</strong>
+                              </td>
+                              <td t-if="end_date" style="text-align: left;">
+                                 : <span t-esc="end_date" t-options='{"widget": "date"}'/>
+                              </td>
+                              <td style="text-align: left;">
+                                  <strong>Report time</strong>
+                              </td>
+                              <td style="text-align: left;">
+                                  : <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/>
+                              </td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+                  <br/>
+                  <table width="100%" class="table table-striped">
+                      <thead>
+                          <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Date</th>
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Journal Entry</th>
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Journal</th>
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Description</th>
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Partner</th>
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not account_id">Account</th>
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Debit</th>
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Credit</th>
+                              <th style="width:15%;background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Balance</th>
+                          </tr>
+                      </thead>
+                      <tbody style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                          <t t-foreach="lines" t-as="line">
+                              <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                  <td style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <span t-if="line.date" t-esc="line.date" t-options='{"widget": "datetime"}'/>
+                                  </td>
+                                  <td style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <span t-if="line.move_id" t-esc="line.move_id.name"/>
+                                  </td>
+                                  <td style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000">
+                                    <span t-if="line.journal_id" t-esc="line.journal_id.name"/>
+                                  </td>
+                                  <td style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000">
+                                    <span t-if="line.name" t-esc="line.name"/>
+                                  </td>
+                                  <td style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000">
+                                    <span t-if="line.partner_id" t-esc="line.partner_id.name"/>
+                                  </td>
+                                  <td t-if="not account_id" style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000">
+                                    <span t-if="line.account_id" t-esc="line.account_id.name"/>
+                                  </td>
+                                  <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000">
+                                    <span t-if="line.debit" t-esc="line.debit"/>
+                                  </td>
+                                  <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000">
+                                    <span t-if="line.credit" t-esc="line.credit"/>
+                                  </td>
+                                  <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000">
+                                    <span t-esc="line.balance_after_trans"/>
+                                  </td>
+                              </tr>
+                          </t>
+                      </tbody>
+
+                  </table>
+              </div>
+       </t>
+       </t>
+   </template>
+
+   <report
+       id="report_journal_item"
+       string="Journal Item Report"
+       model="account.move.line"
+       report_type="qweb-pdf"
+       file="journal_reports.report_journal_item_pdf"
+       name="journal_reports.report_journal_item_pdf"
+   />
+
+</data>
+</openerp>

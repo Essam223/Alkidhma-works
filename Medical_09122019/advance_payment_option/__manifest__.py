@@ -1,0 +1,20 @@
+{
+    'name': "Advance Payment Management",
+    'version': '0.1',
+    'sequence': 2,
+    'author': "Al Kidhma Group",
+    'category': 'Invoicing',
+    'description': 'Allows you to manage advance payment collection',
+    'depends': ['base', 'web', 'pragtech_dental_management'],
+    'data': [
+        'views/advance_payments.xml',
+        'wizard/adv_payment_wizard.xml',
+        'reports/report.xml',
+        'reports/adv_payment_report.xml',
+        # 'security/ir.model.access.csv',
+    ],
+    'license': 'LGPL-3',
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

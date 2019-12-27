@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_journal_item_wizard" model="ir.ui.view">
+        <field name="name">journal.item.wizard.form</field>
+        <field name="model">journal.item.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Journal Item Report ">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="account_id"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_print_journal_item" model="ir.actions.act_window">
+        <field name="name">Journal Item Report</field>
+        <field name="res_model">journal.item.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_print_journal_item"
+        name="Journal Items Report"
+        parent="account.menu_finance_legal_statement"
+        action="action_print_journal_item"
+        groups="account.group_account_manager,account.group_account_user"
+       />
+
+</odoo>

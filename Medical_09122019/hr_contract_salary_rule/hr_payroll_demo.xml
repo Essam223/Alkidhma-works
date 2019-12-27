@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="hr_salary_rule_Accommodation" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.accommodation_amount</field>
+            <field name="condition_select">none</field>
+            <field name="code">ACC</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <!--<field name="register_id" ref="hr_payroll.hr_houserent_register"/>-->
+            <field name="name">Accommodation</field>
+            <field name="sequence" eval="5"/>
+        </record>
+
+        <record id="hr_salary_rule_Transportation_Allowance" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.transportation_amount</field>
+            <field name="condition_select">none</field>
+            <field name="code">TRA</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <!--<field name="register_id" ref="hr_payroll.hr_meal_voucher_register"/>-->
+            <field name="name">Transportation Allowance</field>
+            <field name="sequence" eval="16"/>
+         </record>
+</odoo>

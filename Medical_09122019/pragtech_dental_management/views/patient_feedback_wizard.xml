@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_feedback_wizard2" model="ir.ui.view">
+            <field name="name">patient.feedback.wizard.form</field>
+            <field name="model">patient.feedback.wizard</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Feedback Form">
+					<group>
+						<group>
+							<field name="language" string="Language/لغة"/>
+							<field name="patient_id" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+							<field name="patient_id" string="اسم المريض"
+								   attrs="{'invisible': [('language', '=', 'english')]}"/>
+						</group>
+						<group>
+							<field name="feedback_date" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+							<field name="feedback_date" string="تاريخ"
+								   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							<field name="name" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+							<field name="name" options="{'no_create': True, 'no_create_edit':True}" string="حضر الطبيب"
+								   attrs="{'invisible': [('language', '=', 'english')]}"/>
+						</group>
+					</group>
+					<separator string="YOUR IMPRESSIONS OF US ..." style="color:#47cc3b"
+							   attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+					<separator string="انطباعاتك عنا ..." style="color:#47cc3b"
+							   attrs="{'invisible': [('language', '=', 'english')]}"/>
+
+					<table style="width:100%;"  class="table table-striped">
+					    <tr>
+						    <td style="width:75%;">
+								<label for="q1" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q1" string="1. هل شرح لك طبيب الأسنان بوضوح حالة أسنانك ولثتك؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td style="width:25%;"><field name="q1"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q2" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q2" string="2. هل تم شرح جميع خيارات العلاج لك؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q2"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q3" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q3" string="3. هل فهمت أي تعليمات تم شرحها لك؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q3"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q4" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q4" string="4. هل تم شرح التكاليف لك قبل بدء العلاج؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q4"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q5" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q5" string="5. هل استمع مزودك إلى مخاوفك؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q5"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q6" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q6" string="6. هل قام مزود الخدمة الخاص بك بالتصرف مهنياً وعلاجك بطريقة مهذبة؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q6"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q7" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q7" string="7. هل شرح مقدمك كيف تحافظ على صحة فمك؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q7"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q8" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q8" string=".8 هﻞ ﻗﺎم ﻣﻘﺪم اﻟﺨﺪﻣﺔ ﺑﻤﺴﺎﻋﺪﺗﻚ ﺑﺴﻬﻮﻟﺔ ﻓﻲ أي ﻣﺸﺎﻋﺮ ﻗﺪ ﺗﺸﻬﺪهﺎ؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q8"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q9" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q9" string="9. هل أنت راض عن علاج الأسنان الذي تلقيته من مقدم الرعاية الخاص بك؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q9"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q10" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q10" string="10. هل ستوصي بمقدم رعاية الأسنان لأصدقائك وأفراد عائلتك؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q10"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q11" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q11" string="11. هل كان مزود الخدمة الخاص بك في الموعد المحدد لمواعيدك المحددة؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q11"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q12" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q12" string="12. هل تم تزويدك بمعلومات حول سياسات مركز العناية بالأسنان؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q12"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q13" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q13" string="13. هل كان موظف الاستقبال مهذب ومفيد؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q13"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q14" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q14" string="14. هل كان أمين الصندوق مهذب ومفيد؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q14"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q15" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q15" string="15. هل وجدت مركز العناية بالأسنان جيدًا؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q15"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q16" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q16" string="16. هل توصي مركز العناية بالأسنان لشخص آخر؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q16"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q17" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+								<label for="q17" string="17. هل لديك مشكلة في العثور على أماكن لوقوف السيارات؟"
+									   attrs="{'invisible': [('language', '=', 'english')]}"/>
+							</td>
+						    <td><field name="q17"/></td>
+					    </tr>
+					</table>
+					<br/>
+					<p attrs="{'invisible': [('language', '=', 'arabic')]}"><strong>Please take a moment to write your comments below.</strong></p>
+					<p  style="text-align: right;" attrs="{'invisible': [('language', '=', 'english')]}"><strong>يرجى قضاء بعض الوقت في كتابة تعليقاتك أدناه.
+</strong></p>
+					<field name="comments"/>
+
+                  <footer>
+                        <button name="action_confirm" string="Confirm / أكد" type="object" class="btn-primary"/>
+                        <button string="Cancel / إلغاء" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_feedback_wizard">
+		<field name="name">Feedback Form</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">patient.feedback.wizard</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+	<!--<menuitem name="Feedback Form" action="action_feedback_wizard" id="medical_feedback_menu"-->
+              <!--parent="medical_patients_menu" sequence="3"/>-->
+
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="employee_form_contract_view_wiz" model="ir.ui.view">
+        <field name="name">employee.form.contract.inherit.form1</field>
+        <field name="model">employee.form.contract</field>
+        <field name="inherit_id" ref="hr_multi_employee_contract.employee_form_contract_view_wiz"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='wage']" position="replace"/>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="wage"/>
+                <field name="accommodation_amount"/>
+                <field name="transportation_amount"/>
+            </xpath>
+            <xpath expr="//field[@name='struct_id']" position="before">
+                <field name="journal_id"/>
+                <field name="date_start"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

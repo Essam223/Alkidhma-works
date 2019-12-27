@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_loan">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                                <strong>
+                                    <center>
+                                        <h3><span t-field="o.name"/></h3>
+                                        <h4><span t-field="o.date"/></h4>
+                                    </center>
+                                </strong>
+                                <table class="table table-condensed table-bordered">
+                                    <tr>
+                                        <td><strong>Employee</strong></td>
+                                        <td><span t-field="o.employee_id"/></td>
+                                        <td><strong>Department</strong></td>
+                                        <td><span t-field="o.department_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Job Position</strong></td>
+                                        <td><span t-field="o.job_position.name"/></td>
+                                        <td><strong>Loan Amount</strong></td>
+                                        <td><span t-field="o.loan_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>No of Installments</strong></td>
+                                        <td><span t-field="o.installment"/></td>
+                                        <td><strong>EMI</strong></td>
+                                        <td><span t-field="o.emi" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Start date</strong></td>
+                                        <td><span t-field="o.payment_start_date"/></td>
+                                        <td><strong>End date</strong></td>
+                                        <td><span t-field="o.payment_end_date"/></td>
+                                    </tr>
+                                </table>
+
+                                <table width="100%" class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">Date</th>
+                                            <th width="25%">Paid/Unpaid</th>
+                                            <th width="25%" class="text-right">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="o.loan_lines" t-as="line">
+                                            <td>
+                                                <span t-field="line.date"></span>
+                                            </td>
+                                            <td>
+                                                <t t-if="line.state=='payment_pending'">Payment pending</t>
+                                                <t t-if="line.state=='waiting_for_postponed'">Waiting for postponement</t>
+                                                <t t-if="line.state=='Postponed'">Postponed</t>
+                                                <t t-if="line.state=='Paid'">Paid</t>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.amount"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            <div class="row">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed">
+                                        <tr class="border-black">
+                                            <td><strong>Total Amount:</strong></td>
+                                            <td class="text-right">
+                                                <span t-field="o.total_amount"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-black">
+                                            <td><strong>Paid Amount:</strong></td>
+                                            <td class="text-right">
+                                                <span t-field="o.total_paid_amount"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-black">
+                                            <td><strong>Balance Amount:</strong></td>
+                                            <td class="text-right">
+                                                <span t-field="o.balance_amount"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="oe_structure"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+</template>
+</data>
+</openerp>

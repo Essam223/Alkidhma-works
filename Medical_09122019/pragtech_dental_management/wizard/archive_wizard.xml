@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_archive_wizard_wizard2" model="ir.ui.view">
+            <field name="name">archive.wizard.form</field>
+            <field name="model">archive.wizard</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Archive Reason">
+                    <group>
+                        <field name="reason_archive" />
+                        <field name="appt_id"  invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+
+</odoo>

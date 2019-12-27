@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_appointments_calendar,access_appointments_calendar,model_appointments_calendar,,1,1,1,1
+access_appointment_state_color,access_appointment_state_color,model_appointment_state_color,,1,1,1,1

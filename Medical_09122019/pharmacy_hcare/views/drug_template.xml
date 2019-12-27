@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="drug_print_pdf">
+        <t t-call="web.basic_layout">
+            <t t-foreach="records" t-as="pres">
+                <div class="page">
+                    <div class="text-center">
+                        <br/>
+                        <table style="width: 100%; border: 5px solid black;border-style:ridge;border-color: #009688;" >
+                            <thead>
+                                <tr height="160">
+                                    <th style='text-align:center;vertical-align: middle;color:#009688;'>
+                                        <h2><t t-esc="pres"/></h2>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+	</template>
+
+    <report
+        id="drug_print"
+        string="Drug Label"
+        model="medical.appointment"
+        report_type="qweb-pdf"
+		file="pharmacy_hcare.drug_print_pdf"
+        name="pharmacy_hcare.drug_print_pdf"
+		paperformat="pharmacy_management.paperformat_pharmacy_Medicament_barcode"
+		menu="False"
+    />
+
+</odoo>

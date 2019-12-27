@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="0">
+
+		<!-- TAGS FOR RETRIEVING THE TOOTH DATA -->
+
+		<record id="teeth_code_Upper_Jaw" model="teeth.code">
+			<field name="name">Upper Jaw</field>
+			<field name="code">Upper_Jaw</field>
+			<field name="palmer_name">Upper_Jaw</field>
+			<field name="iso">Upper_Jaw</field>
+			<field name="palmer_internal_id">60</field>
+			<field name = "internal_id">60</field>
+		</record>
+		<record id="teeth_code_Lower_Jaw" model="teeth.code">
+			<field name="name">Lower Jaw</field>
+			<field name="code">Lower_Jaw</field>
+			<field name="palmer_name">Lower_Jaw</field>
+			<field name="iso">Lower_Jaw</field>
+			<field name="palmer_internal_id">61</field>
+			<field name = "internal_id">61</field>
+		</record>
+		<record id="teeth_code_Full_Mouth" model="teeth.code">
+			<field name="name">Full Mouth</field>
+			<field name="code">Full_mouth</field>
+			<field name="palmer_name">Full_mouth</field>
+			<field name="iso">Full_mouth</field>
+			<field name="palmer_internal_id">62</field>
+			<field name = "internal_id">62</field>
+		</record>
+		<record id="teeth_code_No_Tooth" model="teeth.code">
+			<field name="name">No Tooth</field>
+			<field name="code">No_Tooth</field>
+			<field name="palmer_name">No_Tooth</field>
+			<field name="iso">No_Tooth</field>
+			<field name="palmer_internal_id">63</field>
+			<field name = "internal_id">63</field>
+		</record>
+
+	</data>
+</openerp>

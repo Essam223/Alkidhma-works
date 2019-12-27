@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Extend Leave  -->
+        <record id="extend_leave_form" model="ir.ui.view">
+            <field name="name">extend.leave.form</field>
+            <field name="model">extend.leave</field>
+            <field name="arch" type="xml">
+                <form string="Extend Leave">
+                    <group >
+                        <group>
+                            <field name="extend_from" readonly="1"/>
+                            <field name="extend_dur" />
+                        </group>
+                        <group>
+                            <field name="extend_to"/>
+                            <field name="leave_type" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_extend_leave" type="object" string="Extend" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--  Extend Leave action -->
+        <record id="extend_leave_act" model="ir.actions.act_window">
+            <field name="name">Extend Leave</field>
+            <field name="res_model">extend.leave</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="extend_leave_form"/>
+            <field name="target">new</field>
+        </record>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="pharmacy_sales_report_wizard" model="ir.ui.view">
+            <field name="name">pharmacy.sales.report</field>
+            <field name="model">pharmacy.sales.report</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Pharmacy Report Wizard">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="period_stop"/>
+                        </group>
+                        <group>
+                            <field name="show_drug"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="pharmacy_sales_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button name="send_pharmacy_sales_report" string="Email Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pharmacy_sales_report" model="ir.actions.act_window">
+                <field name="name">Pharmacy Report Wizard</field>
+                <field name="res_model">pharmacy.sales.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="pharmacy_sales_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem name="Reports" id="menu_pharm_report" parent="pharmacy_management.menu_pharmacy" sequence="60"
+                  groups="pharmacy_management.group_pharmacy_user,pharmacy_management.group_pharmacy_manager"/>
+            <menuitem id="menu_pharmacy_sales_report" name="Pharmacy Report" action="action_pharmacy_sales_report"
+                      parent="menu_pharm_report" sequence="1"/>
+
+    </data>
+</odoo>

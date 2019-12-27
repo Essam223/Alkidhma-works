@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_patient_det_overdue">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div style="color:#009688;">
+                                     <h2><b>DETAILED PATIENT OVERDUE REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period From</strong></td>
+                                                <td >:
+                                                    <t t-if="period_start">
+                                                        <span t-esc="period_start" t-options='{"widget": "datetime"}'/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                                <td style="color:#009688;"><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y %H:%M')"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period To</strong></td>
+                                                <td>:
+                                                    <t t-if="period_stop">
+                                                        <span t-esc="period_stop" t-options='{"widget": "datetime"}'/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                                <td style="color:#009688;"><strong>Doctor</strong></td>
+                                                <td>:
+                                                    <t t-if="doctor">
+                                                        <span t-esc="doctor[1]"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Patient</strong></td>
+                                                <td>:
+                                                    <t t-if="patient">
+                                                        <span t-esc="patient[1]"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                                <td/>
+                                                <td/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-striped" name="invoices">
+                                        <colgroup>
+                                            <col width='6%'/>
+                                            <col width='14%'/>
+                                            <col width='13%'/>
+                                            <col width='30%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Invoice Date</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Invoice No</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Patient</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total Amt</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Paid Amt</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Due Amt</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="appointment_tbody" >
+                                            <t t-set="total_amount_total_signed" t-value="0" />
+                                            <t t-set="total_paid" t-value="0" />
+                                            <t t-set="total_due" t-value="0" />
+                                            <tr t-foreach="doctors" t-as="l">
+                                                <t t-if="not invoices[l] == []">
+                                                    <td colspan="4" style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="l.name.name"/></b></td>
+                                                    <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="get_doctor_total(invoices[l], 'amount_total_signed')"/></b></td>
+                                                    <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="get_doctor_total(invoices[l], 'amount_paid')"/></b></td>
+                                                    <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><b><span t-esc="get_doctor_total(invoices[l], 'amount_due')"/></b></td>
+                                                </t>
+                                                <t t-set="i" t-value="1" />
+                                                <t t-foreach="invoices[l]" t-as="inv" >
+                                                    <tr style="background-color: #c7e8e5;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-field="inv.date_invoice" t-options='{"widget": "date"}'/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="inv.number"/><br/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                            [ <span t-esc="inv.patient.patient_id"/> ] <span t-esc="inv.patient.name.name"/>
+                                                        </td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                            <span t-esc="inv.amount_total_signed"/>
+                                                            <t t-set="total_amount_total_signed" t-value="total_amount_total_signed+inv.amount_total_signed"/>
+                                                        </td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                            <span t-esc="inv.amount_total_signed-inv.residual_signed"/>
+                                                            <t t-set="paid" t-value="inv.amount_total_signed-inv.residual_signed"/>
+                                                            <t t-set="total_paid" t-value="total_paid+paid"/>
+                                                        </td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;">
+                                                            <span t-esc="inv.residual_signed"/>
+                                                            <t t-set="total_due" t-value="total_due+inv.residual_signed"/>
+                                                        </td>
+                                                    </tr>
+                                                    <t t-set="payments_vals" t-value="inv._get_payments_vals()"/>
+                                                    <tr t-foreach="payments_vals" t-as="payment_vals" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;" colspan="5" class="text-right"><t t-esc="payment_vals['date_new']" t-options='{"widget": "date"}'/></td>
+                                                        <!--<td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-left"><span t-esc="'%.2f'%(payment_vals['amount'])"/></td>-->
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-left"><span t-esc="payment_vals['amount']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"/>
+                                                    </tr>
+                                                </t>
+                                            </tr>
+                                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" class="text-right" colspan="4"><b>Total:</b></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><b><span t-esc="total_amount_total_signed"/></b></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><b><span t-esc="total_paid"/></b></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><b><span t-esc="total_due"/></b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>
+

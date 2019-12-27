@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="sales_note_report_pdf">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div style="color:#009688;">
+                                     <h2><b>SALES REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="90%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period From</strong></td>
+                                                <td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+                                                <td style="color:#009688;"><strong>Based On</strong></td>
+                                                <td>: <span t-esc="date_type" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period To</strong></td>
+                                                <td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+                                                <td style="color:#009688;"><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Doctor</strong></td>
+                                                <td>:
+                                                    <t t-if="doctor">
+                                                        <span t-esc="doctor[1]"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                                <td style="color:#009688;"><strong>Insurance Company</strong></td>
+                                                <td>:
+                                                    <t t-if="insurance_company">
+                                                        <span t-esc="insurance_company[1]"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Patient</strong></td>
+                                                <td>:
+                                                    <t t-if="patient">
+                                                        <span t-esc="patient[1]"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                                <td style="color:#009688;">
+                                                    <t t-if="date_type == 'Payment Date'">
+                                                        <strong>Payment Mode</strong>
+                                                    </t>
+                                                </td>
+                                                <td> :
+                                                    <t t-if="date_type == 'Payment Date'">
+                                                        <t t-if="payment_mode">
+                                                            <span t-esc="payment_mode[1]"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            All
+                                                        </t>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Cashier</strong></td>
+                                                <td>:
+                                                    <t t-if="cashier">
+                                                        <span t-esc="cashier[1]"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                     <t t-if="date_type == 'Invoice Date'">
+                                        <table class="table table-striped" name="account_invoices">
+                                            <colgroup>
+                                                <col width='4%'/>
+                                                <col width='8%'/>
+                                                <col width='8%'/>
+                                                <col width='8%'/>
+                                                <col width='10%'/>
+                                                <col width='8%'/>
+                                                <col width='7%'/>
+                                                <col width='7%'/>
+                                                <col width='7%'/>
+                                                <col width='7%'/>
+                                                <col width='7%'/>
+                                                <col width='5%'/>
+                                                <col width='5%'/>
+                                                <col width='5%'/>
+                                                <col width='5%'/>
+                                            </colgroup>
+                                            <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <tr>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" rowspan="2">Sl No.</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Bill Ref</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not patient" rowspan="2">Patient</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not doctor" rowspan="2">Doctor</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not doctor" rowspan="2">Notes</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not insurance_company" rowspan="2">Insurance Company</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Gross Amount</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">After Treatment Group Discount</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Clinic Discount</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Patient Amount</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Insurance Amount</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Payment by IC</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="1" colspan="3">Payment by Patient</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="1">Cash</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="1">Credit</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="1">Due Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice_tbody" >
+                                                <t t-set="i" t-value="1" />
+                                                <t t-set="gross_sum" t-value="0" />
+                                                <t t-set="cash_sum" t-value="0" />
+                                                <t t-set="credit_sum" t-value="0" />
+                                                <t t-set="due_sum" t-value="0" />
+                                                <t t-set="insurance_sum" t-value="0" />
+                                                <t t-set="net_amount_sum" t-value="0" />
+                                                <t t-set="disc_sum" t-value="0" />
+                                                <t t-set="amount_sum" t-value="0" />
+                                                <t t-set="ic_payment_sum" t-value="0" />
+                                                <tr t-foreach="orders" t-as="l" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <t t-if="l['type'] == 'out_refund'">
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['number']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not patient"><span t-esc="l['patient']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not doctor"><span t-esc="l['doctor']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['note_cashier']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not insurance_company"><span t-esc="l['insurance_company']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['gross_amt']"/><t t-set="gross_sum" t-value="gross_sum+l['gross_amt']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['net_amount']"/><t t-set="net_amount_sum" t-value="net_amount_sum+l['net_amount']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['disc_total']"/><t t-set="disc_sum" t-value="disc_sum+l['disc_total']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['amount_total']"/><t t-set="amount_sum" t-value="amount_sum+l['amount_total']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['insurance_total']"/><t t-set="insurance_sum" t-value="insurance_sum+l['insurance_total']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['ic_payment']"/><t t-set="ic_payment_sum" t-value="ic_payment_sum+l['ic_payment']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['cash']"/><t t-set="cash_sum" t-value="cash_sum+l['cash']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['credit']"/><t t-set="credit_sum" t-value="credit_sum+l['credit']"/></td>
+                                                        <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['due']"/><t t-set="due_sum" t-value="due_sum+l['due']"/></td>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['number']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not patient"><span t-esc="l['patient']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not doctor"><span t-esc="l['doctor']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['note_cashier']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not insurance_company"><span t-esc="l['insurance_company']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['gross_amt']"/><t t-set="gross_sum" t-value="gross_sum+l['gross_amt']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['net_amount']"/><t t-set="net_amount_sum" t-value="net_amount_sum+l['net_amount']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['disc_total']"/><t t-set="disc_sum" t-value="disc_sum+l['disc_total']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['amount_total']"/><t t-set="amount_sum" t-value="amount_sum+l['amount_total']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['insurance_total']"/><t t-set="insurance_sum" t-value="insurance_sum+l['insurance_total']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['ic_payment']"/><t t-set="ic_payment_sum" t-value="ic_payment_sum+l['ic_payment']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['cash']"/><t t-set="cash_sum" t-value="cash_sum+l['cash']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['credit']"/><t t-set="credit_sum" t-value="credit_sum+l['credit']"/></td>
+                                                        <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['due']"/><t t-set="due_sum" t-value="due_sum+l['due']"/></td>
+                                                    </t>
+                                                </tr>
+                                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                    <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                    <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not doctor"></td>
+                                                    <td style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                    <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not insurance_company"></td>
+                                                    <td style="border-right: 1px solid black;border-top: 1px solid black;"><strong>Total  : </strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="gross_sum"/></strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="net_amount_sum"/></strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="disc_sum"/></strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="amount_sum"/></strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="insurance_sum"/></strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="ic_payment_sum"/></strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="cash_sum"/></strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="credit_sum"/></strong></td>
+                                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="due_sum"/></strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                     <br/>
+                                     <h3>Payment mode Summary</h3>
+                                     <table class="table table-bordered table-striped"  style="width: 70%">
+                                        <thead>
+                                            <tr>
+                                                <th style='text-align:left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;'>Name</th>
+                                                <th style='text-align:left;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;'>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Cash</td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="cash_sum" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" >Credit</td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="credit_sum" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Total :</td>
+                                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="cash_sum + credit_sum" /></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                     </t>
+                                     <t t-else="">
+                                         <table class="table table-striped" name="account_payments">
+                                        <colgroup>
+                                            <col width='3%'/>
+                                            <col width='10%'/>
+                                            <col width='8%'/>
+                                            <col width='8%'/>
+                                            <col width='12%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                            <col width='12%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" rowspan="2">Sl No.</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Bill Ref</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Bill Date</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="2">Payment Date</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not patient" rowspan="2">Patient</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not doctor" rowspan="2">Doctor</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not cashier" rowspan="2">Cashier</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not insurance_company" rowspan="2">Insurance Company</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not payment_mode" rowspan="1" colspan="2">Payment by Patient</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="payment_mode" rowspan="1" colspan="1">Payment by Patient</th>
+                                            </tr>
+                                            <tr>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not payment_mode or payment_mode and payment_mode[2] == 'cash'" rowspan="1">Cash</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not payment_mode or payment_mode and payment_mode[2] == 'bank'" rowspan="1">Credit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                            <t t-set="cash_sum" t-value="0" />
+                                            <t t-set="credit_sum" t-value="0" />
+                                            <tr t-foreach="orders" t-as="l" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <t t-if="l['type'] == 'out_refund'">
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['number']"/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['bill_date']" t-options='{"widget": "date"}'/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['payment_date']" t-options='{"widget": "date"}'/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not patient"><span t-esc="l['patient']"/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not doctor"><span t-esc="l['doctor']"/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not cashier"><span t-esc="l['cashier']"/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not insurance_company"><span t-esc="l['insurance_company']"/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not payment_mode or (payment_mode and payment_mode[2] == 'cash')"><span t-esc="l['cash']"/><t t-set="cash_sum" t-value="cash_sum+l['cash']"/></td>
+                                                    <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not payment_mode or (payment_mode and payment_mode[2] == 'bank')"><span t-esc="l['credit']"/><t t-set="credit_sum" t-value="credit_sum+l['credit']"/></td>
+                                                </t>
+                                                <t t-else="">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['number']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['bill_date']" t-options='{"widget": "date"}'/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['payment_date']" t-options='{"widget": "date"}'/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not patient"><span t-esc="l['patient']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not doctor"><span t-esc="l['doctor']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not cashier"><span t-esc="l['cashier']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not insurance_company"><span t-esc="l['insurance_company']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not payment_mode or (payment_mode and payment_mode[2] == 'cash')"><span t-esc="l['cash']"/><t t-set="cash_sum" t-value="cash_sum+l['cash']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not payment_mode or (payment_mode and payment_mode[2] == 'bank')"><span t-esc="l['credit']"/><t t-set="credit_sum" t-value="credit_sum+l['credit']"/></td>
+                                                </t>
+                                            </tr>
+                                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not doctor"></td>
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not cashier"></td>
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not insurance_company"></td>
+                                                <td style="border-right: 1px solid black;border-top: 1px solid black;"><strong>Total  :  <span t-esc="cash_sum + credit_sum"/></strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" t-if="not payment_mode or (payment_mode and payment_mode[2] == 'cash')"><strong><span t-esc="cash_sum"/></strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" t-if="not payment_mode or (payment_mode and payment_mode[2] == 'bank')"><strong><span t-esc="credit_sum"/></strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                     </t>
+
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>

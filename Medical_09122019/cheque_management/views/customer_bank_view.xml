@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+     <!--  Customer Bank Form View -->
+        <record model="ir.ui.view" id="customer_bank_form">
+            <field name="name">customer.bank.form</field>
+            <field name="model">customer.bank</field>
+            <field name="arch" type="xml">
+                <form string="Customer Bank">
+                    <sheet>
+                         <group>
+                             <field name="name"/>
+                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Customer Bank Tree View -->
+        <record model="ir.ui.view" id="customer_bank_tree">
+            <field name="name">customer.bank.tree</field>
+            <field name="model">customer.bank</field>
+            <field name="arch" type="xml">
+                <tree string="Customer Banks">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Customer Bank Search View -->
+        <record model="ir.ui.view" id="customer_bank_search">
+            <field name="name">customer.bank.search</field>
+            <field name="model">customer.bank</field>
+            <field name="arch" type="xml">
+                <search string="Customer Banks">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_customer_bank">
+            <field name="name">Customer Banks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">customer.bank</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Customer Banks" id="menu_customer_banks" parent="cheque_management.menu_settings" sequence="2"
+                  action="action_customer_bank"/>
+    </data>
+</odoo>

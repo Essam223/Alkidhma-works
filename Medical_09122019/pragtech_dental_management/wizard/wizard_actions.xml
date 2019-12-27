@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_income_by_doctor_form" model="ir.ui.view">
+			<field name="name">Income By Doctor</field>
+			<field name="model">income.by.doctor.report.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="By Doctor">
+					<separator string="Fill The Dates" colspan="4" />
+					<group colspan="4" col='4'>
+						<field name="start_date" />
+						<field name="end_date" />
+					</group>
+					<footer>
+						<button name="income_by_doctor_report" string="Print Report" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_income_by_doctor_report">
+			<field name="name">Income By Doctor</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">income.by.doctor.report.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<record id="view_patient_by_doctor_form" model="ir.ui.view">
+			<field name="name">By patient</field>
+			<field name="model">patient.by.doctor.report.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="By Patient">
+					<separator string="Fill The Dates" colspan="4" />
+					<group colspan="4" col='4'>
+						<field name="start_date" />
+						<field name="end_date" />
+						<field name="company_id" groups="base.group_multi_company"/>
+					</group>
+					<footer>
+						<button name="patient_by_doctor_report" string="Print Report" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="income_by_procedure_new_view">
+			<field name="name">income.by.procedure.wizard.form</field>
+			<field name="model">income.by.procedure.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Report Wizard" version="7.0">
+					<separator string="Fill The Dates" colspan="4" />
+					<group colspan="4" col="4">
+						<field name="date_start" />
+						<field name="date_end" />
+						<field name="treatment_ids" widget="many2many_tags"/>
+						<field name="doctor" />
+						<field name="detailed"/>
+						<field name="is_only_doctor" invisible="1"/>
+					</group>
+					<footer>
+						<button name="print_report" string="Print Report" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="patient_by_procedure_new_view">
+			<field name="name">patient.by.procedure.wizard.form</field>
+			<field name="model">patient.by.procedure.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Report Wizard" version="7.0">
+					<separator string="Fill The Dates" colspan="4" />
+					<group colspan="4" col="4">
+						<field name="date_start" />
+						<field name="date_end" />
+						<field name="company_id" groups="base.group_multi_company"/>
+					</group>
+					<footer>
+						<button name="print_report" string="Print Report" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_patient_by_doctor_report">
+			<field name="name">Patient By Doctor</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">patient.by.doctor.report.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem action="action_income_by_doctor_report" name="Income By Doctor"
+			id="income_by_doctor_submenu" parent="dental_report_menu" sequence="25"
+			groups="pragtech_dental_management.group_dental_mng_menu"/>
+		<menuitem action="action_patient_by_doctor_report" name="Patient By Doctor"
+			id="patient_by_doctor_submenu" parent="dental_report_menu" sequence="10"
+			groups="pragtech_dental_management.group_dental_mng_menu"/>
+
+
+
+		<record id="action_income_by_procedure_wizard_report" model="ir.actions.act_window">
+			<field name="name">Income By Procedure</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">income.by.procedure.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem id="menu_action_income_by_procedure_report" action="action_income_by_procedure_wizard_report"
+			parent="dental_report_menu" sequence="30" groups="pragtech_dental_management.group_dental_mng_menu"/>
+
+
+		<record id="action_patient_by_procedure_wizard_report" model="ir.actions.act_window">
+			<field name="name">Patient By Procedure</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">patient.by.procedure.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem id="menu_action_patient_by_procedure_report"
+			action="action_patient_by_procedure_wizard_report" parent="dental_report_menu"
+			sequence="15" groups="pragtech_dental_management.group_dental_mng_menu"/>
+
+	</data>
+</odoo>

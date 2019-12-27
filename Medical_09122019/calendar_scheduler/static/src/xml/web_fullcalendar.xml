@@ -1,0 +1,583 @@
+<template>
+	<t t-name="CalendarView.buttons">
+		<div class="o_calendar_buttons">
+			<button class="o_calendar_button_prev btn btn-sm btn-primary">
+				<span class="fa fa-arrow-left"/>
+			</button>
+			<button class="o_calendar_button_today btn btn-sm btn-primary">
+				Today
+			</button>
+			<button class="o_calendar_button_next btn btn-sm btn-primary">
+				<span class="fa fa-arrow-right"/>
+			</button>
+
+			<div class="btn-group btn-group-sm">
+				<button type="button"
+						class="o_calendar_button_day btn btn-sm btn-default">
+					Day
+				</button>
+				<button type="button"
+						class="o_calendar_button_week btn btn-sm btn-default">
+					Week
+				</button>
+				<button type="button"
+						class="o_calendar_button_month btn btn-sm btn-default">
+					Month
+				</button>
+				<button type="button"
+						class="o_calendar_reload btn btn-sm btn-default fa fa-retweet"
+						title="Reload appointments and patients">
+				</button>
+			</div>
+		</div>
+	</t>
+
+	<div t-name="CalendarView2"
+		 class="o_calendar_container o_scheduler_container">
+		<div class="o_calendar_view">
+			<div class="o_calendar_buttons"/>
+			<div class="o_calendar_widget"/>
+		</div>
+		<div class="o_calendar_sidebar_container hidden-xs">
+			<i class="o_calendar_sidebar_toggler fa"
+			   style="background-color:wheat;"/>
+			<div class="o_calendar_sidebar">
+				<div class="o_calendar_mini"/>
+			</div>
+			<!--dept controller-->
+			<div class="o_calendar_sidebar_dept sidebar_row_parent"
+				 style="height:30px;">
+				<div class="dept_controller sidebar_row fa fa-caret-right">
+					Departments
+					<div class="selection_ctrl">
+						<span class="select_all all_depts fa fa-check">
+							Select all
+						</span>
+						<span class="unselect_all no_depts fa fa-times">
+							Unselect all
+						</span>
+					</div>
+					<div class="o_calendar_dept o_hidden"/>
+				</div>
+			</div>
+			<!--rooms controller-->
+			<div class="o_calendar_sidebar_room sidebar_row_parent"
+				 style="height:30px;">
+				<div class="room_controller sidebar_row fa fa-caret-right">
+					Rooms
+					<div class="selection_ctrl">
+						<span class="select_all all_rooms fa fa-check">
+							Select all
+						</span>
+						<span class="unselect_all no_rooms fa fa-times">
+							Unselect all
+						</span>
+					</div>
+					<div class="o_calendar_room o_hidden"/>
+				</div>
+			</div>
+			<!--doctors controller-->
+			<div class="o_calendar_sidebar_doctor sidebar_row_parent"
+				 style="height:30px;">
+				<div class="doctor_controller sidebar_row fa fa-caret-right">
+					Doctors
+					<div class="selection_ctrl">
+						<span class="select_all all_doctors fa fa-check">
+							Select all
+						</span>
+						<span class="unselect_all no_doctors fa fa-times">
+							Unselect all
+						</span>
+					</div>
+					<div class="o_calendar_doctor o_hidden"/>
+				</div>
+			</div>
+			<!--states controller-->
+			<div class="o_calendar_sidebar_states sidebar_row_parent"
+				 style="height:30px;">
+				<div class="states_controller sidebar_row fa fa-caret-right">
+					Status
+					<div class="selection_ctrl">
+						<span class="select_all all_states fa fa-check">
+							Select all
+						</span>
+						<span class="unselect_all no_states fa fa-times">
+							Unselect all
+						</span>
+					</div>
+					<div class="o_calendar_states o_hidden"/>
+				</div>
+			</div>
+
+			<!--calendar schedule controller-->
+			<div class="o_calendar_sidebar_schedule sidebar_row_parent"
+				 style="height:30px;">
+				<div class="time_schedule_controller fa fa-caret-right">
+					Time controller
+				</div>
+				<div class="o_calendar_schedule o_hidden"/>
+			</div>
+		</div>
+	</div>
+
+	<div t-name="CalendarView2.pat_list_wiz">
+		<div class="form-group">
+			<div class="pat_list_el">
+				<table class="table table-bordered patient_table">
+					<thead class="patient_header">
+						<tr>
+							<th>Name</th>
+							<th>Mobile</th>
+							<th>QID</th>
+							<th>File no.</th>
+						</tr>
+					</thead>
+					<tbody class="patient_body">
+						<t t-set="p_index" t-value="1" />
+						<tr t-foreach="options" t-as="patient"
+							class="patient_line" t-att-id="p_index">
+							<td><t t-esc="patient.patient_name"/></td>
+							<td><t t-esc="patient.mobile"/></td>
+							<td><t t-esc="patient.qid"/></td>
+							<td><t t-esc="patient.patient_id"/></td>
+							<t t-set="p_index" t-value="p_index+1"/>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div t-name="CalendarView2.quick_create"
+		 class="o_calendar_quick_create scheduler_modal">
+		<div class="form-group">
+			<div class="patient_data">
+				<div class="p_left">
+					<div class="p_row">
+						<p class="contents">Is a registered patient?</p>
+						<div class="p_row_data">
+							<input class="patient_type"
+								   type="checkbox"
+								   checked="checked"/>
+						</div>
+					</div>
+					<div class="p_row">
+						<p class="contents">Patient Name</p>
+						<div class="p_row_data">
+							<input class="patient_name" type="text"/>
+						</div>
+					</div>
+					<div class="p_row box patient">
+						<p class="contents">Patient file no.</p>
+						<div class="p_row_data">
+							<input class="patient_list"
+								   style="display:none !important;"
+								   type="text"/>
+							<input class="patient_ids"
+								   type="text"/>
+						</div>
+					</div>
+					<div class="p_row gender_hide">
+						<p class="contents">Gender</p>
+						<div class="p_row_data">
+							<select class="gender">
+								<option value=""/>
+								<option value="m">
+									Male
+								</option>
+								<option value="f">
+									Female
+								</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="p_right">
+					<div class="p_row">
+						<p class="contents">Patients status</p>
+						<div class="p_row_data">
+							<select class="patient_stat">
+								<option value="withapt">
+									Come with Appointment
+								</option>
+								<option value="walkin">
+									Walk In
+								</option>
+
+							</select>
+						</div>
+					</div>
+					<div class="p_row">
+						<p class="contents">Patient Phone</p>
+						<div class="p_row_data">
+							<input class="patient_phone" type="text"
+								   value=""/>
+						</div>
+					</div>
+					<div class="p_row">
+						<p class="contents">QID</p>
+						<div class="p_row_data">
+							<input class="qid" type="text" value=""/>
+						</div>
+					</div>
+					<div class="p_row dob_hide">
+						<p class="contents">Date of birth</p>
+						<div class="p_row_data">
+							<input class="dob" type="text"/>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="physician_data">
+				<div class="p_left">
+					<div class="p_row nationality_id_hide">
+						<p class="contents">Nationality</p>
+						<div class="p_row_data">
+							<select class="nationality_id">
+								<option value=""></option>
+
+								<t t-foreach="options.nationality_ids"
+								   t-as="nt">
+									<option t-att-value="nt.id">
+										<span t-esc="nt.name"/>
+									</option>
+								</t>
+							</select>
+						</div>
+					</div>
+
+					<div class="p_row">
+						<p class="contents">Doctor</p>
+						<div class="p_row_data">
+							<select class="staff">
+								<t t-foreach="options.staff" t-as="st">
+									<t t-if="options.doctor === st.id">
+										<option t-att-value="st.id"
+												selected="True">
+											<span t-esc="st.name"/>
+										</option>
+									</t>
+									<t t-else="">
+										<option t-att-value="st.id">
+											<span t-esc="st.name"/>
+										</option>
+									</t>
+								</t>
+							</select>
+						</div>
+					</div>
+
+					<div class="p_row">
+						<p class="contents">Appointment Start</p>
+						<div class="p_row_data">
+							<!--<t t-set="start_time" t-value="0"/>-->
+							<select class="modal_start_time">
+								<t t-foreach="options.time_slots" t-as="t">
+									<!--<t t-if="start_time==1">
+										<t t-set="start_time" t-value="t"/>
+									</t>-->
+
+									<t t-if="options.start == t">
+										<option t-att-value="t"
+												selected="True">
+											<span t-esc="t"/>
+										</option>
+										<!--<t t-set="start_time" t-value="1"/>-->
+									</t>
+									<t t-else="">
+										<option t-att-value="t">
+											<span t-esc="t"/>
+										</option>
+									</t>
+								</t>
+							</select>
+						</div>
+					</div>
+					<div class="p_row note_row">
+						<p class="contents">Notes</p>
+						<div class="p_row_data">
+							<input class="notes" type="text"/>
+						</div>
+					</div>
+				</div>
+				<div class="p_right">
+					<div class="p_row">
+						<p class="contents">Urgent</p>
+						<div class="p_row_data">
+							<input class="urgent_app" type="checkbox"/>
+						</div>
+					</div>
+					<div class="p_row">
+						<p class="contents">Room</p>
+						<div class="p_row_data">
+							<select class="room_id">
+								<option value=""/>
+								<t t-foreach="options.rooms" t-as="rm">
+									<t t-if="options.room_id === rm.id">
+										<option t-att-value="rm.id"
+												selected="True">
+											<span t-esc="rm.name"/>
+										</option>
+									</t>
+									<t t-else="">
+										<option t-att-value="rm.id">
+											<span t-esc="rm.name"/>
+										</option>
+									</t>
+								</t>
+							</select>
+						</div>
+					</div>
+					<div class="p_row">
+						<p class="contents">Appointment End</p>
+						<div class="p_row_data">
+							<select class="modal_end_time">
+								<t t-foreach="options.time_slots" t-as="t2">
+									<t t-if="options.end == t2">
+										<option t-att-value="t2"
+												selected="True">
+											<span t-esc="t2"/>
+										</option>
+									</t>
+									<t t-else="">
+										<option t-att-value="t2">
+											<span t-esc="t2"/>
+										</option>
+									</t>
+								</t>
+							</select>
+						</div>
+					</div>
+					<div class="p_row">
+						<p class="contents">Followup</p>
+						<div class="p_row_data">
+							<input class="followup_app" type="checkbox"/>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+<!--
+		<div class="alert alert-danger required_field_warning"
+			 style="display:none;position: inherit;text-align:center;">
+			<span>Please fill the required values.</span>
+		</div>
+-->
+	</div>
+
+	<t t-name="CalendarView2.sidebar.schedule">
+		<b>Working time:</b>
+		<div class="interval_start">
+			<div class="interval_start_label">Start</div>
+			<select class="duration_start">
+				<t t-foreach="time_schedule" t-as="s">
+					<t t-if="s === start">
+						<option t-att-value="s" selected="True">
+							<span t-esc="s"/>
+						</option>
+					</t>
+					<t t-else="">
+						<option t-att-value="s">
+							<span t-esc="s"/>
+						</option>
+					</t>
+				</t>
+			</select>
+		</div>
+		<br/>
+		<div class="interval_end">
+			<div class="interval_end_label">End</div>
+			<select class="duration_end">
+				<t t-foreach="time_schedule" t-as="s">
+					<t t-if="s === end">
+						<option t-att-value="s" selected="True">
+							<span t-esc="s"/>
+						</option>
+					</t>
+					<t t-else="">
+						<option t-att-value="s">
+							<span t-esc="s"/>
+						</option>
+					</t>
+				</t>
+			</select>
+		</div>
+		<br/>
+		<div class="border-bottom"/>
+		<label for="manage_breaktime">Manage Break Time</label>
+		<t t-if="manage_breaktime==true">
+			<input type="checkbox" class="manage_breaktime"
+				   t-att-checked="true"/>
+
+		</t>
+		<t t-else="">
+			<input type="checkbox" class="manage_breaktime"/>
+
+		</t>
+		<br/>
+		<div class="break-time-div">
+			<b>Break time:</b>
+			<div class="interval_start">
+				<div class="interval_start_label">Start</div>
+				<select class="break_start">
+					<t t-foreach="time_schedule" t-as="s">
+						<t t-if="s === break_start">
+							<option t-att-value="s" selected="True">
+								<span t-esc="s"/>
+							</option>
+						</t>
+						<t t-else="">
+							<option t-att-value="s">
+								<span t-esc="s"/>
+							</option>
+						</t>
+					</t>
+				</select>
+			</div>
+			<br/>
+			<div class="interval_end">
+				<div class="interval_end_label">End</div>
+				<select class="break_end">
+					<t t-foreach="time_schedule" t-as="s">
+						<t t-if="s === break_end">
+							<option t-att-value="s" selected="True">
+								<span t-esc="s"/>
+							</option>
+						</t>
+						<t t-else="">
+							<option t-att-value="s">
+								<span t-esc="s"/>
+							</option>
+						</t>
+					</t>
+				</select>
+			</div>
+		</div>
+		<br/>
+		<div class="schedule_footer">
+			<button class="update_time">
+				Update
+				<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+			</button>
+		</div>
+	</t>
+	<t t-name="CalendarView2.sidebar.doctors">
+		<div class="res_sel_div">
+			<select class="cal_doctors"
+					placeholder="Doctors"
+					id="doctors"
+					multiple="multiple">
+				<t t-foreach="doctors" t-as="res">
+					<option t-att-value="res.id" selected="selected">
+						<span t-esc="res.title"/>
+					</option>
+				</t>
+			</select>
+		</div>
+	</t>
+	<t t-name="CalendarView2.sidebar.rooms">
+		<div class="res_sel_div">
+			<select class="cal_rooms"
+					placeholder="Rooms"
+					id="rooms"
+					multiple="multiple">
+				<t t-foreach="rooms" t-as="res">
+					<option t-att-value="res.id" selected="selected">
+						<span t-esc="res.title"/>
+					</option>
+				</t>
+			</select>
+		</div>
+	</t>
+	<t t-name="CalendarView2.sidebar.states">
+		<div class="state_sel_div">
+			<select class="cal_states"
+					placeholder="States"
+					id="state_vals"
+					multiple="multiple">
+				<t t-foreach="states" t-as="res">
+					<t t-if="res=='missed' or res == 'cancel'">
+						<option t-att-value="res"
+								t-att-background-color="state_color[res]">
+							<span t-esc="res"/>
+						</option>
+					</t>
+					<t t-else="">
+						<option t-att-value="res"
+								t-att-background-color="state_color[res]"
+								selected="selected">
+							<span t-esc="res"/>
+						</option>
+					</t>
+				</t>
+			</select>
+		</div>
+	</t>
+	<t t-name="CalendarView2.sidebar.dept">
+		<div class="dept_sel_div">
+			<select class="cal_dept"
+					placeholder="Departments"
+					id="dept_vals"
+					multiple="multiple">
+				<t t-foreach="departments" t-as="res">
+					<option t-att-value="res.id" selected="selected">
+						<span t-esc="res.name"/>
+					</option>
+				</t>
+			</select>
+		</div>
+	</t>
+	<t t-name="FieldColorPicker">
+
+		<span t-if="widget.mode !== 'readonly'">
+			<div class="input-group colorpicker-component">
+				<input type="text"
+					   t-att-id="widget.id_for_label"
+					   t-att-tabindex="widget.attrs.tabindex"
+					   t-att-autofocus="widget.attrs.autofocus"
+					   t-att-placeholder="widget.attrs.placeholder"
+					   t-att-maxlength="widget.field.size"
+					   class="colorpickerg form-control"
+				/>
+				<span class="input-group-addon">
+					<i></i>
+				</span>
+			</div>
+
+		</span>
+		<span t-if="widget.mode === 'readonly'"/>
+
+	</t>
+
+	<div t-name="calendarModal2" id="calendarModal2" class="modal draggable fade">
+		<div class="modal-dialog">
+			<div class="modal-content" t-att-style="style_val">
+				<div class="modal-header">
+					<h4 id="modalTitle" class="modal-title">State Controller</h4>
+				</div>
+				<div id="modalBody" class="modal-body">
+					<select class="state_ctrl">
+						<!--<option value=""></option>-->
+						<t t-foreach="states_list" t-as="st">
+							<option t-att-value="st['state'][0]">
+								<span t-esc="st['state'][1]"/>
+							</option>
+						</t>
+					</select>
+				</div>
+				<div class="modal-footer">
+					<button type="button"
+							class="btn btn-default" id="update_evt_status">
+						Update
+					</button>
+					<button type="button" class="btn btn-default close_btn"
+							data-dismiss="modal">Close
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</template>

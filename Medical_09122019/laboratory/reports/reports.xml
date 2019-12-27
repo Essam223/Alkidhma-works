@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<report
+		id="action_report_lab_order"
+		string="Lab Order"
+		model="lab.request"
+		report_type="qweb-pdf"
+		file="laboratory.report_lab_order"
+		name="laboratory.report_lab_order"
+		/>
+	</data>
+</odoo>

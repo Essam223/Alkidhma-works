@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data >
+        <record id="loan" model="account.account">
+            <field name="code">124512</field>
+            <field name="name">HR Loan</field>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+        </record>
+
+        <record id="loan_journal" model="account.journal">
+            <field name="name">HR Loan</field>
+            <field name="code">LOAN</field>
+            <field name="type">bank</field>
+            <field name="default_debit_account_id" ref="loan"/>
+            <field name="default_credit_account_id" ref="loan"/>
+        </record>
+
+    </data>
+</odoo>

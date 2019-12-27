@@ -1,0 +1,20 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="view_user_creation_pharmacy">
+			<field name="name">User Creation</field>
+			<field name="model">user.creation</field>
+            <field name="inherit_id" ref="pragtech_dental_management.view_user_creation" />
+			<field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='inventory']" position="after">
+                        <field name="pharmacy"/>
+                    </xpath>
+                </data>
+			</field>
+        </record>
+
+	</data>
+</odoo>
+
+
+

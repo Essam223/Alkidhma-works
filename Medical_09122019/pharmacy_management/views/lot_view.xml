@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <record model="ir.ui.view" id="view_production_lot_form">
+        <field name="name">stock.production.lot.form</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="type">form</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <sheet position="before">
+                <header>
+                    <button string="Print Barcode" type="object" class="oe_highlight" name="print_barcode"/>
+                </header>
+            </sheet>
+        </field>
+    </record>
+
+    <record id="view_pharm_production_lot_form" model="ir.ui.view">
+        <field name="name">stock.production.lot.form</field>
+        <field name="model">stock.production.lot</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Lots/Serial Numbers">
+                <sheet>
+                <!--<div class="oe_title">-->
+                    <!--<label for="name" class="oe_edit_only"/>-->
+                    <!--<h1>-->
+                        <!--<field name="name" placeholder="e.g. LOT/0001/20121"/>-->
+                    <!--</h1>-->
+                <!--</div>-->
+                <group name="main_group">
+                    <group>
+                        <field name="name" placeholder="e.g. LOT/0001/20121"/>
+                        <field name="product_id" help="Product this lot/serial number contains. You cannot change it anymore if it has already been moved."/>
+                            <!--<label for="product_qty"/>-->
+                            <!--<div class="o_row">-->
+                                <!--<field name="product_qty"/>-->
+                                <!--<field name="product_uom_id" readonly="1" groups="product.group_uom"/>-->
+                            <!--</div>-->
+                        <!--<field name="ref"/>-->
+                    </group>
+                    <group>
+                        <field name="life_date" string="Expiry Date"/>
+                    </group>
+                </group>
+                </sheet>
+                <!--<div class="oe_chatter">-->
+                    <!--<field name="message_follower_ids" widget="mail_followers"/>-->
+                    <!--<field name="message_ids" widget="mail_thread"/>-->
+                <!--</div>-->
+            </form>
+        </field>
+    </record>
+
+    <record id="stock.action_production_lot_form" model="ir.actions.act_window">
+        <field name="name">Lots/Serial Numbers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.production.lot</field>
+        <field name="view_type">form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('stock.view_production_lot_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('stock.view_production_lot_form')})]"/>
+        <field name="search_view_id" ref="stock.search_product_lot_filter"/>
+        <field name="context">{'search_default_group_by_product': 1}</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to add a lot/serial number.
+          </p><p>
+            This is the list of all the production lots you recorded. When
+            you select a lot, you can get the traceability of the products contained in lot.
+          </p>
+        </field>
+    </record>
+
+
+</odoo>

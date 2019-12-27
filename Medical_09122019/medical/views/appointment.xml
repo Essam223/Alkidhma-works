@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="medical_appointment_tree" model="ir.ui.view">
+            <field name="name">Appointment</field>
+			<field name="model">medical.appointment</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_appointment_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="dental" invisible="1"/>
+                </xpath>
+                <xpath expr="//button[@name='appt_open_chart']" position="replace">
+					<button name="appt_open_chart" string="Chart" type="object"
+                        groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+                        attrs="{'invisible': ['|', '|', ('state', 'not in', ['checkin', 'ready']),('patient', '=', False), ('dental', '=', False)]}"/>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="medical_physician_view" model="ir.ui.view">
+            <field name="name">Physician</field>
+			<field name="model">medical.physician</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_physician_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="dental"/>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="medical_appointment_view" model="ir.ui.view">
+            <field name="name">Appointment</field>
+			<field name="model">medical.appointment</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_appointment_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[6]" position="attributes">
+                    <attribute name="groups">medical.group_dental_nurse_menu,pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu</attribute>
+                </xpath>
+                <xpath expr="//button[@name='appt_open_chart']" position="replace">
+                    <button name="appt_open_chart" type="object"
+                            groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+                            string="Open Chart" icon="fa fa-tasks"
+                            attrs="{'invisible': ['|','|', ('state', 'not in', ['checkin', 'ready']),('patient', '=', False), ('dental', '=', False)]}">
+                    </button>
+                </xpath>
+                <xpath expr="//sheet/group/field[@name='followup']" position="after">
+                    <field name="nurse_id"/>
+                </xpath>
+                <xpath expr="//sheet/group/field[@name='invoice_done']" position="after">
+                    <field name="dental" invisible="1" force_save="1"/>
+                </xpath>
+                <xpath expr="//field[@name='benefit_type']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('dental', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='operations']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('dental', '=', False), ('state', 'not in', ['checkin', 'ready', 'done', 'visit_closed'])]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='ready']" position="after">
+                    <button name="CollectedVitalSigns" string="Collected Vital Signs" type="object" groups="medical.group_dental_nurse_menu" attrs="{'invisible': ['|', ('state', 'not in', ['checkin','ready','done', 'visit_closed']),('vital_sign', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//button[@name='print_prescription']" position="after">
+                    <button name="print_patient_file" string="Print Patient File" type="object" attrs="{'invisible': [('patient', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//page[@name='complaints']" position="before">
+                    <page string="Clinical Assessment"
+                          groups="pragtech_dental_management.group_dental_doc_menu,medical.group_dental_nurse_menu,pragtech_dental_management.group_dental_mng_menu"
+                          attrs="{'invisible': [('state', 'not in', ['checkin', 'ready', 'done', 'visit_closed'])]}"  >
+                        <group>
+                            <group>
+                                <field name="weight"  />
+                                <field name="temp" />
+                                <field name="hr" />
+                                <field name="vital_sign" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="rr" />
+                                <field name="bp" />
+                                <field name="sp02" />
+                            </group>
+                        </group>
+                        <label for="Laboratory" />
+                        <field name="Laboratory" placeholder="Laboratory Report......" />
+                        <label for="LaboratoryAttach" />
+                        <field name="LaboratoryAttach" />
+                        <br/>
+                        <label for="ECG"/>
+                        <field name="ECG" placeholder="ECG Report......" />
+                        <label for="ECGAttach" />
+                        <field name="ECGAttach" />
+                        <br/>
+                        <label for="Echocardiography" />
+                        <field name="Echocardiography" placeholder="Echocardiography Report......" />
+                        <label for="EchocardiographyAttach" />
+                        <field name="LaboratoryAttach" />
+                        <br/>
+                        <label for="Radiology"/>
+                        <field name="Radiology" placeholder="Radiology Report......" />
+                        <label for="RadiologyAttach" />
+                        <field name="RadiologyAttach" />
+                        <br/>
+                        <label for="StressTest"/>
+                        <field name="StressTest" placeholder="Stress Test Report......" />
+                        <label for="StressTestAttach" />
+                        <field name="StressTestAttach" />
+                    </page>
+                </xpath>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="medical_appointment_view_clinical_Assessment">
+			<field name="name">Appointment</field>
+			<field name="model">medical.appointment</field>
+			<field name="type">form</field>
+			<field name="priority">15</field>
+			<field name="arch" type="xml">
+				<form string="Clinical Assessment" version="7.0" create="false" edit="false" delete="false">
+                    <sheet>
+                        <field name="state" invisible="1"/>
+						<group>
+									<group>
+										<field name="weight" readonly="1"/>
+										<field name="temp" readonly="1"/>
+										<field name="hr" readonly="1"/>
+										<field name="vital_sign" invisible="1"/>
+									</group>
+									<group>
+										<field name="rr" readonly="1"/>
+										<field name="bp" readonly="1"/>
+										<field name="sp02" readonly="1"/>
+									</group>
+								</group>
+
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="Laboratory" />
+								            <field name="Laboratory" readonly="1"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="LaboratoryAttach" readonly="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="ECG" />
+								            <field name="ECG" readonly="1"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="ECGAttach" readonly="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="Echocardiography" />
+								            <field name="Echocardiography" readonly="1"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="EchocardiographyAttach" readonly="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="Radiology" />
+								            <field name="Radiology" readonly="1"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="RadiologyAttach" readonly="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="StressTest" />
+								            <field name="StressTest" readonly="1"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="StressTestAttach" readonly="1"/>
+                                        </td>
+                                    </tr>
+                                </table>
+					</sheet>
+				</form>
+			</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="medical_appointment_view_nurse">
+			<field name="name">Appointment</field>
+			<field name="model">medical.appointment</field>
+			<field name="type">form</field>
+			<field name="priority">12</field>
+			<field name="arch" type="xml">
+				<form string="Appointment" version="7.0" create="false">
+					<header>
+					   <button name="ready" string="In Chair" type="object" states="checkin"/>
+					   <button name="CollectedVitalSigns" string="Collected Vital Signs" type="object" groups="medical.group_dental_nurse_menu" attrs="{'invisible': ['|', ('state', 'not in', ['checkin','ready','done', 'visit_closed']), ('vital_sign', '=', True)]}"/>
+					   <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,checkin,ready,done,'visit_closed'" statusbar_colors='{"confirmed":"blue","ready":"blue","cancel":"red"}'/>
+            		 </header>
+                    <sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1"/>
+							</h1>
+						</div>
+	                    <group colspan="4" col="4">
+							<field name="patient" attrs="{'invisible': ['&amp;', ('is_registered', '=', False), ('state', 'in', ['draft', 'sms_send'])],'required': [('is_registered', '=', True)]}" context="{'appointment_id_new':id}"/>
+							<field name="urgency" />
+							<field name="appointment_sdate" />
+							<field name="doctor" required="1" />
+							<field name="nurse_id"/>
+							<!--<field name="department_id"/>-->
+							<field name="is_registered" invisible="1" />
+							<field name="vital_sign" invisible="1" />
+						</group>
+						<notebook>
+							<page string="Clinical Assessment" groups="pragtech_dental_management.group_dental_doc_menu,medical.group_dental_nurse_menu,pragtech_dental_management.group_dental_mng_menu">
+								<group>
+									<group>
+										<field name="weight"  />
+										<field name="temp" />
+										<field name="hr" />
+										<field name="vital_sign" invisible="1"/>
+									</group>
+									<group>
+										<field name="rr" />
+										<field name="bp" />
+										<field name="sp02" />
+									</group>
+								</group>
+
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="Laboratory" />
+								            <field name="Laboratory"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="LaboratoryAttach"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="ECG" />
+								            <field name="ECG"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="ECGAttach"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="Echocardiography" />
+								            <field name="Echocardiography"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="EchocardiographyAttach"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="Radiology" />
+								            <field name="Radiology"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="RadiologyAttach" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:75%;">
+                                            <separator string="StressTest" />
+								            <field name="StressTest"/>
+                                        </td>
+                                        <td style="width:25%;vertical-align: bottom;text-align: center;">
+                                            <field name="StressTestAttach"/>
+                                        </td>
+                                    </tr>
+                                </table>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="pragtech_dental_management.medical_action_form_appointment">
+        <field name="name">All Appointments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">medical.appointment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <!--<field name="domain">[('doctor.name.user_id', '=', uid)]</field>-->
+        <field name="context">{'show_nursing': False,'apt_id':True,"search_default_today":1}</field>
+        <field name="search_view_id" ref="pragtech_dental_management.view_medical_appointment_filter" />
+        <!--<field name="view_id" ref="medical_appointment_tree" />-->
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('pragtech_dental_management.medical_appointment_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('pragtech_dental_management.medical_appointment_view')})]"/>
+    </record>
+
+    <record id="pragtech_dental_management.medical_conf_appointment_add" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('medical.group_dental_nurse_menu'))]"/>
+    </record>
+
+    <record id="view_medical_appointment_filter_nursing" model="ir.ui.view">
+        <field name="name">medical.appointment.select</field>
+        <field name="model">medical.appointment</field>
+        <field name="inherit_id" ref="pragtech_dental_management.view_medical_appointment_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[1]" position="after">
+            <!--<xpath expr="//div[@data-key='sale_management']/div[hasclass('o_settings_container')]" position="after">-->
+                <filter icon="terp-personal" string="Check In" name="CheckIn" domain="[('state','=','checkin')]" />
+                <filter icon="terp-personal" string="Vital Signs Done" name="vital_sign_true" domain="[('vital_sign','=',True)]" />
+                <filter icon="terp-personal" string="Pending Vital Signs " name="vital_sign_false" domain="[('vital_sign','=',False)]" />
+                <!--<group expand="1" string="Group By...">-->
+                    <!--<filter string="Department" name="department" icon="terp-personal" domain="[]"-->
+                        <!--context="{'group_by':'department_id'}" />-->
+                <!--</group>-->
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="medical_appointment_tree_nurse">
+        <field name="name">Appointments</field>
+        <field name="model">medical.appointment</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string='Appointment Information'
+                  create="false"
+                  decoration-success="vital_sign==True"
+                  decoration-danger="vital_sign==False" >
+                <field name="name" string="ID"/>
+                <field name="patient" />
+                <field name="vital_sign" invisible="1" />
+                <field name="urgency" />
+                <field name="appointment_sdate" />
+                <!--<field name="department_id" />-->
+                <field name="doctor" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_nursing_Station">
+			<field name="name">Nursing Station</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.appointment</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'show_nursing': True, 'apt_id':True,"search_default_today":1,
+				"search_default_CheckIn":1,"search_default_group_doctor":1}</field>
+			<field name="search_view_id" ref="view_medical_appointment_filter_nursing" />
+			<field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('medical_appointment_tree_nurse')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('medical_appointment_view_nurse')})]"/>
+
+		</record>
+
+    <menuitem action="action_nursing_Station" id="menu_Nursing_Station"
+        parent="pragtech_dental_management.medical_appointment_menu" sequence="4"
+              groups="medical.group_dental_nurse_menu"/>
+
+
+
+
+
+</odoo>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="invoice_form">
+            <field name="name">account.invoice.form</field>
+            <field name="type">form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page/field[@name='invoice_line_ids']/tree" position="replace">
+                    <tree string="Invoice Lines" editable="bottom">
+                        <field name="sequence" widget="handle"/>
+                        <field name="product_id" domain="[('sale_ok','=',True)]"/>
+                        <field name="origin" invisible="1"/>
+                        <field name="is_rounding_line" invisible="1"/>
+                        <field name="name"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="account_id" invisible="1" groups="account.group_account_user" domain="[('company_id', '=', parent.company_id), ('internal_type', '=', 'other'), ('deprecated', '=', False)]"/>
+                        <field name="account_analytic_id" groups="analytic.group_analytic_accounting" domain="[('company_id', '=', parent.company_id)]" context="{'default_partner_id': parent.partner_id}"/>
+                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        <field name="quantity"/>
+                        <field name="uom_id" groups="product.group_uom"/>
+                        <field name="price_unit"/>
+                        <field name="discount" groups="base.group_no_one"/>
+                        <field name="access_to_edit_discount" invisible="1"/>
+                        <field name="discount_fixed_percent" attrs="{'readonly': [('access_to_edit_discount', '=', False)]}"/>
+                        <field name="discount_value" attrs="{'readonly':['|',('discount_fixed_percent','!=','Fixed'),('access_to_edit_discount', '=', False)]}"/>
+                        <field name="discount" attrs="{'readonly':['|',('discount_fixed_percent','!=','Percent'),('access_to_edit_discount', '=', False)]}"/>
+                        <field name="invoice_line_tax_ids" invisible="1"/>
+                        <field name="discount_amt" invisible="1"/>
+                        <field name="amt_paid_by_patient" invisible="1"/>
+                        <field name="amt_fixed_paid_by_patient" invisible="1"/>
+                        <field name="amt_paid_by_insurance" invisible="1"/>
+                        <field name="insurance_cases" invisible="1"/>
+                        <field name="apply_insurance" invisible="1"/>
+                        <field name="price_initial_copay" invisible="1"/>
+                        <field name="insurance_company" invisible="1"/>
+                        <field name="share_based_on" invisible="1"/>
+                        <!--<field name="treatment_grp_disc" invisible="context.get('hide_for_insurance_bill', False)"-->
+                               <!--force_save="1" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"-->
+                               <!--attrs="{'readonly':[('share_based_on','!=','Treatment')],'required':[('share_based_on','=','Treatment')]}"/>-->
+                        <field name="after_treatment_grp_disc" invisible="context.get('hide_for_insurance_bill', False)"
+                               force_save="1" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"
+                               attrs="{'readonly':[('share_based_on','!=','Treatment')],'required':[('share_based_on','=','Treatment')]}" sum="Total after Discount"/>
+                        <field name="insurance_share" invisible="context.get('hide_for_insurance_bill', False)"
+                               force_save="1" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"
+                               attrs="{'readonly':[('share_based_on','!=','Treatment')],'required':[('share_based_on','=','Treatment')]}" sum="Total Insurance Share"/>
+                        <field name="patient_share" invisible="context.get('hide_for_insurance_bill', False)"
+                               force_save="1" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"
+                               attrs="{'readonly':[('share_based_on','!=','Treatment')],'required':[('share_based_on','=','Treatment')]}" sum="Total Patient Share"/>
+                        <field name="price_subtotal" sum="Subtotal"/>
+                        <field name="currency_id" invisible="1"/>
+                    </tree>
+                </xpath>
+                <xpath expr="//field[@name='is_special_case']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_subtotal']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='treatment_group_disc_total']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='net_amount']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!--<xpath expr="//page/group/field[@name='after_treatment_grp_disc']" position="replace">-->
+                    <!--<field name="treatment_grp_disc" attrs="{'invisible':[('share_based_on','!=','Global')],'required':[('share_based_on','=','Global')]}" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>-->
+                    <!--<field name="after_treatment_grp_disc" attrs="{'invisible':[('share_based_on','!=','Global')],'required':[('share_based_on','=','Global')]}" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>-->
+
+                <!--</xpath>-->
+            </field>
+
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="report_patient_by_procedure">
+			<t t-call="web.html_container">
+				<t t-call="web.external_layout">
+					<div class="page">
+						<div class="col-xs-12 text-center">
+							<div style="color:#009688;">
+								 <h2><b>Patient By Procedure</b></h2>
+							 </div>
+						</div>
+						<table name="master" width="100%">
+							<colgroup>
+								<col width='25%' />
+								<col width='25%' />
+								<col width='25%' />
+								<col width='25%' />
+							</colgroup>
+							<thead>
+								<tr>
+									<th/>
+									<th/>
+									<th/>
+									<th/>
+								</tr>
+							</thead>
+							<tbody class="patient_invoice_tbody">
+                                <tr>
+                                    <td style="color:#009688;"><strong>Period From</strong></td>
+                                    <td>: <span t-esc="data['date_start']" t-options='{"widget": "date"}'/></td>
+                                    <td style="color:#009688;"><strong>Period To</strong></td>
+                                    <td>: <span t-esc="data['date_end']" t-options='{"widget": "date"}'/></td>
+                                </tr>
+								<tr>
+									<td groups="base.group_multi_company" style="color:#009688;">
+										<strong>Company</strong>
+									</td>
+									<td>:
+										<t t-if="company_id">
+											<span t-esc="company_id[1]"/>
+										</t>
+									</td>
+									<td/>
+									<td/>
+								</tr>
+                            </tbody>
+                        </table>
+						<br/>
+						<table class="table table-bordered table-striped">
+					          <thead>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Treatment Name</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">No of Patients</th>
+							  </thead>
+								
+							<tbody width="100%">
+							<t t-foreach="get_patient_procedure" t-as="o" >
+							<tr t-foreach="o" t-as="mdata" style="border:none">
+								 <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="50%" class="text-center">
+									<span t-esc="o[mdata][0]"/>
+								</td>
+								<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="50%" class="text-center">
+									<span t-esc="o[mdata][1]"/>
+								</td>
+
+							</tr>
+							</t>
+						</tbody>
+						</table>
+					</div>
+				</t>
+
+			</t>
+		</template>
+	</data>
+</odoo>

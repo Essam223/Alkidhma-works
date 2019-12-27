@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_res_company_enhanced_view">
+		<field name="name">res.company.search.inherit</field>
+		<field name="model">res.company</field>
+		<field name="inherit_id" ref="base.view_company_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name = 'report_header']" position="after">
+				 <field name="default_insurance_diff_account" groups="base.group_multi_company"/>
+				 <field name="default_discount_account" groups="base.group_multi_company"/>
+			 </xpath>
+			 <xpath expr="//field[@name = 'website']" position="before">
+			 	<field name="patient_prefix"/>
+             </xpath>
+			 <xpath expr="//field[@name = 'phone']" position="after">
+			 	<field name="fax"/>
+             </xpath>
+		</field>
+	</record>
+</odoo>

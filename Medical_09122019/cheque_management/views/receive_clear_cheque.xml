@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_receive_clear_cheque">
+            <field name="name">receive.clear.cheque.wizard</field>
+            <field name="model">receive.clear.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Clear Cheque">
+                    <group>
+                        <field name="date_clear" style="width:40%%"/>
+                    </group>
+                    <footer>
+                        <button name="receive_clear_cheque" string="Clear Cheque" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="wizard_receive_clear_cheque2">
+            <field name="name">receive.clear.cheque.wizard</field>
+            <field name="model">receive.clear.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Clear Cheque">
+                    <group>
+                        <field name="date_clear" style="width:40%%"/>
+                    </group>
+                    <footer>
+                        <button name="immediate_receive_clear_cheque" string="Clear Cheques" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

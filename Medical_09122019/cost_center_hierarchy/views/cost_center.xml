@@ -1,0 +1,37 @@
+<odoo>
+	<data>
+
+		<!--<record model="ir.ui.view" id="account_cost_center_tree">-->
+			<!--<field name="name">Cost Center</field>-->
+			<!--<field name="model">account.cost.center</field>-->
+			<!--<field name="inherit_id" ref="account_cost_center.account_cost_center_tree"/>-->
+			<!--<field name="arch" type="xml">-->
+			<!--<field name="speciality" position="after">-->
+				<!--<field name="department_id" />-->
+			<!--</field>-->
+			<!--</field>-->
+		<!--</record>-->
+
+		<record model="ir.ui.view" id="account_cost_center_form">
+			<field name="name">Cost Center</field>
+			<field name="model">account.cost.center</field>
+			<field name="inherit_id" ref="account_cost_center.account_cost_center_form"/>
+			<field name="arch" type="xml">
+			<notebook name="notebook" position="inside">
+				<page string="Departments">
+					<field name="department_ids" context="{'default_cost_center_id': active_id}">
+						<tree>
+							<field name="name"/>
+							<field name="cost_center_id" invisible="1"/>
+						</tree>
+					</field>
+				</page>
+			</notebook>
+			</field>
+		</record>
+
+		 <menuitem action="account_cost_center.account_cost_center_action" id="medical_cost_center_list" sequence="20"
+			parent="pragtech_dental_management.medical_conf_hospital"/>
+
+	</data>
+</odoo>

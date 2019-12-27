@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="discount_account_invoice_view_form" model="ir.ui.view">
+            <field name="name">discount.account.invoice</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_invoice_sent'][1]" position="replace">
+                    <button name="action_invoice_sent" type="object" string="Send by Email"
+                            invisible="1"
+                            class="oe_highlight o_invoice_send" groups="base.group_user"/>
+                </xpath>
+                <xpath expr="//button[@name='action_invoice_sent'][2]" position="replace">
+                    <button name="action_invoice_sent" type="object" string="Send by Email"
+                        invisible="1"
+                        groups="base.group_user"/>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='discount']" position="replace">
+                    <field name="access_to_edit_discount" invisible="1"/>
+                    <field name="discount_fixed_percent" attrs="{'readonly': [('access_to_edit_discount', '=', False)]}"/>
+                    <field name="discount" attrs="{'readonly':['|',('discount_fixed_percent','!=','Percent'),('access_to_edit_discount', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='discount']" position="before">
+                    <field name="discount_value" attrs="{'readonly':['|',('discount_fixed_percent','!=','Fixed'),('access_to_edit_discount', '=', False)]}"/>
+				</xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="replace">
+                        <field name="payment_term_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_untaxed']" position="after">
+                        <field name="amount_before_disc"/>
+                        <field name="access_to_edit_discount" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='comment']" position="before">
+                    <div>
+                        <label for="discount_fixed_percent" string="Discount Type :"/>
+                        <field name="discount_fixed_percent" class="oe_inline" attrs="{'readonly': [('access_to_edit_discount', '=', False)]}"/>
+                    </div>
+                    <div>
+                        <label for="discount" string="Discount (%) :" attrs="{'invisible':[('discount_fixed_percent','!=','Percent')]}"/>
+                        <field name="discount" class="oe_inline" attrs="{'invisible':[('discount_fixed_percent','!=','Percent')],'readonly': [('access_to_edit_discount', '=', False)]}"/>
+                        <label for="discount_value" string="Discount Amt :" attrs="{'invisible':[('discount_fixed_percent','!=','Fixed')]}"/>
+                        <field name="discount_value" class="oe_inline" attrs="{'invisible':[('discount_fixed_percent','!=','Fixed')],'readonly': [('access_to_edit_discount', '=', False)]}"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   
+    <!--Form View Payment-->
+
+    <record model="ir.ui.view" id="view_payment_voucher_form_inherit">
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="expense_account_voucher.view_payment_voucher_form"/>
+        <field name="arch" type="xml">
+
+        <field name="journal_id" position="before">
+            <field name="is_cheque" attrs="{'readonly': [('state', '=', 'posted')]}"/>
+        </field>
+
+       <!--  <xpath expr="//field[@name='number']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('is_cheque', '=', True)]}</attribute>
+        </xpath> -->
+        <xpath expr="//field[@name='journal_id']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('is_cheque', '=', True)]}</attribute>
+        </xpath>
+        <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('is_cheque', '=', True)]}</attribute>
+        </xpath>
+        <xpath expr="//field[@name='partner_name']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('is_cheque', '=', True)]}</attribute>
+        </xpath>
+        <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('is_cheque', '=', True)]}</attribute>
+        </xpath>
+       <!--  <xpath expr="//field[@name='account_id']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('is_cheque', '=', True)]}</attribute>
+        </xpath> -->
+        <xpath expr="//field[@name='date']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('is_cheque', '=', True)]}</attribute>
+        </xpath>
+        <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('is_cheque', '=', True)]}</attribute>
+        </xpath>
+
+            
+
+           <xpath expr="//form/sheet/group" position="after">
+                <group>
+                    <!-- CHANGES BY MCT -->
+                    <field name="cheque_id" attrs="{'invisible': ['|', ('is_cheque', '=', False)],
+                                'required': ['&amp;', ('is_cheque', '=', True)],'readonly': [('state', '=', 'posted')]}"/>
+                    <field name="issued_partner" attrs="{'invisible': ['|', ('is_cheque', '=', False)],
+                    'required': ['&amp;', ('is_cheque', '=', True)],'readonly': [('state', '=', 'posted')]}"/>                                
+                    <field name="name_in_cheque" attrs="{'invisible': ['|', ('is_cheque', '=', False)],
+                                'required': ['&amp;', ('is_cheque', '=', True)],'readonly': [('state', '=', 'posted')]}"/>
+                    
+                </group>
+                <group>
+                    <!-- <field name="bank_name" attrs="{'invisible': ['|', ('is_cheque', '=', False)],
+                                'required': ['&amp;', ('is_cheque', '=', True)]}"/> -->
+                    <field name="cheque_date" attrs="{'invisible': ['|', ('is_cheque', '=', False)],
+                                'required': ['&amp;', ('is_cheque', '=', True)],'readonly': [('state', '=', 'posted')]}"/>
+                    <field name="date_issue" attrs="{'invisible': ['|', ('is_cheque', '=', False)],
+                                'required': ['&amp;', ('is_cheque', '=', True)],'readonly': [('state', '=', 'posted')]}"/>
+                    
+                </group>
+            </xpath>
+          
+        </field>
+    </record>
+
+    
+   
+
+
+</odoo>

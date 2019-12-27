@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="detailed_pat_overdue_report_wizard" model="ir.ui.view">
+            <field name="name">detailed.patient.overdue.report</field>
+            <field name="model">detailed.patient.overdue.report</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Detailed Patient Overdue Report">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="is_only_doctor" invisible="1"/>
+                            <field name="doctor" attrs="{'required':[('is_only_doctor', '=', True)],'readonly': [('is_only_doctor', '=', True)]}"/>
+
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                            <field name="patient"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="detailed_pat_overdue_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_detailed_pat_overdue_report" model="ir.actions.act_window">
+                <field name="name">Detailed Patient Overdue Report</field>
+                <field name="res_model">detailed.patient.overdue.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="detailed_pat_overdue_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_detailed_patient_overdue_book_report" name="Detailed Patient Overdue Report"
+                  action="action_detailed_pat_overdue_report"
+                  groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+                  parent="pragtech_dental_management.dental_report_menu" sequence="5"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_clear_cheque">
+            <field name="name">clear.cheque.wizard</field>
+            <field name="model">clear.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Clear Cheque">
+                    <group>
+                        <field name="date_clear" style="width:40%%"/>
+                    </group>
+                    <footer>
+                        <button name="clear_cheque" string="Post" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="wizard_clear_cheque2">
+            <field name="name">clear.cheque.wizard</field>
+            <field name="model">clear.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Clear Cheque">
+                    <group>
+                        <field name="date_clear" style="width:40%%"/>
+                    </group>
+                    <footer>
+                        <button name="immediate_clear_cheque" string="Clear Cheques" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="wizard_clear_cheque3">
+            <field name="name">clear.cheque.wizard</field>
+            <field name="model">clear.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Hold Cheque">
+                    <group>
+                        <field name="date_clear" string="Hold Date" style="width:40%%"/>
+                    </group>
+                    <footer>
+                        <button name="hold_cheque" string="Hold Cheque" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="wizard_clear_cheque4">
+            <field name="name">clear.cheque.wizard</field>
+            <field name="model">clear.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Hold Cheque">
+                    <group>
+                        <field name="date_clear" string="Hold Date" style="width:40%%"/>
+                    </group>
+                    <footer>
+                        <button name="hold_receive_cheque" string="Hold Cheque" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

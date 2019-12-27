@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="medical_patient_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+			<field name="model">medical.patient</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_patient_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[7]" position="after">
+                    <page string="Lab Orders">
+			        	<group>
+				        	<field name="lab_ids" nolabel="1">
+								<tree>
+                                   <field name="name" />
+                                    <field name="lab_date" />
+                                    <field name="appointment_id" />
+                                    <field name="doctor_id" />
+                                    <field name="state" />
+                                    <field name="attach_count" invisible="1"/>
+                                    <button name="show_attachments" string="Attachments" type="object" attrs="{'invisible': [('attach_count', '=', 0)]}"/>
+                                </tree>
+							</field>
+				        </group>
+			        </page>
+
+                </xpath>
+
+            </field>
+    </record>
+
+
+</odoo>

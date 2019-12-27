@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="prescription_additional">
+    <t t-call="web.html_container">
+		<t t-call="web.external_layout">
+			<div class="page">
+				<div class="text-center">
+					<div style="color:#009688;">
+						 <h2><b>Prescription</b></h2>
+					 </div>
+					<table style="width:100%;">
+						<tr>
+							<th style="width:60%;"></th>
+							<th style="width:40%;"></th>
+						</tr>
+						<tr>
+							<td>
+								<span>
+									<div  style="color:#009688;">
+										<strong>Patient : </strong>
+									</div>
+									<p t-if="patient" t-esc="patient"/>
+								</span>
+							</td>
+							<td>
+								<div  style="color:#009688;">
+									<strong>Doctor : </strong>
+								</div>
+								Dr.<span t-if="doctor" t-esc="doctor.name.name"/><br/>
+								<t t-if="speciality"><span t-esc="speciality"/><br/> </t>
+								<t t-if="license_code">Licence No. <span t-if="license_code" t-esc="license_code"/></t>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div  style="color:#009688;"><strong>Date : </strong></div>
+								<p t-if="date" t-esc="date" t-options='{"widget": "date"}'/>
+							</td>
+							<td>
+								<div  style="color:#009688;"><strong>Ref No. : </strong></div>
+								<p t-if="name" t-esc="name"/>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<table class="table table-bordered table-striped"  style="width: 100%">
+						<thead>
+							<th style='color:white;background-color: #009688;text-align:center;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;' width='7%'>Sl No.</th>
+							<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='25%'>Medicine</th>
+							<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='20%'>Frequency</th>
+							<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='8%'>Duration</th>
+							<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width='20%'>Description</th>
+						</thead>
+						<tbody>
+							<t t-set="i" t-value="1" />
+							<tr t-foreach="pres_lines" t-as="l">
+								<td style='text-align:center;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;'><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+								<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l['medicine_id']" t-esc="l['medicine_id']"/></td>
+								<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l['common_dosage']" t-esc="l['common_dosage']"/></td>
+								<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l['duration']" t-esc="l['duration']"/></td>
+								<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="l['note']" t-esc="l['note']"/></td>
+							</tr>
+						</tbody>
+					</table>
+					<br/>
+					<div class="pull-right">
+					<strong>Doctor Seal and Sign</strong>
+					<br/>
+						<img t-if="doctor.stamp" t-att-src="'data:image/png;base64,%s' % to_text(doctor.stamp)" style="max-height: 130px;"/>
+				</div>
+
+				</div>
+		</div>
+		</t>
+		</t>
+	</template>
+
+    <report
+        id="prescription_additional_report"
+        string="Prescriptions"
+        model="medical.appointment"
+        report_type="qweb-pdf"
+		file="pragtech_dental_management.prescription_additional"
+        name="pragtech_dental_management.prescription_additional"
+		menu="False"
+    />
+
+</odoo>

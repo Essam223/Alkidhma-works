@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="salary_report_wizard" model="ir.ui.view">
+            <field name="name">salary.report.wizard</field>
+            <field name="model">salary.report.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Salary Report">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="employee_id"/>
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                            <field name="show_description"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="salary_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_salary_report" model="ir.actions.act_window">
+                <field name="name">Salary Report</field>
+                <field name="res_model">salary.report.wizard</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="salary_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_salary_report" name="Salary Report" action="action_salary_report"
+                  parent="hr_payroll.menu_hr_payroll_root" sequence="10"/>
+
+    </data>
+</odoo>

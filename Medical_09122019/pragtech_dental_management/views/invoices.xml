@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="account_invoice_groupby_inherit" model="ir.ui.view">
+		<field name="name">account.invoice.groupby</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.view_account_invoice_filter"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='date']" position="replace">
+				<field name="date" string="Invoice Date"/>
+				<field name="date" string="Before" filter_domain="[('date','&lt;=',self)]"/>
+				<field name="date" string="After" filter_domain="[('date','&gt;=',self)]"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="account_cancel.invoice_form_cancel_inherit" model="ir.ui.view">
+		<field name="name">invoice.form.cancel.inherit</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='action_invoice_draft']" position="before">
+				<button name="action_invoice_cancel" type="object" states="draft,open" string="Cancel Invoice"
+						groups="pragtech_dental_management.group_access_invoice_cancellation"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="account_cancel.invoice_supplier_cancel_form_inherit" model="ir.ui.view">
+		<field name="name">invoice.supplier.cancel.form.inherit</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_supplier_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='action_invoice_draft']" position="before">
+				<button name="action_invoice_cancel" type="object" states="draft,open" string="Cancel Invoice"
+						groups="pragtech_dental_management.group_access_invoice_cancellation"/>
+			</xpath>
+		</field>
+	</record>
+
+    <record model="ir.ui.view" id="view_invoice_filter_inherit">
+		<field name="name">account.invoice.search.inherit</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.view_account_invoice_filter" />
+		<field name="arch" type="xml">
+			 <xpath expr="//field[@name = 'journal_id']" position="after">
+				 <field name="dentist" string="Doctor" invisible="not context.get('show_for_service_bill', False)"/>
+				 <field name="patient" string="File number" invisible="not context.get('show_for_service_bill', False)"/>
+			 </xpath>
+			 <xpath expr="//field[@name = 'team_id']" position="replace"/>
+			 <xpath expr="//group/filter[4]" position="replace"/>
+			 <xpath expr="//filter[@name = 'activities_my']" position="replace"/>
+			 <xpath expr="//filter[@name = 'activities_overdue']" position="replace"/>
+			 <xpath expr="//filter[@name = 'activities_today']" position="replace"/>
+			 <xpath expr="//filter[@name = 'activities_upcoming_all']" position="replace"/>
+			 <xpath expr="//field[@name = 'number']" position="after">
+				 <filter string="Today" domain="[('date_invoice','&lt;=', datetime.datetime.now().replace(hour=23, minute=59, second=59)), ('date_invoice','&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0))]"/>
+			 </xpath>
+			 <xpath expr="//filter[@name = 'group_by_partner_id']" position="after">
+			 	<filter string="Patient Invoices" name='patient_invoices' domain="[('is_patient','=',True)]"/>
+             </xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="invoice_supplier_form">
+		<field name="name">account.invoice.form</field>
+		<field name="type">form</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_supplier_form" />
+		<field name="arch" type="xml">
+			<button name="action_invoice_open" position="after">
+				<button name="action_invoice_Register_Payment" type="object" states="draft" string="Register Payment"
+						class="oe_highlight o_invoice_validate" groups="account.group_account_invoice"/>
+			</button>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="discount_account_invoice_view_form">
+		<field name="name">account.invoice.form</field>
+		<field name="type">form</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="invoice_discount_solution.discount_account_invoice_view_form" />
+		<field name="arch" type="xml">
+			<field name="amount_before_disc" position="replace">
+				<field name="amount_before_disc" type="object" invisible="1"/>
+			</field>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="account_cost_center_invoice_form">
+		<field name="name">account.invoice.form</field>
+		<field name="type">form</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account_cost_center.invoice_form_inherit" />
+		<field name="arch" type="xml">
+			<xpath expr="//tree/field[@name = 'cost_center_id']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+		</field>
+	</record>
+
+    <record model="ir.ui.view" id="invoice_form">
+		<field name="name">account.invoice.form</field>
+		<field name="type">form</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_form" />
+		<field name="arch" type="xml">
+			<button name="action_invoice_open" position="after">
+				<button name="action_invoice_Register_Payment" type="object" states="draft" string="Register Payment"
+						class="oe_highlight o_invoice_validate" groups="account.group_account_invoice"/>
+			</button>
+			<xpath expr="//field[@name = 'partner_id']" position="replace">
+				<field string="Customer" name="partner_id"
+					context="{'search_default_customer':1, 'show_address': 1, 'default_company_type': 'company'}"
+					options='{"always_reload": True, "no_quick_create": True}'
+					domain="[('customer', '=', True)]" invisible="context.get('hide_for_service_bill', False)"
+				/>
+			</xpath>
+			<xpath expr="//field[@name = 'payment_term_id']" position="replace">
+				<field  name="payment_term_id" invisible="context.get('hide_for_service_bill', False)"/>
+			</xpath>
+			<xpath expr="//field[@name = 'date_due']" position="replace">
+				<field  name="date_due" attrs="{'readonly': [('payment_term_id','!=',False)]}" force_save="1"
+						invisible="context.get('hide_for_service_bill', False)"/>
+			</xpath>
+			<xpath expr="//field[@name = 'user_id']" position="replace">
+				<field name="user_id" groups="base.group_user" invisible="context.get('hide_for_service_bill', False)"/>
+			</xpath>
+			<xpath expr="//field[@name='date_invoice']" position="attributes">
+                <attribute name="string">Date</attribute>
+            </xpath>
+			<xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='invoice_line_tax_ids']" position="attributes">
+					<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="attributes">
+					<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="attributes">
+					<attribute name="invisible">1</attribute>
+			</xpath>
+
+			<xpath expr="//field[@name='amount_untaxed']" position="attributes">
+					<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='amount_tax']" position="attributes">
+					<attribute name="invisible">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='payment_term_id']" position="after">
+				<field name="patient" force_save="1"/>
+				 <field name="dentist"/>
+				 <field name="appt_id"/>
+                 <field name="is_patient" force_save="1" invisible="1"/>
+             </xpath>
+			<xpath expr="//field[@name='tax_line_ids']" position="attributes">
+				<attribute name="invisible">1</attribute>
+			</xpath>
+		</field>
+	</record>
+
+
+	<record model="ir.ui.view" id="sale_account_invoice_form">
+		<field name="name">account.invoice.form</field>
+		<field name="type">tree</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="sale.account_invoice_form" />
+		<field name="arch" type="xml">
+			 <xpath expr="//field[@name = 'team_id']" position="replace">
+                     <field name="team_id"  invisible="1"/>
+             </xpath>
+		</field>
+	</record>
+
+    <record model="ir.ui.view" id="invoice_tree">
+		<field name="name">account.invoice.tree</field>
+		<field name="type">tree</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_tree" />
+		<field name="arch" type="xml">
+			 <xpath expr="//field[@name = 'partner_id']" position="after">
+                     <field name="is_patient" invisible="True"/>
+             </xpath>
+			<xpath expr="//field[@name='date_invoice']" position="attributes">
+                <attribute name="string">Date</attribute>
+            </xpath>
+			<xpath expr="//field[@name = 'date_due']" position="replace">
+				<field  name="date_due" invisible="context.get('hide_for_service_bill', False)"/>
+			</xpath>
+			<xpath expr="//field[@name = 'partner_id']" position="replace">
+				<field name="partner_id" groups="base.group_user" string="Customer" invisible="context.get('hide_for_service_bill', False)"/>
+			</xpath>
+			<xpath expr="//field[@name = 'user_id']" position="replace">
+				<field name="user_id" invisible="context.get('hide_for_service_bill', False)"/>
+			</xpath>
+			<xpath expr="//field[@name = 'date_invoice']" position="before">
+				<field name="patient" invisible="not context.get('show_for_service_bill', False)"/>
+			</xpath>
+			<xpath expr="//field[@name = 'date_invoice']" position="after">
+				<field name="dentist" invisible="not context.get('show_for_service_bill', False)"/>
+				<field name="appt_id"/>
+			</xpath>
+		</field>
+	</record>
+
+
+    <record model="ir.actions.act_window" id="action_patient_invoicess">
+		<field name="name">Service Billing</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.invoice</field>
+		<field name="domain">[('is_patient','=',1)]</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form, calendar,pivot</field>
+        <field name="view_id" eval="False"/>
+		<field name="context">{'type':'out_invoice', 'journal_type': 'sale', 'hide_for_service_bill': True, 'show_for_service_bill': True}</field>
+	</record>
+
+
+    <record id="action_patient_invoices_tree" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="account.invoice_tree"/>
+        <field name="act_window_id" ref="action_patient_invoicess"/>
+    </record>
+
+    <record id="action_patient_invoices_form" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account.invoice_form"/>
+        <field name="act_window_id" ref="action_patient_invoicess"/>
+    </record>
+
+    <menuitem name="Finance" id="medical_finance_menu" parent="medical_menu" sequence="3"
+			  groups="account.group_account_manager,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_user_menu"/>
+    <menuitem name="Service Billing" action="action_patient_invoicess" id="patient_invoices"
+              parent="medical_finance_menu" sequence="1"
+			  groups="account.group_account_invoice,account.group_account_manager,pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"/>
+
+	<record id="account.menu_finance" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('account.group_account_manager'), ref('account.group_account_user')])]"/>
+    </record>
+
+	<record id="calendar.mail_menu_calendar" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_erp_manager')])]"/>
+    </record>
+
+	<record id="mail.mail_channel_menu_root_chat" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_erp_manager')])]"/>
+    </record>
+
+	<record id="contacts.menu_contacts" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_erp_manager')])]"/>
+    </record>
+
+	<record id="website.menu_website_configuration" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_erp_manager')])]"/>
+    </record>
+
+	<record id="account.menu_finance" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('account.group_account_manager')])]"/>
+    </record>
+
+	<record id="sale.sale_menu_root" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('sales_team.group_sale_manager')])]"/>
+    </record>
+
+	<record id="stock.menu_stock_root" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('stock.group_stock_manager')])]"/>
+    </record>
+
+	<record id="purchase.menu_purchase_root" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('purchase.group_purchase_manager')])]"/>
+    </record>
+
+	<record id="crm.crm_menu_root" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('sales_team.group_sale_manager')])]"/>
+    </record>
+
+</odoo>

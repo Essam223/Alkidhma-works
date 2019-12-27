@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_update_copay_wizard_wizard2" model="ir.ui.view">
+            <field name="name">update.copay.wizard.form</field>
+            <field name="model">update.copay.wizard</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Update Co-pay">
+                    <group>
+                        <group>
+                            <field name="amount_copay" />
+                        </group>
+                        <group>
+                            <field name="invoice_line"  invisible="1"/>
+                        </group>
+
+
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+
+</odoo>

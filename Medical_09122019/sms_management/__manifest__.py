@@ -1,0 +1,20 @@
+{
+    'name': "SMS Management",
+    'version': '0.1',
+    'author': "Al Kidhma Group",
+    'category': 'Tools',
+    'summary': 'You can use single gateway for multiple sms template to send SMS.',
+    'description': 'Allows you to send SMS to the mobile no.',
+    'depends': ['base', 'web', 'web_notify', 'pragtech_dental_management'],
+    'data': [
+        'views/sms_template.xml',
+        'views/appointment.xml',
+        'views/gateway_setup.xml',
+        'views/sms_track.xml',
+        'views/drop_sms.xml',
+        'security/ir.model.access.csv',
+    ],
+    'license': 'LGPL-3',
+    'installable': True,
+    'auto_install': False,
+}

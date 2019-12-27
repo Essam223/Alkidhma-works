@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div data-key="hr" position="inside">
+                <h2>Overtime Hourly rate</h2>
+                <div class="row mt16 o_settings_container" id="overtime_hourly_rate_holiday">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="overtime_hourly_rate_holiday"
+                         title="Overtime Hourly rate(Holiday)">
+                            <div class="row">
+                                <label class="col-md-3 o_light_label" string="Holiday" for="overtime_hourly_rate_holiday"/>
+                                <field name="overtime_hourly_rate_holiday" class="oe_inline"/>
+                            </div>
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container" id="overtime_hourly_rate_working_day">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="overtime_hourly_rate_working_day"
+                         title="Overtime Hourly rate(Working day)">
+                            <div class="row">
+                                <label class="col-md-3 o_light_label" string="Working day" for="overtime_hourly_rate_working_day"/>
+                                <field name="overtime_hourly_rate_working_day" class="oe_inline"/>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+        </field>
+    </record>
+</odoo>

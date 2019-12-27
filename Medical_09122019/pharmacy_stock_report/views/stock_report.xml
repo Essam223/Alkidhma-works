@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="pharmacy_stock_report_pdf">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div style="color:#009688;">
+                                     <h2><b>PHARMACY STOCK REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="90%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period From</strong></td>
+                                                <td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+                                                <td style="color:#009688;"><strong>Period To</strong></td>
+                                                <td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Company</strong></td>
+                                                <td>: <span t-esc="company_name" /></td>
+                                                <td style="color:#009688;"><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                     <table class="table table-striped" name="account_invoices">
+                                            <colgroup>
+                                                <col width='5%'/>
+                                                <col width='55%'/>
+                                                <col width='25%'/>
+                                                <col width='15%'/>
+
+                                            </colgroup>
+                                            <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <tr>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Item</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" >Expire Date</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" >Stock</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice_tbody" >
+                                                <t t-set="i" t-value="1" />
+
+                                                <tr t-foreach="product_lots"  t-as="l" style="color:#009688;background-color: #C9E7E5; border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><b><span t-esc="i"/><t t-set="i" t-value="i+1"/></b></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" colspan="2"><b><span t-esc="l"/></b></td>
+
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" ><b><span t-esc="l_value['total_qty']" /></b></td>
+                                                    <tr t-foreach="l_value['lots']" t-as="lot" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td></td>
+                                                        <td style="text-align:right;border-left: 1px solid black;border-right: 1px solid black;" ><span t-esc="lot.name" /></td>
+                                                        <td style="border-right: 1px solid black;border-right: 1px solid black;" ><span t-esc="lot.life_date" t-options='{"widget": "date"}' /></td>
+                                                        <td style="border-right: 1px solid black;border-right: 1px solid black;" ><span t-esc="lot.product_qty"/><span t-esc="lot.product_uom_id.name"/></td>
+                                                    </tr>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                     <br/>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>

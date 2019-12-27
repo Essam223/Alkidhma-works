@@ -1,0 +1,20 @@
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="product_normal_form_vieww">
+			<field name="name">product.normal.form</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="pragtech_dental_management.view_product_form1" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<field name="type" position="after">
+					<field name="overhead_cost"/>
+				</field>
+			</field>
+		</record>
+
+	</data>
+</odoo>
+
+
+	

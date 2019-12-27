@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+      <menuitem
+        id="send_sms_root_menu"
+        name="SMS"
+        parent="base.menu_custom"
+        sequence="4"/>
+
+      <record model="sms.template" id="appointment_reminder">
+            <field name="name">Appointment Reminder</field>
+            <field name="message">عزيزي المراجع/ه - {patient} يرجى العلم بأنه لديك موعد بتاريخ {appt_date}
+عند الساعه {appt_time}.مع د/{doctor}إذا كان لديك تغيير للموعد الرجاء الإتصال {company_phone}
+Dear {patient} you have an appointment {appt_date} at {appt_time} with Dr. {doctor} , if there is any change pls call {company_phone}
+            </field>
+      </record>
+
+
+    <record id="sms_template_form_view" model="ir.ui.view">
+      <field name="name">sms.template.form</field>
+      <field name="model">sms.template</field>
+      <field name="arch" type="xml">
+        <form string="SMS Template">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="message"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <record id="sms_template_tree_view" model="ir.ui.view">
+      <field name="name">sms.template.list</field>
+      <field name="model">sms.template</field>
+      <field name="arch" type="xml">
+        <tree string="SMS Templates">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+    <record id="action_sms_template" model="ir.actions.act_window">
+      <field name="name">SMS Templates</field>
+      <field name="res_model">sms.template</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="search_view_id" eval="False"/>
+      <field name="context">{}</field>
+      <field name="help">Create new SMS Template</field>
+    </record>
+    <menuitem action="action_sms_template" id="menu_action_sms_template" parent="send_sms_root_menu" sequence="11" />
+  </data>
+</odoo>

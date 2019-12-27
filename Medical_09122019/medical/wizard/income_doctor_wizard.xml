@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_income_by_nurse_form" model="ir.ui.view">
+			<field name="name">Income By Nurse</field>
+			<field name="model">income.by.nurse</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="By Nurse">
+					<separator string="Fill The Dates" colspan="4" />
+					<group colspan="4" col='4'>
+						<field name="start_date" />
+						<field name="end_date" />
+					</group>
+					<footer>
+						<button name="income_by_nurse_report" string="Print Report" type="object" class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_income_by_nurse_report">
+			<field name="name">Income By Nurse</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">income.by.nurse</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+
+		<menuitem action="action_income_by_nurse_report" name="Income By Nurse"
+			id="income_by_nurse_submenu" parent="pragtech_dental_management.dental_report_menu" sequence="25"
+			groups="pragtech_dental_management.group_dental_mng_menu"/>
+
+
+
+	</data>
+</odoo>

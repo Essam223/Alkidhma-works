@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="launch_receive_wizard">
+            <field name="name">Receive A Cheque</field>
+            <field name="res_model">receive.cheque2</field>
+            <field name="target">new</field>
+        </record>
+        <record model="ir.ui.view" id="wizard_receive_view_pdf">
+            <field name="name">receive.cheque2.wizard</field>
+            <field name="model">receive.cheque2</field>
+            <field name="arch" type="xml">
+                <form string="Receive A Cheque">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                            <field name="partner_account_id" invisible="1"/>
+                            <field name="bank_name" options="{'no_create': True}"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <field name="partner_type"/>
+                            <field name="received_date"/>
+                            <field name="cheque_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="receive_cheque" string="Receive Cheque" type="object" class="oe_highlight"/>
+                        <button name="action_clear" string="Clear" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="launch_receive_cheque2"
+                    name="Receive A Cheque"
+                    res_model="receive.cheque2"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+        <menuitem name="Receive A Cheque" id="menu_receive_cheq" parent="cheque_management.menu_receive_cheque" sequence="3"
+                  action="cheque_management.launch_receive_cheque2"/>
+
+    </data>
+</odoo>

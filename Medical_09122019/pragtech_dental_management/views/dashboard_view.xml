@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="medical_dashboard_kanban" model="ir.ui.view">
+        <field name="name">medical.dashboard.kanban</field>
+        <field name="model">medical.dashboard</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" create="false">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <div class="col-xs-1 o_kanban_primary_left"
+                                 groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu">
+                                <button class="btn btn-primary fa fa-navicon " name="get_appointments" type="object">All Appointments</button>
+                            </div>
+                            <br groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu"/>
+                            <br groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu"/>
+                            <br groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu"/>
+                            <div class="col-xs-1 o_kanban_primary_left" groups="pragtech_dental_management.group_dental_doc_menu">
+                                <button class="btn btn-primary fa fa-navicon " name="get_my_appointments" type="object"> My Appointments</button>
+                            </div>
+                            <br groups="pragtech_dental_management.group_dental_doc_menu"/>
+                            <br groups="pragtech_dental_management.group_dental_doc_menu"/>
+                            <br groups="pragtech_dental_management.group_dental_doc_menu"/>
+                            <div class="col-xs-1 o_kanban_primary_left"
+                                groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu">
+                                <button class="btn btn-primary fa fa-address-book-o" name="get_patients"
+                                        type="object">   Patients</button>
+                            </div>
+                            <br groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu"/>
+                            <br groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu"/>
+                            <br groups="pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_dental_patient_menu"/>
+                            <div class="col-xs-1 o_kanban_primary_left">
+                                <button class="btn btn-primary fa fa-registered" name="get_registration"
+                                        type="object">   Registration</button>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="col-xs-1 o_kanban_primary_left">
+                                <button class="btn btn-primary fa fa-file-o" name="get_questionnaire"
+                                        type="object">   Questionnaire</button>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="col-xs-1 o_kanban_primary_left">
+                                <button class="btn btn-primary fa fa-comment-o" name="get_feedback"
+                                        type="object">   Feedback Form</button>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="col-xs-1 o_kanban_primary_left">
+                                <button class="btn btn-primary fa fa-close" name="get_complaint"
+                                        type="object">   Complaint Form</button>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="col-xs-1 o_kanban_primary_left">
+                                <button class="btn btn-primary fa fa-user-md" name="get_doctors"
+                                        type="object">  Doctors</button>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_dashboard">
+		<field name="name">Dashboard</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">medical.dashboard</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">kanban</field>
+        <field name="view_id" eval="False"/>
+	</record>
+
+
+    <menuitem name="Dashboard" action="action_dashboard" id="dental_scheduler"
+              parent="medical_menu" sequence="1"/>
+
+</odoo>

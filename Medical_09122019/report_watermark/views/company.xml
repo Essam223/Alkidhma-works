@@ -1,0 +1,24 @@
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="Company_form">
+			<field name="name">Company</field>
+			<field name="model">res.company</field>
+			<field name="inherit_id" ref="base.view_company_form"/>
+			<field name="arch" type="xml">
+			 <xpath expr="//notebook"  position="inside">
+				<page string="Report Settings">
+					<group>
+						<field name="watermark_image" class="img img-responsive" widget="image"/>
+					</group>
+				</page>
+			 </xpath>
+			</field>
+		</record>
+
+
+	</data>
+</odoo>
+
+
+	

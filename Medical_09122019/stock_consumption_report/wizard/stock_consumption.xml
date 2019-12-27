@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_consumption_report_wizard" model="ir.ui.view">
+            <field name="name">stock.report</field>
+            <field name="model">stock.report</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Stock Report">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="product_ids" widget="many2many_tags"/>
+                            <field name="type_in_out"/>
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                            <field name="location_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="stock_consumption_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_consumption_report" model="ir.actions.act_window">
+                <field name="name">Stock Report</field>
+                <field name="res_model">stock.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="stock_consumption_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_stock_report" name="Stock Report" action="action_stock_consumption_report"
+                  parent="pragtech_dental_management.dental_report_menu" sequence="5"
+                  groups="stock.group_stock_manager"/>
+
+    </data>
+</odoo>

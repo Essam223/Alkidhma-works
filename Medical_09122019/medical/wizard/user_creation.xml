@@ -1,0 +1,20 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="view_user_creation_medical">
+			<field name="name">User Creation</field>
+			<field name="model">user.creation</field>
+            <field name="inherit_id" ref="pragtech_dental_management.view_user_creation" />
+			<field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='doctor']" position="after">
+                        <field name="nurse"/>
+                    </xpath>
+                </data>
+			</field>
+        </record>
+
+	</data>
+</odoo>
+
+
+

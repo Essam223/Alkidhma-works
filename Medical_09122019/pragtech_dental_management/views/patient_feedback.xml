@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="seq_patient_feedback_id" model="ir.sequence">
+            <field name="name">feedback</field>
+            <field name="code">patient.feedback</field>
+            <field name="prefix">FB</field>
+            <field name="padding">3</field>
+			<field name="company_id" eval="False"/>
+        </record>
+
+
+	<record model="ir.ui.view" id="patient_feedback_tree">
+        <field name="name">patient.feedback</field>
+        <field name="model">patient.feedback</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Feedbacks" edit="false" create="false">
+                <field name="feedback_id"/>
+                <field name="patient_id"/>
+                <field name="name"/>
+                <field name="feedback_date"/>
+            </tree>
+        </field>
+    </record>
+
+        <record id="view_feedback2" model="ir.ui.view">
+            <field name="name">patient.feedback.form</field>
+            <field name="model">patient.feedback</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Feedback Form" edit="false" create="false">
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="feedback_id"/>
+							</h1>
+						</div>
+					<group>
+						<group>
+							<field name="language" string="Language"/>
+							<field name="patient_id"/>
+						</group>
+						<group>
+							<field name="feedback_date"/>
+							<field name="name"/>
+						</group>
+					</group>
+					<separator string="YOUR IMPRESSIONS OF US ..." style="color:#47cc3b"/>
+
+					<table style="width:100%;" class="table table-striped">
+					    <tr>
+						    <td style="width:75%;">
+								<label for="q1"/>
+							</td>
+						    <td style="width:25%;"><field name="q1"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q2"/>
+							</td>
+						    <td><field name="q2"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q3"/>
+							</td>
+						    <td><field name="q3"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q4"/>
+							</td>
+						    <td><field name="q4"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q5"/>
+							</td>
+						    <td><field name="q5"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q6"/>
+							</td>
+						    <td><field name="q6"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q7"/>
+							</td>
+						    <td><field name="q7"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q8"/>
+							</td>
+						    <td><field name="q8"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q9"/>
+							</td>
+						    <td><field name="q9"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q10"/>
+							</td>
+						    <td><field name="q10"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q11"/>
+							</td>
+						    <td><field name="q11"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q12"/>
+							</td>
+						    <td><field name="q12"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q13"/>
+							</td>
+						    <td><field name="q13"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q14"/>
+							</td>
+						    <td><field name="q14"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q15"/>
+							</td>
+						    <td><field name="q15"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q16"/>
+							</td>
+						    <td><field name="q16"/></td>
+					    </tr>
+					    <tr>
+						    <td>
+								<label for="q17"/>
+							</td>
+						    <td><field name="q17"/></td>
+					    </tr>
+					</table>
+					<br/>
+					<p><strong>Comments</strong></p>
+					<field name="comments"/>
+					</sheet>
+                </form>
+            </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_feedbackk">
+		<field name="name">Feedbacks</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">patient.feedback</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+    <menuitem name="Feedbacks" action="action_feedbackk" id="feedback_menu"
+              parent="medical_patients_menu" sequence="3"
+			  groups="pragtech_dental_management.group_dental_mng_menu,pragtech_dental_management.group_access_patients_menu"/>
+
+</odoo>

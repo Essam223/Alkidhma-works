@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		 <template id="report_cost_profit">
+			<t t-call="web.html_container">
+				<t t-call="web.external_layout">
+					<div class="page">
+						<div class="row">
+							<div style="color:#009688;" class="text-center">
+                                     <h2><b>Cost Profit Report</b></h2>
+                                 </div>
+							 <center>
+								 <table name="master" width="100%">
+									<colgroup>
+										<col width='25%' />
+										<col width='25%' />
+										<col width='25%' />
+										<col width='25%' />
+									</colgroup>
+									<thead>
+										<tr>
+											<th/>
+											<th/>
+											<th/>
+											<th/>
+										</tr>
+									</thead>
+									<tbody class="patient_invoice_tbody">
+										<tr>
+											<td style="color:#009688;"><strong>Period From</strong></td>
+											<td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+											<td style="color:#009688;"><strong>Report Date</strong></td>
+											<td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+										</tr>
+										<tr>
+											<td style="color:#009688;"><strong>Period To</strong></td>
+											<td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+											<td style="color:#009688;"><strong>Doctor</strong></td>
+											<td>:
+												<t t-if="doctor">
+													<span t-esc="doctor[1]"/>
+												</t>
+												<t t-else="">
+													All
+												</t>
+											</td>
+										</tr>
+										<tr>
+											<td style="color:#009688;"><strong>Treatment</strong></td>
+											<td>:
+												<t t-if="treatment_id">
+													<span t-esc="treatment_id[1]"/>
+												</t>
+												<t t-else="">
+													All
+												</t>
+											</td>
+											<td/>
+											<td/>
+										</tr>
+									</tbody>
+								</table>
+							 </center>
+							<br/>
+						</div>
+						
+						<table class="table table-bordered table-striped">
+					          <thead>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="45%" class="text-center">Treatment</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="5%" class="text-center">Count</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="10%" class="text-center">Income</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="10%" class="text-center">Overhead</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="10%" class="text-center">Material Cost</th>
+									<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" width="10%" class="text-center">Profit</th>
+							  </thead>
+							<tbody width="100%">
+								<t t-foreach="get_cost_profit_data" t-as="o" >
+									<t t-set="count_sum" t-value="0" />
+									<t t-set="income_sum" t-value="0" />
+									<t t-set="overhead_sum" t-value="0" />
+									<t t-set="material_cost_sum" t-value="0" />
+									<t t-set="profit_sum" t-value="0" />
+									<tr t-foreach="o" t-as="mdata" style="border:none">
+										<t t-set="count_sum" t-value="count_sum+o[mdata][1]"/>
+										<t t-set="income_sum" t-value="income_sum+o[mdata][2]"/>
+										<t t-set="overhead_sum" t-value="overhead_sum+o[mdata][3]"/>
+										<t t-set="material_cost_sum" t-value="material_cost_sum+o[mdata][4]"/>
+										<t t-set="profit_sum" t-value="profit_sum+o[mdata][5]"/>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+											<span t-esc="o[mdata][0]"/>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<span t-esc="o[mdata][1]"/>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<span t-esc="o[mdata][2]"/>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<span t-esc="o[mdata][3]"/>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<span t-esc="o[mdata][4]"/>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<span t-esc="o[mdata][5]"/>
+										</td>
+									</tr>
+									<tr style="border:none">
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+											<strong>Total:</strong>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<strong><span t-esc="count_sum"/></strong>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<strong><span t-esc="income_sum"/></strong>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<strong><span t-esc="overhead_sum"/></strong>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<strong><span t-esc="material_cost_sum"/></strong>
+										</td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<strong><span t-esc="profit_sum"/></strong>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+					</div>
+				</t>
+			</t>
+		</template>
+
+		<report
+            id="cost_profit_qweb"
+            string="Cost Profit Report"
+            model="cost.profit.wizard"
+            report_type="qweb-pdf"
+            file="staffcommission_costprofit.report_cost_profit"
+            name="staffcommission_costprofit.report_cost_profit"/>
+	</data>
+</odoo>

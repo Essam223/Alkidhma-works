@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_cancel_cheque">
+            <field name="name">cancel.cheque.wizard</field>
+            <field name="model">cancel.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Clear Cheque">
+                    <group>
+                        <field name="date_cancel"/>
+                        <field name="comment"/>
+                    </group>
+                    <footer>
+                        <button name="cancel_cheque" string="Post" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

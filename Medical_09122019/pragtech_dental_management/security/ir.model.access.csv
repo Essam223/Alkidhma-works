@@ -1,0 +1,34 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+"base.access_res_users_all","res_users all","base.model_res_users",,1,1,1,1
+access_patient_survey,patient_survey,model_patient_survey,,1,1,1,1
+access_diagnosis_user,diagnosis,model_diagnosis,,1,1,1,1
+access_medical_insurance_plan_user,medical_insurance_plan,model_medical_insurance_plan,,1,1,1,1
+access_medical_insurance_user,medical_insurance,model_medical_insurance,,1,1,1,1
+access_medical_speciality_user,medical_speciality,model_medical_speciality,,1,1,1,1
+access_medical_physician_user,medical_physician,model_medical_physician,,1,1,1,1
+access_medical_occupation_user,medical_occupation,model_medical_occupation,,1,1,1,1
+access_medical_patient_user,medical_patient,model_medical_patient,,1,1,1,1
+access_patient_nationality_user,patient_nationality,model_patient_nationality,,1,1,1,1
+access_medical_dose_unit_user,medical_dose_unit,model_medical_dose_unit,,1,1,1,1
+access_medical_drug_form_user,medical_drug_form,model_medical_drug_form,,1,1,1,1
+access_medical_medication_dosage_user,medical_medication_dosage,model_medical_medication_dosage,,1,1,1,1
+access_medical_appointment_user,medical_appointment,model_medical_appointment,,1,1,1,1
+access_medical_hospital_oprating_room_user,medical_hospital_oprating_room,model_medical_hospital_oprating_room,,1,1,1,1
+access_teeth_code_user,teeth_code,model_teeth_code,,1,1,1,1
+access_chart_selection_user,chart_selection.user,model_chart_selection,,1,1,1,1
+access_medical_teeth_treatment_user,medical_teeth_treatment,model_medical_teeth_treatment,,1,1,1,1
+access_patient_complaint_wizard,patient_complaint_wizard,model_patient_complaint_wizard,,1,1,1,1
+access_patient_complaint_user,patient_complaint,model_patient_complaint,,1,1,1,1
+access_patient_feedback_user,patient_feedback,model_patient_feedback,,1,1,1,1
+access_prescription_line_user,prescription_line,model_prescription_line,,1,1,1,1
+access_complaint_finding_user,complaint_finding,model_complaint_finding,,1,1,1,1
+access_operation_summary_user,operation_summary,model_operation_summary,,1,1,1,1
+access_treatment_invoice_user,treatment_invoice,model_treatment_invoice,,1,1,1,1
+access_sign_wizard_user,sign_wizard,model_sign_wizard,,1,1,1,1
+access_medical_dashboard,medical_dashboard,model_medical_dashboard,,1,1,1,1
+access_account_invoice,account_invoice,account.model_account_invoice,,1,1,1,1
+access_model_account_move_line,account move line all,account.model_account_move_line,,1,1,1,1
+access_model_account_move,account move all,account.model_account_move,,1,1,1,1
+access_model_account_invoice_tax,account invoice tax all,account.model_account_invoice_tax,,1,1,1,1
+access_model_account_payment,account payment all,account.model_account_payment,,1,1,1,1
+access_model_account_payment_method,account payment method all,account.model_account_payment_method,,1,1,1,1

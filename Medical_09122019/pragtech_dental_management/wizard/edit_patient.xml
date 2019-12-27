@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_edit_patient_wizard2" model="ir.ui.view">
+            <field name="name">edit.patient.form</field>
+            <field name="model">edit.patient</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Edit Patient ID">
+                    <group>
+                        <field name="new_patient_id" />
+                        <field name="patient_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+
+</odoo>

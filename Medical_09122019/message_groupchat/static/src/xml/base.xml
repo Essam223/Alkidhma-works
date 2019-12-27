@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="mail.chat.ControlButtons">
+        <t t-jquery="button.o_mail_chat_button_unsubscribe" t-operation="replace">
+            <button type="button" class="btn btn-default btn-sm o_mail_chat_button_unsubscribe hidden-xs" title="Unsubscribe from group">Unsubscribe</button>
+        </t>
+        <t t-jquery="button.o_mail_chat_button_settings" t-operation="replace">
+            <button t-if="debug" type="button" class="btn btn-default btn-sm o_mail_chat_button_settings" title="Open group settings">Settings</button>
+        </t>
+        <t t-jquery="button.o_mail_chat_button_private" t-operation="replace">
+            <button t-if="!disable_add_channel" type="button" class="btn btn-default btn-sm o_mail_chat_button_public o_mail_chat_button_private visible-xs" title="New Group">New Group</button>
+        </t>
+    </t>
+
+    <t t-extend="mail.chat.MobileTabPane">
+        <t t-jquery=".o_mail_chat_tab_pane" t-operation="replace">
+            <div class="o_mail_chat_tab_pane" t-att-data-type="type">
+                <div t-if="!disable_add_channel" class="o_mail_add_channel" t-att-data-type="type">
+                    <span t-if="type == 'private' || type == 'public'">#</span>
+                    <t t-set="input_placeholder" t-if="type == 'private' || type == 'public'">Add a group</t>
+                    <t t-set="input_placeholder" t-if="type == 'dm'">Open chat</t>
+                    <input type="text" t-attf-placeholder="#{input_placeholder}"/>
+                </div>
+                <t t-foreach="channels" t-as="channel">
+                    <t t-call="mail.chat.ChannelPreview"/>
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="mail.chat.Sidebar">
+        <t t-jquery=".o_mail_chat_sidebar" t-operation="replace">
+            <div class="o_mail_chat_sidebar">
+            <div t-attf-class="o_mail_chat_title_main o_mail_chat_channel_item #{(active_channel_id === 'channel_inbox') ? 'o_active': ''}"
+                 data-channel-id="channel_inbox">
+                <span class="o_channel_name"><i class="fa fa-inbox mr8"/>Inbox</span>
+                <t t-set="counter" t-value="needaction_counter"/>
+                <t t-call="mail.chat.SidebarNeedaction"/>
+            </div>
+            <div t-attf-class="o_mail_chat_title_main o_mail_chat_title_starred o_mail_chat_channel_item #{(active_channel_id === 'channel_starred') ? 'o_active': ''}"
+                 data-channel-id="channel_starred">
+                <span class="o_channel_name"><i class="fa fa-star-o mr8"/>Starred</span>
+                <t t-set="counter" t-value="starred_counter"/>
+                <t t-call="mail.chat.SidebarNeedaction"/>
+            </div>
+            <hr class="mb8"/>
+
+            <t t-set="channel_type" t-value="'public'"/>
+            <t t-call="mail.chat.SidebarTitle">
+                <t t-set="channel_title">Groups</t>
+                <t t-set="channel_icon" t-value="fa-users"/>
+            </t>
+            <t t-call="mail.chat.SidebarItems">
+                <t t-set="display_hash" t-value="true"/>
+                <t t-set="input_placeholder">Add a group</t>
+            </t>
+
+            <t t-set="channel_type" t-value="'dm'"/>
+            <t t-call="mail.chat.SidebarTitle">
+                <t t-set="channel_title">Direct Messages</t>
+                <t t-set="channel_icon" t-value="fa-user"/>
+            </t>
+            <t t-call="mail.chat.SidebarItems">
+                <t t-set="display_status" t-value="true"/>
+                <t t-set="input_placeholder">User name</t>
+            </t>
+
+            <t t-set="channel_type" t-value="'private'"/>
+            <t t-call="mail.chat.SidebarTitle">
+                <t t-set="channel_title">Private Groups</t>
+                <t t-set="channel_icon" t-value="fa-eye-slash"/>
+            </t>
+            <t t-call="mail.chat.SidebarItems">
+                <t t-set="input_placeholder">Add a private group</t>
+                <t t-set="display_hash" t-value="true"/>
+            </t>
+        </div>
+
+        </t>
+    </t>
+</templates>

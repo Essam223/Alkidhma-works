@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_update_wizard_wizard2" model="ir.ui.view">
+            <field name="name">update.wizard.form</field>
+            <field name="model">update.wizard</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Update Payment">
+                    <group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="amount" />
+                        </group>
+                        <group>
+                            <field name="journal_id" widget="selection"/>
+                            <field name="payment_id"  invisible="1"/>
+                        </group>
+
+
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+
+</odoo>

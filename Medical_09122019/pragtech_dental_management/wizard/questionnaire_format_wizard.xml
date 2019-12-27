@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_questionnaire_format" model="ir.ui.view">
+            <field name="name">questionnaire.format.wizard.form</field>
+            <field name="model">questionnaire.format.wizard</field>
+            <field name="priority">4</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group><field name="language" string="Language"/></group>
+                        <group></group>
+                    </group>
+
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_questionnaire_format_wizard">
+		<field name="name">Questionnaire Form</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">questionnaire.format.wizard</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+        <field name="context"></field>
+	</record>
+
+</odoo>

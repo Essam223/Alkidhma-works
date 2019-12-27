@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <record id="hr_salary_rule_overtime" model="hr.salary.rule">
+        <field name="code">OVTH</field>
+        <field name="name">Holiday Overtime</field>
+        <field name="category_id" ref="hr_payroll.ALW"/>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = +employee.env['hr.employee'].get_overtime_ins_holiday(employee.id,
+				payslip.id)</field>
+        <field name="sequence" eval="6"/>
+        <field name="note">
+            overtime = ((Wage(in contract) / Total Hour in normal working hour)*Holiday overtime rate in hr settings) * Total Holiday Overtime Hours
+        </field>
+    </record>
+
+    <record id="hr_salary_rule_overtime_working_day" model="hr.salary.rule">
+        <field name="code">OVTW</field>
+        <field name="name">Working Day Overtime</field>
+        <field name="category_id" ref="hr_payroll.ALW"/>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = +employee.env['hr.employee'].get_overtime_ins_working_day(employee.id,
+				payslip.id)</field>
+        <field name="sequence" eval="6"/>
+        <field name="note">
+            overtime = ((Wage(in contract) / Total Hour in normal working hour)*Working Day overtime rate in hr settings) * Total Working Day Overtime Hours
+        </field>
+    </record>
+</data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_termination_wizard_wizard2" model="ir.ui.view">
+            <field name="name">termination.wizard.form</field>
+            <field name="model">termination.wizard</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Termination details">
+                    <group>
+                        <group>
+                            <field name="employee_id" readonly="1"/>
+                            <field name="last_working_day"/>
+                        </group>
+                        <group>
+                            <field name="joining_date" readonly="1"/>
+                        </group>
+
+
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+
+</odoo>

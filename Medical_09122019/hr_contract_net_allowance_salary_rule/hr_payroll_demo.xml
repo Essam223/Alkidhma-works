@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="hr_salary_rule_all_allowances" model="hr.salary.rule">
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = +employee.env['hr.employee'].get_all_allowances(employee.id,payslip.id)</field>
+            <field name="condition_select">none</field>
+            <field name="code">ALL_ALW</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">All Allowances</field>
+            <field name="sequence" eval="16"/>
+         </record>
+</odoo>

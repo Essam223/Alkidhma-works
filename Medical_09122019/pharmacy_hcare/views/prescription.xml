@@ -1,0 +1,39 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="medical_appointment_view2">
+			<field name="name">Appointment</field>
+			<field name="model">medical.appointment</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_appointment_view" />
+			<field name="arch" type="xml">
+                <data>
+                <xpath expr="//field[@name='prescription_ids']" position="replace">
+                    <field name="prescription_ids"
+                           context="{'default_patient_id':patient,
+                           'default_doctor':doctor, 'default_appt_id':id,
+                           'default_prescription_date':appointment_sdate}">
+                        <tree editable="bottom" decoration-danger="qty_available &gt; 0" decoration-success="qty_available &lt; 1">
+							<field name="appt_id" invisible="1" />
+							<field name="patient_id" invisible="1" />
+							<field name="qty_available" invisible="1" />
+							<field name="prescription_date" invisible="1"/>
+							<field name="doctor" invisible="1"/>
+							<field name="medicine_id" />
+							<field name="dose"  invisible="1"/>
+							<field name="dose_unit" invisible="1"/>
+							<field name="form" invisible="1"/>
+							<field name="common_dosage" />
+							<field name="duration" />
+							<field name="duration_period" />
+							<field name="note" />
+						</tree>
+					</field>
+                </xpath>
+                </data>
+			</field>
+        </record>
+
+	</data>
+</odoo>
+
+
+

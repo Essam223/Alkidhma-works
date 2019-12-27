@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="pharmacy_stock_inout_report_pdf">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div style="color:#009688;">
+                                     <h2><b>PHARMACY STOCK IN-OUT REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="90%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <!--<thead>-->
+                                            <!--<tr>-->
+                                                <!--<th>&nbsp;</th>-->
+                                                <!--<th>&nbsp;</th>-->
+                                                <!--<th>&nbsp;</th>-->
+                                                <!--<th>&nbsp;</th>-->
+                                            <!--</tr>-->
+                                        <!--</thead>-->
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period From</strong></td>
+                                                <td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+                                                <td style="color:#009688;"><strong>Period To</strong></td>
+                                                <td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Company</strong></td>
+                                                <td>: <span t-esc="company_name" /></td>
+                                                <td style="color:#009688;"><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                     <table class="table table-striped" name="account_invoices">
+                                            <colgroup>
+                                                <col width='5%'/>
+                                                <col width='55%'/>
+                                                <col width='10%'/>
+                                                <col width='10%'/>
+                                                <col width='10%'/>
+                                                <col width='10%'/>
+
+
+                                            </colgroup>
+                                            <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <tr>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Item</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" >Open Stock</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" >Qty IN</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Qty Out</th>
+                                                    <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Current Stock</th>
+                                                    <!--<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Card</th>-->
+                                                    <!--<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Total Amount</th>-->
+                                                    <!--<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Discount Amt</th>-->
+                                                    <!--<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Net Amount</th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice_tbody" >
+                                                <t t-set="i" t-value="1" />
+                                                <t t-set="initial_sum" t-value="0" />
+                                                <t t-set="cash_sum" t-value="0" />
+                                                <t t-set="credit_sum" t-value="0" />
+                                                <t t-set="disc_sum" t-value="0" />
+                                                <t t-set="amount_sum" t-value="0" />
+                                                <tr t-foreach="orders" t-as="l" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" ><span t-esc="l_value['open_qty']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;" ><span t-esc="l_value['qty_in']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l_value['qty_out']"/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l_value['qty_available']"/></td>
+
+                                                    <!--<td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['credit']"/><t t-set="credit_sum" t-value="credit_sum+l['credit']"/></td>-->
+                                                    <!--<td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['initial_amt']"/><t t-set="initial_sum" t-value="initial_sum+l['initial_amt']"/></td>-->
+                                                    <!--<td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['disc_total']"/><t t-set="disc_sum" t-value="disc_sum+l['disc_total']"/></td>-->
+                                                    <!--<td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['amount_total']"/><t t-set="amount_sum" t-value="amount_sum+l['amount_total']"/></td>-->
+                                                </tr>
+                                                <!--<tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">-->
+                                                    <!--<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"/>-->
+                                                    <!--<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"/>-->
+                                                    <!--<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"/>-->
+                                                    <!--<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"/>-->
+                                                    <!--<td style="border-right: 1px solid black;border-top: 1px solid black;"><strong>Total  : </strong></td>-->
+                                                    <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="cash_sum"/></strong></td>-->
+                                                    <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="credit_sum"/></strong></td>-->
+                                                    <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="initial_sum"/></strong></td>-->
+                                                    <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="disc_sum"/></strong></td>-->
+                                                    <!--<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="amount_sum"/></strong></td>                                                </tr>-->
+                                            </tbody>
+                                        </table>
+                                     <br/>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>

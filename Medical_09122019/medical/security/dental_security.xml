@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data >
+
+		<record id="group_dental_nurse_menu" model="res.groups">
+	        <field name="name">Nurse</field>
+	    </record>
+
+		<record model="ir.rule" id="medical_nurse_mc_rule">
+            <field name="name">medical.nurse multi-company</field>
+            <field name="model_id" ref="medical.model_medical_nurse"/>
+            <field name="domain_force">[('company_id','child_of',[user.company_id.id])]</field>
+            <field name="active" eval="True"/>
+        </record>
+
+	</data>
+</openerp>

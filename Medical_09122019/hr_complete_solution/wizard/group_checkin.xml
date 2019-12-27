@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Checkin  -->
+        <record id="checkin_only_form" model="ir.ui.view">
+            <field name="name">checkin.only.form</field>
+            <field name="model">checkin.only</field>
+            <field name="arch" type="xml">
+                <form string="Checkin">
+                    <group >
+                        <group>
+                            <field name="check_in_time"/>
+                        </group>
+                        <group/>
+                    </group>
+                    <group string="Employees">
+                        <field name="employee_ids" nolabel="1">
+                            <tree>
+                                <field name="name" />
+                                <field name="department_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="action_checkin_only" type="object" string="Proceed" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--  Checkin action -->
+        <record id="checkin_only_act" model="ir.actions.act_window">
+            <field name="name">Checkin</field>
+            <field name="res_model">checkin.only</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="checkin_only_form"/>
+            <field name="target">new</field>
+        </record>
+
+    <act_window
+            id="action_checkin_only"
+            multi="True"
+            key2="client_action_multi" name="Checkin"
+            res_model="checkin.only"
+            src_model="hr.employee"
+            view_mode="form" target="new" view_type="form"
+            view_id="checkin_only_form"
+            groups="hr_attendance.group_hr_attendance_user,hr_attendance.group_hr_attendance_manager"
+        />
+</odoo>

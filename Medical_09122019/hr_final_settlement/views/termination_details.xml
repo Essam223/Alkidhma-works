@@ -1,0 +1,80 @@
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="medical_termination_details_vieww">
+			<field name="name">termination</field>
+			<field name="model">termination.details</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Termination" create="0" delete="0" edit="0">
+					<header>
+						<button string="Pay Gratuity" name="%(action_pay_gratuity_payment)d" type="action"
+                        	attrs="{'invisible': [('fully_paid', '=', True)]}" class="oe_highlight"/>
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="employee_id"/>
+								<field name="joining_date"/>
+								<field name="last_working_day"/>
+							</group>
+							<group>
+								<field name="gratuity_days"/>
+								<field name="gratuity_amt" />
+								<field name="fully_paid"  invisible="1"/>
+								<field name="residual" />
+							</group>
+						</group>
+						<notebook>
+							<page name="Payments" string="Payments">
+								<field name="payment_ids" readonly="1">
+									<tree>
+										<field name="payment_date" string="Date"/>
+										<field name="journal_id" string="Journal"/>
+										<field name="amount" sum="Amount"/>
+										<field name="name"/>
+										<field name="state" invisible="1"/>
+										<!--<button name="update_payment" string="Update" type="object"-->
+												<!--attrs="{'invisible': [('state', 'not in', ['posted'])]}"/>-->
+										<!--<button name="delete_payment" string="Delete" type="object"/>-->
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_termination_details_tree">
+			<field name="name">Termination details</field>
+			<field name="model">termination.details</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Termination" create="0" delete="0" edit="0">
+					<field name="employee_id"/>
+					<field name="joining_date"/>
+					<field name="last_working_day"/>
+					<field name="gratuity_days"/>
+					<field name="gratuity_amt" />
+					<field name="residual" />
+				</tree>
+			</field>
+    </record>
+
+    <record id="action_termination_detail" model="ir.actions.act_window">
+		<field name="name">Termination details</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">termination.details</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+		<menuitem action="action_termination_detail"
+			id="menu_termination_details" parent="hr.menu_hr_root" sequence="20" string="Termination" />
+
+	</data>
+</odoo>
+
+
+	

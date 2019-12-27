@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+      <record id="medical_appointment_view" model="ir.ui.view">
+            <field name="name">Appointment</field>
+			<field name="model">medical.appointment</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_appointment_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='followup']" position="after">
+                    <field name="insurance_id" attrs="{'invisible': [('patient', '=', False)]}"
+                                   context="{'default_name': patient_partner, 'default_patient_id': patient, 'default_res_company_id': company_id}"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="medical_patient_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+			<field name="model">medical.patient</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_patient_view"/>
+            <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="inside">
+                <separator colspan="4" string="Insurances"/>
+                <field name="insurance_ids" string="Insurance" colspan="4"
+                       context="{'default_name': name, 'default_patient_id': id}">
+                    <tree string='Insurance List'>
+                        <field name="company_id" />
+                        <field name="name" invisible="not context.get('show_for_ins_menu', False)"/>
+                        <field name="number" />
+                        <field name="insurance_id_no"/>
+                        <field name="group_name"  />
+                        <field name="member_since" />
+                        <field name="member_exp" />
+                    </tree>
+                </field>
+            </xpath>
+            </field>
+      </record>
+
+     <record model="ir.ui.view" id="view_base_partner_form">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Coverage Treatments" attrs="{ 'invisible':[('is_insurance_company', '=', False)]}" >
+						<field name="treatment_ids" string="Treatment"
+							domain="[('is_treatment','=',True)]">
+							<tree>
+								<field name="default_code" />
+								<field name="name"/>
+								<field name="lst_price"/>
+							</tree>
+							</field>
+					</page>
+					<page string="Non-Coverage Treatments" attrs="{ 'invisible':[('is_insurance_company', '=', False)]}" >
+						<field name="non_coverage_treatment_ids" string="Treatment"
+							domain="[('is_treatment','=',True)]">
+							<tree>
+								<field name="default_code" />
+								<field name="name"/>
+								<field name="lst_price"/>
+							</tree>
+							</field>
+					</page>
+					<page string="Consultation charges" attrs="{ 'invisible':[('is_insurance_company', '=', False)]}" >
+						<field name="consultation_treatment_ids" string="Consultation charges"
+							domain="[('is_treatment','=',True)]">
+							<tree>
+								<field name="default_code" />
+								<field name="name"/>
+								<field name="lst_price"/>
+							</tree>
+							</field>
+					</page>
+                </xpath>
+            </field>
+     </record>
+
+      <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+            <field name="inherit_id" ref="pragtech_dental_management.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="insurance_ids" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                    <attribute name="attrs">{'invisible':[('is_patient', '=', False)]}</attribute>
+                </field>
+            </field>
+      </record>
+
+      <record model="ir.ui.view" id="view_product_form1">
+			<field name="name">product.normal.form</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="pragtech_dental_management.view_product_form1" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+                <field name="discount_amt" position="replace">
+                    <field name="discount_amt" attrs="{ 'invisible':[('is_treatment', '=', False)]}"/>
+                </field>
+                <xpath expr="//notebook[@name='general_information']" position="inside">
+                    <page string="Insurance Company(Coverage)" attrs="{ 'invisible':[('is_treatment', '=', False)]}" >
+                        <field name="insurance_company_ids" string="Insurance Company"
+								domain="[('is_insurance_company','=',True)]">
+                            <tree>
+                                <field name="name"/>
+                                <field name="discount_amt" />
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Insurance Company(Non-Coverage)" attrs="{ 'invisible':[('is_treatment', '=', False)]}" >
+                        <field name="non_coverage_insurance_company_ids" string="Insurance Company"
+                            domain="[('is_insurance_company','=',True)]">
+                            <tree>
+                                <field name="name"/>
+                                <field name="discount_amt" />
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Insurance Company(Consultation)" attrs="{ 'invisible':[('is_treatment', '=', False)]}" >
+                        <field name="consultation_insurance_company_ids" string="Insurance Company"
+                            domain="[('is_insurance_company','=',True)]">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+      </record>
+
+    <record model="ir.ui.view" id="product_seacrh_view_inherited">
+		<field name="name">product.search.view.inherited</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_search_form_view"/>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<field name="product_tmpl_id" position="after">
+				<field name="insurance_company_ids"/>
+				<field name="non_coverage_insurance_company_ids"/>
+				<field name="consultation_insurance_company_ids"/>
+			</field>
+		</field>
+	</record>
+
+    <record id="pragtech_dental_management.medical_patients_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('basic_insurance.group_insurance_mgmnt_manager_menu'))]"/>
+    </record>
+
+    <record id="pragtech_dental_management.medical_edit_patient" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('basic_insurance.group_insurance_mgmnt_manager_menu'))]"/>
+    </record>
+
+    <record id="pragtech_dental_management.medical_conf_appointment_add" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('basic_insurance.group_insurance_mgmnt_manager_menu'))]"/>
+    </record>
+
+  </data>
+ </odoo>   	

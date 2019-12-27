@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_registration"
+        string="Registration Report"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="pragtech_dental_management.report_registration_pdf"
+        name="pragtech_dental_management.report_registration_pdf"
+		menu="False"
+    />
+        <record id="view_registration_wizard2" model="ir.ui.view">
+            <field name="name">patient.registration.form</field>
+            <field name="model">patient.registration</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Patient Details">
+                    <div  attrs="{'invisible': [('language', '=', 'arabic')]}">
+
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="language" string="Language/ لغة"/>
+                                </td>
+                                <td >
+                                    <field name="language"/>
+                                </td>
+                                <td >
+                                    <label for="register_date"/>
+                                </td>
+                                <td >
+                                    <field name="register_date"/></td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    <label for="patient_id"/>
+                                </td>
+                                <td >
+                                    <field name="patient_id"/></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+                        <separator string="Basic Info" attrs="{'invisible': [('language', '=', 'arabic')]}"/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:70%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="patient_name"/>
+                                </td>
+                                <td>
+                                <div class="address_format">
+                                     <field name="name_tag" style="width: 30%" />
+                                     <field name="patient_name" style="width: 70%" />
+                                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="qid"/>
+                                </td>
+                                <td><field name="qid"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="nationality_id"/>
+                                </td>
+                                <td><field name="nationality_id"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="address"/>
+                                </td>
+                                <td><field name="address"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="mobile"/>
+                                </td>
+                                <td>
+                                    <field name="mobile"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="other_mobile"/>
+                                </td>
+                                <td>
+                                    <field name="other_mobile"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="dob"/>
+                                </td>
+                                <td><field name="dob" style="width: 100%" /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="sex"/>
+                                </td>
+                                <td><field name="sex" widget="radio"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <h2>
+                                        <separator string="Emergency Contact Details"/>
+                                    </h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="emergency_name"/>
+                                </td>
+                                <td><field name="emergency_name"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="emergency_relation"/>
+                                </td>
+                                <td><field name="emergency_relation"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="emergency_phone"/>
+                                </td>
+                                <td><field name="emergency_phone"/></td>
+                            </tr>
+
+                        </table>
+                        <separator string="Questionnaire"/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q1" />
+                                </td>
+                                <td><field name="q1"/></td>
+                            </tr>
+
+                        </table>
+                        <p><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q2"/>
+                                </td>
+                                <td><field name="q2"/></td>
+
+                                <td>
+                                    <label for="q3" />
+                                </td>
+                                <td><field name="q3"/></td>
+
+                                <td>
+                                    <label for="q4" />
+                                </td>
+                                <td><field name="q4"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q5" />
+                                </td>
+                                <td><field name="q5"/></td>
+
+                                <td>
+                                    <label for="q6"/>
+                                </td>
+                                <td><field name="q6"/></td>
+
+                                <td>
+                                    <label for="q7" />
+                                </td>
+                                <td><field name="q7"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q8"/>
+                                </td>
+                                <td><field name="q8"/></td>
+
+                                <td>
+                                    <label for="q9"/>
+                                </td>
+                                <td><field name="q9"/></td>
+
+                                <td>
+                                    <label for="q10"/>
+                                </td>
+                                <td><field name="q10"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q11"/>
+                                </td>
+                                <td><field name="q11"/></td>
+
+                                <td>
+                                    <label for="q12"/>
+                                </td>
+                                <td><field name="q12"/></td>
+
+                                <td>
+                                    <label for="q13"/>
+                                </td>
+                                <td><field name="q13"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q14"/>
+                                </td>
+                                <td><field name="q14"/></td>
+
+                                <td>
+                                    <label for="q15"/>
+                                </td>
+                                <td><field name="q15"/></td>
+
+                                <td>
+                                    <label for="q16"/>
+                                </td>
+                                <td><field name="q16"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q17"/>
+                                </td>
+                                <td><field name="q17"/></td>
+
+                                <td>
+                                    <label for="q18"/>
+                                </td>
+                                <td><field name="q18"/></td>
+
+                                <td>
+                                    <label for="q19"/>
+                                </td>
+                                <td><field name="q19"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q20"/>
+                                </td>
+                                <td><field name="q20"/></td>
+
+                                <td>
+                                    <label for="q21"/>
+                                </td>
+                                <td><field name="q21"/></td>
+
+                                <td>
+                                    <label for="q22"/>
+                                </td>
+                                <td><field name="q22"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q23"/>
+                                </td>
+                                <td><field name="q23"/></td>
+
+                                <td>
+                                    <label for="q24"/>
+                                </td>
+                                <td><field name="q24"/></td>
+
+                                <td>
+                                    <label for="q25"/>
+                                </td>
+                                <td><field name="q25"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q26"/>
+                                </td>
+                                <td><field name="q26"/></td>
+
+                                <td>
+                                    <label for="q27"/>
+                                </td>
+                                <td><field name="q27"/></td>
+
+                                <td>
+                                    <label for="q28"/>
+                                </td>
+                                <td><field name="q28"/></td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q29"/>
+
+                                    </td>
+                                <td><field name="q29"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q29', '!=', 'YES')]}">
+                                <td><label for="q30" string="When...."/></td>
+                                <td><field name="q30"/></td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q31"/>
+
+                                    </td>
+                                <td><field name="q31"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q31', '!=', 'YES')]}">
+                                <td><label for="q32" string="Please specify...."/></td>
+                                <td><field name="q32"/></td>
+
+                            </tr>
+                        </table>
+                        <p><strong>Do you have allergies to?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q33"/>
+                                </td>
+                                <td><field name="q33"/></td>
+
+                                <td>
+                                    <label for="q34"/>
+                                </td>
+                                <td><field name="q34"/></td>
+
+                                <td>
+                                    <label for="q35"/>
+                                </td>
+                                <td><field name="q35"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q36"/>
+                                </td>
+                                <td><field name="q36"/></td>
+
+                                <td>
+                                    <label for="q37"/>
+                                </td>
+                                <td><field name="q37"/></td>
+
+                                <td>
+                                    <label for="q38"/>
+                                </td>
+                                <td><field name="q38"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q39"/>
+                                </td>
+                                <td><field name="q39"/></td>
+
+                                <td>
+                                    <label for="q40"/>
+                                </td>
+                                <td><field name="q40"/></td>
+
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q41"/>
+                                </td>
+                                <td><field name="q41"/></td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q42"/>
+                                </td>
+                                <td><field name="q42"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q42', '!=', 'YES')]}">
+                                <td><label for="q43" string="# of cigarette/day...."/></td>
+                                <td><field name="q43"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q44"/>
+                                </td>
+                                <td><field name="q44"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q44', '!=', 'YES')]}">
+                                <td><label for="q45" string="Month...."/></td>
+                                <td><field name="q45"/></td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q46"/>
+                                </td>
+                                <td><field name="q46"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q47"/>
+                                </td>
+                                <td><field name="q47"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q48"/>
+                                </td>
+                                <td><field name="q48"/></td>
+                            </tr>
+                        </table>
+                        <p><strong>Associated with dentistry?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q49"/>
+                                </td>
+                                <td><field name="q49"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q50" string="How often do you brush/floss?"/>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label for="q50"/>
+                                </td>
+                                <td>
+                                    <field name="q50"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label for="q51"/>
+                                </td>
+                                <td>
+                                    <field name="q51"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label for="q52"/>
+                                </td>
+                                <td>
+                                    <field name="q52"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q53"/>
+                                </td>
+                                <td><field name="q53"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q54"/>
+                                </td>
+                                <td><field name="q54"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q54', '!=', 'YES')]}">
+                                <td><label for="q55" string="When and where...."/></td>
+                                <td><field name="q55"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q56"/>
+                                </td>
+                                <td><field name="q56"/></td>
+                            </tr>
+                        </table>
+
+                        <p><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:40%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:40%;"></th>
+                                <th style="width:15%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q57"/>
+                                </td>
+                                <td><field name="q57"/></td>
+
+                                <td>
+                                    <label for="q58"/>
+                                </td>
+                                <td><field name="q58"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q59"/>
+                                </td>
+                                <td><field name="q59"/></td>
+
+                                <td>
+                                    <label for="q60"/>
+                                </td>
+                                <td><field name="q60"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q61"/>
+                                </td>
+                                <td><field name="q61"/></td>
+
+                                <td>
+                                    <label for="q62"/>
+                                </td>
+                                <td><field name="q62"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q63"/>
+                                </td>
+                                <td><field name="q63"/></td>
+
+                                <td>
+                                    <label for="q64"/>
+                                </td>
+                                <td><field name="q64"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q65"/>
+                                </td>
+                                <td><field name="q65"/></td>
+
+                                <td>
+                                    <label for="q66"/>
+                                </td>
+                                <td><field name="q66"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q67"/>
+                                </td>
+                                <td><field name="q67"/></td>
+
+                                <td>
+                                    <label for="q68"/>
+                                </td>
+                                <td><field name="q68"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q69"/>
+                                </td>
+                                <td><field name="q69"/></td>
+
+                                <td>
+                                    <label for="q70"/>
+                                </td>
+                                <td><field name="q70"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q71"/>
+                                </td>
+                                <td><field name="q71"/></td>
+
+                                <td>
+                                    <label for="q72"/>
+                                </td>
+                                <td><field name="q72"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q73"/>
+                                </td>
+                                <td><field name="q73"/></td>
+
+                                <td>
+                                    <label for="q74"/>
+                                </td>
+                                <td><field name="q74"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q75"/>
+                                </td>
+                                <td><field name="q75"/></td>
+
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p><strong>Smile Assessment</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="q76"/>
+                                </td>
+                                <td><field name="q76"/></td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q76', '!=', 'NO')]}">
+                                <td><label for="q77" string="If no, Please explain...."/></td>
+                                <td><field name="q77"/></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div  attrs="{'invisible': [('language', '=', 'english')]}">
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="language"/></td>
+                                <td style="text-align: right;">
+                                    <label for="language" string="Language/ لغة"/>
+                                </td>
+                                <td>
+                                    <field name="register_date"/></td>
+                                <td style="text-align: right;">
+                                    <label for="register_date" string="تاريخ"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <field name="patient_id"/></td>
+                                <td style="text-align: right;">
+                                    <label for="patient_id" string="اسم المريض"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <separator style="text-align: right;" string="معلومات أساسية"/>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:70%;"></th>
+                                <th style="width:30%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="address_format">
+                                         <field name="name_tag" style="width: 30%" />
+                                         <field name="patient_name" style="width: 70%" />
+                                    </div>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="patient_name" string="اسم المريض"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="qid"/></td>
+                                <td style="text-align: right;">
+                                    <label for="qid" string="رقم هوية قطر"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="nationality_id"/></td>
+                                <td style="text-align: right;">
+                                    <label for="nationality_id" string="جنسية"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="address"/></td>
+                                <td style="text-align: right;">
+                                    <label for="address" string="عنوان"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <field name="mobile"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="mobile" string="الهاتف 1"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <field name="other_mobile"/>
+                                </td>
+                                <td style="text-align: right;">
+                                    <label for="other_mobile" string="الهاتف 2"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="dob" style="width: 100%" /></td>
+                                <td style="text-align: right;">
+                                    <label for="dob" string="تاريخ الميلاد"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="sex" widget="radio"/></td>
+                                <td style="text-align: right;">
+                                    <label for="sex" string="جنس"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <h2>
+                                        <separator style="text-align: right;" string="تفاصيل الاتصال في حالات الطوارئ"/>
+                                    </h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="emergency_name"/></td>
+                                <td style="text-align: right;">
+                                    <label for="emergency_name" string="اسم"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="emergency_relation"/></td>
+                                <td style="text-align: right;">
+                                    <label for="emergency_relation" string="علاقة"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="emergency_phone"/></td>
+                                <td style="text-align: right;">
+                                    <label for="emergency_phone" string="عنوان"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <separator style="text-align: right;" string="استطلاع" />
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q1"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q1" string="هل صحتك جيدة؟"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <p style="text-align: right;"><strong> هل كان لديك أي من التالي؟ (يرجى تحديد المربع)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q2"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q2" string=" فقر الدم"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q3"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q3" string=" التهاب المفاصل والروماتيزم"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q4"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q4" string=" المفاصل الصناعية"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q5"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q5" string=" الربو"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q6"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q6" string=" آلام الظهر"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q7"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q7" string="علاج الكورتيزون"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q8"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q8" string=" السعال المستمر"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q9"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q9" string=" داء السكري"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q10"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q10" string=" الصرع"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q11"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q11" string=" الإغماء"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q12"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q12" string=" الجلوكوما"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q13"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q13" string=" الصداع النصفي"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q14"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q14" string=" الهيموفيليا"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q15"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q15" string=" أمراض القلب"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q16"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q16" string=" مشاكل صمام القلب"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q17"/></td>
+                                <td style="text-align: right;" >
+                                    <label for="q17" string="جراحة القلب"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q18"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q18" string=" التهاب الكبد"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q19"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q19" string=" ارتفاع ضغط الدم"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q20"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q20" string=" فيروس نقص المناعة المكتسبة"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q21"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q21" string=" ألم الفك"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q22"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q22" string=" مرض الكلى"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q23"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q23" string="منظم ضربات القلب"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q24"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q24" string=" نزيف استمر لفترة طويلة"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q25"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q25" string=" أمراض الجهاز التنفسي"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q26"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q26" string=" مشاكل في الكلى"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q27"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q27" string=" أمراض الكبد"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q28"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q28" string=" مشكلة الغدة الدرقية"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:75%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q29"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q29" string=" مرض خطير أو عمليات؟"/>
+
+                                </td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q29', '!=', 'YES')]}">
+                                <td style="text-align: right;"><field name="q30"/></td>
+                                <td style="text-align: right;"><label for="q30" string=" إذا نعم متى"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q31"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q31" string=" مشاكل طبية أخرى؟ "/>
+                                </td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q31', '!=', 'YES')]}">
+                                <td style="text-align: right;"><field name="q32"/></td>
+                                <td style="text-align: right;"><label for="q32" string="إذا كان الجواب بالنفي ، فيرجى تحديد"/></td>
+                            </tr>
+                        </table>
+                        <p style="text-align: right;"><strong>هل لديك حساسيه؟</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q33"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q33" string=" اللاتكس"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q34"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q34" string=" مخدر موضعي"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q35"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q35" string=" البنسلين"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q36"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q36" string=" السلفا"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q37"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q37" string=" الأسبرين"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q38"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q38" string=" البروفين"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;"><field name="q39"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q39" string=" اليود"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q40"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q40" string=" لا شيء"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q41"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q41" string=" أي حساسية أخرى؟ "/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:75%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q42"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q42" string="هل تدخن؟"/>
+                                </td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q42', '!=', 'YES')]}">
+                                <td style="text-align: right;"><field name="q43"/></td>
+                                <td style="text-align: right;"><label for="q43"  string="# السيجارة / اليوم"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q44"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q44" string="هل انت حامل؟"/>
+                                </td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q44', '!=', 'YES')]}">
+                                <td style="text-align: right;"><field name="q45"/></td>
+                                <td style="text-align: right;"><label for="q45"  string=" نعم الشهر"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q46"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q46" string="هل تشعر بالانزعاج في هذا الوقت؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q47"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q47" string="هل سبق لك أن واجهت أي مشكلة خطيرة؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q48"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q48" string="هل تأخذ أي مضادات تخثر الدم"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="text-align: right;"><strong>فيما يخص طب الأسنان؟</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td><field name="q49"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q49" string="تاريخ آخر زيارة لطب الأسنان؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="text-align: right;">
+                                    <label for="q50" string="كم مرة تقوم بالفرشاة / الخيط؟"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <field name="q50"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <label for="q50" string="تنظيف"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <field name="q51"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <label for="q51" string="الخيط"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <field name="q52"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <label for="q52" string="غسول الفم"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q53"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q53" string="هل عولجت لمرض اللثة"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q54"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q54" string="هل كان لديك أي صور الأشعة السنية؟ "/>
+                                </td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q54', '!=', 'YES')]}">
+                                <td style="text-align: right;"><field name="q55"/></td>
+                                <td style="text-align: right;"><label for="q55" string="متى و أين"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q56"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q56" string="ما هو السبب الرئيسي للحصول على رعاية الأسنان؟"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="text-align: right;"><strong>هل لديك مشكلة في:</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:15%;"></th>
+                                <th style="width:40%;text-align: right;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:40%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q57"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q57" string=" نزيف أو التهاب اللثة"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q58"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q58" string=" عض الخدود / الشفتان"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q59"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q59" string=" الحشوة المكسورة"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q60"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q60" string=" صرير الأسنان"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q61"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q61" string=" طرقعة المفصل "/>
+                                </td>
+                                <td style="text-align: right;"><field name="q62"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q62" string="من الصعب فتح / إغلاق الفم"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q63"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q63" string=" بثور متكررة (الشفاه / الفم)"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q64"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q64" string="تأثير الغذاء"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q65"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q65" string=" جمع الطعام بين الأسنان"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q66"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q66" string="معالجة قناة الجذر"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q67"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q67" string=" أسنان متحركة"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q68"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q68" string="تورم أو كتل في الفم"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q69"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q69" string=" تقويم الأسنان"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q70"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q70" string="  ﺣﺴﺎسية ﻟﻠﺤﺮارة"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q71"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q71" string="  حساسية للبرد"/>
+                                </td>
+                                <td style="text-align: right;"><field name="q72"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q72" string=" حساسية للحلو "/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q73"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q73" string=" ألم عند العض "/>
+                                </td>
+                                <td style="text-align: right;"><field name="q74"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q74" string=" التحول في العض"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;"><field name="q75"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q75" string=" طعم غير سار / رائحة الفم الكريهة"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="text-align: right;"><strong>تقييم الابتسامة</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:75%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="q76"/></td>
+                                <td style="text-align: right;">
+                                    <label for="q76" string="هل أنت راض عن المظهر العام لأسنانك وابتسامتك؟"/>
+                                </td>
+                            </tr>
+                            <tr attrs = "{'invisible':[('q76', '!=', 'NO')]}">
+                                <td style="text-align: right;"><field name="q77"/></td>
+                                <td style="text-align: right;"><label for="q77" string="إذا كان الجواب لا ، فيرجى التوضيح"/></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <group>
+                        <field name="register_signature" widget="signature" nolabel="1" />
+                    </group>
+                    <footer>
+                            <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                            <button string="Cancel / إلغاء " class="btn-default" special="cancel" />
+                        </footer>
+
+                </form>
+            </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_registration_wizard">
+		<field name="name">Registration Form</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">patient.registration</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+    <!--<menuitem name="Patient Registration" action="action_registration_wizard" id="medical_registration_menu"-->
+              <!--parent="medical_patients_menu" sequence="2"/>-->
+
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="calendar_scheduler_master_assets" name="fc assets"
+				  inherit_id="web.assets_backend">
+			<xpath expr="." position="inside">
+				<link rel="stylesheet"
+					  href="/calendar_scheduler/static/lib/fc/css/fullcalendar.min.css"/>
+				<link rel="stylesheet"
+					  href="/calendar_scheduler/static/lib/fc/css/scheduler.min.css"/>
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/lib/select2.full.js"/>
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/lib/fc/js/fullcalendar-2.5.0.js"/>
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/lib/fc/js/scheduler-1.1.0.js"/>
+				<link rel="stylesheet"
+					  href="/calendar_scheduler/static/src/css/scheduler.css"/>
+
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/src/scheduler/scheduler_controller.js"></script>
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/src/scheduler/scheduler_model.js"></script>
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/src/scheduler/scheduler_quick_create.js"></script>
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/src/scheduler/scheduler_renderer.js"></script>
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/src/scheduler/scheduler_view.js"></script>
+
+				<link rel="stylesheet"
+					  href="/calendar_scheduler/static/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.css"/>
+
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/src/js/color_widget.js"></script>
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/lib/bootstrap-colorpicker/js/bootstrap-colorpicker.js">
+				</script>
+			</xpath>
+		</template>
+
+		<template id="assets_common_ext" inherit_id="web.assets_common">
+			<xpath expr="//script[@src='/web/static/lib/select2/select2.js']"
+				   position="replace">
+				<script type="text/javascript"
+						src="/calendar_scheduler/static/lib/select2.js"></script>
+			</xpath>
+		</template>
+	</data>
+</odoo>

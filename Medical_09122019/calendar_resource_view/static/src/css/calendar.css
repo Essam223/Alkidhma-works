@@ -1,0 +1,309 @@
+#appointments_container_sub{
+    width:18%;
+    float:right;
+    margin-top: 6.12%;
+    margin-left: 1px;
+}
+/*#appointments_container_sub .fc-center h2 {
+    font-size: 16px;
+}
+#appointments_container_sub .fc-center {
+   margin: 4%;
+}*/
+#appointments_container_sub .left {
+    float: right;
+}
+#appointments_container_sub .ui-datepicker {
+    float: right;
+    margin-right: 2%;
+}
+#appointments_container{
+    width:81%;float:right;
+}
+.controll-buttons{
+    position: absolute;
+    text-align: center;
+    margin-left: 5.5%;
+}
+#from_date{
+    position: absolute;
+    margin-top: 18%;
+    width: 145%;
+}
+#to_date{
+    position: absolute;
+    margin-top: 51%;
+    width: 145%;
+}
+.update_date_range {
+    position: absolute;
+    margin-top: 85%;
+    height: 30px;
+    width: 65px;
+    border-radius: 3px;
+    text-align: center;
+    background: #eaaa00;
+    border-color: #eaaa00 !important;
+    font-weight: 600;
+    transition: all 0.5s ease;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+.update_date_range:hover{
+    background: #da8a00;
+    border-color: #da8a00 !important;
+}
+.ui-datepicker-calendar{
+    background-color: lavender;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+    border: none;
+    background-color: lavender;
+}
+a.ui-state-default.ui-state-highlight{
+    background-color: #cfbcd1 !important;
+}
+a.ui-state-default.ui-state-active{
+    background-color: darkmagenta !important;
+    color: aliceblue;
+}
+
+.calendar_properties{
+    margin-right: -10%;
+    margin-top: 20%;
+    position: relative;
+    float: right;
+    height: auto;
+}
+.resource-title, .status-title{
+    font-size: 17px;
+    font-weight: bolder;
+    margin-top: 13px;
+    border-bottom: 1px grey solid;
+}
+.state_selection {
+    margin-top: 12px;
+}
+.status-div, .resource-div{
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.input_date{
+    width: 55%;
+    margin-left: 35px;
+    border-radius: 1px;
+}
+.start,.end{
+    float: left;
+    width: 2% !important;
+    margin-top: 1%;
+    margin-right: 19%;
+}
+.time-range{
+    margin-left: 1px;
+    margin-top: 2%;
+}
+.wickedpicker{
+    position: absolute;
+    left: 1305.72px;
+    top: 205.674px;
+    display: block;
+    width: 157px !important;
+    height: 126px;
+}
+
+.button-reload{
+    margin-left: 12%;
+    height: 29px;
+    width: auto;
+    border-radius: 2px !important;
+    text-align: center;
+    background: #f4f7f4;
+    border-color: #f4f7f4!important;
+    font-weight: 600;
+    transition: all 5.5s ease;
+    font-family: sans-serif;
+    font-size: 14px;
+    position: absolute;
+}
+.button-reload:hover{
+    background: #87de86ab;
+    border-color: #eff4ef !important;
+}
+.openerp .oe_form .oe_form_field_time_delta input {
+    width: 100%;
+}
+
+.openerp .oe_form .oe_form_field_delta div {
+    border: 1px solid;
+    display: inline-block;
+    height: 14px;
+    margin-right: 10px;
+    position: relative;
+    top: 3px;
+    width: 40px;
+}
+
+.oe_list_field_time_delta div {
+    border: 1px solid;
+    display: inline-block;
+    height: 14px;
+    margin-right: 10px;
+    position: relative;
+    top: 3px;
+    width: 40px;
+}
+
+.time_delta_box {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin-right: 5px;
+}
+/*.modal-dialog{
+    width: 21%;
+}*/
+.fc-time-grid-event{
+    border: 1px solid;
+    border-color: #0a0a0a !important;
+}
+.sub-prev, .sub-next{
+    border-radius: 2px !important;
+    text-align: center;
+    background: #cbcaca;
+    border-color: #cbcaca !important;
+    font-weight: 600;
+    transition: all 0.5s ease;
+}
+.sub-prev:hover, .sub-next:hover{
+    background: #636363;
+    border-color: #636363 !important;
+}
+#appointments_container_sub .fc-view-container{
+    border: 1px solid !important;
+    font-size: smaller !important;
+    font-weight: 600 !important;
+    background: gainsboro;
+}
+#appointments_container_sub .fc-row{
+    height: 3pc;
+}
+#appointments_container_sub td.fc-day.fc-widget-content {
+    aspectRatio: 1 !important;
+    line-height: normal;
+}
+
+#appointments_container_sub td.fc-day.fc-widget-content.fc-thu.fc-today.fc-state-highlight {
+    background: honeydew;
+}
+.fc-time-grid-event.fc-short .fc-title .fc-file_no .fc-mobile .fc-notes{
+    color: black;
+}
+.resource_ctrl_btn{
+    margin-top: 6%;
+    margin-bottom: 6%;
+}
+.hide_ctrl_panel{
+    width: 2%;
+    height: 24px;
+    margin-top: 4.2%;
+    margin-left: 97%;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: antiquewhite;
+}
+.hide_ctrl_panel:hover{
+    background-color: #72f7f187;
+    border: antiquewhite;
+    border-radius: 6px;
+    transition: 0.7s;
+    transform: rotateZ(58deg);
+}
+.calendar_el{
+    margin-top: 1%;
+}
+
+.fc-widget-header, .fc-widget-header th, td.fc-axis.fc-time.fc-widget-content{
+    background-color: #d3d3bc;
+    border-style: dotted !important;
+    font-size: 1.15em;
+}
+.fc-time-grid .fc-bg td {
+    border-right: 1px solid !important;
+    background-color: #fffff9;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+@media only screen and (max-width: 1326px) {
+    .update_date_range {
+        position: absolute;
+        margin-top: 80%;
+        margin-left: 44px;
+        height: 30px;
+        width: 65px;
+        border-radius: 3px;
+        text-align: center;
+        background: #eaaa00;
+        border-color: #eaaa00 !important;
+        font-weight: 600;
+        transition: all 0.5s ease;
+        font-family: sans-serif;
+        font-size: 12px;
+    }
+    #appointments_container {
+        width: 79%;
+        float: left;
+    }
+    .calendar_properties {
+        margin-top: 24%;
+    }
+}
+@media only screen and (max-width: 1266px) {
+    .calendar_properties {
+        margin-top: 26%;
+    }
+    .button-reload {
+        margin-left: 16%;
+    }
+}
+@media only screen and (max-width: 1128px) {
+    .calendar_properties {
+        margin-top: 28%;
+    }
+    .button-reload {
+        margin-left: 16%;
+    }
+}
+
+@media only screen and (max-width: 970px) {
+    #appointments_container_sub .fc-center h2 {
+        font-size: 16px;
+    }
+    .calendar_properties {
+        margin-top: 23%;
+    }
+}
+@media only screen and (max-width: 924px) {
+    .time-range {
+        margin-top: -161%;
+        float: right;
+    }
+    .status-div {
+        margin-left: 142%;
+        width: 90%;
+    }
+    .cal_head{
+        margin-top: 285px;
+        margin-right: -336%;
+    }
+    .appointments_container{
+        width: 100%;
+    }
+}

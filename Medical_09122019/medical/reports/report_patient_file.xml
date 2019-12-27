@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_patient_file">
+    <t t-foreach="docs" t-as="o">
+    <!--<t t-call="web.html_container">-->
+		<t t-call="web.external_layout">
+			<div class="page">
+				<div class="text-center">
+					<div style="color:#009688;">
+						 <h2><b>Confidencial Patient Case File</b></h2>
+					 </div>
+					<table class="table table-bordered table-striped" style="width:100%;">
+						<colgroup>
+							<col width='25%' />
+							<col width='25%' />
+							<col width='25%' />
+							<col width='25%' />
+						</colgroup>
+						<thead>
+							<tr>
+								<th style="color:#009688;"><strong>Name : </strong></th>
+								<th colspan="3"><t t-if="o.patient_name"><span t-esc="o.patient_name"/></t></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="color:#009688;"><strong>Sex : </strong></td>
+								<td >
+									<t t-if="o.sex">
+										<t t-if="o.sex=='m'">Male</t>
+										<t t-if="o.sex=='f'">Female</t>
+									</t>
+								</td>
+								<td  style="color:#009688;"><strong>Age : </strong></td>
+								<td >
+									<t t-if="o.age" ><span t-esc="o.age"/></t>
+								</td>
+							</tr>
+							<tr>
+								<td style="color:#009688;"><strong>File No : </strong></td>
+								<td><t t-if="o.patient_id" ><span t-esc="o.patient_id"/></t></td>
+								<td  style="color:#009688;"><strong>ID No : </strong></td>
+								<td><t t-if="o.qid"><span t-esc="o.qid"/></t></td>
+							</tr>
+							<tr>
+								<td style="color:#009688;"><strong>Nationality : </strong></td>
+								<td><t t-if="o.nationality_id" ><span t-esc="o.nationality_id.name"/></t></td>
+								<td  style="color:#009688;"><strong>Contact Number : </strong></td>
+								<td><t t-if="o.mobile"><span  t-esc="o.mobile"/></t></td>
+							</tr>
+							<!--<tr t-if="doctor">-->
+								<!--<td ><strong>Doctor : </strong><t t-if="doctor" ><span t-esc="doctor"/></t></td>-->
+								<!--<td ><strong>Date : </strong><t t-if="appointment_sdate"><span t-esc="appointment_sdate"/></t></td>-->
+							<!--</tr>-->
+						</tbody>
+					</table>
+					<br/>
+				</div>
+		</div>
+		</t>
+		</t>
+	</template>
+
+	<report
+        id="action_report_patient_file"
+        string="Patient File"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="medical.report_patient_file"
+        name="medical.report_patient_file"
+		menu="True"
+    />
+
+</odoo>

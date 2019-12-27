@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="medical_project_shutdown_form">
+			<field name="name">Project Shutdown</field>
+			<field name="model">project.shutdown</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Project Shutdown" create="0" delete="0">
+					<group colspan="4">
+						<field name="restrict_login" />
+						<field name="shutdown_date"
+							   attrs="{'invisible': [('restrict_login', '=', False)],'required': [('restrict_login', '=', True)]}"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_project_shutdown_tree">
+			<field name="name">Project Shutdown</field>
+			<field name="model">project.shutdown</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Project Shutdown" create="false" delete="false">
+					<field name="restrict_login" />
+					<field name="shutdown_date" />
+				</tree>
+			</field>
+    </record>
+
+    <record id="action_project_shutdown" model="ir.actions.act_window">
+			<field name="name">Project Shutdown</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">project.shutdown</field>
+			<field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem action="action_project_shutdown"
+			id="menu_project_shutdown" parent="base.next_id_6" string="Project Shutdown"
+			sequence="1" />
+
+  </data>
+ </odoo>   	

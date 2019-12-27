@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="invoice_form">
+            <field name="name">account.invoice.form</field>
+            <field name="type">form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name = 'sent']" position="after">
+                    <group col="4">
+                        <field name="insurance_card" invisible="not context.get('show_for_service_bill', False)"
+                               context="{'default_name': partner_id, 'default_patient_id': patient, 'default_res_company_id': company_id}"/>
+                        <field name="insurance_invoice" attrs="{'invisible':[('insurance_invoice','=',False)]}"
+                               context="{'hide_for_insurance_bill':True}" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>
+                        <field name="insurance_company" domain="insurance_company_domain" invisible="1"/>
+                        <field name="is_insurance_company" force_save="1" invisible="1"/>
+                        <field name="insurance_company_domain" invisible="1"/>
+                    </group>
+                </xpath>
+                <xpath expr="//form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="before">
+                        <field name="discount_amt" invisible="1"/>
+                        <field name="amt_paid_by_patient" invisible="1"/>
+                        <field name="amt_fixed_paid_by_patient" invisible="1"/>
+                        <field name="amt_paid_by_insurance" invisible="1"/>
+                        <field name="insurance_cases" invisible="1"/>
+                        <field name="apply_insurance" invisible="1"/>
+                        <field name="price_initial_copay" invisible="1"/>
+                        <field name="insurance_company" invisible="1"/>
+                        <field name="share_based_on" invisible="1"/>
+                        <field name="after_treatment_grp_disc" invisible="context.get('hide_for_insurance_bill', False)"
+                               force_save="1" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"
+                               attrs="{'readonly':[('share_based_on','!=','Treatment')],'required':[('share_based_on','=','Treatment')]}"/>
+                        <field name="insurance_share" invisible="context.get('hide_for_insurance_bill', False)"
+                               force_save="1" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"
+                               attrs="{'readonly':[('share_based_on','!=','Treatment')],'required':[('share_based_on','=','Treatment')]}"/>
+                        <field name="patient_share" invisible="context.get('hide_for_insurance_bill', False)"
+                               force_save="1" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"
+                               attrs="{'readonly':[('share_based_on','!=','Treatment')],'required':[('share_based_on','=','Treatment')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="before">
+                    <field name="share_based_on" attrs="{'invisible':[('insurance_company','=',False)]}" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>
+                    <field name="after_treatment_grp_disc" attrs="{'invisible':[('share_based_on','!=','Global')],'required':[('share_based_on','=','Global')]}" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>
+                    <field name="insurance_share" attrs="{'invisible':[('share_based_on','!=','Global')],'required':[('share_based_on','=','Global')]}" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>
+                    <field name="patient_share" attrs="{'invisible':[('share_based_on','!=','Global')],'required':[('share_based_on','=','Global')]}" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="insurance_total"  attrs="{'invisible':[('insurance_company','=',False)]}" groups="pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_insurance_invoicess">
+            <field name="name">Insurance Invoice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.invoice</field>
+            <field name="domain">[('is_insurance_company','=',1)]</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,pivot</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('account.invoice_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('account.invoice_form')})]"/>
+            <field name="context">{'type':'out_invoice', 'journal_type': 'sale','hide_for_insurance_bill': True}</field>
+        </record>
+
+        <record id="pragtech_dental_management.medical_finance_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('basic_insurance.group_insurance_mgmnt_manager_menu'))]"/>
+        </record>
+
+        <record id="pragtech_dental_management.patient_invoices" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('basic_insurance.group_insurance_mgmnt_manager_menu'))]"/>
+        </record>
+
+        <menuitem name="Insurance Invoice" action="action_insurance_invoicess" id="insurance_invoicess"
+              parent="pragtech_dental_management.medical_finance_menu" sequence="2"
+			  groups="account.group_account_invoice,account.group_account_manager,pragtech_dental_management.group_dental_mng_menu,basic_insurance.group_insurance_mgmnt_manager_menu"/>
+
+        <record model="ir.ui.view" id="invoice_line_form">
+			<field name="name">account.invoice.line.dental.form</field>
+			<field name="model">account.invoice.line</field>
+			<field name="inherit_id" ref="account.view_invoice_line_form" />
+			<field name="arch" type="xml">
+			<xpath expr="//form/group/group[2]" position="after">
+                <group col="4" colspan="4">
+                    <field name="apply_insurance" invisible="1"/>
+                    <field name="discount_amt" attrs="{'invisible':[('apply_insurance','=',False)]}"/>
+                </group>
+			</xpath>
+		</field>
+		</record>
+
+    </data>
+</odoo>

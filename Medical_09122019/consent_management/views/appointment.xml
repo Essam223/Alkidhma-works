@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="medical_appointment_view_enhanced">
+		<field name="name">Appointment</field>
+		<field name="model">medical.appointment</field>
+		<field name="inherit_id" ref="pragtech_dental_management.medical_appointment_view" />
+		<field name="arch" type="xml">
+			 <xpath expr="//button[@name = 'checkin']" position="after">
+			 	<button class="btn fa fa-file-o" name="get_Consent_form" string="Consent Forms"
+						type="object"
+				  states="checkin,ready,done"/>
+             </xpath>
+		</field>
+	</record>
+</odoo>

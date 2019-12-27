@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_medical_nurse,access_medical_nurse,model_medical_nurse,,1,1,1,1

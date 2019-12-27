@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="summary_report"
+            string="Monthly Summary Report"
+            model="monthly.summary.wizard"
+            report_type="qweb-pdf"
+            file="monthly_summary_report.summary_report_pdf"
+            name="monthly_summary_report.summary_report_pdf"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="transfer_account_id" model="account.account.template">
+            <field name="code">101005</field>
+            <field name="name">Liquidity Transfers</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+        </record>
+
+        <record id="configurable_chart_template" model="account.chart.template">
+            <field name="name">Configurable Account Chart Template</field>
+            <field name="code_digits">6</field>
+            <field name="bank_account_code_prefix">1014</field>
+            <field name="cash_account_code_prefix">1016</field>
+            <field name="transfer_account_id" ref="transfer_account_id"/>
+            <field name="currency_id" ref="base.QAR"/>
+        </record>
+        <record id="transfer_account_id" model="account.account.template">
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Account Templates-->
+
+        <!-- Balance Sheet -->
+        <!-- Fixed assets -->
+        <record id="conf_xfa" model="account.account.template">
+            <field name="code">100000</field>
+            <field name="name">Fixed Assets</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_me" model="account.account.template">
+            <field name="code">100001</field>
+            <field name="name">Medical Equipments</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_faf" model="account.account.template">
+            <field name="code">100002</field>
+            <field name="name">Furniture and Fixtures </field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_cas" model="account.account.template">
+            <field name="code">100003</field>
+            <field name="name">Computer and Software</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_mat" model="account.account.template">
+            <field name="code">100004</field>
+            <field name="name">Machinery and Tools</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_d" model="account.account.template">
+            <field name="code">100005</field>
+            <field name="name">Decoration</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_mt" model="account.account.template">
+            <field name="code">100006</field>
+            <field name="name">Medical Tools</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_oe" model="account.account.template">
+            <field name="code">100007</field>
+            <field name="name">Office Equipment</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_pe" model="account.account.template">
+            <field name="code">100008</field>
+            <field name="name">Preoperation Expenses</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_xfa_a" model="account.account.template">
+            <field name="code">100009</field>
+            <field name="name">Amortaization</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Depreciation -->
+
+        <record id="conf_d_adome" model="account.account.template">
+            <field name="code">100500</field>
+            <field name="name">Accumulated Depreciation of Medical Equipment</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_d_adofaf" model="account.account.template">
+            <field name="code">100501</field>
+            <field name="name">Accumulated Depreciation of Furniture and Fixtures</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_d_adocas" model="account.account.template">
+            <field name="code">100502</field>
+            <field name="name">Accumulated Depreciation of Computer and Software</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_d_adom" model="account.account.template">
+            <field name="code">100503</field>
+            <field name="name">Accumulated Depreciation of Machinery</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_d_adod" model="account.account.template">
+            <field name="code">100504</field>
+            <field name="name">Accumulated Depreciation of Decoration</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_d_adomt" model="account.account.template">
+            <field name="code">100505</field>
+            <field name="name">Accumulated Depreciation of Medical Tools</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_d_adooe" model="account.account.template">
+            <field name="code">100506</field>
+            <field name="name">Accumulated Depreciation of Office Equipment</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Current Assets -->
+
+        <record id="conf_ca" model="account.account.template">
+            <field name="code">101000</field>
+            <field name="name">Current Assets</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_ca_rd" model="account.account.template">
+            <field name="code">101001</field>
+            <field name="name">Refundable Deposit</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_ca_pdcr" model="account.account.template">
+            <field name="code">101002</field>
+            <field name="name">Post Dated Cheq-Received</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_ca_ar" model="account.account.template">
+            <field name="code">101003</field>
+            <field name="name">Accrued Revenues</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_ca_sa" model="account.account.template">
+            <field name="code">101004</field>
+            <field name="name">Staff Advance</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_ca_sva" model="account.account.template">
+            <field name="code">101110</field>
+            <field name="name">Stock Valuation Account</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_ca_siar" model="account.account.template">
+            <field name="code">101120</field>
+            <field name="name">Stock Interim Account (Received)</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_ca_siad" model="account.account.template">
+            <field name="code">101130</field>
+            <field name="name">Stock Interim Account (Delivered)</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_ca_tp" model="account.account.template">
+            <field name="code">101100</field>
+            <field name="name">Tax Paid</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Receivable -->
+
+        <record id="conf_a_recv" model="account.account.template">
+            <field name="code">101200</field>
+            <field name="name">Account Receivable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_receivable"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Bank and cash -->
+
+        <record id="conf_credit_card" model="account.account.template">
+            <field name="code">101501</field>
+            <field name="name">Credit Card</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_o_income" model="account.account.template">
+            <field name="code">101700</field>
+            <field name="name">Opening Income Account</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_other_income"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_ncas" model="account.account.template">
+            <field name="code">110000</field>
+            <field name="name">Non-current assets</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_non_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_prepayments" model="account.account.template">
+            <field name="code">111000</field>
+            <field name="name">Prepayments</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_prepayments"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Payable -->
+        <record id="conf_a_pay" model="account.account.template">
+            <field name="code">111100</field>
+            <field name="name">Account Payable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_payable"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_a_pay_cp" model="account.account.template">
+            <field name="code">111101</field>
+            <field name="name">Post Dated Cheq-Payable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_payable"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_a_pay_ae" model="account.account.template">
+            <field name="code">111102</field>
+            <field name="name">Accured Expenses</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_payable"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Liabilities -->
+
+       <record id="current_liabilities" model="account.account.template">
+            <field name="code">112000</field>
+            <field name="name">Current Liabilities</field>
+           <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cl_ta" model="account.account.template">
+            <field name="code">112001</field>
+            <field name="name">Tax Received</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cl_p" model="account.account.template">
+            <field name="code">112002</field>
+            <field name="name">Provision </field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_cl_eosp" model="account.account.template">
+            <field name="code">112003</field>
+            <field name="name">End Of Service Provision</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_cl_ap" model="account.account.template">
+            <field name="code">112004</field>
+            <field name="name">Airticket Provision</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_cl_aovp" model="account.account.template">
+            <field name="code">112005</field>
+            <field name="name">allowance Of Vacation Provision</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="conf_cl_rapla" model="account.account.template">
+            <field name="code">112006</field>
+            <field name="name">Reserve and Profit/Loss Account</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_ncl" model="account.account.template">
+            <field name="code">113000</field>
+            <field name="name">Non-current Liabilities</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+
+    <!-- Profit and Loss -->
+
+        <record id="conf_a_pdt_sale" model="account.account.template">
+            <field name="code">114000</field>
+            <field name="name">Product Sales</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_service_sale" model="account.account.template">
+            <field name="code">114001</field>
+            <field name="name">Service Sales</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_surgery_sale" model="account.account.template">
+            <field name="code">114002</field>
+            <field name="name">Surgery</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_orthodontic" model="account.account.template">
+            <field name="code">114003</field>
+            <field name="name">Orthodontic</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_gc" model="account.account.template">
+            <field name="code">114004</field>
+            <field name="name">General Clinic</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_dxray" model="account.account.template">
+            <field name="code">114005</field>
+            <field name="name">Dental X-Ray (Panorama)</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_edontic" model="account.account.template">
+            <field name="code">114006</field>
+            <field name="name">Endodontic</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_feg" model="account.account.template">
+            <field name="code">114007</field>
+            <field name="name">Foreign Exchange Gain</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+
+        <record id="conf_cogs" model="account.account.template">
+            <field name="code">116000</field>
+            <field name="name">Cost of Goods Sold</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_co_rp" model="account.account.template">
+            <field name="code">116001</field>
+            <field name="name">Radiology Purchases</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_co_lp" model="account.account.template">
+            <field name="code">116002</field>
+            <field name="name">Lab Purchases</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_co_dp" model="account.account.template">
+            <field name="code">116003</field>
+            <field name="name">Dental Purchases</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_co_c" model="account.account.template">
+            <field name="code">116004</field>
+            <field name="name">Clerance</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_co_cd" model="account.account.template">
+            <field name="code">116005</field>
+            <field name="name">Custom Duty</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_co_sc" model="account.account.template">
+            <field name="code">116006</field>
+            <field name="name">Shipping Charge</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_co_pr" model="account.account.template">
+            <field name="code">116007</field>
+            <field name="name">Purchase Return</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_co_ssae" model="account.account.template">
+            <field name="code">116008</field>
+            <field name="name">Stock Shortages and Expiry</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_direct_costs"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+
+        <record id="conf_a_expense_expense" model="account.account.template">
+            <field name="code">117000</field>
+            <field name="name">Expense</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_fel" model="account.account.template">
+            <field name="code">118000</field>
+            <field name="name">Foreign Exchange Loss</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_gae" model="account.account.template">
+            <field name="code">118001</field>
+            <field name="name">General and Administrative Expenses</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_se" model="account.account.template">
+            <field name="code">118002</field>
+            <field name="name">Salary Expenses</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_poe" model="account.account.template">
+            <field name="code">118003</field>
+            <field name="name">Purchase of Equipments</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_bf" model="account.account.template">
+            <field name="code">118004</field>
+            <field name="name">Bank Fees</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_rent" model="account.account.template">
+            <field name="code">118005</field>
+            <field name="name">Rent</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_eaw" model="account.account.template">
+            <field name="code">118006</field>
+            <field name="name">Electricity and Water</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_tai" model="account.account.template">
+            <field name="code">118007</field>
+            <field name="name">Telephone and Internet</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_ccsc" model="account.account.template">
+            <field name="code">118008</field>
+            <field name="name">Credit Card Service Charge</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_eos" model="account.account.template">
+            <field name="code">118009</field>
+            <field name="name">End of Service</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_gf" model="account.account.template">
+            <field name="code">118010</field>
+            <field name="name">Government Fees</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_rav" model="account.account.template">
+            <field name="code">118011</field>
+            <field name="name">Resident and Visa</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_tf" model="account.account.template">
+            <field name="code">118012</field>
+            <field name="name">Transportation Fees</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_at" model="account.account.template">
+            <field name="code">118013</field>
+            <field name="name">Airticket</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_va" model="account.account.template">
+            <field name="code">118014</field>
+            <field name="name">Vacation Allowance</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_hc" model="account.account.template">
+            <field name="code">118015</field>
+            <field name="name">Health Care</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_em" model="account.account.template">
+            <field name="code">118016</field>
+            <field name="name">Equipment Maintenace</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_pa" model="account.account.template">
+            <field name="code">118017</field>
+            <field name="name">Phone allowance</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_s" model="account.account.template">
+            <field name="code">118018</field>
+            <field name="name">Stationery</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_t" model="account.account.template">
+            <field name="code">118019</field>
+            <field name="name">Tools</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_ic" model="account.account.template">
+            <field name="code">118020</field>
+            <field name="name">Insurance Charges</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_mad" model="account.account.template">
+            <field name="code">118021</field>
+            <field name="name">Marketing and Advertising</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_me" model="account.account.template">
+            <field name="code">118022</field>
+            <field name="name">Miscellaneous Expense</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_d" model="account.account.template">
+            <field name="code">118023</field>
+            <field name="name">Depreciation</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_faem" model="account.account.template">
+            <field name="code">118024</field>
+            <field name="name">Furniture and Equipment Maintenance</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_ge" model="account.account.template">
+            <field name="code">118025</field>
+            <field name="name">General Expenses</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_ue" model="account.account.template">
+            <field name="code">118026</field>
+            <field name="name">Uniform Expenses</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_cm" model="account.account.template">
+            <field name="code">118027</field>
+            <field name="name">Cleaning Materials </field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_cs" model="account.account.template">
+            <field name="code">118028</field>
+            <field name="name">Cleaning Services</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_cmac" model="account.account.template">
+            <field name="code">118029</field>
+            <field name="name">Clinical Materials and Consumables</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+        <record id="conf_a_expense_re" model="account.account.template">
+            <field name="code">118030</field>
+            <field name="name">Referral Expenses</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+
+        <record id="a_capital" model="account.account.template">
+            <field name="code">119000</field>
+            <field name="name">Capital</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="a_capital_p1" model="account.account.template">
+            <field name="code">119001</field>
+            <field name="name">Partner One Current Account</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="a_capital_p2" model="account.account.template">
+            <field name="code">119002</field>
+            <field name="name">Partner Two Current Account</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="a_capital_p3" model="account.account.template">
+            <field name="code">119003</field>
+            <field name="name">Partner Three Current Account</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="a_capital_p4" model="account.account.template">
+            <field name="code">119004</field>
+            <field name="name">Partner Four Current Account</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="a_capital_re" model="account.account.template">
+            <field name="code">119005</field>
+            <field name="name">Retained Earning</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="a_capital_sr" model="account.account.template">
+            <field name="code">119006</field>
+            <field name="name">Statutory Reserve</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="a_capital_d" model="account.account.template">
+            <field name="code">119007</field>
+            <field name="name">Dividends</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+        <record id="a_upl" model="account.account.template">
+            <field name="code">999999</field>
+            <field name="reconcile" eval='True'/>
+            <field name="name">Undistributed Profits/Losses</field>
+            <field name="user_type_id" ref="account.data_unaffected_earnings"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- chart template -->
+        <record id="configurable_chart_template" model="account.chart.template">
+            <field name="property_account_receivable_id" ref="conf_a_recv"/>
+            <field name="property_account_payable_id" ref="conf_a_pay"/>
+            <field name="property_account_expense_categ_id" ref="conf_a_expense_expense"/>
+            <field name="property_account_income_categ_id" ref="conf_a_service_sale"/>
+            <field name="complete_tax_set" eval="False"/>
+            <field name="use_anglo_saxon" eval="True"/>
+            <field name="property_stock_account_input_categ_id" ref="conf_ca_siar"/>
+            <field name="property_stock_account_output_categ_id" ref="conf_ca_siad"/>
+            <field name="property_stock_valuation_account_id" ref="conf_ca_sva"/>
+            <field name="income_currency_exchange_account_id" ref="conf_a_feg"/>
+            <field name="expense_currency_exchange_account_id" ref="conf_a_expense_fel"/>
+        </record>
+
+    </data>
+</odoo>

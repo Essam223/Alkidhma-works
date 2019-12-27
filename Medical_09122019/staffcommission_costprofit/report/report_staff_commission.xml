@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="staff_commission_report_pdf">
+			<t t-call="web.html_container">
+				<t t-call="web.external_layout">
+					<div class="page">
+						<div class="row">
+							<div style="color:#009688;" class="text-center">
+                                     <h2><b>Staff Commission Report</b></h2>
+                                 </div>
+							 <center>
+								 <table name="master" width="100%">
+									<colgroup>
+										<col width='25%' />
+										<col width='25%' />
+										<col width='25%' />
+										<col width='25%' />
+									</colgroup>
+									<thead>
+										<tr>
+											<th/>
+											<th/>
+											<th/>
+											<th/>
+										</tr>
+									</thead>
+									<tbody class="patient_invoice_tbody">
+										<tr>
+											<td style="color:#009688;"><strong>Period From</strong></td>
+											<td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+											<td style="color:#009688;"><strong>Report Date</strong></td>
+											<td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+										</tr>
+										<tr>
+											<td style="color:#009688;"><strong>Period To</strong></td>
+											<td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+											<td style="color:#009688;"><strong>Doctor</strong></td>
+											<td>:
+												<t t-if="doctor">
+													<span t-esc="doctor[1]"/>
+												</t>
+												<t t-else="">
+													All
+												</t>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							 </center>
+							<br/>
+						</div>
+						<table class="table table-bordered table-striped">
+							<colgroup>
+								<col width='40%'/>
+								<col width='10%'/>
+								<col width='10%'/>
+								<col width='10%'/>
+								<col width='10%'/>
+								<col width='10%'/>
+								<col width='10%'/>
+							</colgroup>
+					          <!--<thead>-->
+					          <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+								  <tr>
+									  <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" rowspan="2" class="text-center">Doctor</th>
+									  <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" rowspan="2" class="text-center">Income</th>
+									  <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" rowspan="2" class="text-center">Material Cost</th>
+									  <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" rowspan="2" class="text-center">Profit</th>
+									  <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" rowspan="2" class="text-center">Target</th>
+									  <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="1" colspan="2">Commission</th>
+								  </tr>
+								  <tr>
+									  <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="1">%</th>
+									  <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" rowspan="1">Amount</th>
+								  </tr>
+							</thead>
+							<tbody >
+								<tr t-foreach="get_staffcommission" t-as="line" style="border:none">
+									<t t-if="line['Hike']>0">
+										<td style="color: green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+											<t t-esc="line['dentist_name']" />
+										</td>
+										<td style="color: green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['income_sale_price']" />
+										</td>
+										<td style="color: green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['Material_cost']" />
+										</td>
+										<td style="color: green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['Profit']" />
+										</td>
+										<td style="color: green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['target_amount']" />
+										</td>
+										<td style="color: green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['commission']" />
+										</td>
+										<td style="color: green;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['Hike']" />
+										</td>
+									</t>
+									<t t-else="">
+										<td style="color: black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+											<t t-esc="line['dentist_name']" />
+										</td>
+										<td style="color: black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['income_sale_price']" />
+										</td>
+										<td style="color: black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['Material_cost']" />
+										</td>
+										<td style="color: black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['Profit']" />
+										</td>
+										<td style="color: black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['target_amount']" />
+										</td>
+										<td style="color: black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['commission']" />
+										</td>
+										<td style="color: black;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-left">
+											<t t-esc="line['Hike']" />
+										</td>
+									</t>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</t>
+			</t>
+        </template>
+
+        <report
+            id="staff_commission_report"
+            string="Staff Commission Report"
+            model="staff.commission.wizard"
+            report_type="qweb-pdf"
+            file="staffcommission_costprofit.staff_commission_report_pdf"
+            name="staffcommission_costprofit.staff_commission_report_pdf"
+        />
+    </data>
+</odoo>

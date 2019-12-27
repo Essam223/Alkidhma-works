@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="medical_appointment_view" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="pragtech_dental_management.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='insurance_ids']/tree/field[@name='group_name']" position="after">
+                    <field name="co_payment_method" />
+                    <field name="amt_paid_by_patient"/>
+                    <field name="amt_fixed_paid_by_patient"/>
+                </xpath>
+                <xpath expr="//field[@name='is_deductible']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='insur_report_format']" position="before">
+                    <field name="amt_paid_by_patient"/>
+                    <field name="approved_amt_based_on"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="medical_patient_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+			<field name="model">medical.patient</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_patient_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='insurance_ids']/tree/field[@name='group_name']" position="after">
+                    <field name="co_payment_method" />
+                    <field name="amt_paid_by_patient"/>
+                    <field name="amt_fixed_paid_by_patient"/>
+                </xpath>
+            </field>
+      </record>
+
+     <record model="ir.ui.view" id="view_product_form1">
+			<field name="name">product.normal.form</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="basic_insurance.view_product_form1" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='insurance_company_ids']/tree/field[@name='discount_amt']" position="after">
+                    <field name="amt_paid_by_patient"/>
+                    <field name="amt_paid_by_insurance" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='non_coverage_insurance_company_ids']/tree/field[@name='discount_amt']" position="after">
+                    <field name="amt_paid_by_patient"/>
+                    <field name="amt_paid_by_insurance" invisible="1"/>
+                </xpath>
+            </field>
+      </record>
+
+
+
+    </data>
+</odoo>

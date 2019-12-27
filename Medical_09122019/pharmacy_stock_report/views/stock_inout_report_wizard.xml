@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="pharmacy_stock_inout_report_wizard" model="ir.ui.view">
+            <field name="name">pharmacy.stock_inout.report</field>
+            <field name="model">pharmacy.stock_inout.report</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Pharmacy stock in-out Report Wizard">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="pharmacy_stock_inout_report" string="Print Report" type="object"
+                                class="btn-primary"/>
+                        <!--<button name="send_pharmacy_sales_report" string="Email Report" type="object" class="btn-primary"/>-->
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pharmacy_stock_inout_report" model="ir.actions.act_window">
+            <field name="name">Pharmacy Stock IN-OUT Report Wizard</field>
+            <field name="res_model">pharmacy.stock_inout.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="pharmacy_stock_inout_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="menu_pharmacy_stock_inout_report" name="Stock IN-OUT Report"
+                  action="action_pharmacy_stock_inout_report"
+                  parent="pharmacy_sales_report.menu_pharm_report" sequence="2"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="paperformat_pharmacy_invoice" model="report.paperformat">
+            <field name="name">Paperformat Pharmacy Invoice Receipt</field>
+            <field name="format">custom</field>
+            <field name="page_height">450</field>
+            <field name="page_width">70</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">6</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">24</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report id="report_pharmacy_invoice_pdf"
+            string="Pharmacy Invoice"
+            model="account.invoice"
+            report_type="qweb-pdf"
+            file="pharmacy_management.report_pharmacy_invoice"
+            name="pharmacy_management.report_pharmacy_invoice"
+            paperformat="paperformat_pharmacy_invoice"
+            attachment_use="False"
+            menu="False"
+        />
+
+        <record id="paperformat_pharmacy_Medicament_barcode" model="report.paperformat">
+            <field name="name">Paperformat Pharmacy Medicament Barcode</field>
+            <field name="format">custom</field>
+            <field name="page_height">50</field>
+            <field name="page_width">70</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">6</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">24</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="product.report_product_label"
+            string="Products Labels"
+            model="product.product"
+            report_type="qweb-pdf"
+            name="product.report_productlabel"
+            file="product.report_productlabel"
+            paperformat="paperformat_pharmacy_Medicament_barcode"
+            print_report_name="'Product Barcode - %s' % (object.name)"
+            menu="False"
+        />
+        <report
+            id="report_lot_barcode_pdf"
+            string="Products Barcode"
+            model="stock.production.lot"
+            report_type="qweb-pdf"
+            name="pharmacy_management.report_lot_barcode"
+            file="pharmacy_management.report_lot_barcode"
+            paperformat="paperformat_pharmacy_Medicament_barcode"
+            print_report_name="'Lot Barcode - %s' % (object.name)"
+            menu="False"
+        />
+
+    </data>
+</openerp>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_surgical_consent_wizard2" model="ir.ui.view">
+            <field name="name">surgical.consent.form</field>
+            <field name="model">surgical.consent</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Surgical consent / إقرار موافقة على إجراء عملية جراحية ">
+                    <div class="oe_title">
+                        <h1 attrs="{'invisible': [('language', '=', 'arabic')]}">Surgical consent</h1>
+                        <h1 attrs="{'invisible': [('language', '=', 'english')]}">‫جراحية‬ ‫عملية‬ ‫إجراء‬ ‫على‬ ‫موافقة‬ ‫إقرار‬ </h1>
+                    </div>
+                    <div  attrs="{'invisible': [('language', '=', 'arabic')]}">
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:15%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:10%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td><label for="language" string="Language/ لغة"/></td>
+                                <td ><field name="language"/></td>
+                                <td/>
+                                <td ><label for="register_date"/></td>
+                                <td ><field name="register_date" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="doctor_id"/></td>
+                                <td ><field name="doctor_id" options="{'no_open':True}" style="width:100%"/></td>
+                                <td/>
+                                <td ><label for="speciality"/></td>
+                                <td><field name="speciality" options="{'no_open':True}" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="patient_id"/></td>
+                                <td ><field name="patient_id" options="{'no_open':True}" style="width:100%"/></td>
+                                <td/>
+                                <td ><label for="file_number"/></td>
+                                <td ><field name="file_number" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="dob"/></td>
+                                <td ><field name="dob" style="width:100%"/></td>
+                                <td/>
+                                <td ><label for="sex"/></td>
+                                <td ><field name="sex" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="nationality_id"/></td>
+                                <td ><field name="nationality_id" options="{'no_open':True}" style="width:100%"/></td>
+                                <td/>
+                                <td ><label for="mobile"/></td>
+                                <td ><field name="mobile" style="width:100%"/></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div  attrs="{'invisible': [('language', '=', 'english')]}">
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:10%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:15%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="language"/></td>
+                                <td style="text-align: right;"><label for="language" string="Language/ لغة"/></td>
+                                <td/>
+                                <td><field name="register_date" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="register_date" string="التاريخ"/></td>
+                            </tr>
+                            <tr>
+                                <td><field name="doctor_id" options="{'no_open':True}" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="doctor_id" string="إسم الطبيب‬"/></td>
+                                <td/>
+                                <td><field name="speciality" options="{'no_open':True}" style="width:100%"/></td>
+                                <td style="text-align: right;"><label string="‫التخصص‬" label="speciality"/></td>
+                            </tr>
+                            <tr>
+                                <td><field name="patient_id" options="{'no_open':True}" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="patient_id" string=" ‫الاسم‬ "/></td>
+                                <td/>
+                                <td><field name="file_number" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="file_number" string=" ‫الملف‬ ‫رقم‬"/></td>
+                            </tr>
+                            <tr>
+                                <td><field name="dob" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="dob" string="‫تاريخ الميلاد"/></td>
+                                <td/>
+                                <td><field name="sex" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="sex" string="‫الجنس‬ "/></td>
+                            </tr>
+                            <tr>
+                                <td><field name="nationality_id" options="{'no_open':True}" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="nationality_id" string="الجنسية "/></td>
+                                <td/>
+                                <td><field name="mobile" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="mobile" string="رقم الاتصال "/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div  attrs="{'invisible': [('language', '=', 'arabic')]}">
+                        <br/><br/>
+                        <p>
+                            1. Dr. <field name="doctor_name" style="width:43%"/> has explained to me that the following condition(s) exist in my case:
+                            <field name="Complications_Findings"/>
+                                                <br/><br/>
+                            2. And I understand that the surgical procedure/operation/treatment for evaluating and treating my condition is/are
+                                                <field name="surgical_procedure"/>
+                                                <br/><br/>
+                            3. And as there may be benefits from the proposed surgical procedure/operation/treatment, I also understand that there may be some
+                            risks and complications and those risks include allergic reaction, bleeding, infection, adverse side effects of drugs.
+                                                <br/><br/>
+                            4. And also, I am aware that in the practice of medicine there are other risks or complications – wasn’t enumerated before that may
+                            occur such as <field name="risk_complications"/>
+                                                <br/><br/>
+                            5. I also understand that during the course of the proposed surgical procedure/operation/treatment, another condition may reveal
+                            itself during the performance of the additional intervention (including transfusion of blood and/or its products), and I authorize such
+                            intervention to be performed.
+                                                <br/><br/>
+                            6. I also understand that the outmost care possible will be given to me; I also understand that there are no guarantees or promises
+                            have been made to me concerning the result of my procedure/treatment.
+                                                <br/><br/>
+                            7. I understand that the alternative(s) of the surgical procedure/operation/treatment include(s) <field name="alternative_surgical_procedure"/>
+                            And the likely result without such treatment is/are <field name="result_without_treatment"/>
+                                                <br/><br/>
+                            8. I admit that I understand what has been explained to me as well as the contents of this consent form, and I have been given the
+                            opportunity to ask questions and I have received satisfactory answers, also I have been given the opportunity to discuss with my family
+                            before taking the final decision.
+                                                <br/><br/>
+                            9. After reading this form and after talking to my surgeon, my signature below acknowledges that: I voluntarily give my authorization
+                            and consent to the performance of the above-mentioned surgical procedure/operation/treatment by my surgeon and his/her
+                            assistants, assisted by the hospital personnel.
+                            <br/><br/>
+
+                            <table style="width:100%;">
+                                <tr>
+                                    <th style="width:30%;"></th>
+                                    <th style="width:70%;"></th>
+                                </tr>
+                                <tr>
+                                    <td ><label for="Surgeon"/></td>
+                                    <td><field name="Surgeon"/></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="Surgeon_signature"/>
+                                    </td>
+                                    <td><field name="Surgeon_signature" widget="signature" nolabel="1"/><br/></td>
+                                </tr>
+                                <tr>
+                                    <td ><label for="Patient_Guardian"/></td>
+                                    <td><field name="Patient_Guardian"/></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="Patient_or_Guardian_signature"/>
+                                    </td>
+                                    <td><field name="Patient_or_Guardian_signature" widget="signature" nolabel="1"/></td>
+                                </tr>
+                            </table>
+                            <br/>
+                            Translator: (I acknowledge that I did my best to assist the patient in understanding the surgical procedure/operation/treatment, I also
+                            gave him the chance to discuss with the physician and also I consent that the patient agreed on the proposed surgical
+                            procedure/operation/treatment.
+                            <br/><br/>
+                            <table style="width:100%;">
+                                <tr>
+                                    <th style="width:30%;"></th>
+                                    <th style="width:70%;"></th>
+                                </tr>
+                                <tr>
+                                    <td ><label for="Translator"/></td>
+                                    <td><field name="Translator"/></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="Translator_signature"/>
+                                    </td>
+                                    <td><field name="Translator_signature" widget="signature" nolabel="1"/><br/></td>
+                                </tr>
+                            </table>
+                            <br/><br/>
+                        </p>
+    </div>
+    <div attrs="{'invisible': [('language', '=', 'english')]}">
+        <br/><br/>
+        <p  style="text-align: right;">
+   لقد شرح لي الطبيب/<field style="text-align: right;width:43%;" name="doctor_name"/>تشخيص حالتي وهي
+
+            <field name="Complications_Findings"/>
+                            <br/><br/>
+            وأعلم أن الإجراء العلاجي / الجراحي المطلوب لتشخيص حالتي وعلاج حالتي هو
+        <field name="surgical_procedure" style="text-align: right;"/>
+                            <br/><br/>
+        وبالرغم من علمي بأنه يوجد فوائد من الإجراء العلاجي/الجراحي المقترح ، أعلم أيضاً أنه قد توجد مخاطر ومضاعفات والتي تتضمن التحسس والنزيف والتقيح والأعراض الجانبية من الأدوية.
+            <br/><br/>
+        وأعلم أنه قد توجد مخاطر و مضاعفات أخرى قد تحدث أثناء الإجراء العلاجي/ الجراحي مثل
+         <field name="risk_complications" style="text-align: right;"/>
+                            <br/><br/>
+        وأعلم أنه أثناء الإجراء العلاجي/الجراحي قد تظهر مخاطر ومضاعفات غير متوقعة والتي قد تطلب تدخلات إضافية (والتي قد تتضمن نقل الدم ومشتقاته)، وأفوض الطبيب المعالج بإجراء الجراحة أو إعطاء العلاج اللازم.
+                            <br/><br/>
+        وأعلم أنه سيتم إعطائي كل الرعاية المطلوبة وكذلك أعلم أنه لايوجد ضمانات أو وعود أعطيت لي بخصوص نتائج جراحتي أو علاجي وأعلم أن البدائل المتاحة لعلاج
+            <field name="alternative_surgical_procedure"/>
+        وأن المضاعفات التي قد تحدث إذا تم رفض العلاج هي
+            <field name="result_without_treatment"/>
+                            <br/><br/>
+        وأقر بأني أفهم كل ماشرح لي في هذا الإقرار وتم إعطائي الفرصة الكاملة لطرح الأسئلة وتم إعطائي الأجوبة اللازمة كما تم إعطائي الفرصة الكاملة لمناقشة العلاج مع عائلتي قبل إعطاء قراري النهائي.
+                            <br/><br/>
+        بعد قراءة هذا الإقرار والتحدث مع الجراح فقد وضعت إمضائي بمحض إرادتي موافقاً على إجراء الجراحة أو العلاج اللازم بواسطة الجراح ومساعديه وبمساعة طاقم المستشفى.
+        <br/><br/>
+
+        <table style="width:100%;">
+            <tr>
+                <th style="width:70%;"></th>
+                <th style="width:30%;"></th>
+            </tr>
+            <tr>
+                <td><field name="Surgeon"/></td>
+                <td><label for="Surgeon" string="الطبيب"/></td>
+            </tr>
+            <tr>
+                <td><field name="Surgeon_signature2" widget="signature" nolabel="1"/><br/></td>
+                <td>
+                    <label for="Surgeon_signature2" string="التوقيع"/>
+                </td>
+            </tr>
+            <tr>
+                <td><field name="Patient_Guardian"/></td>
+                <td><label for="Patient_Guardian" string="المريض أو ولي أمره"/></td>
+
+            </tr>
+            <tr>
+                <td><field name="Patient_or_Guardian_signature2" widget="signature" nolabel="1"/></td>
+                <td>
+                    <label for="Patient_or_Guardian_signature2" string="التوقيع"/>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        المترجم: ( أقر بأنني بذلت قصارى جهدي لمساعدة المريض في فهم الإجراء العلاجي/الجراحي المقترح كما أنني جعلت المريض يساهم في المناقشة مع الطبيب كما أقر بانه قد وافق على الإجراء العلاجي / الجراحي)
+        <br/><br/>
+            <table style="width:100%;">
+                <tr>
+                    <th style="width:70%;"></th>
+                    <th style="width:30%;"></th>
+                </tr>
+                <tr>
+                    <td><field name="Translator"/></td>
+                    <td><label for="Translator" string="المترجم"/></td>
+
+                </tr>
+                <tr>
+                    <td><field name="Translator_signature2" widget="signature" nolabel="1"/><br/></td>
+                    <td>
+                        <label for="Translator_signature2" string="التوقيع"/>
+                    </td>
+                </tr>
+            </table>
+            <br/><br/>
+        </p>
+    </div>
+    <footer>
+        <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+        <button string="Cancel / إلغاء " class="btn-default" special="cancel" />
+    </footer>
+
+                </form>
+            </field>
+    </record>
+</odoo>

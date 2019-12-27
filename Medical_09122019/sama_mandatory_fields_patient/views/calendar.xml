@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<template id="sama_mandatory_fields_patient_assets" name="fc assets" inherit_id="web.assets_backend">
+			<xpath expr="." position="inside">
+				<link rel="stylesheet" href="/sama_mandatory_fields_patient/static/src/css/scheduler.css"/>
+			</xpath>
+		</template>
+	</data>
+</odoo>

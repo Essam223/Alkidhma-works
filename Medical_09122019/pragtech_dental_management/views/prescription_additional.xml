@@ -1,0 +1,77 @@
+<odoo>
+    <record id="seq_prescription_id" model="ir.sequence">
+        <field name="name">prescription</field>
+        <field name="code">prescription.additional</field>
+        <field name="prefix">PRE</field>
+        <field name="padding">3</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record model="ir.ui.view" id="prescription_additional_view">
+        <field name="name">Prescription</field>
+        <field name="model">prescription.additional</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Treatment">
+                <header>
+                    <button name="print_prescription" string="Print Prescription" class="btn-primary" type="object"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+							<h1>
+								<field name="name"/>
+							</h1>
+						</div>
+                    <group>
+                        <group>
+                            <field name="patient_id" />
+                            <field name="doctor"/>
+                        </group>
+                        <group>
+                            <field name="prescription_date" />
+                        </group>
+                    </group>
+                     <notebook>
+                         <page string="Prescription Lines">
+                             <field name="prescription_ids"
+                             context="{'default_additional_id':id}">
+                                 <tree string="Prescriptions" editable="bottom">
+                                     <field name="additional_id" invisible="1"/>
+                                     <field name="medicine_id" />
+                                     <field name="dose"  invisible="1"/>
+                                     <field name="dose_unit" invisible="1"/>
+                                     <field name="form" invisible="1"/>
+                                     <field name="common_dosage" />
+                                     <field name="duration" />
+                                     <field name="duration_period" />
+                                     <field name="note" />
+                                 </tree>
+                             </field>
+                         </page>
+                     </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="prescription_additional_tree">
+        <field name="name">Prescriptions</field>
+        <field name="model">prescription.additional</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Prescriptions">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="prescription_date"/>
+                <field name="doctor"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_prescription_additional">
+        <field name="name">Prescriptions</field>
+        <field name="res_model">prescription.additional</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

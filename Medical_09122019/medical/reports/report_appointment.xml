@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <template id="report_appointment_inherit" inherit_id="pragtech_dental_management.report_appointment_document">
+            <xpath expr="//table[@id='master_data']" position="after">
+                <t>
+                    <h4 style="color:#009688;">CLINICAL ASSESSMENT</h4>
+                </t>
+                <table id="complaints" t-if="doc.finding_ids" class="table">
+                    <colgroup>
+                        <col width='17%'/>
+                        <col width='20%'/>
+                        <col width='10%'/>
+                        <col width='20%'/>
+                        <col width='13%'/>
+                        <col width='20%'/>
+                    </colgroup>
+                    <tbody >
+						<tr>
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Weight</strong></td>
+							<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="doc.weight"/></td>
+                            <td style="color:#009688;border-top: 1px solid black;border-bottom:1px solid #000000;"><strong>Temp</strong></td>
+							<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="doc.temp"/></td>
+							<td style="color:#009688;border-top: 1px solid black;border-bottom:1px solid #000000;"><strong>RR</strong></td>
+							<td style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="doc.rr"/></td>
+
+						</tr>
+						<tr>
+                            <td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>BP</strong></td>
+							<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="doc.bp"/></td>
+							<td style="color:#009688;border-top: 1px solid black;border-bottom:1px solid #000000;"><strong>HR</strong></td>
+							<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="doc.hr"/></td>
+							<td style="color:#009688;border-top: 1px solid black;border-bottom:1px solid #000000;"><strong>SP02</strong></td>
+							<td style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="doc.sp02"/></td>
+						</tr>
+						<tr t-if="doc.Laboratory">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Laboratory : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="doc.Laboratory"/></td>
+						</tr>
+						<tr t-if="doc.ECG">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>ECG : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="doc.ECG"/></td>
+						</tr>
+						<tr t-if="doc.Echocardiography">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Echocardiography : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="doc.Echocardiography"/></td>
+						</tr>
+						<tr t-if="doc.Radiology">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Radiology : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="doc.Radiology"/></td>
+						</tr>
+						<tr t-if="doc.StressTest">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Stress Test : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="doc.StressTest"/></td>
+						</tr>
+					</tbody>
+                </table>
+            </xpath>
+	    </template>
+    </data>
+</odoo>

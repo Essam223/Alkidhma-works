@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="registration_fee_product" model="product.product">
+            <field name="name">Registration Fee</field>
+            <field name="standard_price">0</field>
+            <field name="list_price">0</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">REGISTRATION</field>
+        </record>
+        <record id="basic_product" model="product.product">
+            <field name="name">Consultation Fee</field>
+            <field name="standard_price">0</field>
+            <field name="list_price">200</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="default_code">BASIC</field>
+        </record>
+
+    </data>
+</openerp>

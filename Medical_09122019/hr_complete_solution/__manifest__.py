@@ -1,0 +1,47 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'HR Complete Solution',
+    'version': '10.0.1.0.0',
+    'summary': 'HR Management',
+    'description': """
+        Employee Document Management and Expiry Alert\n
+        Group Check-in - Checkout Functionality\n
+        
+        """,
+    'category': 'Human Resources',
+    'author': 'Al Kidhma Group',
+    'website': "",
+    'company': '',
+    'depends': ['hr_payroll',
+                'hr_payroll_account',
+                'web_notify',
+                'hr_attendance',
+                # 'hr_loan_and_advance',
+                'hr_leaves_solution',
+                'hr_automatic_leave_alloc',
+                'hr_multi_employee_contract',
+                'hr_attendance_overtime',
+                ],
+    'data': [
+        "security/ir.model.access.csv",
+        'reports/reports.xml',
+        'reports/report_offer_letter.xml',
+        'reports/report_attendance.xml',
+        'data/cron.xml',
+        'views/hr_config_settings.xml',
+        'wizard/group_checkin.xml',
+        'wizard/group_checkout.xml',
+        'wizard/group_checkin_checkout.xml',
+        'wizard/report_attendance.xml',
+        'views/hr_salary_rule.xml',
+        'views/hr_employee.xml',
+        'views/res_company.xml',
+        'views/payslip.xml',
+        'views/hr_attendance.xml',
+    ],
+    'images': [],
+    'license': 'AGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="monthly_summary_wizard" model="ir.ui.view">
+            <field name="name">monthly.summary.wizard</field>
+            <field name="model">monthly.summary.wizard</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Summary Report Wizard">
+                    <group>
+                        <group>
+                            <field name="period_start"/>
+                        </group>
+                        <group>
+                            <field name="period_stop"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_monthly_summary_report" model="ir.actions.act_window">
+                <field name="name">Summary Report Wizard</field>
+                <field name="res_model">monthly.summary.wizard</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="monthly_summary_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_monthly_summary_report" name="Summary Report" action="action_monthly_summary_report"
+                  parent="pragtech_dental_management.dental_report_menu" sequence="1"
+                  groups="pragtech_dental_management.group_dental_mng_menu"
+        />
+    </data>
+</odoo>

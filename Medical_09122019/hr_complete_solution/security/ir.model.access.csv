@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_company_bank_account,company_bank_account,model_company_bank_account,,1,1,1,1
+access_employee_document,employee_document,model_employee_document,,1,1,1,1
+access_document_type,document_type,model_document_type,,1,1,1,1
+access_employee_expiry_alert,employee_expiry_alert,model_employee_expiry_alert,,1,1,1,1

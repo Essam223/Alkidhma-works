@@ -1,0 +1,31 @@
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="medical_physician_tree">
+			<field name="name">Physician</field>
+			<field name="model">medical.physician</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_physician_tree"/>
+			<field name="arch" type="xml">
+			<field name="speciality" position="after">
+				<field name="department_id" />
+			</field>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="medical_physician_view">
+			<field name="name">Physician</field>
+			<field name="model">medical.physician</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_physician_view"/>
+			<field name="arch" type="xml">
+			<field name="code" position="after">
+				<field name="department_id" />
+			</field>
+			</field>
+		</record>
+
+
+	</data>
+</odoo>
+
+
+	

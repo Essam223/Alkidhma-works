@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="seq_lab_request_id" model="ir.sequence">
+        <field name="name">Lab Order</field>
+        <field name="code">lab.request</field>
+        <field name="prefix">LAB</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="medical_appointment_view" model="ir.ui.view">
+            <field name="name">Appointment</field>
+			<field name="model">medical.appointment</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_appointment_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='appt_open_chart']" position="after">
+                    <button name="action_view_lab_request" type="object" class="oe_stat_button"
+                            icon="fa-pencil-square-o" attrs="{'invisible': [('lab_request_count', '=', 0)]}">
+                        <field name="lab_request_count" widget="statinfo" string="Lab Orders"/>
+                    </button>
+                </xpath>
+                <xpath expr="//button[@name='done']" position="before">
+                    <button name="lab_request" type="object" class="btn-primary" string="Lab Order" states="ready,done,visit_closed"/>
+                </xpath>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="lab_request_form">
+			<field name="name">Lab Order</field>
+			<field name="model">lab.request</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Lab Order">
+					<header>
+					   <button name="submit_request" string="Submit" type="object" states="Draft" class="oe_highlight"/>
+					   <button name="accept_request" string="Accept" type="object" states="Requested" class="oe_highlight"/>
+					   <button name="in_progress_request" string="In Progress" type="object" states="Accepted" class="oe_highlight"/>
+					   <button name="completed_request" string="Completed" type="object" states="In_Progress" class="oe_highlight"/>
+					   <button name="cancel_request" string="Cancel" type="object" states="Draft,Requested,Accepted,In_Progress"/>
+                       <button name="print_report" string="Print" type="object" />
+					   <field name="state" widget="statusbar" statusbar_visible="Draft,Requested,Accepted,In_Progress,Done" />
+            		 </header>
+                    <sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1"/>
+							</h1>
+						</div>
+	                    <group colspan="4" col="4">
+                                <field name="patient_id" />
+                                <field name="lab_date" />
+								<field name="doctor_id" />
+                                <field name="appointment_id"/>
+                                <field name="user_id"/>
+                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="invoice_id" attrs="{'invisible':[('invoice_id','=',False)]}"/>
+						</group>
+						<notebook>
+							<page string="Tests">
+                                <field name="lab_request_line_ids">
+                                    <tree string="" editable="bottom">
+                                        <field name="lab_request_id" invisible="1"/>
+                                        <field name="test_id" />
+                                        <field name="sale_price" />
+                                        <field name="Special_Instructions" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Attach Results" >
+                                <field name="attach_count" invisible="1"/>
+                                <button name="show_attachments" type="object"
+									attrs="{'invisible': [('attach_count', '=', 0)]}"
+									string="View Attachments"
+									class="btn btn-primary fa fa-file-pdf">
+								</button>
+								<field name = "attachment_ids"
+									   context="{'default_res_model': 'lab.request','default_res_id': id,
+									   'default_patient_id': patient_id,'default_appointment_id': appointment_id,
+									   'default_lab_request_id': active_id}">
+										<tree editable="bottom">
+											<field name="name"/>
+											<field name="type" invisible="1"/>
+											<field name="datas" widget="download_link" options="{'filename': 'datas_fname'}"/>
+											<field name="appointment_id" invisible="1"/>
+											<field name="patient_id" invisible="1"/>
+											<field name="create_date"/>
+										</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+    </record>
+
+    <record id="view_lab_request_filter" model="ir.ui.view">
+        <field name="name">Lab Order</field>
+        <field name="model">lab.request</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+        <search string="Search Lab Order">
+            <filter icon="terp-personal" string="Check In" name="CheckIn" domain="[('state','=','checkin')]" />
+            <newline />
+            <group expand="1" string="Group By...">
+                <filter string="Appointment" icon="terp-personal" domain="[]" context="{'group_by':'appointment_id'}" />
+                <filter string="Doctor" icon="terp-personal" domain="[]" context="{'group_by':'doctor_id'}" />
+                <filter string="Patient" icon="terp-personal" domain="[]" context="{'group_by':'patient_id'}" />
+                <filter string="Lab User" icon="terp-personal" domain="[]" context="{'group_by':'user_id'}" />
+            </group>
+        </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="lab_request_tree">
+        <field name="name">Lab Order</field>
+        <field name="model">lab.request</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+        <tree string='Lab Order' >
+            <field name="name" />
+            <field name="lab_date" />
+            <field name="appointment_id" />
+            <field name="patient_id" />
+            <field name="doctor_id" />
+            <field name="state" />
+            <field name="user_id" />
+            <field name="company_id" groups="base.group_multi_company"/>
+        </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_lab_request">
+			<field name="name">Lab Orders</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">lab.request</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+            <!--<field name="domain">[('user_id', '=', uid)]</field>-->
+			<field name="search_view_id" ref="view_lab_request_filter" />
+			<field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('lab_request_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('lab_request_form')})]"/>
+		</record>
+
+    <menuitem action="action_lab_request" id="menu_lab_request"
+              parent="pragtech_dental_management.medical_appointment_menu" sequence="4"
+              groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+    />
+
+
+
+
+
+</odoo>

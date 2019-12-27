@@ -1,0 +1,60 @@
+<odoo>
+
+
+    <record model="ir.ui.view" id="prescription_line_view">
+        <field name="name">Prescription</field>
+        <field name="model">prescription.line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Treatment">
+                <group>
+                    <group>
+                        <field name="prescription_date"/>
+                        <field name="medicine_id" />
+                        <field name="dose_unit" />
+                        <field name="common_dosage" />
+                        <field name="duration_period" />
+                        <field name="appt_id"/>
+                    </group>
+                    <group>
+                        <field name="patient_id"/>
+                        <field name="doctor"/>
+                        <field name="dose" />
+                        <field name="form" />
+                        <field name="duration" />
+                        <field name="note" />
+                        <field name="qty" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="prescription_line_tree">
+        <field name="name">Prescriptions</field>
+        <field name="model">prescription.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Prescriptions">
+                <field name="appt_id"/>
+                <field name="patient_id"/>
+                <field name="prescription_date"/>
+                <field name="doctor"/>
+                <field name="medicine_id" />
+                <field name="duration" />
+                <field name="duration_period" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_prescription">
+        <field name="name">Prescriptions</field>
+        <field name="res_model">prescription.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--<menuitem action="action_prescription" id="menu_medical_action_prescription"-->
+			<!--parent="medical_conf_menu" />-->
+
+</odoo>

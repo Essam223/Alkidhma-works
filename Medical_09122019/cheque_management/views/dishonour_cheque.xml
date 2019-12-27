@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_dishhonour_cheque">
+            <field name="name">dishonour.cheque.wizard</field>
+            <field name="model">dishonour.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Return Cheque">
+                        <group>
+                            <group>
+                                <field name="present_date" style="width:40%%"/>
+                                <field name="date_return" style="width:40%%"/>
+                            </group>
+                            <group>
+                                <field name="charge" style="width:40%%"/>
+                            </group>
+                        </group>
+                    <footer>
+                        <button name="dishonour_cheque" string="Post" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

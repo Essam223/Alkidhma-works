@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="appointment.state.color" id="state1">
+            <field name="state">draft</field>
+            <field name="color">rgb(242, 181, 237)</field>
+        </record>
+        <!--<record model="appointment.state.color" id="state2">-->
+            <!--<field name="state">sms_send</field>-->
+            <!--<field name="color">rgba(211,51,239,1)</field>-->
+        <!--</record>-->
+        <record model="appointment.state.color" id="state3">
+            <field name="state">confirmed</field>
+            <field name="color">rgb(146, 119, 165)</field>
+        </record>
+        <record model="appointment.state.color" id="state4">
+            <field name="state">missed</field>
+            <field name="color">rgb(224, 133, 49)</field>
+        </record>
+        <record model="appointment.state.color" id="state5">
+            <field name="state">checkin</field>
+            <field name="color">rgb(245, 247, 126)</field>
+        </record>
+        <record model="appointment.state.color" id="state8">
+            <field name="state">ready</field>
+            <field name="color">rgb(162, 242, 168)</field>
+        </record>
+        <record model="appointment.state.color" id="state6">
+            <field name="state">done</field>
+            <field name="color">rgb(11, 122, 1)</field>
+        </record>
+        <record model="appointment.state.color" id="state7">
+            <field name="state">visit_closed</field>
+            <field name="color">rgb(61, 229, 226)</field>
+        </record>
+        <record model="appointment.state.color" id="state_cancel">
+            <field name="state">cancel</field>
+            <field name="color">rgb(226, 68, 68)</field>
+        </record>
+    </data>
+</odoo>

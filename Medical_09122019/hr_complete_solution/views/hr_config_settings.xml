@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_formm" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div data-key="hr" position="inside">
+                <h2>HR Email</h2>
+                <div class="row mt16 o_settings_container" id="mail_to_hr">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="mail_to_hr"
+                         title="HR Email">
+                            <div class="row">
+                                <label class="col-md-3 o_light_label" string="HR Email" for="mail_to_hr"/>
+                                <field name="mail_to_hr" class="oe_inline"/>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="EmployeeDocumentsAlert">
+            <field name="name">Employee Documents Alert Popup</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="code">model.employee_documents_alert()</field>
+            <field name="args" eval="'()'" />
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 10:00:00')" />
+        </record>
+
+        <record model="ir.cron" id="EmployeeDocumentsAlertRecordCreation">
+            <field name="name">Employee Documents Alert Record Creation</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="code">model.employee_documents_alert_record_creation()</field>
+            <field name="args" eval="'()'" />
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 10:00:00')" />
+        </record>
+
+        <record id="ir_cron_employee_documents_alert_notification" model="ir.cron">
+            <field name="name">Employee Documents Alert Mail Notification</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 10:00:00')" />
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.employee_documents_alert_mail()</field>
+            <field name="args" eval="'()'" />
+      </record>
+
+        <record id="ir_cron_attendance_report_mail_notification" model="ir.cron">
+            <field name="name">Attendance Report Mail Notification</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 20:45:00')" />
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.attendance_report_alert_mail()</field>
+            <field name="args" eval="'()'" />
+      </record>
+
+        <record model="ir.cron" id="PayslipMonthlyCreation">
+            <field name="name">Payslip Monthly Creation</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="code">model.payslip_monthly_creation()</field>
+            <field name="args" eval="'()'" />
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 10:00:00')" />
+        </record>
+
+        <record id="ir_cron_attendance_report_mail_notification_today" model="ir.cron">
+            <field name="name">Todays Attendance Report Mail Notification </field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 19:00:00')" />
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.attendance_report_alert_mail_today()</field>
+            <field name="args" eval="'()'" />
+      </record>
+
+
+      <record id="ir_cron_attendance_report_mail_notification_yesterday" model="ir.cron">
+            <field name="name">Yesterday's Attendance Report Mail Notification</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')" />
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.attendance_report_alert_mail_yesterday()</field>
+            <field name="args" eval="'()'" />
+      </record>
+    </data>
+</odoo>

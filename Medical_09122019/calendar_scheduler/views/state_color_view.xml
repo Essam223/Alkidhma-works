@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<data>
+		<record id="appointments_config_tree" model="ir.ui.view">
+			<field name="name">appointments_config_tree</field>
+			<field name="model">appointment.state.color</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="appointments_config_form" model="ir.ui.view">
+			<field name="name">appointments_config_form</field>
+			<field name="model">appointment.state.color</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="state"/>
+							</group>
+							<group>
+								<field name="color" widget="colorpicker"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_appointments_color_config"
+				model="ir.actions.act_window">
+			<field name="name">Appointments State Colors</field>
+			<field name="res_model">appointment.state.color</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_ids"
+				   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('appointments_config_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('appointments_config_form')})
+                          ]"
+			/>
+		</record>
+		<menuitem name="Appointments state colors"
+				  id="appointments_color_config_menu"
+				  action="action_appointments_color_config"
+				  parent="pragtech_dental_management.medical_conf_menu"
+				  sequence="11"
+		/>
+	</data>
+</odoo>

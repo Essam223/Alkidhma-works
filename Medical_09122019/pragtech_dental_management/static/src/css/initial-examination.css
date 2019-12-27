@@ -1,0 +1,75 @@
+.initial-examination{
+	display:flex;
+	flex-grow:1;
+	align-content: flex-end;
+}
+
+.initial_examination {
+	position: absolute;
+    display:flex;
+    align-content: flex-end;
+	float: right;
+	color: rgb(20, 44, 51);
+	font-weight: 600;
+    border:none;
+    background: gainsboro;
+    margin-bottom: 18px;
+    font-size: 16px;
+    border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+    top: 10px;
+    right: 120px;
+	width: auto;
+	padding: 10px;
+	line-height: normal;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.examinationcolor {
+    background: #5cb85c;
+}
+
+.screenshorts {
+    position: absolute;
+    display:flex;
+    align-content: flex-end;
+    float: right;
+    line-height: 1;
+    color: rgb(20, 44, 51);
+    font-weight: 600;
+    border: 1px solid;
+    background: gainsboro;
+    margin-bottom: 18px;
+    font-size: 15px;
+    border-radius: 4px;
+    top: 2%;
+    right: 14%;
+    width: 98px;
+    height: 42px;
+}
+
+.img_tooth_screen {
+    position: absolute;
+    top: 120%;
+    width: 105px;
+    height: 33px;
+    font-weight: 600;
+    font-size: 15px;
+}
+.img_tooth_lines_screen {
+    position: absolute;
+    top: 170%;
+    width: 100px;
+    height: 33px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+html2canvas {
+     width: 100px !important;
+     height: 200px !important;
+}

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_consumables,product_consumables,model_product_consumables,,1,1,1,1
+access_appt_consumables,appt_consumables,model_appt_consumables,,1,1,1,1
+access_appt_consumables,appt_consumables,model_appt_consumables,,1,1,1,1
+access_stock_picking_hcare,stock.picking hcare,stock.model_stock_picking,,1,1,1,1
+access_stock_move_hcare,stock.move hcare,stock.model_stock_move,,1,1,1,1

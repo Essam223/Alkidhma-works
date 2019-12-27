@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_partner_form">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="pragtech_dental_management.view_partner_form"/>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+                <xpath expr="//field[@name = 'is_insurance_company']" position="after">
+                    <field name="is_laboratory"/>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="action_partner_lab" model="ir.actions.act_window">
+        <field name="name">Laboratories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="context">{"default_is_laboratory":1,"search_default_is_laboratory":1}</field>
+        <field name="domain">[('is_laboratory','=',1)]</field>
+    </record>
+
+    <menuitem action="action_partner_lab" sequence="1" parent="pragtech_dental_management.medical_conf_menu"
+			id="menu_partner_lab_form"/>
+
+
+
+</odoo>

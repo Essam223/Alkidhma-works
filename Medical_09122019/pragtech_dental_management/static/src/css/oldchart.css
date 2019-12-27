@@ -1,0 +1,89 @@
+.flex-container {
+  display: flex;
+
+
+
+}
+.col-1 {
+    flex: 0 1 50%;
+    min-height: 100%;
+    max-width: 25%;
+
+
+}
+.col-2 {
+         flex: 0 1 50%;
+          display: flex;
+           height: 100%;
+          align-items: center;
+           flex-direction: column;
+           flex-wrap: wrap;
+
+}
+
+
+
+.tabarea{
+display: flex;
+flex-direction: column;
+display: grid;
+}
+
+.charttype{
+flex-grow: 1;
+display:flex;
+}
+.mouth_selection{
+display:flex;
+
+flex-grow: 1
+}
+
+.closearea{
+display:flex;
+flex-grow:1;
+
+
+#selections{
+display:none;
+}
+
+#showkey{
+display:none;
+}
+}
+
+.mouth_selection{
+display:fl
+ex
+}
+
+.teethchart {
+    display: flex;
+    flex-direction: column;
+    flex-grow:1
+}
+
+.upperteeth{
+ display: flex;
+ order : 1;
+ max-width: 100%;
+ height: auto;
+}
+.svg-layer{
+display:flex;
+order:2;
+}
+.lowerteeth{
+display: flex;
+order:3;
+max-width: 100%;
+height: auto;
+}
+.states{
+display:flex;
+flex-direction: column;
+}
+
+.procedure_selected{
+}

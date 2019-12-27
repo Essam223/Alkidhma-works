@@ -1,0 +1,193 @@
+.o_calendar_quick_create.modal-body{
+	width: 100%;
+    padding-right: 60px;
+}
+.gender_hide,.dob_hide,.nationality_id_hide{
+  display: none;
+}
+.o_calendar_quick_create input{
+	border-radius: 4px;
+	border: 1px solid #aaa;
+}
+ .rooms {
+     margin-top: 5px;
+ }
+ select.modal_start_time, select.modal_end_time, select.gender {
+     border-radius: 4px;
+ }
+ select.modal_end_time {
+    margin-top: 10px;
+ }
+
+.select2-choices {
+    width: 285px;
+    border-radius: 2px;
+    background: white !important;
+    border: 1px solid lightgrey;
+}
+
+.scheduler_create {
+	margin-left: 35%;
+	background-color: #3735bd !important;
+	border-color: #3735bd !important;
+}
+.scheduler_create:hover {
+	background-color: #8988e0; !important;
+	border-color: #8988e0; !important;
+}
+
+/*----------*/
+.contents {
+	font-size:15px;
+	font-weight:bold;
+}
+.physician_data {
+    width: 100%;
+}
+
+.p_left {
+    width: 50%;
+    float: left;
+    display: grid;
+}
+
+.p_right {
+    width: 50%;
+    float: left;
+    display: grid;
+}
+
+.p_row {
+    width: 95%;
+    padding: 2px;
+    height: 45px;
+}
+
+.p_row p.contents {
+    width: 40%;
+    float: left;
+    height: inherit;
+}
+.p_row select {
+    border:1px solid #aaa;
+}
+
+.p_row_data {
+    width: 60%;
+    float: left;
+    height: inherit;
+}
+.p_row input, .p_row select {
+    height: 70%;
+}
+.note_row {
+	height: 90px;
+}
+/*.patient_div, .physician_div {
+  column-count: 4;
+  margin-top:10px;
+  *//*background: green;*//*
+  *//*border: 1px solid;*//*
+  *//*column-rule: 1px solid;*//*
+}
+.box2,.notes {
+    height: 55px;
+}
+.Notes{
+    line-height: 47px;
+    margin-top: 0px;
+}
+.box {
+    height: 31px;
+*//*
+    margin-top: 5px;
+*//*
+}
+.box .contents,.box2 .contents {
+    font-weight: bold;
+}
+
+.box.patient input.patient_list{
+    visibility: hidden;
+}
+.box input,.box select,.box option{
+    height: 27px;
+    margin-bottom: 20px;
+    *//*border-radius: 4px;*//*
+}
+.box.app_end div.bootstrap-datetimepicker-widget {
+    position: absolute !important;
+    top: auto !important;
+    left: 75% !important;
+    right: 0px !important;
+}
+.box.app_start div.bootstrap-datetimepicker-widget {
+    position: absolute !important;
+    top: auto !important;
+    left: 25% !important;
+    right: 0px !important;
+}*/
+
+.calendar-dialog{
+    width: 61%;
+}
+.calendar-footer button{
+    float: left;
+}
+
+.states {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.scheduler_modal {
+	font-size: 15px;
+}
+
+@media only screen and (max-width: 846px) {
+    .o_calendar_sidebar_container.hidden-xs {
+        margin-top: 354px;
+        position: absolute !important;
+        display: block !important;
+        margin-left: 5%;
+    }
+    .p_row {
+        display: flex;
+        flex-direction: column;
+        height: auto !important;
+    }
+    .p_row input, .p_row select {
+        height:auto !important;
+    }
+    .physician_data {
+        display: flex;
+        flex-direction: row;
+    }
+    .p_row p.contents {
+        width: 95%;
+    }
+    .p_row_data {
+        width: 95%;
+    }
+    .scheduler_modal {
+        padding-right: 16px !important;
+    }
+    .close {
+        right: 10px;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+	.patient_data, .physician_data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .p_left, .p_right {
+        width: 100%;
+    }
+    .close {
+        right: 10px;
+    }
+}
+

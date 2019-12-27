@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+
+		<report
+		id="report_patient_det_overdue_pdf"
+		string="Detailed Patient Overdue Report"
+		model="medical.appointment"
+		report_type="qweb-pdf"
+		menu="False"
+		file="detailed_pat_overdue_report.report_patient_det_overdue"
+		name="detailed_pat_overdue_report.report_patient_det_overdue"
+		/>
+
+	</data>
+</odoo>

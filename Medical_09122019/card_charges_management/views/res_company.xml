@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_res_company_card_view">
+		<field name="name">res.company.search.inherit</field>
+		<field name="model">res.company</field>
+		<field name="inherit_id" ref="base.view_company_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name = 'report_header']" position="after">
+				 <field name="default_bank_id" groups="base.group_multi_company"/>
+				 <field name="default_card_id" groups="base.group_multi_company"/>
+			 </xpath>
+		</field>
+	</record>
+</odoo>

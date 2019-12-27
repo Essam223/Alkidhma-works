@@ -1,0 +1,1851 @@
+<odoo>
+    <template id="report_registration_pdf">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="text-center">
+                        <div  t-if="o.language == 'english'">
+                            <div style="color:#009688;">
+                                 <h2><b>Patient Registration</b></h2>
+                             </div>
+                        <br/>
+                        <table name="master" width="100%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Language/لغة</strong></td>
+                                                <td>: <span t-field="o.language"/></td>
+                                                <td style="color:#009688;"><strong>Updated Date</strong></td>
+                                                <td>: <span t-field="o.updated_date"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Patient Id</strong></td>
+                                                <td>: <span t-field="o.patient_id"/></td>
+                                                <td style="color:#009688;"><strong>Patient Name</strong></td>
+                                                <td>: <span t-field="o.patient_name"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                        <br/>
+                        <table class="table table-bordered table-striped" style="width:100%;">
+							<tr>
+                            <td colspan="2" style="color:white;background-color: #009688; font-size: 15px;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>معلومات اساسية</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Basic Information</span></strong>
+                                </t>
+							</td>
+					    </tr>
+
+					    <tr>
+                            <td style="width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>رقم هوية قطر</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>QID</span></strong>
+                                </t>
+							</td>
+						    <td style="width:70%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.qid"/></td>
+					    </tr>
+					    <tr>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>عنوان</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Address</span></strong>
+                                </t>
+							</td>
+						    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.address"/></td>
+					    </tr>
+					    <tr>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>الهاتف 1</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Mobile 1</span></strong>
+                                </t>
+							</td>
+						    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+								<t t-esc="o.mobile"/>
+							</td>
+					    </tr>
+					    <tr>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>الهاتف 2</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Mobile 2</span></strong>
+                                </t>
+							</td>
+						    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+								<t t-esc="o.other_mobile"/>
+							</td>
+					    </tr>
+					    <tr>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>تاريخ الميلاد</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Date of Birth</span></strong>
+                                </t>
+							</td>
+						    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.dob" style="width: 100%"/></td>
+					    </tr>
+					    <tr>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>جنس</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Gender</span></strong>
+                                </t>
+							</td>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.sex" widget="radio"/></td>
+					    </tr>
+					    <tr>
+                            <td colspan="2" style="color: #797096; font-size: 15px;border-top: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>تفاصيل الاتصال في حالات الطوارئ</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Emergency Contact Details</span></strong>
+                                </t>
+							</td>
+					    </tr>
+					    <tr>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>اسم</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Name</span></strong>
+                                </t>
+							</td>
+						    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.emergency_name"/></td>
+					    </tr>
+					    <tr>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>علاقة</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Relation</span></strong>
+                                </t>
+							</td>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.emergency_relation"/></td>
+					    </tr>
+					    <tr>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <t t-if="o.language == 'arabic'">
+                                    <strong><span>عنوان</span></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong><span>Phone</span></strong>
+                                </t>
+							</td>
+                            <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.emergency_phone"/></td>
+					    </tr>
+
+					</table>
+
+                        <separator string="Questionnaire"/>
+
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Is your health good?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q1"/></td>
+                            </tr>
+
+                        </table>
+                        <p style="text-align: left;"><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Anemia</span></strong>
+                                </td>
+                                <td>
+                                    <t t-if="o.q2">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <strong><span>Arthritis, Rheumatism</span></strong>
+                                </td>
+                                <td>
+                                    <t t-if="o.q3">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t>
+                                </td>
+
+                                <td>
+                                    <strong><span>Artificial Joints, Pins</span></strong>
+                                </td>
+                                <td><t t-if="o.q4">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Asthma</span></strong>
+                                </td>
+                                <td><t t-if="o.q5">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Back pain</span></strong>
+                                </td>
+                                <td><t t-if="o.q6">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Cortisone Treatment</span></strong>
+                                </td>
+                                <td><t t-if="o.q7">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Cough, Persistent</span></strong>
+                                </td>
+                                <td><t t-if="o.q8">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Diabetes</span></strong>
+                                </td>
+                                <td><t t-if="o.q9">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Epilepsy</span></strong>
+                                </td>
+                                <td><t t-if="o.q10">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Fainting</span></strong>
+                                </td>
+                                <td><t t-if="o.q11">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Glaucoma</span></strong>
+                                </td>
+                                <td><t t-if="o.q12">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Headaches or Migraine</span></strong>
+                                </td>
+                                <td><t t-if="o.q13">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Hemophilia</span></strong>
+                                </td>
+                                <td><t t-if="o.q14">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Heart Disease</span></strong>
+                                </td>
+                                <td><t t-if="o.q15">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Heart Valve problems</span></strong>
+                                </td>
+                                <td><t t-if="o.q16">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Heart Surgery</span></strong>
+                                </td>
+                                <td><t t-if="o.q17">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Hepatitis</span></strong>
+                                </td>
+                                <td><t t-if="o.q18">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>High Blood Pressure</span></strong>
+                                </td>
+                                <td><t t-if="o.q19">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>HIV</span></strong>
+                                </td>
+                                <td><t t-if="o.q20">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Jaw Pain</span></strong>
+                                </td>
+                                <td><t t-if="o.q21">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Kidney Disease</span></strong>
+                                </td>
+                                <td><t t-if="o.q22">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Pacemaker</span></strong>
+                                </td>
+                                <td><t t-if="o.q23">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Prolonged bleeding</span></strong>
+                                </td>
+                                <td><t t-if="o.q24">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Respiratory Disease</span></strong>
+                                </td>
+                                <td><t t-if="o.q25">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Kidney Problem</span></strong>
+                                </td>
+                                <td><t t-if="o.q26">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Liver Problem</span></strong>
+                                </td>
+                                <td><t t-if="o.q27">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Thyroid Problem</span></strong>
+                                </td>
+                                <td><t t-if="o.q28">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Serious illness or operations?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q29"/></td>
+                            </tr>
+                            <tr  t-if="o.q29 == 'YES'">
+                                <td><strong><span>When ...</span></strong></td>
+                                <td><t t-esc="o.q30"/></td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Other Medical Problems?</span></strong>
+                                    </td>
+                                <td><t t-esc="o.q31"/></td>
+                            </tr>
+                            <tr  t-if="o.q31 == 'YES'">
+                                <td><t t-esc="o.q32"/></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p style="text-align: left;"><strong>Do you have allergies to?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;"></th>
+                                <th style="width:8%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Latex</span></strong>
+                                </td>
+                                <td><t t-if="o.q33">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Local Anesthetic</span></strong>
+                                </td>
+                                <td><t t-if="o.q34">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Penicillin</span></strong>
+                                </td>
+                                <td><t t-if="o.q35">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Sulfa</span></strong>
+                                </td>
+                                <td><t t-if="o.q36">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Aspirin</span></strong>
+                                </td>
+                                <td><t t-if="o.q37">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Brufen</span></strong>
+                                </td>
+                                <td><t t-if="o.q38">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Iodine</span></strong>
+                                </td>
+                                <td><t t-if="o.q39">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>NONE</span></strong>
+                                </td>
+                                <td><t t-if="o.q40">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Any other allergies</span></strong>
+                                </td>
+                                <td><t t-esc="o.q41"/></td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Do you smoke?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q42"/></td>
+                            </tr>
+                            <tr t-if="o.q42 == 'YES'">
+                                <td>
+                                    <strong><span># of cigarette/day</span></strong>
+                                </td>
+                                <td><t t-esc="o.q43"/></td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you pregnant?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q44"/></td>
+                            </tr>
+                            <tr  t-if="o.q44 == 'YES'">
+                                <td>
+                                    <strong><span>Month</span></strong>
+                                </td>
+                                <td><t t-esc="o.q45"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you having discomfort at this time?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q46"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you ever had any serious trouble?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q47"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you taking any anticoagulants (blood thinner) ?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q48"/></td>
+                            </tr>
+                        </table>
+                        <p style="text-align: left;"><strong>Associated with dentistry?</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Date of Last Medical Visit?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q49"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>How often do you brush/floss?</span></strong>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Brushing</span></strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.q50"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Flossing</span></strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.q51"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Mouthwash</span></strong>
+                                </td>
+                                <td>
+                                    <t t-esc="o.q52"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you been treated for gum disease?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q53"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Have you had any Medical radiographs?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q54"/></td>
+                            </tr>
+                            <tr  t-if="o.q54 == 'YES'">
+                                <td>
+                                    <strong><span>When and where</span></strong>
+                                </td>
+                                <td><t t-esc="o.q55"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>What is the main reason for seeking Medical care?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q56"/></td>
+                            </tr>
+                        </table>
+
+                        <p style="text-align: left;"><strong>Have you had any of the following? (Please check the box)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:40%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:40%;"></th>
+                                <th style="width:15%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Bleeding or sore gums</span></strong>
+                                </td>
+                                <td><t t-if="o.q57">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Biting Cheeks/lips</span></strong>
+                                </td>
+                                <td><t t-if="o.q58">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Broken filling</span></strong>
+                                </td>
+                                <td><t t-if="o.q59">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Clenching/grinding</span></strong>
+                                </td>
+                                <td><t t-if="o.q60">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Clicking/Locked Jaw</span></strong>
+                                </td>
+                                <td><t t-if="o.q61">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Difficult to open/close</span></strong>
+                                </td>
+                                <td><t t-if="o.q62">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Frequent blisters (lips/mouth)</span></strong>
+                                </td>
+                                <td><t t-if="o.q63">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Food impaction</span></strong>
+                                </td>
+                                <td><t t-if="o.q64">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Food collection in between teeth</span></strong>
+                                </td>
+                                <td><t t-if="o.q65">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Root Canal Treatment</span></strong>
+                                </td>
+                                <td><t t-if="o.q66">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Loose teeth</span></strong>
+                                </td>
+                                <td><t t-if="o.q67">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Swelling or Lumps in mouth</span></strong>
+                                </td>
+                                <td><t t-if="o.q68">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Ortho Treatment (braces)</span></strong>
+                                </td>
+                                <td><t t-if="o.q69">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Sensitive to hot</span></strong>
+                                </td>
+                                <td><t t-if="o.q70">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Sensitive to cold</span></strong>
+                                </td>
+                                <td><t t-if="o.q71">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Sensitive to sweet</span></strong>
+                                </td>
+                                <td><t t-if="o.q72">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Sensitive to bite</span></strong>
+                                </td>
+                                <td><t t-if="o.q73">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td>
+                                    <strong><span>Shifting in bite</span></strong>
+                                </td>
+                                <td><t t-if="o.q74">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Unpleasant taste/bad breath</span></strong>
+                                </td>
+                                <td><t t-if="o.q75">
+                                     <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p style="text-align: left;"><strong>Smile Assessment</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong><span>Are you pleased with the general appearance of your teeth and smile?</span></strong>
+                                </td>
+                                <td><t t-esc="o.q76"/></td>
+                            </tr>
+                            <tr  t-if="o.q76 == 'NO'">
+                                <td>
+                                    <strong><span>If no, Please explain</span></strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                        <div  t-if="o.language == 'arabic'">
+                            <div style="color:#009688;">
+                                 <h2><b>تسجيل المريض</b></h2>
+                             </div>
+                            <br/>
+                            <table name="master" width="100%">
+                                            <colgroup>
+                                                <col width='25%' />
+                                                <col width='25%' />
+                                                <col width='25%' />
+                                                <col width='25%' />
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="patient_invoice_tbody">
+                                                <tr>
+                                                    <td style="text-align: right;"><span t-field="o.updated_date"/> :</td>
+                                                    <td style="text-align: right;color:#009688;"><strong>تاريخ التحديث</strong></td>
+                                                    <td style="text-align: right;"><span t-field="o.language"/>: </td>
+                                                    <td style="text-align: right;color:#009688;"><strong>لغة</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right;"><span t-field="o.patient_name"/>: </td>
+                                                    <td style="text-align: right;color:#009688;"><strong>اسم المريض</strong></td>
+                                                    <td style="text-align: right;"><span t-field="o.patient_id"/>: </td>
+                                                    <td style="text-align: right;color:#009688;"><strong>رقم المريض</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                            <br/>
+                            <table class="table table-bordered table-striped" style="width:100%;">
+                                <tr>
+                                <td colspan="2" style="text-align: right;color:white;background-color: #009688; font-size: 15px;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <strong><span>معلومات اساسية</span></strong>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="text-align: right;width:70%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.qid"/></td>
+                                <td style="text-align: right;width:30%;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <strong><span>رقم هوية قطر</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.address"/></td>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>عنوان</span></strong>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <t t-esc="o.mobile"/>
+                                </td>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>الهاتف 1</span></strong>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <t t-esc="o.other_mobile"/>
+                                </td>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>الهاتف 2</span></strong>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.dob" style="width: 100%"/></td>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>تاريخ الميلاد</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.sex" widget="radio"/></td>
+                                 <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>جنس</span></strong>
+                                </td>
+                           </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: right;color: #797096; font-size: 15px;border-top: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>تفاصيل الاتصال في حالات الطوارئ</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.emergency_name"/></td>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>اسم</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.emergency_relation"/></td>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>علاقة</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><t t-esc="o.emergency_phone"/></td>
+                                <td style="text-align: right;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                        <strong><span>عنوان</span></strong>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <separator style="text-align: right;" string="استطلاع"/>
+
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:75%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q1"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل صحتك جيدة؟</span></strong>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <p style="text-align: right;"><strong>هل كان لديك أي من التالي؟(يرجى تحديد المربع)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <t t-if="o.q2">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>فقر دم</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q3">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>التهاب المفاصل والروماتيزم</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q4">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>="المفاصل الصناعية ودبابيس</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q5">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>الربو</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q6">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>ألم في الظهر</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q7">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>علاج الكورتيزون</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q8">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>السعال ، المستمر</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q9">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>داء السكري</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q10">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>صرع</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q11">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>إغماء</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q12">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>الزرق</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q13">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>الصداع أو الصداع النصفي</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q14">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>الهموفيليا مرض بالدم</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q15">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مرض القلب</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q16">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مشاكل صمام القلب</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q17">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;" >
+                                    <strong><span>عملية قلب</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q18">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>التهاب الكبد</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q19">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>ضغط دم مرتفع</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q20">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>فيروس نقص المناعة البشرية</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q21">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>ألم الفك</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q22">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مرض الكلية</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q23">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>جهاز تنظيم ضربات القلب</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q24">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>نزيف استمر لفترة طويلة</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q25">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>أمراض الجهاز التنفسي</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q26">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مشكلة في الكلى"/></span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q27">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مشكلة الكبد</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q28">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مشكلة الغدة الدرقية</span></strong>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:75%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q29"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مرض خطير أو عمليات؟</span></strong>
+
+
+                                </td>
+                            </tr>
+                            <tr  t-if="o.q29 == 'YES'">
+
+                                <td style="text-align: right;"><t t-esc="o.q30"/></td>
+                                <td><strong><span> إذا نعم متى</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q31"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مشاكل طبية أخرى؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr  t-if="o.q31 == 'YES'">
+                                <td></td>
+                                <td style="text-align: right;"><t t-esc="o.q32"/></td>
+                            </tr>
+                        </table>
+                        <p style="text-align: right;"><strong>هل لديك حساسيه؟</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                                <th style="width:8%;"></th>
+                                <th style="width:25%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q33">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>اللاتكس</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q34">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>مخدر موضعي</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q35">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>بنسلين</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q36">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>السلفا</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q37">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>الأسبرين</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q38">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>البروفين</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;"><t t-if="o.q39">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>اليود</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q40">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>لا شيء</span></strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q41"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>أي حساسية أخرى</span></strong>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:75%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q42"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل صحتك جيدة؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr  t-if="o.q42 == 'YES'">
+                                <td style="text-align: right;"><t t-esc="o.q43"/></td>
+                                <td style="text-align: right;"><strong><span># من السيجارة / اليوم ....</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q44"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل انت حامل؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr  t-if="o.q44 == 'YES'">
+
+                                <td style="text-align: right;"><t t-esc="o.q45"/></td>
+                                <td><strong><span>نعم الشهر</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q46"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل تشعر بالانزعاج في هذا الوقت؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q47"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل سبق لك أن واجهت أي مشكلة خطيرة؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q48"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل تأخذ أي مضادات تخثر الدم؟</span></strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="text-align: right;"><strong>يرتبط مع طب الأسنان؟</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:50%;"></th>
+                                <th style="width:50%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td><t t-esc="o.q49"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>تاريخ آخر زيارة الطبيب الأسنان؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="text-align: right;">
+                                    <strong><span>كم مرة تقوم بالفرشاة / الخيط؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <t t-esc="o.q50"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <strong><span>تنظيف</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <t t-esc="o.q51"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <strong><span>الخيط</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <t t-esc="o.q52"/>
+                                </td>
+                                <td style="text-align: center;">
+                                    <strong><span>غسول الفم</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q53"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل تم علاجك من مرض اللثة؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q54"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل كان لديك أي صور الأشعة السنية؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr  t-if="o.q54 == 'YES'">
+
+                                <td style="text-align: right;"><t t-esc="o.q55"/></td>
+                                <td><strong><span>متى و أين</span></strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q56"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>ما هو السبب الرئيسي للحصول على رعاية الأسنان؟</span></strong>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="text-align: right;"><strong>هل كان لديك أي من التالي؟ (يرجى تحديد المربع)</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:15%;"></th>
+                                <th style="width:40%;text-align: right;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:40%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q57">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>نزيف أو التهاب اللثة</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q58">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>الخفق العض / الشفتين</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q59">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>ملء المكسور</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q60">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>انقباض / طحن</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q61">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>النقر / قفل الفك</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q62">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>من الصعب فتح / إغلاق</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q63">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>بثور متكررة (الشفتين / الفم)</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q64">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>تأثير الغذاء</span></strong>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q65">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>جمع الطعام بين الأسنان</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q66">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>معالجة قناة الجذر</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q67">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>الأسنان فضفاضة</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q68">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>تورم أو كتل في الفم</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q69">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>علاج أورثو (تقويم الأسنان)</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q70">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>حساسة للحرارة</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q71">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>حساسة للبرد</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q72">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>حساسة للحلو</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-if="o.q73">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>حساسة لدغة</span></strong>
+                                </td>
+                                <td style="text-align: right;"><t t-if="o.q74">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>التحول في لدغة</span></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;"><t t-if="o.q75">
+                                        <input type="checkbox" checked="True"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox"/>
+                                    </t></td>
+                                <td style="text-align: right;">
+                                    <strong><span>طعم غير سار / رائحة كريهة</span></strong>
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="text-align: right;"><strong>تقييم الابتسامة</strong></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:25%;"></th>
+                                <th style="width:75%;text-align: right;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><t t-esc="o.q76"/></td>
+                                <td style="text-align: right;">
+                                    <strong><span>هل أنت راض عن المظهر العام لأسنانك وابتسامتك؟</span></strong>
+                                </td>
+                            </tr>
+                            <tr  t-if="o.q76 == 'YES'">
+                                <td style="text-align: right;"><t t-esc="o.q77"/></td>
+                                <td><strong><span>إذا كان الجواب لا ، فيرجى التوضيح</span></strong></td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                        <div class="pull-right">
+                                <strong>Patient Signature</strong>
+                                <br/>
+                                <img t-if="o.register_signature" t-att-src="'data:image/png;base64,%s' % to_text(o.register_signature)" class="pull-right" height="60"/>
+                        </div>
+
+                    </div>
+                </div>
+        </t>
+        </t>
+        </t>
+    </template>
+
+</odoo>

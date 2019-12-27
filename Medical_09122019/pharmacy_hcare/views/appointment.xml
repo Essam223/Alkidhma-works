@@ -1,0 +1,107 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="appointment_pharmacy_form">
+			<field name="name">Appointment Prescription</field>
+			<field name="model">medical.appointment</field>
+			<field name="type">form</field>
+			<field name="priority">12</field>
+			<field name="arch" type="xml">
+				<form string="Appointment Prescription"  version="7.0" create="false" delete="false" edit="false">
+                    <header>
+						<button name="print_prescription" string="Print Prescription" type="object"/>
+						<button name="print_drug_label" string="Print Drug Label" type="object"/>
+					    <button name="Convert_to_Order" string="Convert to Order" type="object" class="oe_highlight" groups="pharmacy_management.group_pharmacy_user,pharmacy_management.group_pharmacy_manager" attrs="{'invisible': [('sale_count', '>', 0)]}"/>
+					    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,checkin,ready,done,visit_closed" statusbar_colors='{"confirmed":"blue","ready":"blue","cancel":"red"}'/>
+            		 </header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button type="object"  name="action_view_sales"
+								class="oe_stat_button"
+								icon="fa-pencil-square-o" attrs="{'invisible':[('sale_ids','=',[])]}">
+								<field name="sale_count" widget="statinfo" string="Sales"/>
+								<field name='sale_ids' invisible="1"/>
+							</button>
+						</div>
+						<div class="oe_title">
+							<h1>
+								<field name="name" readonly="1"/>
+							</h1>
+						</div>
+	                    <group colspan="4" col="4">
+							<field name="patient" attrs="{'invisible': ['&amp;', ('is_registered', '=', False), ('state', 'in', ['draft', 'sms_send'])],'required': [('is_registered', '=', True)]}" context="{'appointment_id_new':id}"/>
+							<field name="appointment_sdate" />
+							<field name="doctor" required="1" />
+							<field name="is_registered" invisible="1" />
+						</group>
+						<notebook>
+							<page string="Prescriptions" attrs="{'invisible': [('state', 'not in', ['checkin', 'ready', 'done', 'visit_closed'])]}">
+								<field name="prescription_ids"
+									   context="{'default_patient_id':patient,
+								 'default_doctor':doctor, 'default_appt_id':id,
+								 'default_prescription_date':appointment_sdate}">
+									<tree editable="bottom" decoration-danger="qty_available &gt; 0" decoration-success="qty_available &lt; 1">
+										<field name="appt_id" invisible="1" />
+										<field name="patient_id" invisible="1" />
+										<field name="qty_available" invisible="1" />
+										<field name="prescription_date" invisible="1"/>
+										<field name="doctor" invisible="1"/>
+										<field name="medicine_id" />
+										<field name="dose"  invisible="1"/>
+										<field name="dose_unit" invisible="1"/>
+										<field name="form" invisible="1"/>
+										<field name="common_dosage" />
+										<field name="duration" />
+										<field name="duration_period" />
+										<field name="note" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+        </record>
+
+    <record model="ir.ui.view" id="appointment_pharmacy_tree">
+        <field name="name">Appointment Prescription</field>
+        <field name="model">medical.appointment</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string='Appointment Prescription Information' create="false" delete="false" edit="false">
+                <field name="name" string="ID"/>
+                <field name="patient" />
+                <field name="appointment_sdate" />
+                <field name="doctor" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_pharmacy_appt">
+			<field name="name">Prescriptions</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">medical.appointment</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[('state', 'in', ('done', 'visit_closed')),('prescription_ids', '!=', False)]</field>
+			<field name="context">{"search_default_today":1}</field>
+			<field name="search_view_id" ref="pragtech_dental_management.view_medical_appointment_filter" />
+			<field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('appointment_pharmacy_tree')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('appointment_pharmacy_form')})]"/>
+
+		</record>
+
+		<menuitem id="menu_pharmacy_appt_1" sequence="1" parent="pharmacy_management.menu_pharmacy"
+				  name="Prescriptions" groups="pharmacy_management.group_pharmacy_user,pharmacy_management.group_pharmacy_manager"/>
+		<menuitem action="action_pharmacy_appt" id="menu_pharmacy_appt_2" sequence="1"
+				  parent="menu_pharmacy_appt_1"/>
+	</data>
+</odoo>
+
+
+

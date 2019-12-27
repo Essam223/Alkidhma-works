@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!--Adding a salary rule for Unpaid-->
+	<data >
+		<record id="hr_rule_UNPAID" model="hr.salary.rule">
+			<field name="name">Unpaid Leaves</field>
+			<field name="sequence" eval="100"/>
+			<field name="code">UNPAID</field>
+			<field name="category_id" ref="hr_payroll.DED"/>
+			<field name="condition_select">none</field>
+			<field name="amount_select">code</field>
+			<field name="amount_python_compute">result = -payslip.env['hr.payslip'].get_Unpaid_deductions(employee.id,
+				payslip.id, payslip.date_from,payslip.date_to)</field>
+		</record>
+
+	</data>
+</odoo>

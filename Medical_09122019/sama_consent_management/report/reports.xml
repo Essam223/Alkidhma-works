@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_consent_botox"
+        string="Consent for Botox"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="sama_consent_management.report_botox"
+        name="sama_consent_management.report_botox"
+		menu="False"
+    />
+
+    <report
+        id="report_consent_prp"
+        string="Consent for PRP"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="sama_consent_management.report_prp"
+        name="sama_consent_management.report_prp"
+		menu="False"
+    />
+
+    <report
+        id="report_consent_derma"
+        string="Consent for Derma Fillers"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="sama_consent_management.report_derma"
+        name="sama_consent_management.report_derma"
+		menu="False"
+    />
+
+</odoo>

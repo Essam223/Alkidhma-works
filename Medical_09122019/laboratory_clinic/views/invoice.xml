@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_invoice_form">
+			<field name="name">account.invoice.form</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_supplier_form"/>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+                <xpath expr="//field[@name = 'partner_id']" position="after">
+                    <field name="appt_id" attrs="{'invisible': [('appt_id','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name = 'origin']" position="after">
+                    <field name="is_laboratory" invisible="1"/>
+                </xpath>
+            </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_invoice_lab">
+		<field name="name">Laboratory Bills</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.invoice</field>
+		<field name="domain">[('is_laboratory','=',1)]</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form, calendar,pivot</field>
+        <field name="view_id" eval="False"/>
+        <field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase',"default_is_laboratory":1,"search_default_is_laboratory":1}</field>
+        <field name="search_view_id" ref="account.view_account_invoice_filter_inherit_invoices"/>
+	</record>
+
+    <record id="action_patient_invoices_tree" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="account.invoice_supplier_tree"/>
+        <field name="act_window_id" ref="action_invoice_lab"/>
+    </record>
+
+    <record id="action_patient_invoices_form" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account.invoice_supplier_form"/>
+        <field name="act_window_id" ref="action_invoice_lab"/>
+    </record>
+
+    <menuitem action="action_invoice_lab"  parent="pragtech_dental_management.medical_finance_menu" sequence="4"
+			  groups="account.group_account_invoice,account.group_account_manager,pragtech_dental_management.group_dental_user_menu,pragtech_dental_management.group_dental_mng_menu"
+			  id="menu_invoice_lab_form"/>
+
+
+
+</odoo>

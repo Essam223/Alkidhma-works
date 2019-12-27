@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+
+        <!--Email template -->
+        <record id="email_template_edi_loan" model="mail.template">
+            <field name="name">Loan Sanctioned Mail</field>
+            <!--<field name="email_from">${(object.user_id.email or object.company_id.email or 'noreply@localhost')|safe}</field>-->
+            <field name="email_from">${object.get_current_login_user_mail() or '' | safe}</field>
+            <field name="subject">LOAN (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.employee_id.address_home_id.id}</field>
+            <field name="email_to">${object.employee_id.work_email}</field>
+            <field name="model_id" ref="hr_loan_and_advance.model_hr_loan"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="action_report_loan"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.company_id.partner_id.lang}</field>
+                        <field name="body_html"><![CDATA[
+            <p>Dear
+                ${object.employee_id.name},</p>
+            <p>
+            With reference to your application dated  ${object.date}, we have sanctioned a Loan
+            of Rs  ${object.loan_amount} with an emi of ${object.emi} for ${object.installment} months.
+            </p>
+            <p>Please refer the attachment.</p>
+            <p>Best regards,</p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

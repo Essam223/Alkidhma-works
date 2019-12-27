@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_general_consent"
+        string="General Consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_general_consent_pdf"
+        name="consent_management.report_general_consent_pdf"
+		menu="False"
+    />
+    <report
+        id="report_orthodontic_informed_consent"
+        string="Orthodontic Informed Consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_orthodontic_consent_pdf"
+        name="consent_management.report_orthodontic_consent_pdf"
+		menu="False"
+    />
+
+    <report
+        id="report_oral_surgery_consent"
+        string="Oral Surgery Consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_oral_surgery_consent_pdf"
+        name="consent_management.report_oral_surgery_consent_pdf"
+		menu="False"
+    />
+
+    <report
+        id="report_cosmetic_treatment"
+        string="Cosmetic treatment consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_cosmetic_treatment_pdf"
+        name="consent_management.report_cosmetic_treatment_pdf"
+		menu="False"
+    />
+
+    <report
+        id="report_attendance_consent"
+        string="Attendance Consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_attendance_pdf"
+        name="consent_management.report_attendance_pdf"
+		menu="False"
+    />
+
+    <report
+        id="report_endodontic_treatment"
+        string="Endodontic Treatment Form"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_endodontic_treatment_pdf"
+        name="consent_management.report_endodontic_treatment_pdf"
+		menu="False"
+    />
+
+    <report
+        id="report_Consent_for_Final_Cementation"
+        string="Consent for Final Cementation"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_final_cementation"
+        name="consent_management.report_final_cementation"
+		menu="False"
+    />
+
+    <report
+        id="report_general_dentistry_consent"
+        string="General Dentistry Consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_general_dentistry_consent_pdf"
+        name="consent_management.report_general_dentistry_consent_pdf"
+		menu="False"
+    />
+    <report
+        id="report_refusal_of_recommended"
+        string="Refusal Of Recommended Treatment"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_refusal_of_recommended_pdf"
+        name="consent_management.report_refusal_of_recommended_pdf"
+		menu="False"
+    />
+    <report
+        id="report_xray_consent"
+        string="Xray Consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_xray_consent_pdf"
+        name="consent_management.report_xray_consent_pdf"
+		menu="False"
+    />
+    <report
+        id="report_refusal_of_xray_consent"
+        string="Informed Refusal of X-ray Consent"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_refusal_of_xray_consent_pdf"
+        name="consent_management.report_refusal_of_xray_consent_pdf"
+		menu="False"
+    />
+    <report
+        id="report_photo_release"
+        string="Photo Release Form"
+        model="medical.patient"
+        report_type="qweb-pdf"
+		file="consent_management.report_photo_release_pdf"
+        name="consent_management.report_photo_release_pdf"
+		menu="False"
+    />
+
+
+    
+
+</odoo>

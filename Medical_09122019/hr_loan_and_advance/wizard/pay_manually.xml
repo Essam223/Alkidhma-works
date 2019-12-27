@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pay_loan_individual_view_form" model="ir.ui.view">
+            <field name="name">pay.loan.individual.form</field>
+            <field name="model">pay.loan.individual</field>
+            <field name="arch" type="xml">
+                <form string="Pay Loan">
+                    <group class="oe_title">
+                        <field name="journal_id"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="loan_line_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_pay" string="Confirm" type="object" class="btn btn-sm btn-primary"/>
+                        <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    <record id="pay_loan_individual_action" model="ir.actions.act_window">
+        <field name="name">Pay Loan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pay.loan.individual</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="pay_loan_individual_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

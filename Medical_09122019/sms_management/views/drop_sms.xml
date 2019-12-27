@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="drop_sms_wizard" model="ir.ui.view">
+            <field name="name">drop.sms</field>
+            <field name="model">drop.sms</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Drop SMS">
+                    <group>
+                        <group>
+                            <field name="selection"/>
+                        </group>
+                        <group>
+                            <field name="file" attrs="{'invisible': [('selection', '!=', 'excel')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="mobiles" placeholder="Mobile number must be separated by commas.." attrs="{'invisible': [('selection', '!=', 'numbers')],
+                        'required': [('selection', '=', 'numbers')]}"/>
+                    </group>
+                    <separator string="Message"/>
+                    <group attrs="{'invisible': [('selection', '!=', 'patients')]}">
+                    <div>
+                        <h4>Please use {patient} variable for Patient name</h4>
+                    </div>
+                  </group>
+                    <field name="message"/>
+                    <footer>
+                        <button name="drop_sms" string="Send" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_drop_sms" model="ir.actions.act_window">
+                <field name="name">Drop SMS</field>
+                <field name="res_model">drop.sms</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="drop_sms_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_sms" name="SMS" parent="pragtech_dental_management.medical_menu"
+                  sequence="4"/>
+        <menuitem id="menu_drop_sms" name="Drop SMS" action="action_drop_sms"
+                  parent="menu_sms" sequence="4"/>
+
+    </data>
+</odoo>

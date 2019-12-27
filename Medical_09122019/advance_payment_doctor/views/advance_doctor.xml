@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="advance_doctor_wizard" model="ir.ui.view">
+            <field name="name">advance.doctor</field>
+            <field name="model">advance.doctor</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Advance Payment">
+                    <group>
+                        <group>
+                            <field name="patient_id" invisible="1"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <field name="payment_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sale" model="ir.actions.act_window">
+                <field name="name">Advance Doctor</field>
+                <field name="res_model">advance.doctor</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="advance_doctor_wizard"/>
+                <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

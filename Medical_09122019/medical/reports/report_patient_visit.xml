@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <template id="report_patient_visit_inherit" inherit_id="pragtech_dental_management.report_patient_visit_document">
+            <xpath expr="//t[@t-if='appts.finding_ids']" position="before">
+                <t>
+                    <h4 style="color:#009688;">CLINICAL ASSESSMENT</h4>
+                </t>
+                <table class="table">
+                <!--<table id="complaints" t-if="appts.finding_ids" class="table">-->
+                    <colgroup>
+                        <col width='17%'/>
+                        <col width='20%'/>
+                        <col width='10%'/>
+                        <col width='20%'/>
+                        <col width='13%'/>
+                        <col width='20%'/>
+                    </colgroup>
+                    <tbody >
+						<tr>
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Weight</strong></td>
+							<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="appts.weight"/></td>
+                            <td style="color:#009688;border-top: 1px solid black;border-bottom:1px solid #000000;"><strong>Temp</strong></td>
+							<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="appts.temp"/></td>
+							<td style="color:#009688;border-top: 1px solid black;border-bottom:1px solid #000000;"><strong>RR</strong></td>
+							<td style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="appts.rr"/></td>
+
+						</tr>
+						<tr>
+                            <td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>BP</strong></td>
+							<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="appts.bp"/></td>
+							<td style="color:#009688;border-top: 1px solid black;border-bottom:1px solid #000000;"><strong>HR</strong></td>
+							<td style="border-top: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="appts.hr"/></td>
+							<td style="color:#009688;border-top: 1px solid black;border-bottom:1px solid #000000;"><strong>SP02</strong></td>
+							<td style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"> : <span t-field="appts.sp02"/></td>
+						</tr>
+						<tr t-if="appts.Laboratory">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Laboratory : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="appts.Laboratory"/></td>
+						</tr>
+						<tr t-if="appts.ECG">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>ECG : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="appts.ECG"/></td>
+						</tr>
+						<tr t-if="appts.Echocardiography">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Echocardiography : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="appts.Echocardiography"/></td>
+						</tr>
+						<tr t-if="appts.Radiology">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Radiology : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="appts.Radiology"/></td>
+						</tr>
+						<tr t-if="appts.StressTest">
+							<td style="color:#009688;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;"><strong>Stress Test : </strong></td>
+							<td colspan="5" style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="appts.StressTest"/></td>
+						</tr>
+					</tbody>
+                </table>
+            </xpath>
+	    </template>
+    </data>
+</odoo>

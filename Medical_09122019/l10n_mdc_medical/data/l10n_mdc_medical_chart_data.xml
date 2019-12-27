@@ -1,0 +1,1477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="transfer_account_id" model="account.account.template">
+            <field name="code">124</field>
+            <field name="name">Liquidity Transfers</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+        </record>
+
+        <record id="configurable_chart_template" model="account.chart.template">
+            <field name="name">Configurable MDC Account Chart Template</field>
+            <field name="code_digits">3</field>
+            <field name="bank_account_code_prefix">1102</field>
+            <field name="cash_account_code_prefix">1103</field>
+            <field name="transfer_account_id" ref="transfer_account_id"/>
+            <field name="currency_id" ref="base.QAR"/>
+        </record>
+        <record id="transfer_account_id" model="account.account.template">
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Account Templates-->
+
+        <!-- Balance Sheet -->
+        <!-- Current Assets -->
+
+        <record id="conf_assets" model="account.account.template">
+            <field name="code">1000000000</field>
+            <field name="name">Assets الاصـــول</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_current_assets" model="account.account.template">
+            <field name="code">1100000000</field>
+            <field name="name">Current Assets الاصول المتدوالـــة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_inventory" model="account.account.template">
+            <field name="code">1101000000</field>
+            <field name="name">Inventory  المخـــزون</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_inventory_medical_supplies" model="account.account.template">
+            <field name="code">1101010000</field>
+            <field name="name">Inventory-medical supplies مخزن مواد طيبة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_bank" model="account.account.template">
+            <field name="code">1102000000</field>
+            <field name="name">Bank البنوك</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_bank_local_currency" model="account.account.template">
+            <field name="code">1102010000</field>
+            <field name="name">Bank - Local currency بنوك عملة محلية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_qib_bank" model="account.account.template">
+            <field name="code">1102010100</field>
+            <field name="name">QIB Bank مصرف قطر الاسلامي</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_qnb_bank_1" model="account.account.template">
+            <field name="code">1102010101</field>
+            <field name="name">QNB-0110212870013 مصرف قطر الاسلامي 110212870013</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_qnb_bank_2" model="account.account.template">
+            <field name="code">1102010102</field>
+            <field name="name">QNB-0151593360029 مصرف قطر الاسلامي - مختبر151593360029</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cqb_bank" model="account.account.template">
+            <field name="code">1102010200</field>
+            <field name="name">CBQ Bank البنك التجـــاري</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cqb_bank_luqta" model="account.account.template">
+            <field name="code">1102010201</field>
+            <field name="name">CBQ - Luqta 688948 البنك التجاري  اللقطة 688948</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cqb_bank_ispair" model="account.account.template">
+            <field name="code">1102010202</field>
+            <field name="name">CBQ - Ispair 680059 البنك التجارى اسباير 680059</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cqb_bank_sadd" model="account.account.template">
+            <field name="code">1102010203</field>
+            <field name="name">CBQ - Sadd 680060 البنك التجارى السد 680060</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cqb_bank_abu_hamour" model="account.account.template">
+            <field name="code">1102010204</field>
+            <field name="name">CBQ - Abu Hamour 324584 البنك التجارى ابوهامور 324584</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_barwa_bank" model="account.account.template">
+            <field name="code">1102010300</field>
+            <field name="name">Barwa Bank بروة بنك</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_barwa_bank_1" model="account.account.template">
+            <field name="code">1102010301</field>
+            <field name="name">Barwa-100000685697 بروة بنك 100000685697</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_bank_currency" model="account.account.template">
+            <field name="code">1102020000</field>
+            <field name="name">Bank - $ currency بنوك عملة اجنبية - دولار</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cash" model="account.account.template">
+            <field name="code">1103000000</field>
+            <field name="name">Cash النقديـــة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cash_local_currency" model="account.account.template">
+            <field name="code">1103010000</field>
+            <field name="name">Cash - Local Currency نقدية في الصندوق</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cash_box" model="account.account.template">
+            <field name="code">1103010100</field>
+            <field name="name">Cash box الصندوق</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_petty_cash" model="account.account.template">
+            <field name="code">1103010200</field>
+            <field name="name">Petty Cash صندوق عهدة عمل مستديمة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+  <!-- Receivable -->
+
+        <record id="conf_account_receivable" model="account.account.template">
+            <field name="code">1104000000</field>
+            <field name="name">Accounts Recievable العملاء</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_receivable"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+
+        <record id="conf_notes_receivable" model="account.account.template">
+            <field name="code">1105000000</field>
+            <field name="name">Notes Receivable اوراق قبض</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cheque_under_clearness" model="account.account.template">
+            <field name="code">1106000000</field>
+            <field name="name">Cheqeue under Clearness اوراق قبض تحت التحصيل</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_return_cheque" model="account.account.template">
+            <field name="code">1107000000</field>
+            <field name="name">Return Cheque اوراق قبض مرتدة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_debtors_1" model="account.account.template">
+            <field name="code">1108000000</field>
+            <field name="name">Debtors مدينون وارصدة مدينة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_debtors_2" model="account.account.template">
+            <field name="code">1108010000</field>
+            <field name="name">Debtors مدينون</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_cash_advance" model="account.account.template">
+            <field name="code">1108010100</field>
+            <field name="name">Cash advance مدينون سلف عاملين</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_insurance" model="account.account.template">
+            <field name="code">1108010200</field>
+            <field name="name">Insurance﻿ مدينو تامنيات لدي الغير</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_sister_company" model="account.account.template">
+            <field name="code">1108010300</field>
+            <field name="name">Sister company مدينو شركات شقيقة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_other_debtors_1" model="account.account.template">
+            <field name="code">1108010400</field>
+            <field name="name">Other Debtors مدينون اخرون</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_pay_in_adv_current_assets" model="account.account.template">
+            <field name="code">1108020000</field>
+            <field name="name">Payment in advance-Current Assets دفعات مقدمة لشراء اصول متداولة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_pay_in_adv_current_suppliers" model="account.account.template">
+            <field name="code">1108020100</field>
+            <field name="name">Payment in advance-Suppliers موردين دفعات مقدمة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_other_debtors_2" model="account.account.template">
+            <field name="code">1108030000</field>
+            <field name="name">Other Debtors ارصدة مدينة اخري</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_prepaid_exp" model="account.account.template">
+            <field name="code">1108030200</field>
+            <field name="name">Prepaid Expenses مصروفات مدفوعة مقدما</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_prepaid_exp_rents" model="account.account.template">
+            <field name="code">1108030201</field>
+            <field name="name">Prepaid Expenses- Rents مصاريف مقدمة - ايجارات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_prepaid_exp_other" model="account.account.template">
+            <field name="code">1108030202</field>
+            <field name="name">Prepaid Expenses- Other مصروفات مدفوعة مقدماً متنوع</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_prepaid_exp_salary" model="account.account.template">
+            <field name="code">1108030203</field>
+            <field name="name">Prepaid Expenses-Salary مصاريف مقدمة - رواتب</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_prepaid_exp_boom" model="account.account.template">
+            <field name="code">1108030204</field>
+            <field name="name">Prepaid Expenses-Boom مصاريف مقدمة - بوم</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_prepaid_exp_visa" model="account.account.template">
+            <field name="code">1108030205</field>
+            <field name="name">Prepaid Expenses-Visa/Licence مصاريف مقدمه - اقامات/تراخيص</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_investments" model="account.account.template">
+            <field name="code">1109000000</field>
+            <field name="name">Investments الاستثمارات الماليــة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_long_term_investments" model="account.account.template">
+            <field name="code">1109010000</field>
+            <field name="name">Long Term Investment استثمارات طوية الاجل</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_investments_hitech" model="account.account.template">
+            <field name="code">1109010100</field>
+            <field name="name">Investments-Hi Tech شركة هاى تك - استثمارات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_short_term_investments" model="account.account.template">
+            <field name="code">1109020000</field>
+            <field name="name">Short Term Investment استثمارات قصيرة الاجل</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_items_reserved" model="account.account.template">
+            <field name="code">1109020100</field>
+            <field name="name">Items reserved بنود محجوزه</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_construction_in_process" model="account.account.template">
+            <field name="code">1200000000</field>
+            <field name="name">Construction in Process مشروعات تحت التنفيذ</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_investment_spending" model="account.account.template">
+            <field name="code">1201000000</field>
+            <field name="name">Investment spending انفاق استثماري</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+
+        <record id="conf_pay_in_adv_fixed_assets" model="account.account.template">
+            <field name="code">1201010000</field>
+            <field name="name">Advance Payment - Fixed Assets دفعات مقدمة لشراء اصول ثابتة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_lc" model="account.account.template">
+            <field name="code">1300000000</field>
+            <field name="name">LC الاعتمادات المستندية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Fixed assets -->
+        <record id="conf_fixed_assets" model="account.account.template">
+            <field name="code">1400000000</field>
+            <field name="name">Fixed Assets اصول ثابتة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_permanent_asset_1" model="account.account.template">
+            <field name="code">1401000000</field>
+            <field name="name">Permanent asset اصول ثابتة ملموسة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_permanent_asset_2" model="account.account.template">
+            <field name="code">1401010000</field>
+            <field name="name">Permanent asset اصول ثابتة ملموسة غير مستهلكة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_real_property" model="account.account.template">
+            <field name="code">1401010100</field>
+            <field name="name">REAL PROPERTY - Lands اراضـــــي</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_permanent_assets" model="account.account.template">
+            <field name="code">1401020000</field>
+            <field name="name">Permanent asset اصول ثابتة ملموسة مستهلكة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_net_buildings_constructions" model="account.account.template">
+            <field name="code">1401020100</field>
+            <field name="name">Net Buildings and constructions صافي تكلفة المباني والانشاءات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_buildings_and_constructions" model="account.account.template">
+            <field name="code">1401020101</field>
+            <field name="name">Buildings and constructions تكلفة المباني والانشاءات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_buildings_and_constructions_depreciation" model="account.account.template">
+            <field name="code">1401020102</field>
+            <field name="name">Buildings and constructions depreciation مجمع الاهلاك مباني وانشاءات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_net_tools_account" model="account.account.template">
+            <field name="code">1401020200</field>
+            <field name="name">Net Tools account  صافي تكلفة الالات والمعدات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_tools_account" model="account.account.template">
+            <field name="code">1401020201</field>
+            <field name="name">Tools account تكلفة الالات والمعدات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_tools_depreciation" model="account.account.template">
+            <field name="code">1401020202</field>
+            <field name="name">Tools depreciation﻿ مجمع اهلاك الالات والمعدات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+         <record id="conf_fa_net_transportation_account" model="account.account.template">
+            <field name="code">1401020300</field>
+            <field name="name">Net transportation account صافي تكلفة وسائل نقل وانتقالات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_transportation_account" model="account.account.template">
+            <field name="code">1401020301</field>
+            <field name="name">transportation account تكلفة وسائل نقل وانتقالات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fa_net_transportation_depreciation" model="account.account.template">
+            <field name="code">1401020302</field>
+            <field name="name">transportation depreciation﻿ مجمع اهلاك وسائل نقل وانتقالات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_net_medical_equipment_account" model="account.account.template">
+            <field name="code">1401020400</field>
+            <field name="name">Net Medical equipment Account صافي تكلفة اجهزة طيبة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_medical_equipment_account" model="account.account.template">
+            <field name="code">1401020401</field>
+            <field name="name">Medical equipment Account تكلفة اجهزة طيبة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_net_medical_equipment_depreciation" model="account.account.template">
+            <field name="code">1401020402</field>
+            <field name="name">Medical equipment depreciation﻿ مجمع اهلاك  اجهزة طيبة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_net_tools_account" model="account.account.template">
+            <field name="code">1401020500</field>
+            <field name="name">Net Tools account صافي تكلفة ادوات طبية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_tools_account" model="account.account.template">
+            <field name="code">1401020501</field>
+            <field name="name">Tools﻿account تكلفة ادوات طبية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_tools_depreciation" model="account.account.template">
+            <field name="code">1401020502</field>
+            <field name="name">Tools depreciation﻿ مجمع اهلاك ادوات طبية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_computers_net_cost" model="account.account.template">
+            <field name="code">1401020600</field>
+            <field name="name">Computers and Related Equipment Net Cost صافي تكلفة حاسبات الكترونية و جوالات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_computers" model="account.account.template">
+            <field name="code">1401020601</field>
+            <field name="name">Computers and Related Equipment تكلفة حاسبات الكترونية و جوالات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_computers_depreciation" model="account.account.template">
+            <field name="code">1401020602</field>
+            <field name="name">Computers and Related Equipment Depr مجمع اهلاك حاسبات الكترونية و جوالات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+       <record id="conf_furnitures_net_cost" model="account.account.template">
+            <field name="code">1401020700</field>
+            <field name="name">Office Furniture and Fixtures Net Cost صافي تكلفة الاثاث واجهزة مكاتب</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_furnitures" model="account.account.template">
+            <field name="code">1401020701</field>
+            <field name="name">Office Furniture and Fixtures تكلفة اثاث ومهمات مكاتب</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_furnitures_depreciation" model="account.account.template">
+            <field name="code">1401020702</field>
+            <field name="name">furniture depreciation﻿ مجمع اهلاك اثاث ومعدات مكاتب</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fixtures_net_cost" model="account.account.template">
+            <field name="code">1401020800</field>
+            <field name="name">fixtures and supplies﻿Net Cost صافي تكلفة تجهيزات </field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fixtures" model="account.account.template">
+            <field name="code">1401020801</field>
+            <field name="name">fixtures and supplies﻿Cost تكلفة تجهيزات فى اماكن مستأجرة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_fixtures_depreciation" model="account.account.template">
+            <field name="code">1401020802</field>
+            <field name="name">fixtures and supplies depreciation﻿ مجمع اهلاك تجهيزات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_m_net_cost" model="account.account.template">
+            <field name="code">1401020900</field>
+            <field name="name">Net Cam صافى تكلفة اجهزة تصوير</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_m_cost" model="account.account.template">
+            <field name="code">1401020901</field>
+            <field name="name">Cam Cost تكلفة اجهزة تصوير</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_m_depreciation" model="account.account.template">
+            <field name="code">1401020902</field>
+            <field name="name">Cam depreciation﻿ مجمع اهلاك اجهزة تصوير</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_security_system_net_cost" model="account.account.template">
+            <field name="code">1401021000</field>
+            <field name="name">Security System net Cost</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_security_system" model="account.account.template">
+            <field name="code">1401021001</field>
+            <field name="name">Security System Cost تكلفة كاميرات مراقبه</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_fixed_assets"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_security_system_depreciation" model="account.account.template">
+            <field name="code">1401021002</field>
+            <field name="name">Security System depreciation﻿ مجمع اهلاك كاميرات مراقبة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_depreciation"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Current Liabilities -->
+
+       <record id="conf_liabilities" model="account.account.template">
+            <field name="code">2000000000</field>
+            <field name="name">liabilities الخصوم</field>
+           <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!--Equity-->
+
+        <record id="conf_capital_equity" model="account.account.template">
+            <field name="code">2100000000</field>
+            <field name="name">capital and equity راس المال وحقوق الملكية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+	<record id="conf_capital" model="account.account.template">
+            <field name="code">2101000000</field>
+            <field name="name">capital راس المال</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_capital_ali_alsuwaidi" model="account.account.template">
+            <field name="code">2101010000</field>
+            <field name="name">capital -Ali Alsuwaidi راس مال الوقف - 91%</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_capital_mohamed_gohar" model="account.account.template">
+            <field name="code">2101020000</field>
+            <field name="name">capital - Mohamed Gohar راس مال - محمد جوهر 9%</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="confquity" model="account.account.template">
+            <field name="code">2102000000</field>
+            <field name="name">equity حقوق الملكية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_current" model="account.account.template">
+            <field name="code">2102010000</field>
+            <field name="name">Current جاري الشركاء</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_ali_alsuwaidi_current" model="account.account.template">
+            <field name="code">2102010100</field>
+            <field name="name">Ali Alsuwaidi - Current Account  جارى -  على السويدى</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_mohamed_gohar_current" model="account.account.template">
+            <field name="code">2102010300</field>
+            <field name="name">Mohamed Gohar - Current Account  جارى - محمد جوهر</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_retained_earnings" model="account.account.template">
+            <field name="code">2102020000</field>
+            <field name="name">Retained Earning  ارباح وخسائر مرحلة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_equity"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+<!--Current Year Earnings-->
+        <record id="conf_net_profit_loss" model="account.account.template">
+            <field name="code">2102030000</field>
+            <field name="name">Net Profit and Loss / Current Year ارباح وخسائر الفترة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_unaffected_earnings"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_legal_reserve" model="account.account.template">
+            <field name="code">2102040000</field>
+            <field name="name">Legal Reserve الاحتياطيات</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_provision" model="account.account.template">
+            <field name="code">2200000000</field>
+            <field name="name">Provision مخصصات</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_end_of_service_provision" model="account.account.template">
+            <field name="code">2201010000</field>
+            <field name="name">End of Service Provision مخصصات نهاية الخدمة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_bad_debits_provision" model="account.account.template">
+            <field name="code">2201020000</field>
+            <field name="name">Bad Debits Provision مخصص ديون مشكوك فى تحصيلها</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_doctor_commission_provision" model="account.account.template">
+            <field name="code">2201040000</field>
+            <field name="name">Doctors Commission Provision مخصص عمولات الاطباء</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_annual_leave_provision" model="account.account.template">
+            <field name="code">2201050000</field>
+            <field name="name">Annual Leave Provision مخصص بدل اجازات</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_annual_ticket_provision" model="account.account.template">
+            <field name="code">2201060000</field>
+            <field name="name">Annual Ticket Provision مخصص بدل تذاكر السفر</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_loan" model="account.account.template">
+            <field name="code">2300000000</field>
+            <field name="name">Loan القروض المستلمة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_long_term_loan" model="account.account.template">
+            <field name="code">2301000000</field>
+            <field name="name">Long Term Loan قروض مستلمة طويلة الاجل</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_short_term_loan" model="account.account.template">
+            <field name="code">2302000000</field>
+            <field name="name">Short Term Loan قروض مستلمة قصيرة الاجل</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_current_liabilities" model="account.account.template">
+            <field name="code">2500000000</field>
+            <field name="name">Current Liabilities الخصوم المتدوالــة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Payable -->
+
+        <record id="conf_account_payable" model="account.account.template">
+            <field name="code">2501000000</field>
+            <field name="name">Accounts Payable الموردين</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_payable"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_suppliers_medical_supplies" model="account.account.template">
+            <field name="code">2501010000</field>
+            <field name="name">Suppliers - medical supplies موردين مواد طبية و مختبرات</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_suppliers_services" model="account.account.template">
+            <field name="code">2501020000</field>
+            <field name="name">Suppliers - Services  مورديى خدمات</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_notes_payable" model="account.account.template">
+            <field name="code">2502000000</field>
+            <field name="name">Notes Payable اوراق الدفــع</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_creditors" model="account.account.template">
+            <field name="code">2503000000</field>
+            <field name="name">Creditors الدائنــــون</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_creditors_from_third_parties" model="account.account.template">
+            <field name="code">2503020000</field>
+            <field name="name">Creditors from third parties دائنو تأمنيات من الغير</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!--<record id="conf_account_payable_2" model="account.account.template">-->
+            <!--<field name="code">2503040000</field>-->
+            <!--<field name="name">Accounts Payable حسابات دائنة متنوعة</field>-->
+            <!--<field eval="True" name="reconcile"/>-->
+            <!--<field name="user_type_id" ref="account.data_account_type_payable"/>-->
+            <!--<field name="chart_template_id" ref="configurable_chart_template"/>-->
+        <!--</record>-->
+
+        <record id="conf_other_creditors" model="account.account.template">
+            <field name="code">2506000000</field>
+            <field name="name">Other Creditors ارصدة دائنـــة أخري</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_unearned_revenue" model="account.account.template">
+            <field name="code">2506010000</field>
+            <field name="name">unearned revenue ايرادات مقدمة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_accrued_expenses" model="account.account.template">
+            <field name="code">2506020000</field>
+            <field name="name">Accrued Expenses مصاريف مستحقة السداد</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_accrued_salaries_1" model="account.account.template">
+            <field name="code">2507000000</field>
+            <field name="name">Accrued Salaries اجور وراتب مستحقة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_accrued_salaries_2" model="account.account.template">
+            <field name="code">2507000001</field>
+            <field name="name">Accrued Salaries اجور ومرتبات مستحقة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_accrued_annual_leave" model="account.account.template">
+            <field name="code">2507000002</field>
+            <field name="name">Accrued Annual Leave اجور اجازة مستحقة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_accrued_overtime" model="account.account.template">
+            <field name="code">2507000003</field>
+            <field name="name">Accrued Over Time اجور اضافية</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_accrued_commission" model="account.account.template">
+            <field name="code">2507000004</field>
+            <field name="name">Accrued  Commission عمولات مستحقة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_annual_ticket_accrued" model="account.account.template">
+            <field name="code">2507000005</field>
+            <field name="name">Annual Ticket Accrued تذاكر طيران مستحقة</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_accrued_end_of_service" model="account.account.template">
+            <field name="code">2507000006</field>
+            <field name="name">Accrued End of Service مكافاة نهاية الخدمة مستحقه</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!--Expenses-->
+
+        <record id="conf_expense_expense" model="account.account.template">
+            <field name="code">3000000000</field>
+            <field name="name">Expenses المصروفات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_net_cost" model="account.account.template">
+            <field name="code">3100000000</field>
+            <field name="name">Net Cost صافي مصروفات النشاط</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_direct_cost" model="account.account.template">
+            <field name="code">3101010100</field>
+            <field name="name">Direct costs تكاليف مباشرة على العيادات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_medical_supplies" model="account.account.template">
+            <field name="code">3101010101</field>
+            <field name="name">medical supplies مواد طبية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_Laboratories" model="account.account.template">
+            <field name="code">3101010102</field>
+            <field name="name">Laboratories مختبرات و معامل</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_implant_materials" model="account.account.template">
+            <field name="code">3101010103</field>
+            <field name="name">implant materials زرعات أسنان و مستلزماتها</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_orthodontic_materials" model="account.account.template">
+            <field name="code">3101010104</field>
+            <field name="name">Orthodontic materials( مواد تقويم ( انفيزالاين</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_rents" model="account.account.template">
+            <field name="code">3101010105</field>
+            <field name="name">Rents الايجـــــــــــارات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_stationary" model="account.account.template">
+            <field name="code">3101010106</field>
+            <field name="name">stationary ادوات كتابية ومطبوعات وحاسبات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_salaries" model="account.account.template">
+            <field name="code">3101010107</field>
+            <field name="name">Salaries اجور و مرتبات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_transportation_allowance" model="account.account.template">
+            <field name="code">3101010108</field>
+            <field name="name">Transportation Allowance بدل انتقالات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_housing_allowance" model="account.account.template">
+            <field name="code">3101010109</field>
+            <field name="name">Housing Allowance بدل السكن</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_phone_allowance" model="account.account.template">
+            <field name="code">3101010110</field>
+            <field name="name">Phone Allowance بدل هاتف</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_overtime" model="account.account.template">
+            <field name="code">3101010111</field>
+            <field name="name">Overtime بدل العمل الاضافى</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_other_allowance" model="account.account.template">
+            <field name="code">3101010112</field>
+            <field name="name">Other Allowance بدلات اخرى</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_annual_leave" model="account.account.template">
+            <field name="code">3101010113</field>
+            <field name="name">Annual Leave - Exp. بدل الاجازات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_job_nature_allowance" model="account.account.template">
+            <field name="code">3101010114</field>
+            <field name="name">Job Nature Allowance - Admin بدل طبيعة عمل</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_visa_expenses" model="account.account.template">
+            <field name="code">3101010115</field>
+            <field name="name">Visa Expenses مصاريف الاقامات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_maintenance_expenses" model="account.account.template">
+            <field name="code">3101010116</field>
+            <field name="name">Maintenance expenses مصاريف صيانة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_ph_internet_expenses" model="account.account.template">
+            <field name="code">3101010117</field>
+            <field name="name">Telephone and Internet expenses مصاريف هاتف و انترنت وبريد</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_water_electricity_expenses" model="account.account.template">
+            <field name="code">3101010118</field>
+            <field name="name">Water and electricity expenses مصاريف كهرماء</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_marketing_advertising_expenses" model="account.account.template">
+            <field name="code">3101010119</field>
+            <field name="name">Marketing and advertising دعاية و أعلان و هدايا</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_governmental_expenses" model="account.account.template">
+            <field name="code">3101010120</field>
+            <field name="name">Governmental expenses مصاريف سجلات تجارية وتراخيص و ما في حكمها</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_medical_waste_expenses" model="account.account.template">
+            <field name="code">3101010121</field>
+            <field name="name">medical waste expenses مصاريف نظافة و مخلفات طبية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_license_fees_expenses" model="account.account.template">
+            <field name="code">3101010122</field>
+            <field name="name">License fees رسوم تراخيص</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_hospital_expenses" model="account.account.template">
+            <field name="code">3101010123</field>
+            <field name="name">hospital Exp مصاريف علاج</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_ticket_expenses" model="account.account.template">
+            <field name="code">3101010124</field>
+            <field name="name">Ticket Expenses تذاكر طيران</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_doctor_expenses" model="account.account.template">
+            <field name="code">3101010125</field>
+            <field name="name">Doctors  Commission عمولات الاطباء</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_legal_consultations" model="account.account.template">
+            <field name="code">3101010126</field>
+            <field name="name">Legal Consultations اتعاب استشارات قانونية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_bank_charge_commission" model="account.account.template">
+            <field name="code">3101010127</field>
+            <field name="name">Bank Charge, Commission مصاريف بنكية وفرق تقويم عمله</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_housekeeping_exp" model="account.account.template">
+            <field name="code">3101010128</field>
+            <field name="name">Housekeeping Exp. مصروفات ضيافة و علاقات عامة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_training_courses" model="account.account.template">
+            <field name="code">3101010129</field>
+            <field name="name">Training courses دورات تدريبية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_bonus" model="account.account.template">
+            <field name="code">3101010130</field>
+            <field name="name">Bonus مكافأة تشجيعية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_sterilization_materials" model="account.account.template">
+            <field name="code">3101010131</field>
+            <field name="name">Sterilization materials مواد تعقيم</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_doubtful_depts_exp" model="account.account.template">
+            <field name="code">3101010132</field>
+            <field name="name">Doubtful Debts Exp مصروف مخصص ديون مشكوك فى تحصيلها</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_recruitment_visa" model="account.account.template">
+            <field name="code">3101010133</field>
+            <field name="name">Recruitment and visa Expenses مصاريف استقدام و تأشيرات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_ticket_hotel" model="account.account.template">
+            <field name="code">3101010134</field>
+            <field name="name">Ticket and Hotel مصاريف سفر و اقامات فنادق</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_end_of_service_exp" model="account.account.template">
+            <field name="code">3101010135</field>
+            <field name="name">End of Service Exp مكافاة نهاية الخدمة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_equipment_repairs" model="account.account.template">
+            <field name="code">3101010136</field>
+            <field name="name">Equipment Repairs صيانة اجهزه طبيه</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_uniform_expenses" model="account.account.template">
+            <field name="code">3101010137</field>
+            <field name="name">Uniform expenses مصاريف يونيفورم</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_equipment_expenses" model="account.account.template">
+            <field name="code">3101010138</field>
+            <field name="name">Equipment expenses مصاريف تجهيزات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_car_expenses" model="account.account.template">
+            <field name="code">3101010139</field>
+            <field name="name">Cars Exp- Cost مصروفات وسائل نقل وانتقالات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_staff_accommodation_expenses" model="account.account.template">
+            <field name="code">3101010140</field>
+            <field name="name">Staff accommodation Exp سكن موظفين</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_general_expenses" model="account.account.template">
+            <field name="code">3101010200</field>
+            <field name="name">General Expenses مصاريف عمومية وادارية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_expenses_prior_periods" model="account.account.template">
+            <field name="code">3101010300</field>
+            <field name="name">Expenses and Prior Periods مصروفات سنوات سابقة</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!--Other Income-->
+
+        <record id="conf_revenues" model="account.account.template">
+            <field name="code">4000000000</field>
+            <field name="name">Revenues ايرادات</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_other_income"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+
+        <record id="conf_direct_revenues" model="account.account.template">
+            <field name="code">4100000000</field>
+            <field name="name">Direct Revenues ايرادات النشاط</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_other_income"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_other_income_1" model="account.account.template">
+            <field name="code">4102000000</field>
+            <field name="name">Other Income ايرادات اخري</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_other_income"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_operating_income_for_others" model="account.account.template">
+            <field name="code">4102010000</field>
+            <field name="name">Operating income for others ايرادات التشغيل للغير</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_other_income"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_capital_gains" model="account.account.template">
+            <field name="code">4102020000</field>
+            <field name="name">Capital gains ارباح راسمالية</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+	<record id="conf_bank_benefits" model="account.account.template">
+            <field name="code">4102030000</field>
+            <field name="name">Bank benefits ارباح فوائد بنكيه</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+	<record id="conf_other_income_2" model="account.account.template">
+        <field name="code">4102040000</field>
+        <field name="name">Other Income ايرادات اخرى</field>
+        <field name="reconcile" eval='True'/>
+        <field name="user_type_id" ref="account.data_account_type_other_income"/>
+        <field name="chart_template_id" ref="configurable_chart_template"/>
+    </record>
+
+    <record id="conf_insurance_difference" model="account.account.template">
+        <field name="code">4102050000</field>
+        <field name="name">Insurance Difference</field>
+        <field name="reconcile" eval='True'/>
+        <field name="user_type_id" ref="account.data_account_type_revenue"/>
+        <field name="chart_template_id" ref="configurable_chart_template"/>
+    </record>
+
+    <record id="conf_invoice_discount" model="account.account.template">
+        <field name="code">4102060000</field>
+        <field name="name">Invoice Discount</field>
+        <field name="reconcile" eval='True'/>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+        <field name="chart_template_id" ref="configurable_chart_template"/>
+    </record>
+
+   <!-- chart template -->
+    <record id="configurable_chart_template" model="account.chart.template">
+        <field name="property_account_receivable_id" ref="conf_account_receivable"/>
+        <field name="property_account_payable_id" ref="conf_account_payable"/>
+        <field name="property_account_expense_categ_id" ref="conf_expense_expense"/>
+        <field name="property_account_income_categ_id" ref="conf_direct_revenues"/>
+        <field name="complete_tax_set" eval="False"/>
+        <field name="use_anglo_saxon" eval="True"/>
+        <!--<field name="property_stock_account_input_categ_id" ref="conf_siar"/>-->
+        <!--<field name="property_stock_account_output_categ_id" ref="conf_siad"/>-->
+        <!--<field name="property_stock_valuation_account_id" ref="conf_sva"/>-->
+        <!--<field name="income_currency_exchange_account_id" ref="conf_a_feg"/>-->
+        <!--<field name="expense_currency_exchange_account_id" ref="conf_a_expense_fel"/>-->
+    </record>
+
+    </data>
+</odoo>

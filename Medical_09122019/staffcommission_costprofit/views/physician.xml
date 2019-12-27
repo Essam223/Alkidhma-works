@@ -1,0 +1,20 @@
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="medical_physician_view">
+			<field name="name">Physician</field>
+			<field name="model">medical.physician</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_physician_view"/>
+			<field name="arch" type="xml">
+			<field name="code" position="after">
+				<field name="target_amount" />
+				<field name="commission" />
+			</field>
+			</field>
+		</record>
+
+	</data>
+</odoo>
+
+
+	

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record id="medical_appointment_form_view" model="ir.ui.view">
+        <field name="name">medical.appointment.form</field>
+        <field name="model">medical.appointment</field>
+        <field name="inherit_id" ref="pragtech_dental_management.medical_appointment_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_invoice']" position="after">
+                <button name="action_view_delivery"
+                        groups="service_consumable.group_consumable_mgmnt_manager_menu"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-pencil-square-o"
+                        attrs="{'invisible': ['|', ('patient', '=', False), ('delivery_count', '=', 0)]}">
+                    <field name="delivery_count" widget="statinfo" string="Stock Updates"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='reason_reversal']" position="after">
+                <field name="reason_stock_reversal" readonly="1"
+                       attrs="{'invisible': [('reason_stock_reversal', '=', False)]}"
+                groups="service_consumable.group_consumable_mgmnt_user_menu,service_consumable.group_consumable_mgmnt_manager_menu"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_id']" position="after">
+                <field name="delivery_id" attrs="{'invisible': [('delivery_id', '=', False)]}"
+                       groups="service_consumable.group_consumable_mgmnt_user_menu,service_consumable.group_consumable_mgmnt_manager_menu"/>
+            </xpath>
+            <xpath expr="//page[6]" position="after">
+                <page name="Consumables" string="Consumables"
+                      attrs="{'invisible': [('state', 'not in', ['checkin', 'ready', 'done'])]}"
+                      groups="service_consumable.group_consumable_mgmnt_user_menu,service_consumable.group_consumable_mgmnt_manager_menu">
+                    <br/>
+                    <button name="create_consumables" style="line-height: 24px;
+                    font-size: 30px;
+                    color: green;
+                    padding: 5px;" class="btn fa fa-check" type="object"
+                    groups="service_consumable.group_consumable_mgmnt_manager_menu"/>
+                    <br/>
+                    <br/>
+                    <field name="access_to_edit_consumables" invisible="1"/>
+                    <field name="consumable_ids" widget="one2many_list" attrs="{'readonly': [('access_to_edit_consumables', '=', False)]}"
+                           context="{'default_appt_id':active_id}">
+                        <tree string="Consumables" editable="bottom">
+                            <field name="product_tmpl_id"/>
+                            <field name="consu_product_id"/>
+                            <field name="quantity"/>
+                            <field name="appt_id" invisible="1"/>
+                            <field name="payment_line_id" invisible="1"/>
+                        </tree>
+                        <form string="Consumables" editable="bottom">
+                            <group>
+                                <group>
+                                    <field name="product_tmpl_id"/>
+                                    <field name="consu_product_id"/>
+                                </group>
+                                <group>
+                                    <field name="quantity"/>
+                                    <field name="appt_id" invisible="1"/>
+                                    <field name="payment_line_id" invisible="1"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='done']" position="after">
+                <button name="stock_update" class="btn-primary" string="Stock Update" type="object"
+                        groups="service_consumable.group_consumable_mgmnt_manager_menu"
+                        attrs="{'invisible' :['|',('delivery_id', '!=', False),('state', 'not in', ['checkin','ready', 'done'])]}"/>
+                <button name="stock_reverse" class="btn-primary" string="Stock Reverse" type="object"
+                        groups="service_consumable.group_consumable_mgmnt_manager_menu"
+                        attrs="{'invisible' :[('delivery_id', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+  </data>
+ </odoo>   	

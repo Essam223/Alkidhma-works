@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+     <!--  Print Cheque Form View -->
+        <record model="ir.ui.view" id="issue_cheque_form">
+            <field name="name">issue.cheque.form</field>
+            <field name="model">issue.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Print Cheque" delete='false'>
+                    <header>
+                        <button name="post_cheque" states="used" string="Post" type="object"/>
+                        <!--<button name="print_cheque" string="Print" type="object"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="new,used,printed"/>
+                    </header>
+
+                    <sheet>
+                     <group>
+                         <group>
+                            <field name="cheque_id" options="{'no_create': True}"
+                                   attrs="{'readonly':[('state','in',('used', 'printed'))]}"/>
+                            <field name="partner_id" attrs="{'readonly':[('state','in',('printed'))]}"
+                                   options="{'no_create': True}"/>
+                            <field name="name_in_cheque" attrs="{'readonly':[('state','in',('printed'))]}"/>
+                            <field name="dest_account_id" attrs="{'readonly':[('state','in',('printed'))]}"
+                                options="{'no_create': True}"/>
+                            <field name="amount" attrs="{'readonly':[('state','in',('printed'))]}"/>
+                         </group>
+                         <group>
+                            <field name="date_issue" attrs="{'readonly':[('state','in',('printed'))]}"/>
+                            <field name="cheque_date" attrs="{'readonly':[('state','in',('printed'))]}"/>
+                            <field name="issue_journal_entry" attrs="{'invisible':[('state','in',('new', 'used'))]}"/>
+                        </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--  Print Cheque Tree View -->
+        <record model="ir.ui.view" id="issue_cheque_tree">
+            <field name="name">issue.cheque.tree</field>
+            <field name="model">issue.cheque</field>
+            <field name="arch" type="xml">
+                <tree string="Print Cheques" delete='false'>
+                    <field name="cheque_id"/>
+                    <field name="partner_id"/>
+                    <field name="date_issue"/>
+                    <field name="cheque_date"/>
+                    <field name="amount"/>
+                    <field name="issue_journal_entry"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  Print Cheque Search View -->
+        <record model="ir.ui.view" id="issue_cheque_search">
+            <field name="name">issue.cheque.search</field>
+            <field name="model">issue.cheque</field>
+            <field name="arch" type="xml">
+                <search string="Print Cheques">
+                    <field name="cheque_id"/>
+                    <field name="partner_id"/>
+                    <field name="issue_journal_entry"/>
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
+
+
+         <record model="ir.actions.act_window" id="action_issue_cheque">
+            <field name="name">Print Cheque</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">issue.cheque</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Print Cheque" id="menu_issue" parent="cheque_management.menu_cheque" sequence="4" action="action_issue_cheque"/>
+    </data>
+</odoo>

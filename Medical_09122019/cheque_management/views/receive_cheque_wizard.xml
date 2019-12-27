@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="launch_receive_wizard">
+            <field name="name">Receive Cheque Book</field>
+            <field name="res_model">receive.cheque</field>
+            <field name="target">new</field>
+        </record>
+        <record model="ir.ui.view" id="wizard_form_view_pdf">
+            <field name="name">receive.cheque.wizard</field>
+            <field name="model">receive.cheque</field>
+            <field name="arch" type="xml">
+                <form string="Receive Cheque Book">
+                    <separator string="Cheque Number"/>
+                        <group>
+                            <group>
+                                 <field name="cheque_from" style="width:40%%"/>
+                                 <field name="cheque_to" style="width:40%%"/>
+                            </group>
+                            <group>
+                                <field name="bank_name" style="width:50%%" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+
+                    <footer>
+                        <button name="receive_cheque" string="Receive Cheque Book" type="object" class="oe_highlight"/>
+                        <button name="action_clear" string="Clear" type="object" class="oe_highlight"/>
+                        or <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window id="launch_receive_cheque"
+                    name="Receive Cheque Book"
+                    res_model="receive.cheque"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+        <menuitem name="Receive Cheque Book" id="menu_receive" parent="cheque_management.menu_cheque" sequence="3"
+                  action="cheque_management.launch_receive_cheque"/>
+
+    </data>
+</odoo>

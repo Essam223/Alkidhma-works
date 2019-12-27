@@ -1,0 +1,289 @@
+<odoo>
+    <template id="report_surgical_consent_pdf">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="text-center" t-if="language=='english'">
+                        <h3>SURGICAL CONSENT</h3>
+                        <table width="100%" class="table table-striped">
+                            <colgroup>
+                                <col width='15%' />
+                                <col width='35%' />
+                                <col width='15%' />
+                                <col width='35%' />
+                            </colgroup>
+                            <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                <tr>
+                                    <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>Doctor</strong></th>
+                                    <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-esc="doctor_id[1]"/></th>
+                                    <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>Speciality</strong></th>
+                                    <th style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-esc="speciality"/></th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;" colspan="2"><h4><strong>PATIENT DETAILS</strong></h4></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>Date</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-esc="register_date" t-options='{"widget": "date"}'/></td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>Name</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="patient_name" t-esc="patient_name"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>File Number</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="file_number" t-esc="file_number"/></td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>Date of Birth</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="dob" t-esc="dob" t-options='{"widget": "date"}'/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>Gender</strong></td>
+                                    <td t-if="sex" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;">
+                                        <t t-if="sex == 'm'">
+                                            <span>MALE</span>
+                                        </t>
+                                        <t t-if="sex == 'f'">
+                                            <span>FEMALE</span>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>Nationality</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="nationality_id" t-esc="nationality_id"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>Contact Number</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="mobile" t-esc="mobile"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <p style="text-align: left;">
+                            1. <strong>Dr. <span t-esc="doctor_name[1]"/></strong> has explained to me that the following condition(s) exist in my case:
+                            <strong><span t-esc="Complications_Findings"/></strong><br/><br/>
+                            2. And I understand that the surgical procedure/operation/treatment for evaluating and treating my condition is/are
+                            <strong><span t-esc="surgical_procedure"/></strong><br/><br/>
+                            3. And as there may be benefits from the proposed surgical procedure/operation/treatment, I also understand that there may be some
+                            risks and complications and those risks include allergic reaction, bleeding, infection, adverse side effects of drugs.<br/><br/>
+                            4. And also, I am aware that in the practice of medicine there are other risks or complications – wasn’t enumerated before that may
+                            occur such as
+                            <strong><span t-esc="risk_complications"/></strong><br/><br/>
+                            5. I also understand that during the course of the proposed surgical procedure/operation/treatment, another condition may reveal
+                            itself during the performance of the additional intervention (including transfusion of blood and/or its products), and I authorize such
+                            intervention to be performed.<br/><br/>
+                            6. I also understand that the outmost care possible will be given to me; I also understand that there are no guarantees or promises
+                            have been made to me concerning the result of my procedure/treatment.<br/><br/>
+                            7. I understand that the alternative(s) of the surgical procedure/operation/treatment include(s)
+                            <strong><span t-esc="alternative_surgical_procedure"/></strong><br/>
+                            And the likely result without such treatment is/are
+                            <strong><span t-esc="result_without_treatment"/></strong><br/><br/>
+                            8. I admit that I understand what has been explained to me as well as the contents of this consent form, and I have been given the
+                            opportunity to ask questions and I have received satisfactory answers, also I have been given the opportunity to discuss with my family
+                            before taking the final decision.<br/><br/>
+                            9. After reading this form and after talking to my surgeon, my signature below acknowledges that: I voluntarily give my authorization
+                            and consent to the performance of the above-mentioned surgical procedure/operation/treatment by my surgeon and his/her
+                            assistants, assisted by the hospital personnel.<br/>
+                            <br/>
+                            <table style="width:100%;">
+                                <tr>
+                                    <th style="width:25%;"></th>
+                                    <th style="width:25%;"></th>
+                                    <th style="width:25%;"></th>
+                                    <th style="width:25%;"></th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Surgeon:</strong></td>
+                                    <td style="text-align: left;">
+                                        <span t-esc="Surgeon"/>
+                                    </td>
+                                    <td><strong>Signature:</strong></td>
+                                    <td style="text-align: left;">
+                                        <img t-if="Surgeon_signature" t-att-src="'data:image/png;base64,%s' % to_text(Surgeon_signature)" class="pull-right" height="60"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td >&#160;<br/></td>
+                                    <td >&#160;</td>
+                                    <td >&#160;</td>
+                                    <td >&#160;</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Patient(Guardian):</strong></td>
+                                    <td style="text-align: left;">
+                                        <span t-esc="Patient_Guardian"/>
+                                    </td>
+                                    <td><strong>Signature:</strong></td>
+                                    <td style="text-align: left;">
+                                        <img t-if="Patient_or_Guardian_signature" t-att-src="'data:image/png;base64,%s' % to_text(Patient_or_Guardian_signature)" class="pull-right" height="60"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <p style="text-align: left;">
+                            Translator: (I acknowledge that I did my best to assist the patient in understanding the surgical procedure/operation/treatment, I also
+                            gave him the chance to discuss with the physician and also I consent that the patient agreed on the proposed surgical
+                            procedure/operation/treatment.
+                            </p>
+                            <br/>
+                            <table style="width:100%;">
+                                    <tr>
+                                        <th style="width:25%;"></th>
+                                        <th style="width:25%;"></th>
+                                        <th style="width:25%;"></th>
+                                        <th style="width:25%;"></th>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Translator’s Name:</strong></td>
+                                        <td style="text-align: left;">
+                                            <span t-esc="Translator"/>
+                                        </td>
+                                        <td><strong>Signature:</strong></td>
+                                        <td style="text-align: left;">
+                                            <img t-if="Translator_signature" t-att-src="'data:image/png;base64,%s' % to_text(Translator_signature)" class="pull-right" height="60"/>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <br/><br/>
+                        </p>
+
+                    </div>
+                    <div class="text-center" t-if="language=='arabic'">
+                        <h3>إقرار موافقة على إجراء عملية جراحية</h3>
+                        <table width="100%" class="table table-striped">
+                            <colgroup>
+                                <col width='15%' />
+                                <col width='35%' />
+                                <col width='15%' />
+                                <col width='35%' />
+                            </colgroup>
+                            <tbody >
+                                <tr>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>إسم الطبيب</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-esc="doctor_id[1]"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>التخصص</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-esc="speciality"/></td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;" colspan="2"><h4><strong>بيانات المريض</strong></h4></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>التاريخ</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-esc="register_date" t-options='{"widget": "date"}'/></td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>الاسم</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="patient_name" t-esc="patient_name"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>رقم الملف</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="file_number" t-esc="file_number"/></td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>تاريخ الميلاد</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="dob" t-esc="dob" t-options='{"widget": "date"}'/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>الجنس</strong></td>
+                                    <td t-if="sex" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;">
+                                        <t t-if="sex == 'm'">
+                                            <span>MALE</span>
+                                        </t>
+                                        <t t-if="sex == 'f'">
+                                            <span>FEMALE</span>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>الجنسية</strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="nationality_id" t-esc="nationality_id"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><strong>رقم الاتصال </strong></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;border-bottom:1px solid #000000;"><span t-if="mobile" t-esc="mobile"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+        <p style="text-align: right;">
+ تشخيص حالتي وهي<strong><span t-esc="doctor_name[1]"/></strong>            لقد شرح لي الطبيب/
+            <strong><span t-esc="Complications_Findings"/></strong>
+                            <br/><br/>
+            وأعلم أن الإجراء العلاجي / الجراحي المطلوب لتشخيص حالتي وعلاج حالتي هو
+        <strong><span t-esc="surgical_procedure" style="text-align: right;"/></strong>
+                            <br/><br/>
+        وبالرغم من علمي بأنه يوجد فوائد من الإجراء العلاجي/الجراحي المقترح ، أعلم أيضاً أنه قد توجد مخاطر ومضاعفات والتي تتضمن التحسس والنزيف والتقيح والأعراض الجانبية من الأدوية.
+            <br/><br/>
+        وأعلم أنه قد توجد مخاطر و مضاعفات أخرى قد تحدث أثناء الإجراء العلاجي/ الجراحي مثل
+         <strong><span t-esc="risk_complications" style="text-align: right;"/></strong>
+                            <br/><br/>
+        وأعلم أنه أثناء الإجراء العلاجي/الجراحي قد تظهر مخاطر ومضاعفات غير متوقعة والتي قد تطلب تدخلات إضافية (والتي قد تتضمن نقل الدم ومشتقاته)، وأفوض الطبيب المعالج بإجراء الجراحة أو إعطاء العلاج اللازم.
+                            <br/><br/>
+        وأعلم أنه سيتم إعطائي كل الرعاية المطلوبة وكذلك أعلم أنه لايوجد ضمانات أو وعود أعطيت لي بخصوص نتائج جراحتي أو علاجي وأعلم أن البدائل المتاحة لعلاج
+            <strong><span t-esc="alternative_surgical_procedure"/></strong>
+        وأن المضاعفات التي قد تحدث إذا تم رفض العلاج هي
+            <strong><span t-esc="result_without_treatment"/></strong>
+                            <br/><br/>
+        وأقر بأني أفهم كل ماشرح لي في هذا الإقرار وتم إعطائي الفرصة الكاملة لطرح الأسئلة وتم إعطائي الأجوبة اللازمة كما تم إعطائي الفرصة الكاملة لمناقشة العلاج مع عائلتي قبل إعطاء قراري النهائي.
+                            <br/><br/>
+        بعد قراءة هذا الإقرار والتحدث مع الجراح فقد وضعت إمضائي بمحض إرادتي موافقاً على إجراء الجراحة أو العلاج اللازم بواسطة الجراح ومساعديه وبمساعة طاقم المستشفى.
+        <br/><br/>
+
+        <table style="width:100%;">
+            <tr>
+                <th style="width:20%;"></th>
+                <th style="width:20%;"></th>
+                <th style="width:20%;"></th>
+                <th style="width:20%;"></th>
+                <th style="width:20%;"></th>
+            </tr>
+            <tr>
+                <td style="text-align: center;vertical-align: middle;"><span t-esc="Surgeon" style="text-align: right;"/></td>
+                <td style="vertical-align: middle;"><strong>الطبيب</strong></td>
+                <td/>
+                <td style="text-align: center;vertical-align: middle;"><span t-esc="Patient_Guardian" style="text-align: right;"/></td>
+                <td style="vertical-align: middle;"><strong>المريض أو ولي أمره</strong></td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">
+                    <img t-if="Surgeon_signature" t-att-src="'data:image/png;base64,%s' % to_text(Surgeon_signature)" class="pull-left" height="60"/>
+                </td>
+                <td style="vertical-align: middle;">
+                    <strong>التوقيع </strong>
+                </td>
+                <td/>
+                <td style="text-align: right;">
+                    <img t-if="Patient_or_Guardian_signature" t-att-src="'data:image/png;base64,%s' % to_text(Patient_or_Guardian_signature)" class="pull-left" height="60"/>
+                </td>
+                <td style="vertical-align: middle;"><strong>التوقيع</strong></td>
+            </tr>
+        </table>
+        <br/>
+        المترجم: ( أقر بأنني بذلت قصارى جهدي لمساعدة المريض في فهم الإجراء العلاجي/الجراحي المقترح كما أنني جعلت المريض يساهم في المناقشة مع الطبيب كما أقر بانه قد وافق على الإجراء العلاجي / الجراحي)
+        <br/><br/>
+        <br/><br/>
+            <table style="width:100%;text-align: right;">
+                <tr>
+                    <th style="width:20%;"></th>
+                    <th style="width:20%;"></th>
+                    <th style="width:20%;"></th>
+                    <th style="width:20%;"></th>
+                    <th style="width:20%;"></th>
+                </tr>
+                <tr style="text-align: right;">
+                    <td style="text-align: center;"><span t-esc="Translator" style="text-align: right;"/></td>
+                    <td style="text-align: right;vertical-align: middle;"><strong>المترجم</strong></td>
+                    <td/>
+                    <td style="text-align: center;"></td>
+                    <td style="vertical-align: middle;"></td>
+                </tr>
+                <tr  style="text-align: right;">
+                    <td style="text-align: right;">
+                        <img t-if="Translator_signature" t-att-src="'data:image/png;base64,%s' % to_text(Translator_signature)" class="pull-left" height="60"/>
+                    </td>
+                    <td style="vertical-align: middle;"><strong>التوقيع</strong></td>
+                    <td/>
+                    <td style="text-align: right;">
+                    </td>
+                    <td style="vertical-align: middle;"></td>
+                </tr>
+            </table>
+            <br/><br/>
+        </p>
+
+                    </div>
+                </div>
+        </t>
+        </t>
+        </t>
+    </template>
+</odoo>

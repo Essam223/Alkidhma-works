@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_res_bank_form" model="ir.ui.view">
+        <field name="name">Res Bank Details</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="bic"]' position='after'>
+                <field name="bank_code" />
+            </xpath>
+        </field>
+   </record>
+
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="bank_details" string="Bank details">
+                    <br/>
+                    <field name="bank_account_ids" context="{'default_company_id': active_id}">
+                        <tree editable="bottom">
+                            <field name="company_id" invisible="1"/>
+                            <field name="bank_account_id" />
+                            <field name="bank_id" readonly="1"/>
+                            <field name="bank_code" readonly="1"/>
+                            <field name="iban_code"/>
+                        </tree>
+                    </field>
+                    <group>
+                        <group>
+                            <field name="Employer_EID"/>
+                            <field name="Payer_EID"/>
+                        </group>
+                        <group>
+                            <field name="Payer_QID"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+        <record id="view_company_bank_account_form" model="ir.ui.view">
+        <field name="name">company.bank.account.form</field>
+        <field name="model">company.bank.account</field>
+        <field name="arch" type="xml">
+            <form string="Company Bank Account">
+                <group>
+                    <group>
+                        <field name="bank_account_id"/>
+                        <field name="bank_id"/>
+                    </group>
+                    <group>
+                        <field name="bank_code"/>
+                        <field name="iban_code"/>
+                        <field name="company_id" invisible="1"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+</odoo>

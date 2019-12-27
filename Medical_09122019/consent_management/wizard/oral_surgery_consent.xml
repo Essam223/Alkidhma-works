@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_oral_surgery_consent_wizard2" model="ir.ui.view">
+            <field name="name">oral.surgery.consent.form</field>
+            <field name="model">oral.surgery.consent</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="ORAL SURGERY CONSENT/شهادة جراحة الفم ">
+                    <div class="oe_title">
+                        <h1 attrs="{'invisible': [('language', '=', 'arabic')]}">
+                            INFORMATIONAL INFORMED CONSENT
+                        </h1>
+                        <h1 attrs="{'invisible': [('language', '=', 'english')]}">اقرار بالحصول على المعلومات </h1>
+                    </div>
+<div  attrs="{'invisible': [('language', '=', 'arabic')]}">
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:15%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:40%;"></th>
+                            </tr>
+                            <tr>
+                                <td><label for="language" string="Language/ لغة"/></td>
+                                <td ><field name="language"/></td>
+                                <td ><label for="patient_id"/></td>
+                                <td ><field name="patient_id" style="width:100%"/></td>
+
+                            </tr>
+                            <tr>
+                                <td ><label for="register_date"/></td>
+                                <td><field name="register_date" style="width:100%"/></td>
+                                <td ><label for="doctor_id"/></td>
+                                <td ><field name="doctor_id" style="width:100%"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="Treatment"/></td>
+                                <td><field name="Treatment"/></td>
+                                <td ><label for="Tooth_number"/></td>
+                                <td ><field name="Tooth_number"/></td>
+                            </tr>
+                            <tr>
+                                <td ><label for="Parent_Guardian"/></td>
+                                <td><field name="Parent_Guardian"/></td>
+                                <td />
+                                <td />
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div  attrs="{'invisible': [('language', '=', 'english')]}">
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:40%;"></th>
+                                <th style="width:15%;"></th>
+                                <th style="width:30%;"></th>
+                                <th style="width:15%;"></th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;"><field name="language"/></td>
+                                <td style="text-align: right;"><label for="language" string="Language/ لغة"/></td>
+                                <td><field name="patient_id" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="patient_id" string="اسم المريض"/></td>
+                            </tr>
+                            <tr>
+                                <td><field name="register_date" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="register_date" string="التاريخ"/></td>
+                                <td><field name="doctor_id" style="width:100%"/></td>
+                                <td style="text-align: right;"><label for="doctor_id" string="الطبيب"/></td>
+                            </tr>
+                            <tr>
+                                <td><field name="Treatment"/></td>
+                                <td style="text-align: right;"><label for="Treatment" string="العلاج"/></td>
+                                <td><field name="Tooth_number"/></td>
+                                <td style="text-align: right;"><label for="Tooth_number" string="رقم السن"/></td>
+                            </tr>
+                            <tr>
+                                <td><field name="Parent_Guardian"/></td>
+                                <td style="text-align: right;"><label for="Parent_Guardian" string="الوالد / الوصي"/></td>
+                                <td/>
+                                <td style="text-align: right;"/>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width:800px; margin:0 auto;">
+                        <img src="/consent_management/static/src/img/Oral_Surgery_Consent_1.png" class="img img-responsive"
+                               attrs="{'invisible': [('language', '=', 'arabic')]}" style="max-height: 1500px;"/>
+                        <img src="/consent_management/static/src/img/Oral_Surgery_Consent_2.png" class="img img-responsive"
+                               attrs="{'invisible': [('language', '=', 'arabic')]}" style="max-height: 1500px;"/>
+                        <img src="/consent_management/static/src/img/Oral_Surgery_Consent_ar_1.png" class="img img-responsive"
+                               attrs="{'invisible': [('language', '=', 'english')]}" style="max-height: 1500px;"/>
+                        <img src="/consent_management/static/src/img/Oral_Surgery_Consent_ar_2.png" class="img img-responsive"
+                               attrs="{'invisible': [('language', '=', 'english')]}" style="max-height: 1500px;"/>
+                    </div>
+                    <div  attrs="{'invisible': [('language', '=', 'arabic')]}">
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:30%;"></th>
+                                <th style="width:70%;"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Patient_or_Guardian_signature"/>
+                                </td>
+                                <td><field name="Patient_or_Guardian_signature" widget="signature" nolabel="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Treating_Dentist_signature"/>
+                                </td>
+                                <td><field name="Treating_Dentist_signature" widget="signature" nolabel="1"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Witness_signature"/>
+                                </td>
+                                <td><field name="Witness_signature" widget="signature" nolabel="1"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div attrs="{'invisible': [('language', '=', 'english')]}">
+                        <table style="width:100%;">
+                            <tr>
+                                <th style="width:70%;"></th>
+                                <th style="width:30%;"></th>
+                            </tr>
+                            <tr>
+                                <td><field name="Patient_or_Guardian_signature2" widget="signature" nolabel="1"/></td>
+                                <td style="text-align: right;">
+                                    <label for="Patient_or_Guardian_signature2" string="المريض / الوصي القانوني التوقيع"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="Treating_Dentist_signature2" widget="signature" nolabel="1"/></td>
+                                <td style="text-align: right;">
+                                    <label for="Treating_Dentist_signature2" string="توقيع الطبيب "/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><field name="Witness_signature2" widget="signature" nolabel="1"/></td>
+                                <td style="text-align: right;">
+                                    <label for="Witness_signature2" string="توقيع الشاهد "/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <footer>
+                            <button name="action_confirm" string="Confirm / أكد  " type="object" class="btn-primary"/>
+                            <button string="Cancel / إلغاء " class="btn-default" special="cancel" />
+                        </footer>
+
+                </form>
+            </field>
+    </record>
+</odoo>

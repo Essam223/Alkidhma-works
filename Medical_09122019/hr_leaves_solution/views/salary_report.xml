@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="salary_report_pdf">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <h2>SALARY REPORT</h2>
+                                 <center>
+                                     <table name="master" width="90%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td><strong>Period From</strong></td>
+                                                <td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+                                                <td><strong>Period To</strong></td>
+                                                <td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Employee</strong></td>
+                                                <td>:
+                                                    <t t-if="employee_id">
+                                                        <span t-esc="employee_id"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                                <td><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y %H:%M')"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                     <table class="table table-striped" name="account_invoices" t-if="not show_description">
+                                        <colgroup>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='30%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Ref</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Period From</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Period To</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Employee</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Net Salary</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Paid Amount</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Due Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                            <tr t-foreach="orders" t-as="l" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="l['number']"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="l['date_from']" t-options='{"widget": "date"}'/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="l['date_to']" t-options='{"widget": "date"}'/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="l['employee_id']"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="l['net_salary']"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="l['paid_amount']"/></td>
+                                                <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="l['residual']"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                     <table class="table table-striped" name="account_invoices" t-if="show_description">
+                                        <colgroup>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='30%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                            <col width='10%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Ref</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Period From</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Period To</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Employee</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Net Salary</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Paid Amount</th>
+                                                <th style="background-color: #beeef4;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Due Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                            <t t-foreach="orders" t-as="l">
+                                               <tr  style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="l['number']"/></td>
+                                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="l['date_from']" t-options='{"widget": "date"}'/></td>
+                                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="l['date_to']" t-options='{"widget": "date"}'/></td>
+                                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="l['employee_id']"/></td>
+                                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="l['net_salary']"/></td>
+                                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="l['paid_amount']"/></td>
+                                                    <td style="background-color: #b2f78a;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="l['residual']"/></td>
+                                                </tr>
+                                                <t t-set="pay_i" t-value="1" />
+                                                <tr t-foreach="l['payslip'].line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <t t-set="pay_i" t-value="pay_i+1"/>
+                                                    </td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"/>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"/>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"/>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-esc="line.name"/>(<span t-esc="line.code"/>)</td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="line.total"  t-esc-options='{"widget": "monetary", "display_currency": line.slip_id.company_id.currency_id}'/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">
+                                                    </td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"/>
+                                                </tr>
+                                                <tr t-foreach="l['payslip'].payment_ids" t-as="p_vals">
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"/>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"/>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"/>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center"/>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right" colspan="2">
+                                                        Paid by <t t-esc="p_vals.journal_id.name"/> on <t t-esc="p_vals.payment_date" t-options='{"widget": "date"}'/>
+                                                    </td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"><span t-esc="p_vals.amount" t-options='{"widget": "monetary", "display_currency": p_vals.currency_id}'/></td>
+                                                    <td style="border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right"/>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                     <br/>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>

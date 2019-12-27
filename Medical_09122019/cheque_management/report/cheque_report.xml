@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_cheque_payment"
+            string="Cheque Payment Voucher"
+            model="cheque.master"
+            report_type="qweb-pdf"
+            file="cheque_management.cheque_payment_report"
+            name="cheque_management.cheque_payment_report"
+            menu="False"
+        />
+        <report
+            id="report_cheque_receipt"
+            string="Cheque Receipt Voucher"
+            model="receive.cheque.master"
+            report_type="qweb-pdf"
+            file="cheque_management.cheque_receipt_report"
+            name="cheque_management.cheque_receipt_report"
+            menu="False"
+        />
+    </data>
+</odoo>

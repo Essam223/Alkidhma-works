@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="medical_patient_view" model="ir.ui.view">
+            <field name="name">Patient</field>
+			<field name="model">medical.patient</field>
+            <field name="inherit_id" ref="pragtech_dental_management.medical_patient_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[11]" position="replace">
+                    <page string="Old Files">
+						<field name="attach_count" invisible="1"/>
+						<button name="get_img" type="object"
+										attrs="{'invisible': [('attach_count', '=', '0')]}"
+										string="View Images"
+										class="btn  btn-primary fa fa-file-image">
+								</button>
+								<button name="show_attachments" type="object"
+									attrs="{'invisible': [('attach_count', '=', '0')]}"
+									string="View Non-images"
+									class="btn btn-primary fa fa-file-pdf">
+								</button>
+
+                    	<field name = "attachment_ids"
+							   context="{'default_res_model': 'medical.patient','default_res_id': id,'default_patient_id': active_id}">
+                                <tree editable="bottom">
+									<field name="appointment_id"/>
+									<field name="name"/>
+									<field name="type" invisible="1"/>
+									<!--<field name="datas_fname" invisible="1" />-->
+									<!--<field name="datas" filename="datas_fname"/>-->
+									<field name="datas" widget="download_link" options="{'filename': 'datas_fname'}"/>
+									<!--<field name="datas" widget="binary" options="{'filename': 'datas_fname'}"/>-->
+									<field name="patient_id" invisible="1"/>
+									<field name="create_date"/>
+								</tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+    </record>
+
+
+</odoo>

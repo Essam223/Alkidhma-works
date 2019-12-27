@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<template id="report_patient_visit_document">
+			<t t-call="web.external_layout">
+				<t t-set="doc" t-value="doc.with_context({'lang':doc.name.lang})" />
+				<div class="page">
+					<div style="color:#009688;">
+						 <h2><b>Patient Details # <span t-field="doc.name"/></b></h2>
+					 </div>
+					<table id="master_data" width="100%" class="table table-striped">
+						<colgroup>
+					    	<col width='7%' />
+					    	<col width='13%' />
+					    	<col width='7%' />
+					    	<col width='9%' />
+					    	<col width='9%' />
+					    	<col width='20%' />
+					    	<col width='13%' />
+					    	<col width='19%' />
+						</colgroup>
+						<tbody class="master_tbody">
+							<tr>
+								  <td  style="color:#009688;text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;">
+									  <strong>Patient</strong>
+								  </td>
+								  <td colspan="5" style="text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+									 : <span t-field="doc.name.name"/>
+								  </td>
+								  <td style="color:#009688;text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+                                      <strong>File No</strong>
+								  </td>
+								  <td style="text-align: left;border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+									   : <span t-if="doc.patient_id" t-field="doc.patient_id"/>
+								  </td>
+							</tr>
+							<tr>
+                                <td style="color:#009688;text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;">
+                                    <strong>Age</strong>
+                                </td>
+								<td style="text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+									: <span t-if="doc.age" t-field="doc.age"/>
+								</td>
+                                <td style="color:#009688;text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+                                    <strong>Gender</strong>
+                                </td>
+								<td style="text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+									: <span t-if="doc.sex" t-field="doc.sex"/>
+								</td>
+                                <td style="color:#009688;text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+                                    <strong>Nationality</strong>
+                                </td>
+								<td style="text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+									: <span t-if="doc.nationality_id" t-field="doc.nationality_id.name"/>
+								</td>
+                                <td style="color:#009688;text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+                                      <strong>ID No</strong>
+								  </td>
+								  <td style="text-align: left;border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+									   : <span t-if="doc.qid" t-field="doc.qid"/>
+								  </td>
+							</tr>
+							<tr>
+                                <td colspan="2" style="color:#009688;text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;">
+                                    <strong>Registration Date</strong>
+
+                                </td>
+								<td colspan="4" style="text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+									: <span t-field="doc.register_date" t-options='{"widget": "date"}'/>
+								</td>
+                                <td style="color:#009688;text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">
+                                   <!--<strong>Contact Number</strong> -->
+                                   <strong>Phone</strong>
+                                </td>
+								<td style="text-align: left;border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+									: <span t-if="doc.mobile" t-field="doc.mobile"/>
+								</td>
+							</tr>
+							<!--<tr>-->
+                                <!--<td colspan="2" style="text-align: left;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;">-->
+                                    <!--<strong>Name of Doctor</strong>-->
+                                <!--</td>-->
+								<!--<td colspan="4" style="text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">-->
+									<!--: <span t-if="doc.doctor.name" t-field="doc.doctor.name.name"/>-->
+								<!--</td>-->
+								<!--<td style="text-align: left;border-top: 1px solid black;border-bottom:1px solid #000000;">-->
+                                    <!--<strong>Report Date</strong>-->
+                                <!--</td>-->
+								<!--<td style="text-align: left;border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">-->
+									<!--: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y %H:%M:%S')"/>-->
+								<!--</td>-->
+							<!--</tr>-->
+						</tbody>
+					</table>
+					<t t-foreach="doc.apt_id" t-as="appts">
+						<t t-if="appts.state!='cancel'">
+							<h2 style="color:#009688;"><b>Visit Details # <span t-esc="appts.name"/></b></h2>
+							<table id="date_doctor" class="table">
+								<tbody>
+									<colgroup>
+                                        <col width='15%' />
+                                        <col width='35%' />
+                                        <col width='15%' />
+                                        <col width='35%' />
+                                    </colgroup>
+									<tr>
+										<td style="color:#009688;"><strong>Date : </strong></td>
+										<td><span t-field="appts.appointment_sdate" t-options='{"widget": "datetime"}'/></td>
+										<td style="color:#009688;"><strong>Doctor : </strong></td>
+										<td><span t-field="appts.doctor"/></td>
+									</tr>
+								</tbody>
+							</table>
+							<t t-if="appts.finding_ids">
+								<h4 style="color:#009688;">CHIEF COMPLAINT AND CLINICAL FINDINGS</h4>
+							</t>
+							<table id="complaints" t-if="appts.finding_ids" class="table table-bordered">
+								<thead>
+									<tr>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Chief complaint/ History</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Clinical Finding</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Diagnosis</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Procedure</th>
+									</tr>
+								</thead>
+								<tbody >
+									<tr t-foreach="appts.finding_ids" t-as="l">
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="l.complaint"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="l.finding"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="l.diagnosis"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="l.procedure"/></td>
+									</tr>
+								</tbody>
+							</table>
+							<t t-if="appts.prescription_ids">
+								<h4 style="color:#009688;">PRESCRIPTION</h4>
+							</t>
+							<table t-if="appts.prescription_ids" class="table table-bordered">
+								<thead>
+									<tr>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Medicine</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Frequency</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Duration</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Description</th>
+									</tr>
+								</thead>
+								<tbody >
+									<tr t-foreach="appts.prescription_ids" t-as="p">
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="p.medicine_id.name"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="p.common_dosage" t-field="p.common_dosage.name"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="p.duration > 0" t-field="p.duration"/>  <span t-if="p.duration_period" t-field="p.duration_period"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="p.note"/></td>
+									</tr>
+								</tbody>
+							</table>
+							<t t-if="appts.operations">
+								<h4 style="color:#009688;">DENTAL PROCEDURES</h4>
+							</t>
+							<table t-if="appts.operations" class="table table-bordered">
+								<thead>
+									<tr>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:25%;" class="text-left">Procedure</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:26%;" class="text-left">Diagnosis</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:20%;" class="text-left">Notes</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:7%;" class="text-left">Tooth</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:10%;" class="text-left">Surface</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:12%;" class="text-left">Status</th>
+									</tr>
+								</thead>
+								<tbody >
+									<tr t-foreach="appts.operations" t-as="o">
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="o.description"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="o.diagnosis_id" t-field="o.diagnosis_id.code"/><span t-if="o.diagnosis_id" t-field="o.diagnosis_id.description"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="o.diagnosis_description" t-field="o.diagnosis_description"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="o.teeth_id" t-field="o.teeth_id.name"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="o.detail_description" t-field="o.detail_description"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="o.state" t-field="o.state"/></td>
+									</tr>
+								</tbody>
+							</table>
+							<t t-if="appts.treatment_ids">
+								<h4 style="color:#009688;">PAYMENT LINES</h4>
+							</t>
+							<table t-if="appts.treatment_ids" class="table table-bordered">
+								<thead>
+									<tr>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:30%;" class="text-left">Treatment</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:30%;" class="text-left">Description</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:20%;" class="text-left">Actual Amount</th>
+										<th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;width:20%;" class="text-left">After Discount</th>
+									</tr>
+								</thead>
+								<tbody >
+									<tr t-foreach="appts.treatment_ids" t-as="t">
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-if="t.description" t-field="t.description.name"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="t.note"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="t.actual_amount"/></td>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="t.amount"/></td>
+									</tr>
+								</tbody>
+							</table>
+							<t t-if="appts.comments">
+								<h4>NOTES</h4>
+							</t>
+							<table t-if="appts.comments" class="table table-bordered">
+								<tbody>
+									<tr>
+										<td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+											<span t-field="appts.comments"/>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</t>
+					</t>
+				</div>
+			</t>
+		</template>
+		<template id="report_patient_visit">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<t t-call="pragtech_dental_management.report_patient_visit_document" t-lang="doc.name.lang"/>
+				</t>
+			</t>
+		</template>
+
+	</data>
+</odoo>

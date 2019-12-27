@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<data>
+		<record id="saloon_scheduler_view" model="ir.ui.view">
+			<field name="name">medical.appointment.view</field>
+			<field name="model">medical.appointment</field>
+			<field name="arch" type="xml">
+				<scheduler date_start="appointment_sdate"
+						   date_stop="appointment_edate"
+						   avatar_model="res.partner"
+						   mode="agendaDay"
+						   string="Appointmentsss">
+					<field name="patient_name" invisible="1"/>
+					<field name="patient_phone" invisible="1"/>
+					<field name="doctor_user" />
+					<field name="patient_name_phone" />
+					<field name="patient_name" />
+					<field name="patient_file_no"/>
+					<field name="room_id"/>
+					<field name="comments"/>
+					<field name="appointment_sdate" invisible="1"/>
+					<field name="appointment_edate" invisible="1"/>
+					<field name="doctor" invisible="1"/>
+				</scheduler>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_appointments">
+			<field name="name">Appointments</field>
+			<field name="res_model">medical.appointment</field>
+			<field name="view_mode">scheduler</field>
+			<field name="view_type">form</field>
+		</record>
+
+		<menuitem name="Appointments"
+				  id="menu_appintments"
+				  action="action_appointments" />
+	</data>
+</odoo>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="advance_payment_report_pdf">
+            <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                         <div class="page">
+                             <div class="text-center">
+                                 <div style="color:#009688;">
+                                     <h2><b>ADVANCE PAYMENT REPORT</b></h2>
+                                 </div>
+                                 <center>
+                                     <table name="master" width="90%">
+                                        <colgroup>
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                            <col width='25%' />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="patient_invoice_tbody">
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period From</strong></td>
+                                                <td>: <span t-esc="period_start" t-options='{"widget": "date"}'/></td>
+                                                <td style="color:#009688;"><strong>Report Date</strong></td>
+                                                <td>: <span t-esc="datetime.datetime.now()" t-options='{"widget": "datetime"}'/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color:#009688;"><strong>Period To</strong></td>
+                                                <td>: <span t-esc="period_stop" t-options='{"widget": "date"}'/></td>
+                                                <td style="color:#009688;"><strong>Patient</strong></td>
+                                                <td>:
+                                                    <t t-if="patient">
+                                                        <span t-esc="patient"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        All
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-striped" name="account_payments">
+                                        <colgroup>
+                                            <col width='8%'/>
+                                            <col width='20%'/>
+                                            <col width='20%'/>
+                                            <col width='32%'/>
+                                            <col width='20%'/>
+                                        </colgroup>
+                                        <thead style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                            <tr>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">Sl No.</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Ref No</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Date</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center" t-if="not patient">Patient Name</th>
+                                                <th style="color:white;background-color: #009688;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="invoice_tbody" >
+                                            <t t-set="i" t-value="1" />
+                                            <t t-set="cash_sum" t-value="0" />
+                                            <t t-set="credit_sum" t-value="0" />
+                                            <!--<t t-if="payment_mode and payment_mode[2] == 'cash' or not payment_mode">-->
+                                            <tr>
+                                                <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;" colspan="2"><h4><strong>Cash Summary</strong></h4></td>
+                                                <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" colspan="2"></td>
+                                                <t t-if="cash > 0">
+                                                    <tr t-foreach="orders" t-as="l" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <t t-if="l['pay_mode'] == 'cash'">
+                                                            <t t-if="l['type'] == 'out_refund'">
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['name']"/></td>
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['payment_date']" t-options='{"widget": "date"}'/></td>
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not patient"><span t-esc="l['patient']"/></td>
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['amount']"/><t t-set="cash_sum" t-value="cash_sum+l['amount']"/></td>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['name']"/></td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['payment_date']" t-options='{"widget": "date"}'/></td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not patient"><span t-esc="l['patient']"/></td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['amount']"/><t t-set="cash_sum" t-value="cash_sum+l['amount']"/></td>
+                                                            </t>
+                                                        </t>
+                                                    </tr>
+                                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                        <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                        <td style="text-align:right;border-right: 1px solid black;border-top: 1px solid black;" colspan="2"><strong>Cash Total  :  </strong></td>
+                                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="cash_sum"/></strong></td>
+                                                    </tr>
+                                                </t>
+                                                <t t-else="">
+                                                    <tr>
+                                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;" colspan="2"><h4>No Cash Payments</h4></td>
+                                                        <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                        <td style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" colspan="2"></td>
+                                                    </tr>
+                                                </t>
+                                            </tr>
+                                            <!--</t>-->
+                                            <!--<t t-if="payment_mode and payment_mode[2] == 'bank' or not payment_mode">-->
+                                            <tr>
+                                                <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;" colspan="2"><h4><strong>Card Summary</strong></h4></td>
+                                                <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                <td style="color:white;background-color: 66c0b7;border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" colspan="2"></td>
+                                                <t t-if="card > 0">
+                                                    <tr t-foreach="orders" t-as="l" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <t t-if="l['pay_mode'] == 'card'">
+                                                            <t t-if="l['type'] == 'out_refund'">
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['name']"/></td>
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['payment_date']" t-options='{"widget": "date"}'/></td>
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;" t-if="not patient"><span t-esc="l['patient']"/></td>
+                                                                <td style="color: red;border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['amount']"/><t t-set="credit_sum" t-value="credit_sum+l['amount']"/></td>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="i"/><t t-set="i" t-value="i+1"/></td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['name']"/></td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['payment_date']" t-options='{"widget": "date"}'/></td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;" t-if="not patient"><span t-esc="l['patient']"/></td>
+                                                                <td style="border-left: 1px solid black;border-right: 1px solid black;"><span t-esc="l['amount']"/><t t-set="credit_sum" t-value="credit_sum+l['amount']"/></td>
+                                                            </t>
+                                                        </t>
+                                                    </tr>
+                                                    <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                        <td style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                        <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                        <td style="text-align:right;border-right: 1px solid black;border-top: 1px solid black;" colspan="2"><strong>Card Total  :  </strong></td>
+                                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="credit_sum"/></strong></td>
+                                                    </tr>
+                                                </t>
+                                                <t t-else="">
+                                                    <tr>
+                                                        <td style="border-top: 1px solid black;border-left: 1px solid black;border-bottom:1px solid #000000;" colspan="2"><h4>No Card Payments</h4></td>
+                                                        <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                        <td style="border-top: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" colspan="2"></td>
+                                                    </tr>
+                                                </t>
+                                            </tr>
+                                            <!--</t>-->
+                                            <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;">
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;"></td>
+                                                <td style="border-top: 1px solid black;border-bottom:1px solid #000000;" t-if="not patient"></td>
+                                                <td style="text-align:right;border-right: 1px solid black;border-top: 1px solid black;" colspan="2"><strong>Total  :  </strong></td>
+                                                <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><strong><span t-esc="cash_sum + credit_sum"/></strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                 </center>
+                             </div>
+                         </div>
+                    </t>
+                </t>
+        </template>
+    </data>
+</odoo>

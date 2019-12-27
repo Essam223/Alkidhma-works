@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="transfer_account_id" model="account.account.template">
+            <field name="code">124</field>
+            <field name="name">Liquidity Transfers</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_current_assets"/>
+        </record>
+
+        <record id="configurable_chart_template" model="account.chart.template">
+            <field name="name">Configurable Account Chart Template Sama</field>
+            <field name="code_digits">3</field>
+            <field name="bank_account_code_prefix">112</field>
+            <field name="cash_account_code_prefix">111</field>
+            <field name="transfer_account_id" ref="transfer_account_id"/>
+            <field name="currency_id" ref="base.QAR"/>
+        </record>
+        <record id="transfer_account_id" model="account.account.template">
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- Account Templates-->
+
+        <!-- Payable -->
+
+        <record id="conf_a_pay" model="account.account.template">
+            <field name="code">850</field>
+            <field name="name">Account Payable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_payable"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <record id="conf_a_sales" model="account.account.template">
+            <field name="code">602</field>
+            <field name="name">SALES</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_revenue"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+
+        <!--Expenses-->
+
+        <record id="conf_a_expense_expense" model="account.account.template">
+            <field name="code">700</field>
+            <field name="name">EXPENSES</field>
+            <field name="reconcile" eval='True'/>
+            <field name="user_type_id" ref="account.data_account_type_expenses"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+            <field name="tag_ids" eval="[(6,0,[ref('account.account_tag_operating')])]"/>
+        </record>
+
+        <record id="conf_a_recv" model="account.account.template">
+            <field name="code">800</field>
+            <field name="name">Account Receivable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type_id" ref="account.data_account_type_receivable"/>
+            <field name="chart_template_id" ref="configurable_chart_template"/>
+        </record>
+
+        <!-- chart template -->
+        <record id="configurable_chart_template" model="account.chart.template">
+            <field name="property_account_receivable_id" ref="conf_a_recv"/>
+            <field name="property_account_payable_id" ref="conf_a_pay"/>
+            <field name="property_account_expense_categ_id" ref="conf_a_expense_expense"/>
+            <field name="property_account_income_categ_id" ref="conf_a_sales"/>
+            <field name="complete_tax_set" eval="False"/>
+            <field name="use_anglo_saxon" eval="True"/>
+            <!--<field name="property_stock_account_input_categ_id" ref="conf_ca_siar"/>-->
+            <!--<field name="property_stock_account_output_categ_id" ref="conf_ca_siad"/>-->
+            <!--<field name="property_stock_valuation_account_id" ref="conf_ca_sva"/>-->
+            <!--<field name="income_currency_exchange_account_id" ref="conf_a_feg"/>-->
+            <!--<field name="expense_currency_exchange_account_id" ref="conf_a_expense_fel"/>-->
+        </record>
+
+    </data>
+</odoo>

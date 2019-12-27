@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="calendar_appointments">
+    <t t-name="FieldColorPicker">
+
+        <span t-if="widget.mode !== 'readonly'">
+            <div class="input-group colorpicker-component">
+                <input type="text"
+                       t-att-id="widget.id_for_label"
+                       t-att-tabindex="widget.attrs.tabindex"
+                       t-att-autofocus="widget.attrs.autofocus"
+                       t-att-placeholder="widget.attrs.placeholder"
+                       t-att-maxlength="widget.field.size"
+                       class="colorpickerg form-control"
+                        />
+                <span class="input-group-addon"><i></i></span>
+            </div>
+
+        </span>
+        <span t-if="widget.mode === 'readonly'"/>
+
+    </t>
+
+    <t t-name="appointments_today">
+        <p class="calendar_mini">
+            <button class="hide_ctrl_panel" title="Show/hide Control panel"><i class="fa fa-close"></i> </button>
+            <div id='appointments_container_sub'>
+            </div>
+        </p>
+
+        <script>
+            $(document).ready(function(){
+                $.ajax({url: "/current_schedule", success: function(result){
+                    var times = result.split(",");
+                    $('.timepicker1').wickedpicker({
+                         twentyFour: true,
+                         title: 'Timepicker',
+                         now: times[0]
+                    });
+                    $('.timepicker2').wickedpicker({
+                         twentyFour: true,
+                         title: 'Timepicker',
+                         now: times[1]
+                    });
+               }});
+            });
+        </script>
+        <div class="calendar_properties">
+            <input type="checkbox" class="dept_select_all" checked="checked"/>
+            <span class="resource-title">Department</span>
+            <div class="resource-div" t-if="widget.departments">
+                <t t-foreach="widget.departments" t-as="department">
+                    <div t-att-id="department['id']">
+                        <input class="dept_selection" type="checkbox"
+                               checked="checked" t-att-id="department['id']">
+                            <span t-esc="department['name']" />
+                        </input>
+                    </div>
+                </t>
+            </div>
+
+            <input type="checkbox" class="res_select_all" checked="checked" />
+            <span class="resource-title">Doctors</span>
+            <div class="resource-div" t-if="widget.resources">
+                <t t-foreach="widget.resources" t-as="resource">
+                    <div t-att-id="resource['id']" t-att-class="'visible ' + resource['dept']">
+                        <input class="resource_selection" type="checkbox"
+                               checked="checked" t-att-id="resource['id']">
+                            <span t-esc="resource['name']" />
+                        </input>
+                    </div>
+                </t>
+            </div>
+<!--
+            <div class="resource_ctrl_btn">
+                <button class="res_select_all"> Select all</button>
+                <button class="res_unselect_all"> Unselect all</button>
+            </div>
+-->
+            <span class="status-title">Status</span>
+            <div class="status-div" t-if="widget.status">
+                <t t-foreach="widget.status" t-as="state">
+                    <div t-att-id="state['state'][0]">
+                        <t t-if="state['state'][0]!='cancel' and state['state'][0]!='missed'">
+                            <input class="state_selection" type="checkbox" checked="checked" t-att-id="state['state'][0]">
+                                <span t-esc="state['state'][1]" />
+                            </input>
+                        </t>
+                        <t t-if="state['state'][0]=='cancel' or state['state'][0]=='missed'">
+                            <input class="state_selection" type="checkbox" t-att-id="state['state'][0]">
+                                <span t-esc="state['state'][1]" />
+                            </input>
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <div class="time-range">
+                <div id="from_date">
+                    <span class="start" ><b>Start: </b> </span>
+                    <input type="text" id="date_start" class="timepicker timepicker1 input_date"  />
+                </div>
+                <div id="to_date">
+                    <span class="end"><b>End: </b> </span>
+                    <input id="date_end" type="text" class="timepicker timepicker2 input_date" />
+                </div>
+                <button class="update_date_range">Update</button>
+            </div>
+        </div>
+
+        <div class="calendar_el">
+            <div class="cal_head">
+                <!--<button class="button-today">Today</button>-->
+                <button class="button-reload" title="Refresh Calendar">
+                    <i class="fa fa-refresh" style="font-size:24px;color:green"></i>
+                </button>
+            </div>
+            <div id='appointments_container'> </div>
+        </div>
+
+
+        <div id="calendarModal" class="calendarmodal modal fade" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog calendar-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">close</span>
+                        </button>
+                        <h4 id="modalTitle"
+                            class="modal-title">
+                            Create Appointment
+                        </h4>
+                    </div>
+                    <div id="modalBody" class="modal-body calendar-body">
+                        <div class="patient_div">
+                            <div class="box patient_type_box">
+                                <p class="contents">Is a registered patient?</p>
+                            </div>
+                            <div class="box patient_name_box">
+                                <p class="contents">Patient Name</p>
+                            </div>
+                            <div class="box patient">
+                                <p class="contents">Patient file no.</p>
+                            </div>
+
+                            <div class="box patient_type_box">
+                                <input class="patient_type"
+                                       type="checkbox"
+                                       checked="checked"/>
+                            </div>
+                            <div class="box patient_name_box">
+                                <input class="patient_name" type="text" />
+                            </div>
+                            <div class="box patient">
+                                <input class="patient_list"
+                                       style="display:none !important;"
+                                       type="text" />
+                                <input class="patient_ids"
+                                       type="text" />
+                            </div>
+
+                            <div class="box">
+                                <p class="contents">Patients status</p>
+                            </div>
+                            <div class="box">
+                                <p class="contents">Patient Phone</p>
+                            </div>
+                            <div class="box">
+                                <p class="contents">QID</p>
+                            </div>
+
+                            <div class="box">
+                                <select class="patient_stat">
+                                    <option value="withapt">
+                                        Come with Appointment
+                                    </option>
+                                    <option value="walkin">
+                                        Walk In
+                                    </option>
+
+                                </select>
+                            </div>
+                            <div class="box">
+                                <input class="patient_phone" type="text" value="" />
+                            </div>
+                            <div class="box">
+                                <input class="qid" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="physician_div">
+                            <div class="box">
+                                <p class="contents">Doctor</p>
+                            </div>
+                            <div class="box">
+                                <p class="contents">Appointment Start</p>
+                            </div>
+                            <!--<div class="box">-->
+                                <!--<p class="contents">Room</p>-->
+                            <!--</div>-->
+                            <!--<div class="box"></div>-->
+
+                            <div class="box">
+                                <select class="modalPhysician">
+                                    <t t-foreach="widget.resources"
+                                       t-as="resource">
+                                        <option t-att-value="resource['id']">
+                                            <t t-esc="resource['name']" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="box app_start">
+                                <input class="appt_start" size="16" type="text" value="" />
+                            </div>
+                            <!--<div class="box">-->
+                                <!--<select class="rooms_list">-->
+                                    <!--<option value=""></option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="box"></div>-->
+
+                            <div class="box">
+                                <p class="contents">Urgent</p>
+                            </div>
+                            <div class="box">
+                                <p class="contents">Appointment End</p>
+                            </div>
+                            <!--<div class="box">-->
+                                <!--<p class="contents">Created By</p>-->
+                            <!--</div>-->
+                            <!--<div class="box">-->
+                                <!--<p class="contents">Patient Revisit ?</p>-->
+                            <!--</div>-->
+
+                            <div class="box">
+                                <input class="urgent_app" type="checkbox" />
+                            </div>
+                            <div class="box app_end">
+                                <input size="16" type="text" value="" />
+                            </div>
+                            <!--<div class="box">-->
+                                <!--<select class="modal_created_by"></select>-->
+                            <!--</div>-->
+                            <!--<div class="box">-->
+                                <!--<input type="checkbox" class="revisit" />-->
+                            <!--</div>-->
+                        </div>
+                        <div class="physician_div">
+                            <div class="notes">
+                                <p class="contents"><b>Notes</b></p>
+                            </div>
+                            <div class="notes">
+                                <input class="Notes" type="text"/>
+                            </div>
+                            <div class="box2">
+                                <p class="contents">Followup</p>
+                            </div>
+                            <div class="box2">
+                                <input class="followup_app" type="checkbox" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div>-->
+                    <!--</div>-->
+                    <div class="modal-footer calendar-footer">
+                        <div class="alert alert-danger required_field_warning"
+                             style="display:none;position: inherit;text-align:center;">
+                            <span>Please fill the required values.</span>
+                        </div>
+                        <button type="button"
+                                class="btn btn-success event_popup">
+                            Create
+                        </button>
+                        <button type="button"
+                                class="btn btn-sm btn-default close2">
+                            <span>Cancel</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

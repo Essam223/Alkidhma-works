@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_voucher_layout">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <h2>
+                       <center>
+                           <t t-if="o.voucher_type == 'sale'">Receipt Voucher</t>
+                            <t t-if="o.voucher_type == 'purchase'">Payment Voucher</t>
+                       </center>
+                    </h2>
+                    <center>
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.partner_id or o.partner_name" class="col-xs-2">
+                                <t t-if="o.voucher_type == 'sale'"><strong>Received From:</strong></t>
+                                <t t-if="o.voucher_type == 'purchase'"><strong>Paid To:</strong></t>
+                                <p t-if="o.partner_name" t-field="o.partner_name"/>
+                                <p t-elif="o.partner_id" t-field="o.partner_id.name"/>
+                            </div>
+                            <div t-if="o.number" class="col-xs-2">
+                                <strong>Voucher Ref:</strong>
+                                <p t-field="o.number"/>
+                            </div>
+
+                             <div class="col-xs-3">
+                                <strong>Bill Date:</strong>
+                                <p t-field="o.date"/>
+                            </div>
+                            <div t-if="o.name" class="col-xs-2">
+                                <strong>Payment Ref:</strong>
+                                <p t-field="o.name"/>
+                            </div>
+                            <div t-if="o.reference" class="col-xs-2">
+                                <strong>Bill Ref:</strong>
+                                <p t-field="o.reference"/>
+                            </div>
+                            <div class="col-xs-3">
+                                <strong>Payment Mode:</strong><br/>
+                                <span t-field="o.account_id.name"/>
+                            </div>
+                        </div>
+                    </center>
+                    <h3>Settlement for the following :</h3>
+                    <center>
+                        <table style="width:100%;" class="table table-striped">
+                            <tbody >
+                                <tr t-foreach="o.line_ids" t-as="l">
+                                    <td style="width:70%;" class="text-left"><span t-field="l.name"/></td>
+                                    <td style="width:30%;" class="text-right">
+                                        <span t-field="l.price_unit"
+                                              t-options='{"widget": "monetary", "display_currency": l.currency_id}'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">
+                                        <b><span>Total:</span></b>
+                                    </td>
+                                    <td class="text-right">
+                                        <b><span t-field="o.amount"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></b>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    <br/>
+                    <table style="width:100%;">
+						<tr>
+							<th style="width:60%;"></th>
+							<th style="width:40%;"></th>
+						</tr>
+						<tr>
+							<td class="text-left"><span><strong>Prepared By : </strong></span></td>
+							<td class="text-center"><strong>Received By : </strong></td>
+						</tr>
+					</table>
+                    </center>
+                </div>
+
+            </t>
+        </template>
+
+        <template id="report_voucher">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="expense_account_voucher.report_voucher_layout" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

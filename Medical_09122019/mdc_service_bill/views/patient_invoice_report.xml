@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="pragtech_dental_management.report_patient_invoice">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+                    <div class="page" >
+                        <div class="text-center" style="margin:10px 35px 10px 35px;">
+                            <br/>
+                            <br/>
+                            <div style="color:#1fa2c2;">
+                                 <h2><b>INVOICE / فاتورة</b></h2>
+                             </div>
+                            <br/>
+                            <br/>
+                            <center>
+                        <table name="invoice_line_table" width="90%">
+                            <colgroup>
+                                <col width='22%'/>
+                                <col width='25%' />
+                                <col width='6%'/>
+                                <col width='22%' />
+                                <col width='25%' />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="patient_invoice_tbody">
+                                <tr>
+                                    <td style="color:#1fa2c2; height:50;"><strong>Bill No. /<br/> رقم الفاتورة </strong></td>
+                                    <td>: <span t-field="o.number"/></td>
+                                    <td/>
+                                    <td style="color:#1fa2c2;"><strong>Invoice Date /<br/> تاريخ الفاتورة </strong></td>
+                                    <td>: <span t-field="o.date_invoice"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#1fa2c2; height:50;"><strong>Patient name /<br/> اسم المريض</strong></td>
+                                    <td>: <span t-field="o.partner_id.name"/></td>
+                                    <td/>
+                                    <td style="color:#1fa2c2;"><strong>Doctor /<br/> الدكتور </strong></td>
+                                    <td>: <span t-field="o.dentist"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#1fa2c2; height:50;"><strong>File No.<br/> </strong></td>
+                                    <td>: <span t-field="o.patient.patient_id"/>
+                                    </td>
+                                    <td/>
+                                    <td style="color:#1fa2c2;"><strong>OP No.</strong></td>
+                                    <td>: <t t-if="o.appt_id">
+                                        <span t-field="o.appt_id"/>
+                                    </t></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#1fa2c2; height:50;"><strong>Qatar ID /<br/>رقم بطاقة المريض</strong></td>
+                                    <td>: <span t-field="o.patient.qid"/>
+                                    </td>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table class="table table-bordered table-striped" name="invoice_line_table">
+                            <colgroup>
+                                <col/>
+                                <col/>
+                                <col width='13%' />
+                                <col width='13%' />
+                                <col width='13%' />
+                                <col width='15%' />
+                                <col width='13%' />
+                                <col width='13%' />
+                            </colgroup>
+                            <thead>
+                                <tr style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">
+                                    <th style="color:white;background-color: #1fa2c2;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Service / الخدمة</th>
+                                    <th style="color:white;background-color: #1fa2c2;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Description / التفاصيل</th>
+                                    <th style="color:white;background-color: #1fa2c2;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Quantity / الوحدة</th>
+                                    <th style="color:white;background-color: #1fa2c2;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Unit Price / السعر</th>
+                                    <th style="color:white;background-color: #1fa2c2;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Discount / الخصم</th>
+                                    <th style="color:white;background-color: #1fa2c2;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" t-if="o.insurance_company" class="text-center">Treatment Group Disc.(%)</th>
+                                    <th style="color:white;background-color: #1fa2c2;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" t-if="o.insurance_company" class="text-center">Co-Payment(%)</th>
+                                    <th style="color:white;background-color: #1fa2c2;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-center">Amount / المبلغ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="invoice_tbody" style="border-bottom: 1px solid black;border-top: 1px solid black;">
+                                <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="l.product_id"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;"><span t-field="l.name"/></td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">
+                                        <span t-field="l.quantity"/>
+                                        <span t-field="l.uom_id"  groups="product.group_uom"/>
+                                    </td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">
+                                        <span t-field="l.price_unit"/>
+                                    </td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right">
+                                        <t t-if="l.discount_fixed_percent == 'Fixed'">
+                                            <span t-esc="l.discount_value"/>
+                                        </t>
+                                        <t t-elif="l.discount_fixed_percent == 'Percent'">
+                                            <span t-esc="l.discount"/>%
+                                        </t>
+                                        <t t-else="">0</t>
+                                    </td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" t-if="o.insurance_company" class="text-right">
+                                        <span t-field="l.discount_amt"/>
+                                    </td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" t-if="o.insurance_company" class="text-right">
+                                        <span t-field="l.amt_paid_by_patient"/>
+                                    </td>
+                                    <td style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;border-bottom:1px solid #000000;" class="text-right" id="subtotal">
+                                        <span t-field="l.price_subtotal"
+                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>
+
+                    <div id="total" class="row pull-right">
+                            <div>
+                                <table class="table-condensed" style="min-width: 250px;max-width: 400px;">
+                                    <tr>
+                                        <td>Subtotal / حاصل الجمع </td>
+                                        <td class="text-right">
+                                            <span t-field="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+
+                                    </tr>
+                                    <t t-if="o.discount_fixed_percent">
+                                        <tr>
+                                            <td>Clinic Discount</td>
+                                            <td class="text-right">
+                                                <t t-if="o.discount_fixed_percent == 'Fixed'">
+                                                    <span t-esc="o.discount_value"/>
+                                                </t>
+                                                <t t-elif="o.discount_fixed_percent == 'Percent'">
+                                                    <span t-esc="o.discount"/> %
+                                                </t>
+                                                <t t-else="">0</t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td style="border-top:1px solid #000000;border-bottom:1px solid #000000;">
+                                            <strong><h4>Total / المجموع</h4></strong></td>
+                                        <td style="border-top:1px solid #000000;border-bottom:1px solid #000000;" class="text-right">
+                                            <h4><span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></h4>
+                                        </td>
+                                    </tr>
+
+                                    <t t-set="payments_vals" t-value="o._get_payments_vals()"/>
+                                    <t t-foreach="payments_vals" t-as="payment_vals">
+                                        <tr>
+                                            <td>
+                                                Cashier: <t t-esc="payment_vals['salesperson']"/> - <i class="oe_form_field text-right oe_payment_label">Paid by <t t-esc="payment_vals['journal_name']"/> on <t t-esc="payment_vals['date_new']"/></i>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="payment_vals['amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="o.residual > 0">
+                                        <tr class="border-black">
+                                            <td><strong>Amount Due / المبلغ  الإجمالي</strong></td>
+                                            <td class="text-right">
+                                                 <span t-field="o.residual" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                            </center>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <record id="paperformat_euro_mdc" model="report.paperformat">
+            <field name="name">European A4 MDC</field>
+            <field name="format">custom</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">33</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report id="pragtech_dental_management.report_patient_invoice_pdf"
+                string="Patient Invoice"
+                model="account.invoice"
+                report_type="qweb-pdf"
+                file="pragtech_dental_management.report_patient_invoice"
+                name="pragtech_dental_management.report_patient_invoice"
+                paperformat="paperformat_euro_mdc"
+        />
+
+    </data>
+</odoo>

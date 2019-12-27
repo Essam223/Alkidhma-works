@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="doctor_daily_appointment_report_wizard" model="ir.ui.view">
+            <field name="name">doctor.daily.appointment.report</field>
+            <field name="model">doctor.daily.appointment.report</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Appointment Daily Book Report">
+                    <group>
+                        <group>
+                            <field name="date_appt"/>
+                            <field name="is_only_doctor" invisible="1"/>
+                            <field name="doctor" attrs="{'required':[('is_only_doctor', '=', True)]}"/>
+
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="doctor_daily_appointment_report" string="Print Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_doctor_daily_appointment" model="ir.actions.act_window">
+                <field name="name">Appointment Daily Book Report</field>
+                <field name="res_model">doctor.daily.appointment.report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="doctor_daily_appointment_report_wizard"/>
+                <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_doctor_daily_appointment_book_report" name="Appointment Daily Book Report" action="action_doctor_daily_appointment"
+                  groups="pragtech_dental_management.group_dental_doc_menu,pragtech_dental_management.group_dental_mng_menu"
+                  parent="pragtech_dental_management.dental_report_menu" sequence="5"/>
+
+    </data>
+</odoo>

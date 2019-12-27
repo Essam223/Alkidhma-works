@@ -1,0 +1,23 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="medical_dashboard_kanban">
+			<field name="name">medical.dashboard.kanban</field>
+			<field name="model">medical.dashboard</field>
+			<field name="inherit_id" ref="pragtech_dental_management.medical_dashboard_kanban"/>
+			<field name="arch" type="xml">
+			 <xpath expr="//t[@t-name='kanban-box']/div/div[4]"  position="before">
+						<div class="col-xs-1 o_kanban_primary_left">
+							<button class="btn btn-primary fa fa-file-o" name="get_surgical_consent"
+									type="object">Surgical Consent</button>
+						</div>
+						<br/>
+						<br/>
+						<br/>
+			 </xpath>
+			</field>
+		</record>
+	</data>
+</odoo>
+
+
+	

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="salary_report"
+            string="Salary Report"
+            model="salary.report.wizard"
+            report_type="qweb-pdf"
+            file="hr_leaves_solution.salary_report_pdf"
+            name="hr_leaves_solution.salary_report_pdf"
+
+        />
+    </data>
+</odoo>

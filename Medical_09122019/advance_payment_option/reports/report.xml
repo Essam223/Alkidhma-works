@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="advance_payment_report"
+            string="Advance Payment Report"
+            model="advance.payment.report"
+            report_type="qweb-pdf"
+            file="advance_payment_option.advance_payment_report_pdf"
+            name="advance_payment_option.advance_payment_report_pdf"
+            />
+    </data>
+</odoo>

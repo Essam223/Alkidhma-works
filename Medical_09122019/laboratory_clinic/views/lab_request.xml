@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="inherit_lab_request_form">
+			<field name="name">Lab Order</field>
+			<field name="model">lab.request</field>
+			<field name="inherit_id" ref="laboratory.lab_request_form"/>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+                <xpath expr="//field[@name = 'invoice_id']" position="replace">
+                        <field name="invoice_id" attrs="{'invisible':[('invoice_id','=',False)]}"
+                               context="{'form_view_ref': 'account.invoice_supplier_form'}"/>
+                </xpath>
+                <xpath expr="//field[@name = 'user_id']" position="before">
+                    <field name="lab_id" required="1"/>
+                </xpath>
+            </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="medical_insurance_tree" model="ir.ui.view">
+            <field name="name">Insurance List</field>
+			<field name="model">medical.insurance</field>
+			<field name="inherit_id" ref="basic_insurance.medical_insurance_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='group_name']" position="after">
+                    <field name="co_payment_method" />
+					<field name="amt_paid_by_patient"/>
+					<field name="amt_fixed_paid_by_patient"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="medical_insurance_view" model="ir.ui.view">
+            <field name="name">Insurance</field>
+			<field name="model">medical.insurance</field>
+			<field name="inherit_id" ref="basic_insurance.medical_insurance_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='deductible']" position="attributes">
+                    <attribute name="attrs">{ 'invisible':[('is_deductible', '=', False)]}</attribute>
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='insurance_id_no']" position="after">
+                    <field name="co_payment_method" />
+                </xpath>
+                <xpath expr="//field[@name='group_name']" position="after">
+                    <field name="amt_paid_by_patient"  attrs="{'invisible':[('co_payment_method','!=','Percentage')],'required':[('co_payment_method','=','Percentage')]}"/>
+                    <field name="amt_fixed_paid_by_patient"  attrs="{'invisible':[('co_payment_method','!=','Amount')],'required':[('co_payment_method','=','Amount')]}"/>
+                </xpath>
+            </field>
+      </record>
+
+
+    </data>
+</odoo>

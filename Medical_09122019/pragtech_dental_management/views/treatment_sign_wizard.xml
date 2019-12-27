@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_treatment_signature_pdf">
+    <t t-call="web.html_container">
+    <t t-call="web.external_layout">
+		<t t-foreach="docs" t-as="o">
+    <div class="page">
+        <div class="text-center">
+            <div style="color:#009688;">
+                 <h2><b>CONSENT FOR OPERATION / PROCEDURE</b></h2>
+             </div>
+			<div class="row mt32 mb32" id="informations">
+                <div t-if="o.patient_id" class="col-xs-6">
+                    <strong>Patient Id</strong>
+                    <p t-field="o.patient_id"/>
+                </div>
+                <div t-if="o.updated_date" class="col-xs-6">
+                    <strong>Date</strong>
+                    <p t-field="o.updated_date"/>
+                </div>
+            </div>
+            <div class="text-left">
+                <p>1. <strong><u>Authorization</u></strong> :  I <strong><span t-field="o.patient_id.name"/></strong> authorize the performance of the operation / procedure, <strong><span t-field="o.wizard_treatment"/></strong>
+                 , To be performed by or under the direction of<strong> Dr. <span t-field="o.wizard_doctor"/></strong> </p>
+                    <br/>
+                    <p>2. <strong><u>Surgery or Special Procedure</u></strong> :    The following information has been discussed with me about the Procedure listed
+above: (a) the nature and intended purpose; (b) the potential risks, benefits and side effects, including any possible
+duration of incapacity and potential problems that may occur during recovery from the Procedure; (c) the reasonable
+alternatives, including the potential risks, benefits and side effects related to those alternatives; (d) the risks and
+consequences of not receiving the Procedure; and (e) the possible or likely results of the Procedure, including my
+likelihood of achieving treatment goals</p>
+                    <br/>
+                    <p>3. <strong><u>Additional Procedures</u></strong> : I understand that during the course of the Procedure, unforeseen conditions may arise that
+require additional or different procedure(s) other than the Procedure listed in Paragraph 1. I authorize and request that
+my Practitioner and any appropriate designees perform such other procedures as necessary in the exercise of their
+professional judgment. This authority extends to treating all conditions that are unknown to me at the time the
+Procedure is undertaken.</p>
+                    <br/>
+                    <h4>MY SIGNATURE BELOW CONSTITUTES MY ACKNOWLEDGMENT THAT:</h4>
+                    <p>1. I have read, understand and agree to the foregoing;</p>
+                    <p>2. The proposed treatment / procedure have been satisfactorily explained to me and that I have all of the information that I desire;</p>
+                    <p>3. I hereby give my authorization and consent;</p>
+            </div>
+            <div t-if="o.signature" class="pull-right">
+                <strong>Patient Signature</strong>
+                <br/>
+                <img t-if="o.signature" t-att-src="'data:image/png;base64,%s' % to_text(o.signature)" class="pull-right" height="60"/>
+            </div>
+
+        </div>
+    </div>
+    </t>
+    </t>
+    </t>
+</template>
+
+
+    <report
+        id="report_treatment_sign2_pdf"
+        string="Approval Report"
+        model="medical.teeth.treatment"
+        report_type="qweb-pdf"
+		file="pragtech_dental_management.report_treatment_signature_pdf"
+        name="pragtech_dental_management.report_treatment_signature_pdf"
+		menu="False"
+    />
+
+
+    <record id="view_treatment_sign" model="ir.ui.view">
+            <field name="name">treatment.sign.wizard.form</field>
+            <field name="model">treatment.sign.wizard</field>
+            <field name="priority">24</field>
+            <field name="arch" type="xml">
+                <form string="Consent form">
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="width:70%;"></th>
+                            <th style="width:30%;"></th>
+                        </tr>
+					    <tr>
+						    <td class="text-right"><label for="updated_date"/></td>
+						    <td><field name="updated_date"/></td>
+					    </tr>
+                    </table>
+                    <br/>
+
+                    <p>1. <strong><u>Authorization</u></strong> :  I <strong><field name="patient"/></strong> authorize the performance of the operation / procedure, <strong><field name="treatment"/></strong> , To be performed by or under the direction of<strong> Dr. <field name="doctor"/></strong> </p>
+                    <br/>
+                    <p>2. <strong><u>Surgery or Special Procedure</u></strong> :    The following information has been discussed with me about the Procedure listed
+above: (a) the nature and intended purpose; (b) the potential risks, benefits and side effects, including any possible
+duration of incapacity and potential problems that may occur during recovery from the Procedure; (c) the reasonable
+alternatives, including the potential risks, benefits and side effects related to those alternatives; (d) the risks and
+consequences of not receiving the Procedure; and (e) the possible or likely results of the Procedure, including my
+likelihood of achieving treatment goals</p>
+                    <br/>
+                    <p>3. <strong><u>Additional Procedures</u></strong> : I understand that during the course of the Procedure, unforeseen conditions may arise that
+require additional or different procedure(s) other than the Procedure listed in Paragraph 1. I authorize and request that
+my Practitioner and any appropriate designees perform such other procedures as necessary in the exercise of their
+professional judgment. This authority extends to treating all conditions that are unknown to me at the time the
+Procedure is undertaken.</p>
+                    <br/>
+                    <h4>MY SIGNATURE BELOW CONSTITUTES MY ACKNOWLEDGMENT THAT:</h4>
+                    <p>1. I have read, understand and agree to the foregoing;</p>
+                    <p>2. The proposed treatment / procedure have been satisfactorily explained to me and that I have all of the information that I desire;</p>
+                    <p>3. I hereby give my authorization and consent;</p>
+                    <field name="digital_signature" widget="signature" nolabel="1"/>
+                    <footer>
+                        <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+	<record model="ir.actions.act_window" id="action_treatment_sign_wizard">
+		<field name="name">Treatment Consent Form</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">treatment.sign.wizard</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>
