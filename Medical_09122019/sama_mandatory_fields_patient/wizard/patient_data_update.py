@@ -21,16 +21,7 @@ class UpdateWizard(models.TransientModel):
                                     'Patient Type',required=True, default='qat',track_visibility='onchange')
 
     @api.multi
-    # def _get_default_nationality(self):
-    #     doc_ids = None
-    #     dom_partner = [('user_id', '=', self.env.user.id), ('is_doctor', '=', True),
-    #                    ('company_id', '=', self.company_id.id)]
-    #     partner_ids = [x.id for x in self.env['res.partner'].search(dom_partner)]
-    #     if partner_ids:
-    #         doc_ids = [x.id for x in self.env['medical.physician'].search([('name', 'in', partner_ids),
-    #                                                                        ('company_id', '=', self.company_id.id)])]
-    #     self._get_doctor_Id()
-    #     return doc_ids
+    
     def action_Update_checkin(self):
         wizard_vals = self.read()[0]
         if wizard_vals['appt_id']:
