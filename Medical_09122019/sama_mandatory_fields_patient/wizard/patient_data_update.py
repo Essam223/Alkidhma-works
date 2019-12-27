@@ -8,7 +8,6 @@ class UpdateWizard(models.TransientModel):
     @api.model
     def _get_default_nationality(self):
         default_auType =self.env['patient.nationality'].search([('name', '=', 'qatari')])
-        print(default_auType)
         return default_auType
 
     appt_id = fields.Many2one('medical.appointment', 'Appointment', required=True)
